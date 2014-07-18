@@ -5,7 +5,7 @@
 	@include('layouts.index-errors')
 	<div class="col-md-8">
 		<a href="{{ URL::action('male-posts') }}"><b>Erkekler</b></a>
-		<a href="{{ URL::action('female-posts') }}">Kızlar</a>
+		<a href="{{ URL::action('female-posts') }}"><i>Kızlar</i></a>
 
 		<fieldset>
 			<legend>Dedikodla!</legend>
