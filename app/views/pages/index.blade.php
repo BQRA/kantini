@@ -76,7 +76,7 @@
 									<span class="glyphicon glyphicon-star-empty"></span>
 								@endif
 
-								@if($post->member === 1)
+								@if($post->member == 1)
 								<b><a href="{{ URL::action('show-profile', $post->username) }}">{{ $post->username }}</a> - </b> 
 								@else 
 								{{ $post->username }} - 
