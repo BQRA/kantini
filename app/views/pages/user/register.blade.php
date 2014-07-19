@@ -79,6 +79,8 @@
 						</div>
 				</div>
 
+				<hr>
+
 				<div class="form-group">
 					<div class="col-md-4 col-md-offset-2">
 					{{ Form::submit('Gönder!', ['class' => 'btn btn-primary']) }}

@@ -4,8 +4,8 @@
 <div class="row">
 	@include('layouts.index-errors')
 	<div class="col-md-8">
-		<a href="{{ URL::action('male-posts') }}"><b>Erkekler</b></a>
-		<a href="{{ URL::action('female-posts') }}"><i>Kızlar</i></a>
+		<a href="{{ URL::action('male-posts') }}">Erkekler</a>
+		<a href="{{ URL::action('female-posts') }}">Kızlar</a>
 
 		<fieldset>
 			<legend>Dedikodla!</legend>
@@ -89,7 +89,7 @@
 							$comment_post_count = $comments->count();
 							echo $comment_post_count;
 
-							?>) | Like
+							?>) | Like | {{ $post->created_at }}
 						</div>
 					@endforeach
 				</div>

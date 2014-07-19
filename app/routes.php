@@ -25,6 +25,8 @@ Route::post('user/login', ['before' => 'csrf', 'as' => 'user-login', 'uses' => '
 
 Route::get('user/logout', ['as' => 'user-logout', 'uses' => 'UserController@Logout']);
 
+Route::get('organizations', ['as' => 'organization', 'uses' => 'PageController@getOrganization']);
+Route::get('organization/{id}', ['as' => 'show-organization', 'uses' => 'PageController@showOrganization']);
 
 Route::group(['before' => 'admin'], function() {
 
@@ -93,14 +95,7 @@ Route::group(['before' => 'admin'], function() {
 		'as' 	=> 'admin-unban-member/{id}',
 		'uses' 	=> 'AdminController@AdminUnBanMember'
 	]);
-
-	Route::get('admin/update-organizaiton/{id}', [
-		'as' 	=> 'admin-update-organization/{id}', 
-		'uses' 	=> 'AdminController@AdminUpdateOrganization'
-	]);
 });
-
-
 
 Route::group(['before' => 'organization-filter'], function() {
 
@@ -130,39 +125,10 @@ Route::group(['before' => 'edit-filter'], function() {
 		]);
 });
 
-Route::group(['before' => 'baran'], function() {
-
-	Route::get('user/{profile}/', [
-		'as' 	=> 'show-profile',
-		'uses' 	=> 'UserController@showProfile'
-	]);
-
-	Route::get('user/{profile}/all-posts', [
-		'as' 	=> 'users-all-posts',
-		'uses' 	=> 'UserController@getUserAllPosts'
-	]);
-
-	Route::get('user/{profile}/all-comments', [
-		'as' 	=> 'users-all-comments',
-		'uses' 	=> 'UserController@getUserAllComments'
-	]);
-
-	Route::get('user/{profile}/all-organizations', [
-		'as' 	=> 'users-all-organizations',
-		'uses' 	=> 'UserController@getUserAllOrganizations'
-	]);
-
-	Route::get('organizations', [
-		'as' 	=> 'organization',
-		'uses' 	=> 'PageController@getOrganization'
-	]);
-
-	Route::get('organization/{id}', [
-		'as' 	=> 'show-organization',
-		'uses' 	=> 'PageController@showOrganization'
-	]);
-
-});
+Route::get('user/{profile}/', ['as' => 'show-profile', 'uses' => 'UserController@showProfile']);
+Route::get('user/{profile}/all-posts', ['as' => 'users-all-posts', 'uses' => 'UserController@getUserAllPosts']);
+Route::get('user/{profile}/all-comments', ['as' => 'users-all-comments', 'uses' => 'UserController@getUserAllComments']);
+Route::get('user/{profile}/all-organizations', ['as' => 'users-all-organizations', 'uses' => 'UserController@getUserAllOrganizations']);
 
 Route::get('post/{id}', [
 	'as' 	=> 'post/{id}',
@@ -170,7 +136,7 @@ Route::get('post/{id}', [
 ])->where('id', '[0-9]+');
 
 	Route::post('post/{id}', [
-		'before' => 'csrf',
-		'as' 	=> 'post/{id}',
-		'uses' 	=> 'PostController@sendComment'
+		'before' 	=> 'csrf',
+		'as' 		=> 'post/{id}',
+		'uses' 		=> 'PostController@sendComment'
 	]);

@@ -29,12 +29,7 @@
 					<td>{{$a->auth_contact}}</td>
 					<td>{{$a->price}}</td>
 					<td>{{$a->message}}</td>
-					<td>
-					@if($a->pass == '0')
-					{{ HTML::linkAction('AdminController@AdminUpdateOrganization', 'Onayla', [$a->id]) }}
-					@endif
-					{{ HTML::linkAction('AdminController@AdminDeleteOrganization', 'Sil', [$a->id]) }}
-					</td>
+					<td>{{ HTML::linkAction('AdminController@AdminDeleteOrganization', 'Sil', [$a->id]) }}</td>
 				</tr>
 			@endforeach
 		</tbody>

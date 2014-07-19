@@ -90,12 +90,4 @@ class AdminController extends \BaseController {
 
 		return Redirect::back();
 	}
-
-	public function AdminUpdateOrganization($id) {
-		$data = Organization::find($id);
-		$data->pass = 1;
-		$data->save();
-
-		return Redirect::back();
-	}
 }

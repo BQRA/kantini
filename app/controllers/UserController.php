@@ -123,7 +123,6 @@ class UserController extends BaseController {
 
 		$organizations_all 	= Organization::orderBy('created_at', 'DESC')
 							->where('creator_username', '=', $username)
-							->where('pass', '=', 1)
 							->get();
 
 		try {

@@ -38,7 +38,6 @@ class PageController extends \BaseController {
 
 	public function getOrganization() {
 		$organizations = Organization::orderBy('created_at', 'DESC')
-		->where('pass', '=', 1)
 		->get();
 
 		return View::make('pages.organizations')
@@ -48,7 +47,6 @@ class PageController extends \BaseController {
 	public function showOrganization($id) {
 		$organizations = Organization::orderBy('created_at', 'DESC')
 		->where('id', '=', $id)
-		->where('pass', '=', 1)
 		->get();
 		
 		return View::make('pages.show-organization')
