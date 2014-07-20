@@ -12,7 +12,7 @@
 	<h1>Düzenle</h1>
 
 	{{ Form::model($user->profile, ['action' => ['UserController@updateProfile', $user->username] ,'class' => 'form-horizontal']) }}
-		
+
 		<div class="form-group">
 			{{ Form::label('first_name', 'Ad', ['class' => 'col-xs-1 col-sm-2 col-md-2 col-lg-2 control-label']) }}
 			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">

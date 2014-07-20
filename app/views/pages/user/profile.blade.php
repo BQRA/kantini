@@ -2,37 +2,41 @@
 
 @section('content')
 	<h4>{{ $user->username }}</h4>
+
 	<p>{{ $user->profile->first_name }} {{ $user->profile->last_name }}</p>
 	<small>
 		<p>Son görülme tarihi: {{ $user->last_login }}</p>
 	</small>
 	
-	@if($user->profile->twitter_username !== null && $user->profile->twitter_username !== '')
+	@if($user->profile->twitter_username !== '')
 	<p><b>Twitter:</b> <a href="http://twitter.com/{{ $user->profile->twitter_username }}" target="_blank">{{ $user->profile->twitter_username }}</a></p>
 	@endif
 	
-	@if($user->profile->instagram_username !== null && $user->profile->instagram_username !== '')
+	@if($user->profile->instagram_username !== '')
 	<b>Instagram:</b> <a href="http://instagram.com/{{ $user->profile->instagram_username }}" target="_blank">{{ $user->profile->instagram_username }}</a>
 	@endif
 
-	<p>Toplam yorum: {{ $comments_all->count() }} 
+	<p>Toplam yorum: 
 	@if($comments_all->count() == 0)
-		<b>Yorum yok</b>
+		<b>Yorum yok</b></p>
 	@else
+	{{ $comments_all->count() }}
 	=> <a href="{{ URL::action('users-all-comments', $user->username) }}">Tümü</a></p>
 	@endif
 	
-	<p>Toplam gönderi: {{ $posts_all->count() }}
+	<p>Toplam gönderi: 
 	@if($posts_all->count() == 0)
-		<b>Gönderi yok</b>
+		<b>Gönderi yok</b></p>
 	@else
+	{{ $posts_all->count() }}
 	=> <a href="{{ URL::action('users-all-posts', $user->username) }}">Tümü</a></p>
 	@endif
 
-	<p>Toplam etkinlik: {{ $organizations_all->count() }} 
+	<p>Toplam etkinlik: 
 	@if($organizations_all->count() == 0)
-		<b>Etkinlik yok</b>
+		<b>Etkinlik yok</b></p>
 	@else
+	{{ $organizations_all->count() }} 
 	=> <a href="{{ URL::action('users-all-organizations', $user->username) }}">Tümü</a></p>
 	@endif
 	
