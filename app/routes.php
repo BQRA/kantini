@@ -28,6 +28,29 @@ Route::get('/user/logout/', ['as' => 'user-logout', 'uses' => 'UserController@Lo
 Route::get('/organizations/', ['as' => 'organization', 'uses' => 'PageController@getOrganization']);
 Route::get('/organization/{id}/', ['as' => 'show-organization', 'uses' => 'PageController@showOrganization']);
 
+
+
+Route::group(['before' => 'organization-filter'], function() {
+
+	Route::get('/user/{profile}/create-organization/', ['as' => 'create-organization', 'uses' => 'PageController@getCreateOrganization']);
+	Route::post('/user/{profile}/create-organization/', ['as' => 'create-organization', 'before' => 'csrf', 'uses' => 'UserController@postCreateOrganization']);
+});
+
+Route::group(['before' => 'edit-filter'], function() {
+
+	Route::get('/user/{profile}/edit/', ['as' => 'edit-profile', 'uses' => 'UserController@editProfile']);
+	Route::post('/user/{profile}/edit/', ['as' => 'update-profile', 'before' => 'csrf', 'uses' => 'UserController@updateProfile']);
+});
+
+Route::get('/user/{profile}/', ['as' => 'show-profile', 'uses' => 'UserController@showProfile']);
+Route::get('/user/{profile}/all-posts/', ['as' => 'users-all-posts', 'uses' => 'UserController@getUserAllPosts']);
+Route::get('/user/{profile}/all-comments/', ['as' => 'users-all-comments', 'uses' => 'UserController@getUserAllComments']);
+Route::get('/user/{profile}/all-organizations/', ['as' => 'users-all-organizations', 'uses' => 'UserController@getUserAllOrganizations']);
+
+Route::get('/post/{id}/', ['as' => 'post/{id}', 'uses' => 'PostController@getPosts'])->where('id', '[0-9]+');
+Route::get('/post/{id}/secret', ['as' => 'secret', 'uses' => 'PostController@getPostsSecret']);
+Route::post('/post/{id}/', ['as' => 'post/{id}', 'before' => 'csrf', 'uses' => 'PostController@sendComment']);
+
 Route::group(['before' => 'admin'], function() {
 
 	Route::get('/admin/', [
@@ -96,47 +119,3 @@ Route::group(['before' => 'admin'], function() {
 		'uses' 	=> 'AdminController@AdminUnBanMember'
 	]);
 });
-
-Route::group(['before' => 'organization-filter'], function() {
-
-	Route::get('/user/{profile}/create-organization/', [
-		'as' 	=> 'create-organization',
-		'uses' 	=> 'PageController@getCreateOrganization'
-	]);
-
-		Route::post('/user/{profile}/create-organization/', [
-			'before' 	=> 'csrf',
-			'as' 		=> 'create-organization',
-			'uses' 		=> 'UserController@postCreateOrganization'
-		]);
-});
-
-Route::group(['before' => 'edit-filter'], function() {
-
-	Route::get('/user/{profile}/edit/', [
-		'as' 	=> 'edit-profile',
-		'uses' 	=> 'UserController@editProfile'	
-	]);
-
-		Route::post('/user/{profile}/edit/', [
-			'before' 	=> 'csrf',
-			'as' 		=> 'update-profile',
-			'uses' 		=> 'UserController@updateProfile'
-		]);
-});
-
-Route::get('/user/{profile}/', ['as' => 'show-profile', 'uses' => 'UserController@showProfile']);
-Route::get('/user/{profile}/all-posts/', ['as' => 'users-all-posts', 'uses' => 'UserController@getUserAllPosts']);
-Route::get('/user/{profile}/all-comments/', ['as' => 'users-all-comments', 'uses' => 'UserController@getUserAllComments']);
-Route::get('/user/{profile}/all-organizations/', ['as' => 'users-all-organizations', 'uses' => 'UserController@getUserAllOrganizations']);
-
-Route::get('/post/{id}/', [
-	'as' 	=> 'post/{id}',
-	'uses' 	=> 'PostController@getPosts'
-])->where('id', '[0-9]+');
-
-	Route::post('/post/{id}/', [
-		'before' 	=> 'csrf',
-		'as' 		=> 'post/{id}',
-		'uses' 		=> 'PostController@sendComment'
-	]);
