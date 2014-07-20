@@ -18,7 +18,7 @@
 				<tr>
 					<td>{{$a->id}}</td>
 					<td><a href="{{ URL::action('show-profile', $a->comment_username) }}">{{$a->comment_username}}</a></td>
-					<td><a href="{{ URL::action('post/{id}', $a->post_id) }}">{{$a->post_id}}</a></td>
+					<td><a href="{{ URL::action('post/{id}', $a->post_id) }}">{{$a->post->post}}</a></td>
 					<td>{{$a->comment}}</td>
 					<td>{{$a->created_at}}</td>
 					<td>{{ HTML::linkAction('AdminController@AdminDeleteComment', 'Sil', [$a->id]) }} - düzenle</td>

@@ -1,5 +1,4 @@
 1. Avatar
-2. Sadece Comments'leri ve textarea bir sayfaya bas
 4. profil duzenle sayfasi uye ol formuyla ayni olup girilen bilgiler dolu gelecek.
 6. like sistemi
 7. dont know

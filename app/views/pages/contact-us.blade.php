@@ -34,7 +34,7 @@
 				<div class='form-group'>
 				{{ Form::label('subject', 'Konu', ['class' => 'col-xs-1 col-sm-2 col-md-2 col-lg-2 control-label'])}}
 					<div class='col-xs-12 col-sm-6 col-md-6 col-lg-6'>
-					{{ Form::select('subject', [null => 'Seç', '1' => 'Şikayet', '2' => 'Reklam', '3' => 'İş', '4' => 'Tebrik'], null, ['class' => 'form-control']) }}
+					{{ Form::select('subject', [null => 'Seç', 'Şikayet' => 'Şikayet', 'Reklam' => 'Reklam', 'İş' => 'İş', 'Tebrik' => 'Tebrik'], null, ['class' => 'form-control']) }}
 						<p class='text-danger'>
 								@if($errors->has('subject'))
 						    	{{ $errors->first('subject') }}

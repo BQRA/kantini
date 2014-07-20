@@ -58,7 +58,7 @@
 				<div class="form-group">
 				{{ Form::label('school', 'Okul', ['class' => 'col-xs-1 col-sm-2 col-md-2 col-lg-2 control-label'])}}
 					<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-					{{ Form::select('school', [null => 'Seç', '1' => 'Beykent Üniversitesi', '2' => 'Bahçeşehir Üniversitesi'], null, ['class' => 'form-control']) }}
+					{{ Form::select('school', [null => 'Seç', 'Beykent Üniversitesi' => 'Beykent Üniversitesi', 'Bahçeşehir Üniversitesi' => 'Bahçeşehir Üniversitesi'], null, ['class' => 'form-control']) }}
 						<p class="text-danger">
 								@if($errors->has('school'))
 						    	{{ $errors->first("school") }}
