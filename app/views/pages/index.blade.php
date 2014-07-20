@@ -100,18 +100,33 @@
 	<!--Anasayfa profil kısmı -->
 	@if(Sentry::check())
 		<div class="col-md-4">
-		Merhaba <b>{{ Sentry::getUser()->username }} - <a href="{{ URL::to('user/'.Sentry::getUser()->username).'/edit' }}">Düzenle</a> - <a href="{{ URL::route('user-logout') }}">Çıkış</a></b><br>
-			<?php $user = Sentry::findUserByID(Sentry::getUser()->id); ?>
-		@if($user->hasAccess('admin'))
-		<a href="{{ URL::route('admin-all-posts') }}">Admin</a>
-		@endif<br><br>
-		
-		<b>Yorum:</b>
-		<a href="{{ URL::action('users-all-comments', Sentry::getUser()->username) }}">{{ $comments_all->count() }}</a><br>
-		
-		<b>Gönderi:</b><a href="{{ URL::action('users-all-posts', Sentry::getUser()->username) }}">{{ $posts_all->count() }}</a><br>
-		
-		<b>Etkinlik:</b><a href="{{ URL::action('users-all-organizations', Sentry::getUser()->username) }}">{{ $organizations_all->count() }}</a><br>
+			Merhaba <b>{{ Sentry::getUser()->username }} - <a href="{{ URL::to('user/'.Sentry::getUser()->username).'/edit' }}">Düzenle</a> - <a href="{{ URL::route('user-logout') }}">Çıkış</a></b><br>
+				<?php $user = Sentry::findUserByID(Sentry::getUser()->id); ?>
+			@if($user->hasAccess('admin'))
+			<a href="{{ URL::route('admin-all-posts') }}">Admin</a>
+			@endif<br><br>
+			
+			<b>Yorum:</b>
+			@if($comments_all->count() == 0)
+			<b>Yorum yok</b> <br>
+			@else
+			<a href="{{ URL::action('users-all-comments', Sentry::getUser()->username) }}">{{ $comments_all->count() }}</a><br>
+			@endif
+			
+			<b>Gönderi:</b>
+			@if($posts_all->count() == 0)
+			<b>Gönderi yok</b> <br>
+			@else
+			<a href="{{ URL::action('users-all-posts', Sentry::getUser()->username) }}">{{ $posts_all->count() }}</a><br>
+			@endif
+
+			<b>Etkinlik:</b>
+			@if($organizations_all->count() == 0)
+			<b>Etkinlik yok</b> <br>
+			@else
+			<a href="{{ URL::action('users-all-organizations', Sentry::getUser()->username) }}">{{ $organizations_all->count() }}
+			</a><br>
+			@endif
 		</div>
 	@else
 		<div class="col-md-4">
