@@ -32,7 +32,25 @@ class UserController extends BaseController {
 
 			$profile = new Profile;
 			$profile->user_id = Sentry::getUser()->id;
+			$profile->first_name = Input::get('first_name');
+			$profile->last_name = Input::get('last_name');
+			$profile->twitter_username = Input::get('twitter_username');
+			$profile->instagram_username = Input::get('instagram_username');
+			$profile->bio = Input::get('bio');
 			$profile->save();
+
+			/*
+			$destinationPath = '';
+    		$filename        = '';
+
+    		
+		    if (Input::hasFile('image')) {
+		        $file            = Input::file('image');
+		        $destinationPath = public_path().'/avatars/';
+		        $filename        = Sentry::getUser()->id . '_' . $file->getClientOriginalName();
+		        $uploadSuccess   = $file->move($destinationPath, $filename);
+		    }
+		    */
 
 			//$activationCode = $user->getActivationCode();
 
