@@ -5,7 +5,7 @@
 	<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
 		<fieldset>
 			<legend>Kayıt Ol</legend>
-				{{ Form::open(['route' => 'user-register', 'class' => 'form-horizontal']) }}
+				{{ Form::open(['route' => 'user-register', 'class' => 'form-horizontal', 'files' => 'true']) }}
 				
 				<div class="form-group">
 				{{ Form::label('username', 'Kullanıcı Adı', ['class' => 'col-xs-1 col-sm-2 col-md-2 col-lg-2 control-label']) }}
@@ -80,6 +80,69 @@
 				</div>
 
 				<hr>
+				
+				<div class="form-group">
+				{{ Form::label('first_name', 'Ad', ['class' => 'col-xs-1 col-sm-2 col-md-2 col-lg-2 control-label']) }}
+					<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+					{{ Form::input('text', 'first_name', null, ['class' => 'form-control', 'placeholder' => 'Ad']) }}
+						<p class="text-danger">
+							@if($errors->has('first_name'))
+					    	{{ $errors->first("first_name") }}
+							@endif
+						</p>
+					</div>
+				</div>
+
+				<div class="form-group">
+				{{ Form::label('last_name', 'Soyad', ['class' => 'col-xs-1 col-sm-2 col-md-2 col-lg-2 control-label']) }}
+					<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+					{{ Form::input('text', 'last_name', null, ['class' => 'form-control', 'placeholder' => 'Soyad']) }}
+						<p class="text-danger">
+							@if($errors->has('last_name'))
+					    	{{ $errors->first("last_name") }}
+							@endif
+						</p>
+					</div>
+				</div>
+
+				<div class="form-group">
+				{{ Form::label('twitter_username', 'Twitter', ['class' => 'col-xs-1 col-sm-2 col-md-2 col-lg-2 control-label']) }}
+					<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+					{{ Form::input('text', 'twitter_username', null, ['class' => 'form-control', 'placeholder' => 'Twitter']) }}
+						<p class="text-danger">
+							@if($errors->has('twitter_username'))
+					    	{{ $errors->first("twitter_username") }}
+							@endif
+						</p>
+					</div>
+				</div>
+
+				<div class="form-group">
+				{{ Form::label('instagram_username', 'Instagram', ['class' => 'col-xs-1 col-sm-2 col-md-2 col-lg-2 control-label']) }}
+					<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+					{{ Form::input('text', 'instagram_username', null, ['class' => 'form-control', 'placeholder' => 'Instagram']) }}
+						<p class="text-danger">
+							@if($errors->has('instagram_username'))
+					    	{{ $errors->first("instagram_username") }}
+							@endif
+						</p>
+					</div>
+				</div>
+
+				<div class="form-group">
+				{{ Form::label('bio', 'Bio', ['class' => 'col-xs-1 col-sm-2 col-md-2 col-lg-2 control-label'])}}
+					<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+					{{ Form::textarea('bio', null, ['size' => '30x5', 'class' => 'form-control']) }}
+						<p class="text-danger">
+							@if($errors->has('bio'))
+					    	{{ $errors->first("bio") }}
+							@endif
+						</p>
+					</div>
+				</div>
+				
+				
+				<!-- {{ Form::file('image') }} -->
 
 				<div class="form-group">
 					<div class="col-md-4 col-md-offset-2">
