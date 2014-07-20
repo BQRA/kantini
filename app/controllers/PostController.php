@@ -33,15 +33,24 @@ class PostController extends \BaseController {
 
 	public function getPosts($id, $post_id = null) {
 
-		try { $post = Post::where('id', '=', $id)->firstOrFail();
-		} catch (Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-			return Response::view('errors.post', array(), 404);
-		}
-		$comments = Comment::orderBy('created_at', 'DESC')
+		$post 		= Post::where('id', '=', $id)->firstOrFail();
+		$comments 	= Comment::orderBy('created_at', 'DESC')
 								->where('post_id', '=', $id)
 								->get();
 
 		return View::make('pages.show-posts')
+		->with('post', $post)
+		->with('comments', $comments);
+	}
+
+	public function getPostsSecret($id, $post_id = null) {
+
+		$post 		= Post::where('id', '=', $id)->firstOrFail();
+		$comments 	= Comment::orderBy('created_at', 'DESC')
+								->where('post_id', '=', $id)
+								->get();
+
+		return View::make('pages.show-posts-secret')
 		->with('post', $post)
 		->with('comments', $comments);
 	}

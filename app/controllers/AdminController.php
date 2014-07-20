@@ -79,14 +79,14 @@ class AdminController extends \BaseController {
 	}
 
 	public function AdminBanMember($id) {
-		$throttle = Sentry::findThrottlerByUserId(1);
+		$throttle = Sentry::findThrottlerByUserId($id);
 		$throttle->ban();
 
 		return Redirect::back();
 	}
 
 	public function AdminUnBanMember($id) {
-		$throttle = Sentry::findThrottlerByUserId(1);
+		$throttle = Sentry::findThrottlerByUserId($id);
 		$throttle->unBan();
 
 		return Redirect::back();
