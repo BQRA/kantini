@@ -63,6 +63,14 @@ class AdminController extends \BaseController {
 		return Redirect::back();
 	}
 
+	public function AdminDeleteOrganization($id) {
+		$data = Organization::find($id);
+		$data->delete();
+
+		return Redirect::back();
+	}
+
+	/* Member */
 	public function AdminDeleteMember($id) {
 		$data = User::find($id);
 		$data->delete();
@@ -83,11 +91,5 @@ class AdminController extends \BaseController {
 
 		return Redirect::back();
 	}
-
-	public function AdminDeleteOrganization($id) {
-		$data = Organization::find($id);
-		$data->delete();
-
-		return Redirect::back();
-	}
+	/* Member */
 }
