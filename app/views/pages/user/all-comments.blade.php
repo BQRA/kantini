@@ -6,7 +6,7 @@
 
 	@if($comments_all->count())
 		@foreach($comments_all as $comment)
-			<li>{{ $comment->comment }} => <a href="{{ URL::action('post/{id}', $comment->post_id) }}">Oku</a></li>
+			<li>{{ $comment->post->post }} => <a href="{{ URL::action('post/{id}', $comment->post_id) }}">Oku</a></li>
 		@endforeach
 	@endif
 @stop
