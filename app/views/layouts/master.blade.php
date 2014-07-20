@@ -29,10 +29,7 @@
 	    <!-- Collect the nav links, forms, and other content for toggling -->
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	    	<ul class="nav navbar-nav navbar-right">
-	    		<li><a href="{{ URL::route('home') }}">Anasayfa</a></li>
-				<li><a href="{{ URL::route('about-us') }}">Hakkımızda</a></li>
 				<li><a href="{{ URL::route('kantini') }}">Kantini</a></li>
-				<li><a href="{{ URL::route('agreement') }}">Kullanıcı sözleşmesi</a></li>
 				<li><a href="{{ URL::route('contact-us') }}">Kontak</a></li>
 				<li><a href="{{ URL::route('organization') }}">Etkinlikler</a></li>
 				@if(! Sentry::check())

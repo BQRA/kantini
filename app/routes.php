@@ -3,41 +3,37 @@ Route::get('/', ['as' => 'home', 'uses' => 'PageController@index']);
 Route::get('/about-us/', ['as' => 'about-us', 'uses' => 'PageController@aboutUs']);
 Route::get('/kantini/', ['as'	=> 'kantini', 'uses' => 'PageController@kantini']);
 Route::get('/agreement/', ['as' => 'agreement', 'uses' 	=> 'PageController@agreement']);
+Route::get('/dont-know/', ['as' => 'dont-know', 'uses' 	=> 'PageController@dontKnow']);
 
 Route::get('/male-posts/', ['as' => 'male-posts', 'uses' => 'PageController@male']);
 Route::get('/female-posts/', ['as' => 'female-posts', 'uses' => 'PageController@female']);
 
 #Contact us#
 Route::get('/contact-us/', ['as' => 'contact-us', 'uses' => 'PageController@contactUs']);
-Route::post('/contact-us/', ['before' => 'csrf', 'as'=> 'contact-us', 'uses' => 'MessageController@sendMessage']);
+Route::post('/contact-us/', ['as'=> 'contact-us', 'before' => 'csrf', 'uses' => 'MessageController@sendMessage']);
 
 #Send-post#
-Route::get('/send-post/', ['before' => ['baran', 'edit-filter'], 'as' => 'send-post', 'uses' => 'PostController@sendPost']);
-Route::post('/send-post/', ['before' => 'csrf', 'as' => 'send-post', 'uses' => 'PostController@sendPost']);
+Route::post('/send-post/', ['as' => 'send-post', 'before' => 'csrf', 'uses' => 'PostController@sendPost']);
 
 #User Register#
 Route::get('/user/register/', ['as' => 'user-register', 'uses' => 'UserController@getRegister']);
-Route::post('/user/register/', ['before' => 'csrf', 'as' => 'user-register', 'uses' => 'UserController@postRegister']);
+Route::post('/user/register/', ['as' => 'user-register', 'before' => 'csrf', 'uses' => 'UserController@postRegister']);
 
 #User Login#
 Route::get('/user/login/', ['as' => 'user-login', 'uses' => 'UserController@getLogin']);
-Route::post('/user/login/', ['before' => 'csrf', 'as' => 'user-login', 'uses' => 'UserController@postLogin']);
+Route::post('/user/login/', ['as' => 'user-login', 'before' => 'csrf', 'uses' => 'UserController@postLogin']);
 
 Route::get('/user/logout/', ['as' => 'user-logout', 'uses' => 'UserController@Logout']);
 
 Route::get('/organizations/', ['as' => 'organization', 'uses' => 'PageController@getOrganization']);
 Route::get('/organization/{id}/', ['as' => 'show-organization', 'uses' => 'PageController@showOrganization']);
 
-
-
 Route::group(['before' => 'organization-filter'], function() {
-
 	Route::get('/user/{profile}/create-organization/', ['as' => 'create-organization', 'uses' => 'PageController@getCreateOrganization']);
 	Route::post('/user/{profile}/create-organization/', ['as' => 'create-organization', 'before' => 'csrf', 'uses' => 'UserController@postCreateOrganization']);
 });
 
 Route::group(['before' => 'edit-filter'], function() {
-
 	Route::get('/user/{profile}/edit/', ['as' => 'edit-profile', 'uses' => 'UserController@editProfile']);
 	Route::post('/user/{profile}/edit/', ['as' => 'update-profile', 'before' => 'csrf', 'uses' => 'UserController@updateProfile']);
 });

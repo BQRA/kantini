@@ -64,7 +64,6 @@
 			<br>
 		</fieldset>
 
-		@if($posts->count())
 			<div class="row">
 				<div class="col-xs-12 col-sm-9 col-md-6 col-lg-6">
 					@foreach($posts as $post)
@@ -94,7 +93,6 @@
 					@endforeach
 				</div>
 			</div>
-		@endif
 	</div><!--col-md-4 end -->
 
 	<!--Anasayfa profil kısmı -->

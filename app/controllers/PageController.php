@@ -32,6 +32,10 @@ class PageController extends \BaseController {
 		return View::make('pages.agreement');
 	}
 
+	public function dontKnow() {
+		return View::make('pages.dont-know');
+	}
+
 	public function contactUs() {
 		return View::make('pages.contact-us');
 	}
