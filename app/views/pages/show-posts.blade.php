@@ -38,6 +38,8 @@
 					{{ Form::open(['action' => 'PostController@sendComment', 'class' => 'form-horizontal']) }}
 					
 					{{ Form::hidden('post_id', $post->id) }}
+					{{ Form::hidden('user_id', Sentry::getUser()->id) }}
+					{{ Form::hidden('comment_username', Sentry::getUser()->username) }}
 					
 					<div class="form-group">
 					<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">

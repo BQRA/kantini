@@ -2,7 +2,9 @@
 
 @section('content')
 	<h4>{{ $user->username }}</h4>
-
+	
+	{{ HTML::image("avatars/$user->username.jpg", "Profil", ["class" => "img-circle", "height" => "100px"]) }}
+	
 	<p>{{ $user->profile->first_name }} {{ $user->profile->last_name }}</p>
 	<small>
 		<p>Son görülme tarihi: {{ $user->last_login }}</p>
@@ -13,7 +15,7 @@
 	@endif
 	
 	@if($user->profile->instagram_username !== '')
-	<b>Instagram:</b> <a href="http://instagram.com/{{ $user->profile->instagram_username }}" target="_blank">{{ $user->profile->instagram_username }}</a>
+	<p><b>Instagram:</b> <a href="http://instagram.com/{{ $user->profile->instagram_username }}" target="_blank">{{ $user->profile->instagram_username }}</a></p>
 	@endif
 
 	<p>Toplam yorum: 

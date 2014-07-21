@@ -16,6 +16,7 @@ class UserController extends BaseController {
 			'password_again' => 'required|same:password',
 			'school'		 => 'required',
 			'gender' 		 => 'required',
+			'image' 		 => 'required'
 		];
 
 		$validator = Validator::make($data, $rules);
@@ -39,7 +40,7 @@ class UserController extends BaseController {
 			$profile->bio = Input::get('bio');
 			$profile->save();
 
-			/*
+						
 			$destinationPath = '';
     		$filename        = '';
 
@@ -47,11 +48,11 @@ class UserController extends BaseController {
 		    if (Input::hasFile('image')) {
 		        $file            = Input::file('image');
 		        $destinationPath = public_path().'/avatars/';
-		        $filename        = Sentry::getUser()->id . '_' . $file->getClientOriginalName();
+		        $extension       = $file->getClientOriginalExtension();
+		        $filename        = Sentry::getUser()->username .'.'.$extension;
 		        $uploadSuccess   = $file->move($destinationPath, $filename);
 		    }
-		    */
-
+		    
 			//$activationCode = $user->getActivationCode();
 
 			Session::flash('message', 'Üyeliğiniz başarıyla gerçekleştirilmiştir.');

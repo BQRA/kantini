@@ -142,7 +142,12 @@
 				</div>
 				
 				
-				<!-- {{ Form::file('image') }} -->
+				{{ Form::file('image') }}
+				<p class="text-danger">
+					@if($errors->has('image'))
+						{{ $errors->first("image") }}
+					@endif
+				</p>
 
 				<div class="form-group">
 					<div class="col-md-4 col-md-offset-2">

@@ -15,9 +15,9 @@ class PostController extends \BaseController {
 
 		if($validator->passes()) {
 			$post = new Post;
-			$post->username = Input::get('username');
+			$post->username = trim(Input::get('username'));
 			$post->gender 	= Input::get('gender');
-			$post->post 	= Input::get('post');
+			$post->post 	= trim(Input::get('post'));
 			$post->member 	= Input::get('member');
 			$post->save();
 
@@ -64,10 +64,10 @@ class PostController extends \BaseController {
 		
 		if($validator->passes()) {
 			$comment = new Comment;
-			$comment->user_id = Sentry::getUser()->id;
-			$comment->comment_username = Sentry::getUser()->username;
-			$comment->post_id = Input::get('post_id');
-			$comment->comment = Input::get('comment');
+			$comment->user_id 			= Input::get('user_id');
+			$comment->comment_username 	= trim(Input::get('comment_username'));
+			$comment->post_id 			= Input::get('post_id');
+			$comment->comment 			= trim(Input::get('comment'));
 			$comment->save();
 
 			Session::flash('comment-message', 'Yorumunuz başarıyla gönderilmiştir!');

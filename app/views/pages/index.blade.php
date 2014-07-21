@@ -98,8 +98,12 @@
 	<!--Anasayfa profil kısmı -->
 	@if(Sentry::check())
 		<div class="col-md-4">
-			Merhaba <b>{{ Sentry::getUser()->username }} - <a href="{{ URL::to('user/'.Sentry::getUser()->username).'/edit' }}">Düzenle</a> - <a href="{{ URL::route('user-logout') }}">Çıkış</a></b><br>
+			Merhaba <b>{{ Sentry::getUser()->username }} - 
+			<a href="{{ URL::to('user/'.Sentry::getUser()->username).'/edit' }}">Düzenle</a> - 
+			<a href="{{ URL::route('user-logout') }}">Çıkış</a></b><br>
 				<?php $user = Sentry::findUserByID(Sentry::getUser()->id); ?>
+				
+			{{ HTML::image("avatars/$user->username.jpg", "Profil", ["class" => "img-circle", "height" => "100px"]) }}
 			@if($user->hasAccess('admin'))
 			<a href="{{ URL::route('admin-all-posts') }}">Admin</a>
 			@endif<br><br>
