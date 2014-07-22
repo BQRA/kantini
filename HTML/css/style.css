@@ -192,7 +192,8 @@ body {
 /* buttons #end */
 input[type=text],
 input[type=email],
-input[type=password] {
+input[type=password],
+textarea {
   border-radius: 3px;
   border: none;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15), inset 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -209,7 +210,8 @@ input[type=password] {
 }
 input[type=text]:focus,
 input[type=email]:focus,
-input[type=password]:focus {
+input[type=password]:focus,
+textarea:focus {
   box-shadow: 0 0 0 1px rgba(99, 161, 196, 0.65), inset 0 1px 3px rgba(99, 161, 196, 0.5);
 }
 input[type=email] {
@@ -754,6 +756,135 @@ h1 span {
   color: #aaa;
 }
 /* user box #end */
+/* add event */
+.add-event-container {
+  width: 750px;
+  margin: 0 auto;
+  position: relative;
+}
+.add-event-container .ticket-effect {
+  position: absolute;
+  left: 90px;
+  top: 15px;
+  bottom: 15px;
+  right: 0;
+  z-index: 20;
+  background: url('../images/ticket-sprite.png') -218px top #ffffff repeat-y;
+  width: 31px;
+}
+.add-event-container .ticket-effect:after,
+.add-event-container .ticket-effect:before {
+  content: '';
+  display: inline-block;
+  width: 100%;
+  height: 15px;
+  background: url('../images/ticket-sprite.png') -150px 0;
+  top: -15px;
+  left: 0;
+  position: absolute;
+}
+.add-event-container .ticket-effect:before {
+  background-position: -150px -15px;
+  bottom: -15px;
+  top: auto;
+}
+.add-event-container .add-event {
+  background-color: #fff;
+  border-radius: 0 5px 5px 0;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
+  padding: 25px 25px 25px 15px;
+  margin-left: 120px;
+  position: relative;
+  z-index: 19;
+}
+.add-event-container .add-event:after {
+  background: url('../images/ticket-sprite.png') 20px center no-repeat #ffffff;
+  content: '';
+  display: inline-block;
+  width: 90px;
+  position: absolute;
+  left: -120px;
+  top: 0;
+  height: 100%;
+  border-radius: 5px 0 0 5px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
+}
+.add-event-container .add-event .details {
+  box-shadow: inset 0 0 0 3px rgba(0, 0, 0, 0.05);
+  border-radius: 5px;
+  padding: 0 15px;
+}
+.add-event-container .add-event .details .detail {
+  padding: 15px 20px;
+  border-left: 3px solid rgba(0, 0, 0, 0.05);
+  min-height: 70px;
+}
+.add-event-container .add-event .details .detail:first-child {
+  border-left: none;
+}
+.add-event-container .add-event .details .detail.pic {
+  height: 80px;
+  position: relative;
+}
+.add-event-container .add-event .details .detail.pic .pic-upload {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 100px;
+  border: 2px dashed #bbdcea;
+  top: 17px;
+  left: 20px;
+  background: url('../images/sprite.png') 12px -463px no-repeat;
+  cursor: pointer;
+}
+.add-event-container .add-event .details .detail.pic .pic-upload input {
+  height: 50px;
+  opacity: 0;
+  cursor: pointer;
+}
+.add-event-container .add-event .details .detail.price {
+  padding: 26px 0;
+  text-align: center;
+  font: 700 36px 'Quattrocento Sans', 'Helvetica Neue', Arial;
+  height: 92px;
+}
+.add-event-container .add-event .details .detail.price input {
+  padding: 0;
+  text-align: center;
+  font: 700 36px 'Quattrocento Sans', 'Helvetica Neue', Arial;
+  width: 170px;
+}
+.add-event-container .add-event .details .detail strong {
+  font: bold 11px 'Helvetica Neue', Arial;
+  display: block;
+  color: rgba(0, 0, 0, 0.4);
+  text-transform: uppercase;
+}
+.add-event-container .add-event .details .detail input,
+.add-event-container .add-event .details .detail textarea {
+  box-shadow: none;
+  border: none;
+  padding-left: 0;
+  padding-bottom: 0;
+  margin-bottom: 0;
+  font: 400 13px 'Quattrocento Sans', 'Helvetica Neue', Arial;
+  width: 100%;
+  resize: none;
+  color: #000;
+}
+.add-event-container .add-event .details .detail textarea {
+  width: 90%;
+  font-size: 15px;
+}
+.add-event-container .add-event .details .detail.title input {
+  font-size: 22px;
+}
+.add-event-container .add-event .details .clearfix {
+  background-color: rgba(0, 0, 0, 0.05);
+  height: 3px;
+  margin: 0 -13px;
+}
+/* add event #end */
 /* lightbox */
 .lightbox-bg {
   -webkit-animation: lb-footer 40s infinite linear;

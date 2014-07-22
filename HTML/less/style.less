@@ -185,7 +185,8 @@ body {
 
 input[type=text],
 input[type=email],
-input[type=password] {
+input[type=password],
+textarea {
 	border-radius: 3px;
 	border: none;
 	box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15), inset 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -769,6 +770,138 @@ h1 {
 	}
 }
 /* user box #end */
+
+/* add event */
+.add-event-container {
+	width: 750px;
+	margin: 0 auto;
+	position: relative;
+	.ticket-effect {
+		position: absolute;
+		left: 90px;
+		top: 15px;
+		bottom: 15px;
+		right: 0;
+		z-index: 20;
+		background: url('@{img-path}/ticket-sprite.png') -218px top #fff repeat-y;
+		width: 31px;
+		&:after,
+		&:before {
+			content: '';
+			display: inline-block;
+			width: 100%;
+			height: 15px;
+			background: url('@{img-path}/ticket-sprite.png') -150px 0;
+			top: -15px;
+			left: 0;
+			position: absolute;
+		}
+		&:before {
+			background-position: -150px -15px;
+			bottom: -15px;
+			top: auto;
+		}
+	}
+	.add-event {
+		background-color: #fff;
+		border-radius: 0 5px 5px 0;
+		box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
+		padding: 25px 25px 25px 15px;
+		margin-left: 120px;
+		position: relative;
+		z-index: 19;
+		&:after {
+			background: url('@{img-path}/ticket-sprite.png') 20px center no-repeat #fff;
+			content: '';
+			display: inline-block;
+			width: 90px;
+			position: absolute;
+			left: -120px;
+			top: 0;
+			height: 100%;
+			border-radius: 5px 0 0 5px;
+			box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
+		}
+		.details {
+			box-shadow: inset 0 0 0 3px rgba(0, 0, 0, 0.05);
+			border-radius: 5px;
+			padding: 0 15px;
+			.detail {
+				padding: 15px 20px;
+				border-left: 3px solid rgba(0, 0, 0, 0.05);
+				min-height: 70px;
+				&:first-child {
+					border-left: none;
+				}
+				&.pic {
+					height: 80px;
+					position: relative;
+					.pic-upload {
+						position: absolute;
+						width: 50px;
+						height: 50px;
+						border-radius: 100px;
+						border: 2px dashed #bbdcea;
+						top: 17px;
+						left: 20px;
+						background: url('@{img-path}/sprite.png') 12px -463px no-repeat;
+						cursor: pointer;
+						input {
+							height: 50px;
+							opacity: 0;
+							cursor: pointer;
+						}
+					}
+				}
+				&.price {
+					padding: 26px 0;
+					text-align: center;
+					.font2(700, 36px);
+					height: 92px;
+					input {
+						padding: 0;
+						text-align: center;
+						.font2(700, 36px);
+						width: 170px;
+					}
+				}
+				strong {
+					.font(bold,11px);
+					display: block;
+					color: rgba(0, 0, 0, 0.4);
+					text-transform: uppercase;
+				}
+				input,
+				textarea {
+					box-shadow: none;
+					border: none;
+					padding-left: 0;
+					padding-bottom: 0;
+					margin-bottom: 0;
+					.font2(400, 13px);
+					width: 100%;
+					resize: none;
+					color: #000;
+				}
+				textarea {
+					width: 90%;
+					font-size: 15px;
+				}
+				&.title {
+					input {
+						font-size: 22px;
+					}
+				}
+			}
+			.clearfix {
+				background-color: rgba(0, 0, 0, 0.05);
+				height: 3px;
+				margin: 0 -13px;
+			}
+		}
+	}
+}
+/* add event #end */
 
 /* lightbox */
 .lightbox-bg {
