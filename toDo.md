@@ -1,10 +1,8 @@
-1. Avatar
-4. profil duzenle sayfasi uye ol formuyla ayni olup girilen bilgiler dolu gelecek.
-6. like sistemi
-8. sayfalama - 36 gonderi de bir sayfa
+- Avatar
+- 'Profil düzenle' formu (Üyeler hangi bilgileri değiştirebilecek)
+- like sistemi
+- sayfalama - 36 gonderi de bir sayfa
+- Admin sayfası
+- Etkinlik sayfası (konuş)
 
-----
-
-1. uyeler hangi bilgilerini duzenleyebilecek hangilerini duzenleyemeyecek? (veri tabani bunlara gore tekrar gozden gecirilecek)
-
-2.
+not: post/id/secret yazarak anasayfaya eklenecek olan yorumlar kısmına ulaşılabilir.
