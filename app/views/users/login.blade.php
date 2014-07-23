@@ -10,10 +10,16 @@
 	{{ Form::open(array('route' => 'login')) }}
 	
 	{{ Form::label('email', 'Eposta') }}
-	{{ Form::Input('email', 'email') }} <br>
+	{{ Form::Input('email', 'email') }} 
+		@if($errors->has('email'))
+			{{ $errors->first('email') }}
+		@endif <br>
 
 	{{ Form::label('password', 'Şifre') }}
-	{{ Form::Input('password', 'password') }} <br>
+	{{ Form::Input('password', 'password') }}
+		@if($errors->has('password'))
+			{{ $errors->first('password') }}
+		@endif <br>
 
 	{{ Form::submit() }}
 

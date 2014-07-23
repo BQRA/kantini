@@ -10,15 +10,29 @@
 		Cinsiyet: {{ $user->gender }}
 	</p>
 
-	<p>
+	<p>	
+		@if($user->profile->twitter_username !== '')
 		Twitter: {{ $user->profile->twitter_username }} <br>
+		@endif
+
+		@if($user->profile->instagram_username !== '')
 		Instagram: {{ $user->profile->instagram_username }} <br>
+		@endif
+		
+
+		@if($user->profile->facebook_username !== '')
 		Facebook: {{ $user->profile->facebook_username }}
+		@endif
 	</p>
 
 	<p>
+		@if($user->profile->full_name !== '')
 		Ad: {{ $user->profile->full_name }} <br>
+		@endif
+
+		@if($user->profile->bio !== '')
 		Bio: {{ $user->profile->bio }}
+		@endif
 	</p>
 
 	<hr>

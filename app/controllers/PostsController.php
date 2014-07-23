@@ -80,7 +80,8 @@ class PostsController extends \BaseController {
 
 		} else {
 			return Redirect::back()
-			->withErrors($validator);
+			->withErrors($validator)
+			->withInput();
 		}
 	}
 }
