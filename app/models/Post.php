@@ -1,9 +1,9 @@
 <?php
 
-class Post extends Eloquent {
+class Post extends \Eloquent {
 
 	protected $table = 'posts';
-	protected $fillable = ['username', 'gender', 'post', 'member'];
+	protected $fillable = array('username', 'gender', 'post', 'member');
 
 	public function comment() {
 		return $this->hasOne('Comment');

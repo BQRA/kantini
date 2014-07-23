@@ -43,7 +43,7 @@ Route::filter('auth', function()
 		}
 		else
 		{
-			return Redirect::guest('user/login');
+			return Redirect::guest('login');
 		}
 	}
 });
@@ -65,9 +65,8 @@ Route::filter('auth.basic', function()
 |
 */
 
-Route::filter('guest', function()
-{
-	if (Auth::check()) return Redirect::to('/');
+Route::filter('guest', function() {
+	if (!Sentry::check()) return Redirect::to('/');
 });
 
 /*
@@ -89,38 +88,12 @@ Route::filter('csrf', function()
 	}
 });
 
-Route::filter('admin', function($route) {
-	if (!Sentry::check()) {
-		return Redirect::route('home')->with('message-auth', 'Ulaşmak istediğiniz sayfaya giriş yetkiniz bulunmamaktadır.');
-	}
+/*
+|--------------------------------------------------------------------------
+| Custom Filters
+|--------------------------------------------------------------------------
+*/
 
-	if(Sentry::getUser()->username !== 'Admin') {
-		return Redirect::route('home')->with('message-edit-profile', 'Hoop orada bir dur bakalım! :)');
-	}
-});
-
-Route::filter('baran', function() {
-	if (!Sentry::check()) {
-		return Redirect::route('home')->with('message-auth', 'Ulaşmak istediğiniz sayfaya giriş yetkiniz bulunmamaktadır.');
-	}
-});
-
-Route::filter('edit-filter', function($route) {
-	if (!Sentry::check()) {
-		return Redirect::route('home')->with('message-auth', 'Ulaşmak istediğiniz sayfaya giriş yetkiniz bulunmamaktadır.');
-	}
-
-	if(Sentry::getUser()->username !== $route->parameter('profile')) {
-		return Redirect::route('home')->with('message-edit-profile', 'Yanlış işler peşindesin dostum :)');
-	}
-});
-
-Route::filter('organization-filter', function($route) {
-	if (!Sentry::check()) {
-		return Redirect::route('home')->with('message-auth', 'Ulaşmak istediğiniz sayfaya giriş yetkiniz bulunmamaktadır.');
-	}
-
-	if(Sentry::getUser()->username !== $route->parameter('profile')) {
-		return Redirect::route('home')->with('message-edit-profile', 'Yanlış işler peşindesin dostum :)');
-	}
+Route::filter('session', function() {
+	if (Sentry::check()) return Redirect::to('/');
 });

@@ -78,7 +78,7 @@ return array(
 	|
 	*/
 
-	'key' => 'HLPyfBxio1keXpNZ3Il49o28JlVYPS4F',
+	'key' => 'te6lzoFLxPscnh7eqkcsawDZ9BAacM1F',
 
 	'cipher' => MCRYPT_RIJNDAEL_128,
 
@@ -122,8 +122,8 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 
-		'Way\Generators\GeneratorsServiceProvider',
 		'Cartalyst\Sentry\SentryServiceProvider',
+		'Way\Generators\GeneratorsServiceProvider'
 
 	),
 

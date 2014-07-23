@@ -15,21 +15,17 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 * @var string
 	 */
 	protected $table = 'users';
-	protected $fillable = ['username', 'email', 'school', 'gender'];
+	protected $fillable = array('username', 'email', 'school', 'gender');
 
 	/**
 	 * The attributes excluded from the model's JSON form.
 	 *
 	 * @var array
 	 */
-	protected $hidden = array('password');
+	protected $hidden = array('password', 'remember_token');
 
 	public function profile() {
 		return $this->hasOne('Profile');
-	}
-
-	public function comment() {
-		return $this->hasOne('Comment');
 	}
 
 	public function isCurrent() {

@@ -83,34 +83,8 @@ return array(
 	*/
 
 	'custom' => array(
-		'email' => array(
-			'required' => 'Eposta alanı boş kalamaz',
-		),
-
-		'password' => array(
-			'required' => 'Şifre alanı boş kalamaz',
-		),
-
-		'password_again' => array(
-			'required' => 'Şifre tekrar alanı boş kalamaz'
-		),
-
-		'username' => array(
-			'required'  => 'Kullanıcı adı alanı boş kalamaz',
-			'min' 		=> 'Kullanıcı adı en az 3 karakter olmalıdır',
-			'max'		=> 'Kullanıcı adı en fazla 15 karakter olmalıdır'
-		),
-
-		'school' => array(
-			'required' => 'Okul seçmeniz gerekmektedir'
-		),
-
-		'gender' => array(
-			'required' => 'Cinsiyet seçmeniz gerekmektedir'
-		),
-
-		'post' => array(
-			'required' => 'Mesaj kısmı boş kalamaz'
+		'attribute-name' => array(
+			'rule-name' => 'custom-message',
 		),
 	),
 

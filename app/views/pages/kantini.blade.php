@@ -1,5 +1,5 @@
 @extends('layouts.master')
 
 @section('content')
-	<p>Kantini nedir?</p>
+	<p>Kantini</p>
 @stop

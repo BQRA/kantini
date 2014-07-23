@@ -54,8 +54,8 @@ return array(
 
 		'mysql' => array(
 			'driver'    => 'mysql',
-			'host'      => 'localhost',
-			'database'  => 'kantini_beta',
+			'host'      => '127.0.0.1',
+			'database'  => 'kantini_v02',
 			'username'  => 'root',
 			'password'  => 'root',
 			'charset'   => 'utf8',
