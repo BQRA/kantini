@@ -1,8 +1,7 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
-        "This file is @generated automatically"
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
     "hash": "43a801d4b8de7e7716eac63e632dc6b4",
     "packages": [
@@ -338,12 +337,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "cdb5e9d99da0c54b7bdc94bb7cb3fad8ddb50e07"
+                "reference": "a3a7bb308f4f0aab74bcd6952b7a194b2276fa33"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/cdb5e9d99da0c54b7bdc94bb7cb3fad8ddb50e07",
-                "reference": "cdb5e9d99da0c54b7bdc94bb7cb3fad8ddb50e07",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/a3a7bb308f4f0aab74bcd6952b7a194b2276fa33",
+                "reference": "a3a7bb308f4f0aab74bcd6952b7a194b2276fa33",
                 "shasum": ""
             },
             "require": {
@@ -445,7 +444,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2014-07-21 21:21:01"
+            "time": "2014-07-23 04:01:18"
         },
         {
             "name": "monolog/monolog",
@@ -665,12 +664,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpseclib/phpseclib.git",
-                "reference": "36baab1db410601b9376e5964c44158f288b27c5"
+                "reference": "a0a23cbaf105f104d24000d718d0d850cdf41c1f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/36baab1db410601b9376e5964c44158f288b27c5",
-                "reference": "36baab1db410601b9376e5964c44158f288b27c5",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/a0a23cbaf105f104d24000d718d0d850cdf41c1f",
+                "reference": "a0a23cbaf105f104d24000d718d0d850cdf41c1f",
                 "shasum": ""
             },
             "require": {
@@ -755,7 +754,7 @@
                 "x.509",
                 "x509"
             ],
-            "time": "2014-07-21 21:53:33"
+            "time": "2014-07-22 14:09:14"
         },
         {
             "name": "predis/predis",
@@ -763,12 +762,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nrk/predis.git",
-                "reference": "d5c650d51aa99f7d0c992c8a01c015b824d8ce46"
+                "reference": "8dd7f40d2110083724f6672035e04d85132eea9f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nrk/predis/zipball/d5c650d51aa99f7d0c992c8a01c015b824d8ce46",
-                "reference": "d5c650d51aa99f7d0c992c8a01c015b824d8ce46",
+                "url": "https://api.github.com/repos/nrk/predis/zipball/8dd7f40d2110083724f6672035e04d85132eea9f",
+                "reference": "8dd7f40d2110083724f6672035e04d85132eea9f",
                 "shasum": ""
             },
             "require": {
@@ -805,7 +804,7 @@
                 "predis",
                 "redis"
             ],
-            "time": "2014-07-21 16:23:00"
+            "time": "2014-07-23 10:43:29"
         },
         {
             "name": "psr/log",
@@ -906,12 +905,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "1471619d856da006a4de443355d6339325b3f46e"
+                "reference": "e27c50e6f768aecbc46666994ccc9b2f77fd8ade"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/1471619d856da006a4de443355d6339325b3f46e",
-                "reference": "1471619d856da006a4de443355d6339325b3f46e",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/e27c50e6f768aecbc46666994ccc9b2f77fd8ade",
+                "reference": "e27c50e6f768aecbc46666994ccc9b2f77fd8ade",
                 "shasum": ""
             },
             "require": {
@@ -937,13 +936,11 @@
             ],
             "authors": [
                 {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com",
-                    "homepage": "http://fabien.potencier.org",
-                    "role": "Lead Developer"
+                    "name": "Chris Corbyn"
                 },
                 {
-                    "name": "Chris Corbyn"
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
                 }
             ],
             "description": "Swiftmailer, free feature-rich PHP mailer",
@@ -952,7 +949,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2014-07-03 13:54:59"
+            "time": "2014-07-22 15:44:41"
         },
         {
             "name": "symfony/browser-kit",
@@ -1452,12 +1449,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/HttpKernel.git",
-                "reference": "bc645cd0e83008b15586dc60b6acc39fd09bcce3"
+                "reference": "b92a20b7610b7d5403210afdb2519ff51ece2002"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/HttpKernel/zipball/bc645cd0e83008b15586dc60b6acc39fd09bcce3",
-                "reference": "bc645cd0e83008b15586dc60b6acc39fd09bcce3",
+                "url": "https://api.github.com/repos/symfony/HttpKernel/zipball/b92a20b7610b7d5403210afdb2519ff51ece2002",
+                "reference": "b92a20b7610b7d5403210afdb2519ff51ece2002",
                 "shasum": ""
             },
             "require": {
@@ -1504,19 +1501,17 @@
             ],
             "authors": [
                 {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com",
-                    "homepage": "http://fabien.potencier.org",
-                    "role": "Lead Developer"
-                },
-                {
                     "name": "Symfony Community",
                     "homepage": "http://symfony.com/contributors"
+                },
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
                 }
             ],
             "description": "Symfony HttpKernel Component",
             "homepage": "http://symfony.com",
-            "time": "2014-07-15 15:39:46"
+            "time": "2014-07-15 20:52:32"
         },
         {
             "name": "symfony/process",
