@@ -88,10 +88,21 @@ class UsersController extends \BaseController {
 	}
 
 	public function ShowProfile($username) {
-		$user 		= User::with('profile')->whereUsername($username)->firstOrFail();
-
+		try {
+			$user = User::with('profile')->whereUsername($username)->firstOrFail();
+		} catch (Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+			return View::make('errors.404');
+		}
+		
 		$posts 		= Post::orderBy('created_at', 'DESC')
 							->where('username', '=', $username)
+							->where('type', '=', '0')
+							->take(3)
+							->get();
+
+		$orgs 		= Post::orderBy('created_at', 'DESC')
+							->where('username', '=', $username)
+							->where('type', '=', '1')
 							->take(3)
 							->get();
 
@@ -103,16 +114,26 @@ class UsersController extends \BaseController {
 		return View::make('users.profile')
 		->withUser($user)
 		->with('posts', $posts)
+		->with('orgs', $orgs)
 		->with('comments', $comments);
 	}
 
 	public function EditProfile($username) {
-		$user = User::whereUsername($username)->firstOrFail();
+		try {
+			$user = User::with('profile')->whereUsername($username)->firstOrFail();
+		} catch (Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+			return View::make('errors.404');
+		}
 		return View::make('users.edit-profile')->withUser($user);
 	}
 
 	public function UpdateProfile($username) {
-		$user = User::whereUsername($username)->firstOrFail();
+		try {
+			$user = User::with('profile')->whereUsername($username)->firstOrFail();
+		} catch (Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+			return View::make('errors.404');
+		}
+		
 		$data = Input::only('full_name', 'twitter_username', 'instagram_username', 'facebook_username', 'bio');
 
 		$user->profile->fill($data)->save();

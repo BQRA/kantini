@@ -6,7 +6,8 @@ class PagesController extends \BaseController {
 
 		$posts = Post::orderBy('created_at', 'DESC')->get();
 
-		return View::make('pages.home')->with('posts', $posts);
+		return View::make('pages.home')
+		->with('posts', $posts);
 	}
 
 	public function Kantini() {
@@ -27,6 +28,10 @@ class PagesController extends \BaseController {
 
 	public function UDontKnow() {
 		return View::make('pages.u-dont-know');
+	}
+
+	public function CreateOrganization() {
+		return View::make('pages.create-organization');
 	}
 
 	public function Register() {
