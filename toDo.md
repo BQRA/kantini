@@ -1,9 +1,8 @@
+- anasayfaya kişi kartı
 - Avatar
 - 'Profil düzenle' formu (Üyeler hangi bilgileri değiştirebilecek)
 - like sistemi
+- Etkinlik sayfası (konuş)
 - sayfalama - 36 gonderi de bir sayfa
 - Admin sayfası
-- Etkinlik sayfası (konuş)
-
-not: post/id/secret yazarak anasayfaya eklenecek olan yorumlar kısmına ulaşılabilir.
-nota not: bu notlari bahsi gecen kodu push'larken desciption alanina yaz bundan sonra.
+- 404, 403 sayfaları
