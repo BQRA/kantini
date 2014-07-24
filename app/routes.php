@@ -31,8 +31,7 @@ Route::get('/u-dont-know/', array(
 
 Route::get('/user/register/', array(
 	'as' 	 => 'register',
-	'uses' 	 => 'PagesController@Register',
-	'before' => 'session'
+	'uses' 	 => 'PagesController@Register'
 ));
 	
 	Route::post('/user/register/', array(
@@ -43,8 +42,7 @@ Route::get('/user/register/', array(
 
 Route::get('/user/login/', array(
 	'as' 	 => 'login',
-	'uses' 	 => 'PagesController@Login',
-	'before' => 'session'
+	'uses' 	 => 'PagesController@Login'
 ));
 
 	Route::post('/user/login/', array(
@@ -101,3 +99,20 @@ Route::get('/post/{id}/secret', array(
 		'before' => 'csrf'
 	));
 /* Just Post Routes */
+
+Route::get('/create-organization/', array(
+	'as' 	=> 'create.organization',
+	'uses' 	=> 'PagesController@CreateOrganization',
+	'before' => 'session'
+));
+
+	Route::post('/create-organization/', array(
+		'as' 	=> 'create.organization',
+		'uses' 	=> 'PostsController@CreateOrganization',
+		'before' => 'csrf'
+	));
+
+Route::get('/organization/{id}', array(
+	'as' 	=> 'show.organization',
+	'uses' 	=> 'PostsController@ShowOrganization'
+));

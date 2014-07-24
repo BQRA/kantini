@@ -95,5 +95,5 @@ Route::filter('csrf', function()
 */
 
 Route::filter('session', function() {
-	if (Sentry::check()) return Redirect::to('/');
+	if (!Sentry::check()) return Redirect::to('/')->with('message', 'Yanlış işler peşindesin (: <br><br>');
 });
