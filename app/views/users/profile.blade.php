@@ -10,47 +10,47 @@
 		Cinsiyet: {{ $user->gender }}
 	</p>
 
-	<p>	
-		@if($user->profile->twitter_username !== '')
+	<p>
 		Twitter: {{ $user->profile->twitter_username }} <br>
-		@endif
-
-		@if($user->profile->instagram_username !== '')
 		Instagram: {{ $user->profile->instagram_username }} <br>
-		@endif
-		
-
-		@if($user->profile->facebook_username !== '')
 		Facebook: {{ $user->profile->facebook_username }}
-		@endif
 	</p>
 
 	<p>
-		@if($user->profile->full_name !== '')
 		Ad: {{ $user->profile->full_name }} <br>
-		@endif
-
-		@if($user->profile->bio !== '')
 		Bio: {{ $user->profile->bio }}
-		@endif
 	</p>
 
 	<hr>
-
-	<h4>Son 3 Gönderi</h5>
+	
+	@if($posts->count() !== 0)
+		<h4>Son 3 Gönderi</h5>
 		@foreach($posts as $post)
 		<li>
 			{{ $post->post }} &rarr; <a href="{{ URL::action('show.post', $post->id) }}">Oku</a>
 		</li>
 		@endforeach
+	@endif
 	
-	<h4>Son 3 Yorum</h4>
+
+	@if($comments->count() !== 0)
+		<h4>Son 3 Yorum</h4>
 		@foreach($comments as $comment)
 		<li>
 			{{ $comment->comment }} &rarr; <a href="{{ URL::action('show.post', $comment->post_id) }}">Oku</a>
 		</li>
 		@endforeach
-
+	@endif
+	
+	@if($orgs->count() !== 0)
+		<h4>Son 3 Etkinlik</h4>
+		@foreach($orgs as $org)
+		<li>
+			{{ $org->org_name }} &rarr; <a href="{{ URL::action('show.organization', $post->id) }}">Oku</a>
+		</li>
+		@endforeach
+	@endif
+	
 	<hr>
 	@if($user->isCurrent())
 		<a href="{{ URL::to('user/profile/'.Sentry::getUser()->username).'/edit' }}">Düzenle</a>
