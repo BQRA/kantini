@@ -59,6 +59,10 @@ body {
 
 
 /* layout */
+a:hover {
+	text-decoration: none;
+	color: inherit;
+}
 .left {
 	float: left;
 	display: inline-block;
@@ -129,6 +133,9 @@ body {
 	height: 100%;
 	vertical-align: middle;
 }
+.text-center {
+	text-align: center;
+}
 /* layout #end */
 
 /* buttons */
@@ -168,6 +175,7 @@ body {
 	}
 	&:hover {
 		box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.3), 0 2px 5px rgba(0, 0, 0, 0.2);
+		color: rgba(0, 0, 0, 0.5);
 	}
 	&:active {
 		box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.3), inset 0 1px 2px rgba(0, 0, 0, 0.3);
@@ -243,6 +251,27 @@ h1 {
 		display: inline-block;
 		background: url('@{img-path}/logo.png') no-repeat 0 0;
 	}
+}
+
+h2 {
+	padding: 0;
+	margin: 0 0 20px 0;
+	text-align: center;
+	.font2(700, 26px);
+	color: #333;
+}
+p {
+	.font(normal, 13px);
+	line-height: 22px;
+}
+
+.footer {
+	padding: 30px 0;
+	border-top: 1px solid #eee;
+	margin: 30px 0 0 0;
+	text-align: center;
+	.font2(700, 13px);
+	color: #333;
 }
 
 .dedikod-area {
@@ -406,9 +435,10 @@ h1 {
 /*********************************/
 .header {
 	background: url('@{img-path}/unis/beykent.png') center top no-repeat;
-	height: 285px;
+	// height: 285px;
 	display: inline-block;
 	width: 100%;
+	padding-bottom: 30px;
 	.logo {
 		width: 500px;
 		margin: 30px auto 0 auto;
@@ -416,6 +446,23 @@ h1 {
 	}
 }
 
+.blank-page {
+	background: #fff;
+	border-radius: 3px;
+	box-shadow: 0 0 4px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(0, 0, 0, 0.1);
+	padding: 40px;
+	position: relative;
+	&:after {
+		content: '';
+		display: inline-block;
+		height: 2px;
+		background: url('@{img-path}/sprite.png') 0 -538px repeat-x;
+		width: 100%;
+		top: 0;
+		left: 0;
+		position: absolute;
+	}
+}
 
 .container {
 	width: 960px;
@@ -468,7 +515,7 @@ h1 {
 		.dedikods {
 			background: #fff;
 			border-radius: 3px;
-			box-shadow: 0 0 4px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(0, 0, 0, 0.05);
+			box-shadow: 0 0 4px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(0, 0, 0, 0.1);
 			display: inline-block;
 			width: 630px;
 			margin-left: 55px;
@@ -608,7 +655,7 @@ h1 {
 					display: inline-block;
 					width: 38px;
 					height: 38px;
-					border-radius: 2px;
+					border-radius: 20px;
 					overflow: hidden;
 					box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
 					img {
@@ -857,6 +904,29 @@ h1 {
 	}
 }
 /* user box #end */
+
+/* form */
+.form {
+	display: inline-block;
+	width: 100%;
+	padding: 40px 0 0 0;
+	margin: 20px 0 0 0;
+	border-top: 1px solid #eee;
+	.font(bold, 13px);
+	.row {
+		margin-bottom: 20px;
+	}
+	.title {
+		padding-top: 10px;
+	}
+	input[type=text],
+	input[type=email],
+	input[type=password] {
+		margin-bottom: 0;
+		width: 300px;
+	}
+}
+/* form #end */
 
 /* add event */
 .content {
