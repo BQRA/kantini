@@ -181,6 +181,13 @@ body {
 		}
 	}
 }
+input.button,
+button.button {
+	padding-top: 5px;
+	&.sm {
+		padding-top: 2px;
+	}
+}
 /* buttons #end */
 
 input[type=text],
@@ -235,6 +242,85 @@ h1 {
 		margin: 0 0 0 10px;
 		display: inline-block;
 		background: url('@{img-path}/logo.png') no-repeat 0 0;
+	}
+}
+
+.dedikod-area {
+	margin: 30px auto 0 auto;
+	width: 960px;
+	.font2(700, 13px);
+	color: #aaa;
+	textarea {
+		width: 100%;
+		height: 80px;
+		resize: none;
+		margin-bottom: -5px;
+		background-color: rgba(255, 255, 255, 0.6);
+		position: relative;
+		z-index: 1;
+		color: #333;
+		&:focus {
+			background-color: rgba(255, 255, 255, 0.85);
+			box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
+		}
+	}
+	.bottom-bar {
+		height: 40px;
+		border-radius: 0 0 5px 5px;
+		background-color: #fff;
+		box-shadow: inset 0 -10px 20px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(0, 0, 0, 0.2), 0 1px 3px rgba(0, 0, 0, 0.2);
+		display: inline-block;
+		width: 100%;
+		position: relative;
+		z-index: 2;
+		span {
+			padding: 7px;
+			display: inline-block;
+			height: 40px;
+			border-right: 1px solid rgba(0, 0, 0, 0.3);
+			float: left;
+			&.send {
+				border: none;
+			}
+		}
+		span.bar-button {
+			padding: 14px 20px;
+			cursor: pointer;
+			position: relative;
+			&:hover,
+			&.selected {
+				color: #333;
+				background-color: #eee !important;
+				&:after {
+					content: '';
+					position: absolute;
+					top: -11px;
+					left: 50%;
+					width: 0;
+					margin-left: -6px;
+					height: 0;
+					display: inline-block;
+					border: 6px solid transparent;
+					border-bottom: 5px solid #aaa;
+				}
+			}
+			&:first-child {
+				border-left: none;
+				border-radius: 0 0 0 5px;
+			}
+			&.male,
+			&.female {
+				background: url('@{img-path}/sprite.png') no-repeat;
+			}
+			&.male {
+				border-left: 1px solid rgba(0, 0, 0, 0.3);
+				border-radius: 0;
+				background-position: 11px -36px;
+			}
+			&.female {
+				background-position: 11px 12px;
+			}
+		}
 	}
 }
 
@@ -702,6 +788,7 @@ h1 {
 				height: 12px;
 				position: absolute;
 				left: 50%;
+				top: 12px;
 				margin-left: -6px;
 				background: url('@{img-path}/sprite.png') 0 -344px;
 			}
@@ -772,6 +859,51 @@ h1 {
 /* user box #end */
 
 /* add event */
+.content {
+	.content-ticket {
+		width: 580px;
+		overflow: hidden;
+		padding: 5px;
+		height: 311px;
+		position: relative;
+		.transition(.2s);
+		&:after,
+		&:before {
+			content: '';
+			position: absolute;
+			display: inline-block;
+			height: 100%;
+			width: 3px;
+			border-radius: 3px 0 0 3px;
+			background-color: #444;
+			box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
+			left: 0;
+			top: 0;
+			z-index: 9;
+			.transition(.5s);
+		}
+		&:before {
+			z-index: 7;
+			left: 2px;
+			border-radius: 0 3px 3px 0;
+		}
+		.add-event-container {
+			position: absolute;
+			right: 1px;
+			z-index: 8;
+			.transition(.2s);
+		}
+	}
+	&:hover {
+		.content-ticket {
+			width: 752px;
+			&:after,
+			&:before {
+				opacity: 0;
+			}
+		}
+	}
+}
 .add-event-container {
 	width: 750px;
 	margin: 0 auto;
@@ -844,12 +976,16 @@ h1 {
 						border: 2px dashed #bbdcea;
 						top: 17px;
 						left: 20px;
+						overflow: hidden;
 						background: url('@{img-path}/sprite.png') 12px -463px no-repeat;
 						cursor: pointer;
 						input {
 							height: 50px;
 							opacity: 0;
 							cursor: pointer;
+						}
+						img {
+							width: 100%;
 						}
 					}
 				}
@@ -864,6 +1000,11 @@ h1 {
 						.font2(700, 36px);
 						width: 170px;
 					}
+				}
+				& > span {
+					padding-top: 10px;
+					.font2(400, 13px);
+					display: inline-block;
 				}
 				strong {
 					.font(bold,11px);
@@ -888,8 +1029,17 @@ h1 {
 					font-size: 15px;
 				}
 				&.title {
-					input {
+					& > span {
+						padding-top: 9px;
+					}
+					input,
+					& > span {
 						font-size: 22px;
+					}
+				}
+				&.address {
+					span {
+						font-size: 15px;
 					}
 				}
 			}
