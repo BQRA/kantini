@@ -10,7 +10,7 @@
 	{{ Form::open(array('route' => 'login')) }}
 	
 	{{ Form::label('email', 'Eposta') }}
-	{{ Form::Input('email', 'email') }} 
+	{{ Form::Input('email', 'email') }}
 		@if($errors->has('email'))
 			{{ $errors->first('email') }}
 		@endif <br>
