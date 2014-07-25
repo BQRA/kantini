@@ -45,3 +45,5 @@
 {{ Form::submit() }}
 
 {{ Form::close() }}
+
+<hr>

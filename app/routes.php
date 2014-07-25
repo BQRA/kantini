@@ -111,21 +111,33 @@ Route::get('/post/{id}/secret', array(
 	));
 
 	Route::post('/send-comment/', array(
-		'as' 	=> 'send.comment',
-		'uses' => 'PostsController@SendComment',
+		'as' 	 => 'send.comment',
+		'uses'   => 'PostsController@SendComment',
+		'before' => 'csrf'
+	));
+
+	Route::post('/like/', array(
+		'as' 	 => 'like',
+		'uses'   => 'LikesController@Like',
+		'before' => 'csrf'
+	));
+
+	Route::post('/guest-like/', array(
+		'as' 	 => 'like',
+		'uses' 	 => 'LikesController@GuestLike',
 		'before' => 'csrf'
 	));
 /* Just Post Routes */
 
 Route::get('/create-organization/', array(
-	'as' 	=> 'create.organization',
-	'uses' 	=> 'PagesController@CreateOrganization',
+	'as' 	 => 'create.organization',
+	'uses' 	 => 'PagesController@CreateOrganization',
 	'before' => 'session'
 ));
 
 	Route::post('/create-organization/', array(
-		'as' 	=> 'create.organization',
-		'uses' 	=> 'PostsController@CreateOrganization',
+		'as' 	 => 'create.organization',
+		'uses' 	 => 'PostsController@CreateOrganization',
 		'before' => 'csrf'
 	));
 
