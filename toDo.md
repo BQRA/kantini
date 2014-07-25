@@ -6,3 +6,4 @@
 - sayfalama - 36 gonderi de bir sayfa
 - Admin sayfası
 - 404, 403 sayfaları
+- like ederken user_id kullanımı kalkacak

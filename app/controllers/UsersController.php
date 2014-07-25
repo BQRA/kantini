@@ -124,6 +124,10 @@ class UsersController extends \BaseController {
 		$comments_all = Comment::orderBy('created_at', 'DESC')
 							->where('commenter', '=', $username)
 							->get();
+
+		$likes  	 = Like::orderBy('created_at', 'DESC')
+							->where('liker', '=', $username)
+							->get();
 		
 		return View::make('users.profile')
 		->withUser($user)
@@ -132,7 +136,8 @@ class UsersController extends \BaseController {
 		->with('orgs', $orgs)
 		->with('orgs_all', $orgs_all)
 		->with('comments', $comments)
-		->with('comments_all', $comments_all);
+		->with('comments_all', $comments_all)
+		->with('likes', $likes);
 	}
 
 	public function EditProfile($username) {
