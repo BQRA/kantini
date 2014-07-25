@@ -247,167 +247,6 @@
         "notification-url": "https://packagist.org/downloads/"
     },
     {
-        "name": "cartalyst/sentry",
-        "version": "v2.1.3",
-        "version_normalized": "2.1.3.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/cartalyst/sentry.git",
-            "reference": "0127a4047391b2f179dd2b57d71e25f8685b7ba9"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/cartalyst/sentry/zipball/0127a4047391b2f179dd2b57d71e25f8685b7ba9",
-            "reference": "0127a4047391b2f179dd2b57d71e25f8685b7ba9",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.3"
-        },
-        "require-dev": {
-            "illuminate/cookie": ">=4.0.9,<4.2",
-            "illuminate/database": ">=4.0.9,<4.2",
-            "illuminate/http": ">=4.0.9,<4.2",
-            "illuminate/session": ">=4.0.9,<4.2",
-            "ircmaxell/password-compat": "1.0.*",
-            "mockery/mockery": "0.7.2"
-        },
-        "suggest": {
-            "happydemon/txt": "Required Text helpers when using the Kohana implementation",
-            "illuminate/database": "Default sentry user, group and throttling implementations.",
-            "ircmaxell/password-compat": "Default hashing uses PHP 5.5 password_* functions, with forward-compatible support."
-        },
-        "time": "2014-05-19 20:15:14",
-        "type": "library",
-        "extra": {
-            "component": "package",
-            "frameworks": [
-                "Laravel 3",
-                "Laravel 4",
-                "CodeIgniter 3",
-                "FuelPHP 1",
-                "Kohana"
-            ],
-            "versions": {
-                "1": "1.1/master",
-                "2": "master"
-            },
-            "branch-alias": {
-                "dev-master": "2.0-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "classmap": [
-                "src/Cartalyst/Sentry/Groups/Exceptions.php",
-                "src/Cartalyst/Sentry/Throttling/Exceptions.php",
-                "src/Cartalyst/Sentry/Users/Exceptions.php",
-                "src/migrations"
-            ],
-            "psr-0": {
-                "Cartalyst\\Sentry": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "authors": [
-            {
-                "name": "Ben Corlett",
-                "email": "ben.corlett@cartalyst.com",
-                "role": "Developer"
-            },
-            {
-                "name": "Cartalyst LLC",
-                "email": "help@cartalyst.com"
-            },
-            {
-                "name": "Bruno Gaspar",
-                "email": "bruno.gaspar@cartalyst.com",
-                "role": "Developer"
-            },
-            {
-                "name": "Dan Syme",
-                "email": "dan.syme@cartalyst.com",
-                "role": "Creator & Designer"
-            },
-            {
-                "name": "Daniel Petrie",
-                "email": "dan.petrie@cartalyst.com",
-                "role": "Developer"
-            }
-        ],
-        "description": "PHP 5.3+ Fully-featured Authentication & Authorization System",
-        "keywords": [
-            "auth",
-            "codeigniter",
-            "fuelphp",
-            "kohana",
-            "laravel",
-            "security"
-        ]
-    },
-    {
-        "name": "symfony/translation",
-        "version": "2.5.x-dev",
-        "version_normalized": "2.5.9999999.9999999-dev",
-        "target-dir": "Symfony/Component/Translation",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/symfony/Translation.git",
-            "reference": "059d57c361043f5a06eb348b9b7554213f9ab8d1"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/symfony/Translation/zipball/059d57c361043f5a06eb348b9b7554213f9ab8d1",
-            "reference": "059d57c361043f5a06eb348b9b7554213f9ab8d1",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.3"
-        },
-        "require-dev": {
-            "symfony/config": "~2.0",
-            "symfony/yaml": "~2.2"
-        },
-        "suggest": {
-            "symfony/config": "",
-            "symfony/yaml": ""
-        },
-        "time": "2014-07-15 14:22:44",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "2.5-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "Symfony\\Component\\Translation\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Fabien Potencier",
-                "email": "fabien@symfony.com",
-                "homepage": "http://fabien.potencier.org",
-                "role": "Lead Developer"
-            },
-            {
-                "name": "Symfony Community",
-                "homepage": "http://symfony.com/contributors"
-            }
-        ],
-        "description": "Symfony Translation Component",
-        "homepage": "http://symfony.com"
-    },
-    {
         "name": "symfony/security-core",
         "version": "2.5.x-dev",
         "version_normalized": "2.5.9999999.9999999-dev",
@@ -542,114 +381,6 @@
             "uri",
             "url"
         ]
-    },
-    {
-        "name": "symfony/process",
-        "version": "2.5.x-dev",
-        "version_normalized": "2.5.9999999.9999999-dev",
-        "target-dir": "Symfony/Component/Process",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/symfony/Process.git",
-            "reference": "389f090b817141f9922ad14db748470072fb20e2"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/symfony/Process/zipball/389f090b817141f9922ad14db748470072fb20e2",
-            "reference": "389f090b817141f9922ad14db748470072fb20e2",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.3"
-        },
-        "time": "2014-07-16 13:13:02",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "2.5-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "Symfony\\Component\\Process\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Fabien Potencier",
-                "email": "fabien@symfony.com",
-                "homepage": "http://fabien.potencier.org",
-                "role": "Lead Developer"
-            },
-            {
-                "name": "Symfony Community",
-                "homepage": "http://symfony.com/contributors"
-            }
-        ],
-        "description": "Symfony Process Component",
-        "homepage": "http://symfony.com"
-    },
-    {
-        "name": "symfony/http-foundation",
-        "version": "2.5.x-dev",
-        "version_normalized": "2.5.9999999.9999999-dev",
-        "target-dir": "Symfony/Component/HttpFoundation",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/symfony/HttpFoundation.git",
-            "reference": "32ca1659e64bff5df61668e137bb3c3f64b7ce55"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/symfony/HttpFoundation/zipball/32ca1659e64bff5df61668e137bb3c3f64b7ce55",
-            "reference": "32ca1659e64bff5df61668e137bb3c3f64b7ce55",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.3"
-        },
-        "require-dev": {
-            "symfony/expression-language": "~2.4"
-        },
-        "time": "2014-07-15 14:15:12",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "2.5-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "Symfony\\Component\\HttpFoundation\\": ""
-            },
-            "classmap": [
-                "Symfony/Component/HttpFoundation/Resources/stubs"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Fabien Potencier",
-                "email": "fabien@symfony.com",
-                "homepage": "http://fabien.potencier.org",
-                "role": "Lead Developer"
-            },
-            {
-                "name": "Symfony Community",
-                "homepage": "http://symfony.com/contributors"
-            }
-        ],
-        "description": "Symfony HttpFoundation Component",
-        "homepage": "http://symfony.com"
     },
     {
         "name": "symfony/event-dispatcher",
@@ -1210,12 +941,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/phpseclib/phpseclib.git",
-            "reference": "a0a23cbaf105f104d24000d718d0d850cdf41c1f"
+            "reference": "880bc9d9e60a4817ca138b8f5377e313741bf7db"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/a0a23cbaf105f104d24000d718d0d850cdf41c1f",
-            "reference": "a0a23cbaf105f104d24000d718d0d850cdf41c1f",
+            "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/880bc9d9e60a4817ca138b8f5377e313741bf7db",
+            "reference": "880bc9d9e60a4817ca138b8f5377e313741bf7db",
             "shasum": ""
         },
         "require": {
@@ -1232,7 +963,7 @@
             "ext-mcrypt": "Install the Mcrypt extension in order to speed up a wide variety of cryptographic operations.",
             "pear-pear/PHP_Compat": "Install PHP_Compat to get phpseclib working on PHP < 4.3.3."
         },
-        "time": "2014-07-22 14:09:14",
+        "time": "2014-07-24 15:32:38",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1373,53 +1104,6 @@
             "log",
             "logging",
             "psr-3"
-        ]
-    },
-    {
-        "name": "nikic/php-parser",
-        "version": "0.9.x-dev",
-        "version_normalized": "0.9.9999999.9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/nikic/PHP-Parser.git",
-            "reference": "5960ecfc105011b8d1bfedf7647b4b8989dbcb4c"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/5960ecfc105011b8d1bfedf7647b4b8989dbcb4c",
-            "reference": "5960ecfc105011b8d1bfedf7647b4b8989dbcb4c",
-            "shasum": ""
-        },
-        "require": {
-            "ext-tokenizer": "*",
-            "php": ">=5.2"
-        },
-        "time": "2014-04-19 20:26:05",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "0.9-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "PHPParser": "lib/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "authors": [
-            {
-                "name": "Nikita Popov"
-            }
-        ],
-        "description": "A PHP parser written in PHP",
-        "keywords": [
-            "parser",
-            "php"
         ]
     },
     {
@@ -1687,18 +1371,380 @@
         "homepage": "http://symfony.com"
     },
     {
+        "name": "predis/predis",
+        "version": "0.8.x-dev",
+        "version_normalized": "0.8.9999999.9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/nrk/predis.git",
+            "reference": "8dd7f40d2110083724f6672035e04d85132eea9f"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/nrk/predis/zipball/8dd7f40d2110083724f6672035e04d85132eea9f",
+            "reference": "8dd7f40d2110083724f6672035e04d85132eea9f",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.2"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "~4.0"
+        },
+        "suggest": {
+            "ext-curl": "Allows access to Webdis when paired with phpiredis",
+            "ext-phpiredis": "Allows faster serialization and deserialization of the Redis protocol"
+        },
+        "time": "2014-07-23 10:43:29",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Predis": "lib/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Daniele Alessandri",
+                "email": "suppakilla@gmail.com",
+                "homepage": "http://clorophilla.net"
+            }
+        ],
+        "description": "Flexible and feature-complete PHP client library for Redis",
+        "homepage": "http://github.com/nrk/predis",
+        "keywords": [
+            "nosql",
+            "predis",
+            "redis"
+        ]
+    },
+    {
+        "name": "cartalyst/sentry",
+        "version": "2.1.x-dev",
+        "version_normalized": "2.1.9999999.9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/cartalyst/sentry.git",
+            "reference": "1335033432147772c05a509981563409cb3c3d3b"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/cartalyst/sentry/zipball/1335033432147772c05a509981563409cb3c3d3b",
+            "reference": "1335033432147772c05a509981563409cb3c3d3b",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.3"
+        },
+        "require-dev": {
+            "illuminate/cookie": ">=4.0.9,<4.2",
+            "illuminate/database": ">=4.0.9,<4.2",
+            "illuminate/http": ">=4.0.9,<4.2",
+            "illuminate/session": ">=4.0.9,<4.2",
+            "ircmaxell/password-compat": "1.0.*",
+            "mockery/mockery": "0.7.2"
+        },
+        "suggest": {
+            "happydemon/txt": "Required Text helpers when using the Kohana implementation",
+            "illuminate/database": "Default sentry user, group and throttling implementations.",
+            "ircmaxell/password-compat": "Default hashing uses PHP 5.5 password_* functions, with forward-compatible support."
+        },
+        "time": "2014-07-23 20:35:12",
+        "type": "library",
+        "extra": {
+            "component": "package",
+            "frameworks": [
+                "Laravel 3",
+                "Laravel 4",
+                "CodeIgniter 3",
+                "FuelPHP 1",
+                "Kohana"
+            ],
+            "versions": {
+                "1": "1.1/master",
+                "2": "master"
+            },
+            "branch-alias": {
+                "dev-master": "2.0-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "src/Cartalyst/Sentry/Groups/Exceptions.php",
+                "src/Cartalyst/Sentry/Throttling/Exceptions.php",
+                "src/Cartalyst/Sentry/Users/Exceptions.php",
+                "src/migrations"
+            ],
+            "psr-0": {
+                "Cartalyst\\Sentry": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Ben Corlett",
+                "email": "ben.corlett@cartalyst.com",
+                "role": "Developer"
+            },
+            {
+                "name": "Cartalyst LLC",
+                "email": "help@cartalyst.com"
+            },
+            {
+                "name": "Bruno Gaspar",
+                "email": "bruno.gaspar@cartalyst.com",
+                "role": "Developer"
+            },
+            {
+                "name": "Dan Syme",
+                "email": "dan.syme@cartalyst.com",
+                "role": "Creator & Designer"
+            },
+            {
+                "name": "Daniel Petrie",
+                "email": "dan.petrie@cartalyst.com",
+                "role": "Developer"
+            }
+        ],
+        "description": "PHP 5.3+ Fully-featured Authentication & Authorization System",
+        "keywords": [
+            "auth",
+            "codeigniter",
+            "fuelphp",
+            "kohana",
+            "laravel",
+            "security"
+        ]
+    },
+    {
+        "name": "symfony/translation",
+        "version": "2.5.x-dev",
+        "version_normalized": "2.5.9999999.9999999-dev",
+        "target-dir": "Symfony/Component/Translation",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/Translation.git",
+            "reference": "9f09786fd92fb5aba10e868e1ca7b995eed41b2f"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/symfony/Translation/zipball/9f09786fd92fb5aba10e868e1ca7b995eed41b2f",
+            "reference": "9f09786fd92fb5aba10e868e1ca7b995eed41b2f",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.3"
+        },
+        "require-dev": {
+            "symfony/config": "~2.0",
+            "symfony/yaml": "~2.2"
+        },
+        "suggest": {
+            "symfony/config": "",
+            "symfony/yaml": ""
+        },
+        "time": "2014-07-24 17:01:56",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.5-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Symfony\\Component\\Translation\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Symfony Community",
+                "homepage": "http://symfony.com/contributors"
+            },
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            }
+        ],
+        "description": "Symfony Translation Component",
+        "homepage": "http://symfony.com"
+    },
+    {
+        "name": "symfony/process",
+        "version": "2.5.x-dev",
+        "version_normalized": "2.5.9999999.9999999-dev",
+        "target-dir": "Symfony/Component/Process",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/Process.git",
+            "reference": "789e90513e6b9e544a0de896e456656565b4f552"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/symfony/Process/zipball/789e90513e6b9e544a0de896e456656565b4f552",
+            "reference": "789e90513e6b9e544a0de896e456656565b4f552",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.3"
+        },
+        "time": "2014-07-24 17:01:56",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.5-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Symfony\\Component\\Process\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Symfony Community",
+                "homepage": "http://symfony.com/contributors"
+            },
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            }
+        ],
+        "description": "Symfony Process Component",
+        "homepage": "http://symfony.com"
+    },
+    {
+        "name": "symfony/http-foundation",
+        "version": "2.5.x-dev",
+        "version_normalized": "2.5.9999999.9999999-dev",
+        "target-dir": "Symfony/Component/HttpFoundation",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/HttpFoundation.git",
+            "reference": "28940dacd5fc9cb96ee4a77e08d8a228136e1a4f"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/symfony/HttpFoundation/zipball/28940dacd5fc9cb96ee4a77e08d8a228136e1a4f",
+            "reference": "28940dacd5fc9cb96ee4a77e08d8a228136e1a4f",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.3"
+        },
+        "require-dev": {
+            "symfony/expression-language": "~2.4"
+        },
+        "time": "2014-07-24 10:44:07",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.5-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Symfony\\Component\\HttpFoundation\\": ""
+            },
+            "classmap": [
+                "Symfony/Component/HttpFoundation/Resources/stubs"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Symfony Community",
+                "homepage": "http://symfony.com/contributors"
+            },
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            }
+        ],
+        "description": "Symfony HttpFoundation Component",
+        "homepage": "http://symfony.com"
+    },
+    {
+        "name": "nikic/php-parser",
+        "version": "0.9.x-dev",
+        "version_normalized": "0.9.9999999.9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/nikic/PHP-Parser.git",
+            "reference": "ef70767475434bdb3615b43c327e2cae17ef12eb"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/ef70767475434bdb3615b43c327e2cae17ef12eb",
+            "reference": "ef70767475434bdb3615b43c327e2cae17ef12eb",
+            "shasum": ""
+        },
+        "require": {
+            "ext-tokenizer": "*",
+            "php": ">=5.2"
+        },
+        "time": "2014-07-23 18:24:17",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "0.9-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "PHPParser": "lib/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Nikita Popov"
+            }
+        ],
+        "description": "A PHP parser written in PHP",
+        "keywords": [
+            "parser",
+            "php"
+        ]
+    },
+    {
         "name": "laravel/framework",
         "version": "4.2.x-dev",
         "version_normalized": "4.2.9999999.9999999-dev",
         "source": {
             "type": "git",
             "url": "https://github.com/laravel/framework.git",
-            "reference": "a3a7bb308f4f0aab74bcd6952b7a194b2276fa33"
+            "reference": "e6849dcfaf90e16c9ec1c87cd0a42264c9e6afff"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/laravel/framework/zipball/a3a7bb308f4f0aab74bcd6952b7a194b2276fa33",
-            "reference": "a3a7bb308f4f0aab74bcd6952b7a194b2276fa33",
+            "url": "https://api.github.com/repos/laravel/framework/zipball/e6849dcfaf90e16c9ec1c87cd0a42264c9e6afff",
+            "reference": "e6849dcfaf90e16c9ec1c87cd0a42264c9e6afff",
             "shasum": ""
         },
         "require": {
@@ -1768,7 +1814,7 @@
         "suggest": {
             "doctrine/dbal": "Allow renaming columns and dropping SQLite columns."
         },
-        "time": "2014-07-23 04:01:18",
+        "time": "2014-07-25 01:41:42",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1801,58 +1847,6 @@
         "keywords": [
             "framework",
             "laravel"
-        ]
-    },
-    {
-        "name": "predis/predis",
-        "version": "0.8.x-dev",
-        "version_normalized": "0.8.9999999.9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/nrk/predis.git",
-            "reference": "8dd7f40d2110083724f6672035e04d85132eea9f"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/nrk/predis/zipball/8dd7f40d2110083724f6672035e04d85132eea9f",
-            "reference": "8dd7f40d2110083724f6672035e04d85132eea9f",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.2"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "~4.0"
-        },
-        "suggest": {
-            "ext-curl": "Allows access to Webdis when paired with phpiredis",
-            "ext-phpiredis": "Allows faster serialization and deserialization of the Redis protocol"
-        },
-        "time": "2014-07-23 10:43:29",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "Predis": "lib/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Daniele Alessandri",
-                "email": "suppakilla@gmail.com",
-                "homepage": "http://clorophilla.net"
-            }
-        ],
-        "description": "Flexible and feature-complete PHP client library for Redis",
-        "homepage": "http://github.com/nrk/predis",
-        "keywords": [
-            "nosql",
-            "predis",
-            "redis"
         ]
     }
 ]
