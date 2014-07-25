@@ -66,7 +66,8 @@ Route::filter('auth.basic', function()
 */
 
 Route::filter('guest', function() {
-	if (!Sentry::check()) return Redirect::to('/');
+	if (!Sentry::check()) 
+		return Redirect::to('/');
 });
 
 /*
@@ -95,5 +96,13 @@ Route::filter('csrf', function()
 */
 
 Route::filter('session', function() {
-	if (!Sentry::check()) return Redirect::to('/')->with('message', 'Yanlış işler peşindesin (: <br><br>');
+	if (!Sentry::check()) 
+		return Redirect::to('/')
+		->with('message', 'Yanlış işler peşindesin (: <br><br>');
+});
+
+Route::filter('login', function() {
+	if(Sentry::check()) 
+		return Redirect::to('/')
+		->with('message', 'Yanlış işler peşindesin (: <br><br>');
 });

@@ -21,8 +21,6 @@
 					{{ $post->username }} |
 				@endif
 				{{ $post->created_at }}
-
-				{{ $post->type }}
 			</p>
 		@endif
 

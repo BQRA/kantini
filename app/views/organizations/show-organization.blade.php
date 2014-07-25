@@ -1,5 +1,6 @@
 @extends('layouts.master')
 
 @section('content')
-	<p>organizasyon</p>
+	<!--Geliştirelecek -->
+	{{ $post->org_name }}
 @stop

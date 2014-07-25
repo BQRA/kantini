@@ -22,6 +22,14 @@
 	</p>
 
 	<hr>
+
+	<p>
+		Toplam gönderi: {{ $posts_all->count() }}  &rarr; <a href="{{ URL::action('show.users.all.posts', $user->username) }}">Tümü</a><br>
+		Toplam yorum: {{ $comments_all->count() }}  &rarr; <a href="{{ URL::action('show.users.all.comments', $user->username) }}">Tümü</a><br>
+		Toplam organizasyon: {{ $orgs_all->count() }}  &rarr; <a href="{{ URL::action('show.users.all.organizations', $user->username) }}">Tümü</a>
+	</p>
+
+	<hr>
 	
 	@if($posts->count() !== 0)
 		<h4>Son 3 Gönderi</h5>
@@ -46,7 +54,7 @@
 		<h4>Son 3 Etkinlik</h4>
 		@foreach($orgs as $org)
 		<li>
-			{{ $org->org_name }} &rarr; <a href="{{ URL::action('show.organization', $post->id) }}">Oku</a>
+			{{ $org->org_name }} &rarr; <a href="{{ URL::action('show.organization', $org->id) }}">Oku</a>
 		</li>
 		@endforeach
 	@endif

@@ -31,7 +31,8 @@ Route::get('/u-dont-know/', array(
 
 Route::get('/user/register/', array(
 	'as' 	 => 'register',
-	'uses' 	 => 'PagesController@Register'
+	'uses' 	 => 'PagesController@Register',
+	'before' => 'login'
 ));
 	
 	Route::post('/user/register/', array(
@@ -42,7 +43,8 @@ Route::get('/user/register/', array(
 
 Route::get('/user/login/', array(
 	'as' 	 => 'login',
-	'uses' 	 => 'PagesController@Login'
+	'uses' 	 => 'PagesController@Login',
+	'before' => 'login'
 ));
 
 	Route::post('/user/login/', array(
@@ -74,6 +76,21 @@ Route::get('/user/profile/{username}/edit/', array(
 		'uses' 	 => 'UsersController@UpdateProfile',
 		'before' => 'csrf'
 	));
+
+Route::get('/user/profile/{username}/all-posts', array(
+	'as' 	=> 'show.users.all.posts',
+	'uses'  => 'UsersController@ShowUserAllPosts'
+));
+
+Route::get('/user/profile/{username}/all-comments', array(
+	'as' 	=> 'show.users.all.comments',
+	'uses'  => 'UsersController@ShowUserAllComments'
+));
+
+Route::get('/user/profile/{username}/all-organizations', array(
+	'as' 	=> 'show.users.all.organizations',
+	'uses'  => 'UsersController@ShowUserAllOrganizations'
+));
 /* User Profiles */
 
 Route::get('/post/{id}/', array(
