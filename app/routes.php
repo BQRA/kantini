@@ -91,6 +91,11 @@ Route::get('/user/profile/{username}/all-organizations', array(
 	'as' 	=> 'show.users.all.organizations',
 	'uses'  => 'UsersController@ShowUserAllOrganizations'
 ));
+
+Route::get('/user/profile/{username}/all-likes', array(
+	'as' 	=> 'show.users.all.likes',
+	'uses'  => 'UsersController@ShowUserAllLikes'
+));
 /* User Profiles */
 
 Route::get('/post/{id}/', array(

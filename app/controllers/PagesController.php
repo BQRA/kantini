@@ -47,5 +47,4 @@ class PagesController extends \BaseController {
 		Session::flash('message', 'Çıkış yaptınız.');
 		return Redirect::route('home');
 	}
-
 }

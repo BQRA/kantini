@@ -30,12 +30,11 @@
 				@endif
 				
 				@if(Sentry::check())
-					@if(Like::where('post_id', $post->id)->where('user_id', Sentry::getUser()->id)->count()>0)
+					@if(Like::where('post_id', $post->id)->where('liker', Sentry::getUser()->username)->count()>0)
 						{{ 'ok' }}
 					@else
 						{{ Form::open(array('action' => 'LikesController@Like')) }}
 						
-						{{ Form::hidden('user_id', Sentry::getUser()->id) }}
 						{{ Form::hidden('liker', Sentry::getUser()->username) }}
 						{{ Form::hidden('post_id', $post->id) }}
 
@@ -44,7 +43,7 @@
 						{{ Form::close() }}
 					@endif
 				@else
-					@if(Like::where('post_id', $post->id)->where('user_id', $_SERVER['REMOTE_ADDR'])->count()>0)
+					@if(Like::where('post_id', $post->id)->where('ip_address', $_SERVER['REMOTE_ADDR'])->count()>0)
 						{{ 'ok' }}
 					@else
 						{{ Form::open(array('action' => 'LikesController@GuestLike')) }}

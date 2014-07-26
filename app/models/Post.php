@@ -8,4 +8,8 @@ class Post extends \Eloquent {
 	public function comment() {
 		return $this->hasOne('Comment');
 	}
+
+	public function like() {
+		return $this->hasOne('Like');
+	}
 }

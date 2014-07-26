@@ -26,7 +26,8 @@
 	<p>
 		Toplam gönderi: {{ $posts_all->count() }}  &rarr; <a href="{{ URL::action('show.users.all.posts', $user->username) }}">Tümü</a><br>
 		Toplam yorum: {{ $comments_all->count() }}  &rarr; <a href="{{ URL::action('show.users.all.comments', $user->username) }}">Tümü</a><br>
-		Toplam organizasyon: {{ $orgs_all->count() }}  &rarr; <a href="{{ URL::action('show.users.all.organizations', $user->username) }}">Tümü</a>
+		Toplam organizasyon: {{ $orgs_all->count() }}  &rarr; <a href="{{ URL::action('show.users.all.organizations', $user->username) }}">Tümü</a><br>
+		Toplam beğeni: {{ $likes->count() }}  &rarr; <a href="{{ URL::action('show.users.all.likes', $user->username) }}">Tümü</a>
 	</p>
 
 	<hr>

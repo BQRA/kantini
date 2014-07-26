@@ -13,7 +13,6 @@ class LikesController extends \BaseController {
 
 	public function Like() {
 		$like = new Like;
-		$like->user_id 	  = Input::get('user_id');
 		$like->liker 	  = Input::get('liker');
 		$like->post_id 	  = Input::get('post_id');
 		$like->ip_address = $_SERVER['REMOTE_ADDR'];

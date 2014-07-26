@@ -174,7 +174,7 @@ class UsersController extends \BaseController {
 		$posts_all 	= Post::orderBy('created_at', 'DESC')
 							->where('username', '=', $username)
 							->where('type', '=', '0')
-							->get();				
+							->get();
 		
 		return View::make('users.all-posts')
 		->withUser($user)
@@ -190,7 +190,7 @@ class UsersController extends \BaseController {
 
 		$comments_all = Comment::orderBy('created_at', 'DESC')
 							->where('commenter', '=', $username)
-							->get();				
+							->get();
 		
 		return View::make('users.all-comments')
 		->withUser($user)
@@ -207,10 +207,26 @@ class UsersController extends \BaseController {
 		$orgs_all = Post::orderBy('created_at', 'DESC')
 							->where('username', '=', $username)
 							->where('type', '=', '1')
-							->get();				
+							->get();
 		
 		return View::make('users.all-organizations')
 		->withUser($user)
 		->with('orgs_all', $orgs_all);
+	}
+
+	public function ShowUserAllLikes($username) {
+		try {
+			$user = User::with('profile')->whereUsername($username)->firstOrFail();
+		} catch (Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+			return View::make('errors.404');
+		}
+
+		$likes = Like::orderBy('created_at', 'DESC')
+							->where('liker', '=', $username)
+							->get();
+		
+		return View::make('users.all-likes')
+		->withUser($user)
+		->with('likes', $likes);
 	}
 }
