@@ -1,9 +1,7 @@
 - anasayfaya kişi kartı
 - Avatar
 - 'Profil düzenle' formu (Üyeler hangi bilgileri değiştirebilecek)
-- like sistemi
 - Etkinlik sayfası (konuş)
 - sayfalama - 36 gonderi de bir sayfa
 - Admin sayfası
 - 404, 403 sayfaları
-- like ederken user_id kullanımı kalkacak

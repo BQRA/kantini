@@ -23,11 +23,30 @@
 
 	<hr>
 
-	<p>
-		Toplam gönderi: {{ $posts_all->count() }}  &rarr; <a href="{{ URL::action('show.users.all.posts', $user->username) }}">Tümü</a><br>
-		Toplam yorum: {{ $comments_all->count() }}  &rarr; <a href="{{ URL::action('show.users.all.comments', $user->username) }}">Tümü</a><br>
-		Toplam organizasyon: {{ $orgs_all->count() }}  &rarr; <a href="{{ URL::action('show.users.all.organizations', $user->username) }}">Tümü</a><br>
-		Toplam beğeni: {{ $likes->count() }}  &rarr; <a href="{{ URL::action('show.users.all.likes', $user->username) }}">Tümü</a>
+	<p>	
+		@if($posts_all->count() > 0)
+			Toplam gönderi: {{ $posts_all->count() }} &rarr; <a href="{{ URL::action('show.users.all.posts', $user->username) }}">Tümü</a> <br>
+		@else
+			Toplam gönderi: {{ $posts_all->count() }} <br>
+		@endif
+
+		@if($comments_all->count() > 0)
+			Toplam yorum: {{ $comments_all->count() }} &rarr; <a href="{{ URL::action('show.users.all.comments', $user->username) }}">Tümü</a> <br>
+		@else
+			Toplam yorum: {{ $comments_all->count() }} <br>
+		@endif
+
+		@if($orgs_all->count() > 0)
+			Toplam organizasyon: {{ $orgs_all->count() }} &rarr; <a href="{{ URL::action('show.users.all.organizations', $user->username) }}">Tümü</a> <br>
+		@else
+			Toplam organizasyon: {{ $orgs_all->count() }} <br>
+		@endif
+
+		@if($likes->count() > 0)
+			Toplam beğeni: {{ $likes->count() }} &rarr; <a href="{{ URL::action('show.users.all.likes', $user->username) }}">Tümü</a> <br>
+		@else
+			Toplam beğeni: {{ $likes->count() }} <br>
+		@endif
 	</p>
 
 	<hr>

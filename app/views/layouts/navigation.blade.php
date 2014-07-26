@@ -3,7 +3,7 @@
 <a href="{{ URL::route('contact.us') }}">Kontak</a> | 
 <a href="{{ URL::route('ad') }}">Reklam</a> | 
 <a href="{{ URL::route('about.us') }}">Hakkımızda</a> | 
-<a href="{{ URL::route('u.dont.know') }}">Bilmedikleriniz</a> |
+<a href="{{ URL::route('u.dont.know') }}">Bilmedikleriniz</a>
 
 <br><br>
 @if(!Sentry::check())

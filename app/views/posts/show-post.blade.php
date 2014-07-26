@@ -28,35 +28,35 @@
 
 		{{ Form::hidden('post_id', $post->id) }}
 	
-	@if(!Sentry::check())
-		{{ Form::hidden('member', 0) }}
+		@if(!Sentry::check())
+			{{ Form::hidden('member', 0) }}
 
-		{{  $guest_username.' olarak gönderi yapıyorsunuz' }}
-		{{ Form::hidden('commenter', $guest_username) }} <br>
+			{{  $guest_username.' olarak gönderi yapıyorsunuz' }}
+			{{ Form::hidden('commenter', $guest_username) }} <br>
 
-		{{ Form::label('gender', 'Cinsiyet') }}
-		{{ Form::select('gender', array(
-									null 	 => 'Seç',
-									'male' 	 => 'Erkek',
-									'female' => 'Kız'
-								)) }} 
-		@if($errors->has('gender'))
-			{{ $errors->first('gender') }}
-		@endif <br>
-	@else
-		{{ Form::hidden('commenter', Sentry::getUser()->username) }}
-		{{ Form::hidden('gender', Sentry::getUser()->gender) }}
-		{{ Form::hidden('member', 1) }}
-	@endif
+			{{ Form::label('gender', 'Cinsiyet') }}
+			{{ Form::select('gender', array(
+										null 	 => 'Seç',
+										'male' 	 => 'Erkek',
+										'female' => 'Kız'
+									)) }} 
+			@if($errors->has('gender'))
+				{{ $errors->first('gender') }}
+			@endif <br>
+		@else
+			{{ Form::hidden('commenter', Sentry::getUser()->username) }}
+			{{ Form::hidden('gender', Sentry::getUser()->gender) }}
+			{{ Form::hidden('member', 1) }}
+		@endif
 
-		{{ Form::label('comment', 'Yorum') }} <br>
-		{{ Form::textarea('comment') }}
+			{{ Form::label('comment', 'Yorum') }} <br>
+			{{ Form::textarea('comment') }}
 
 			@if($errors->has('comment'))
 				{{ $errors->first('comment') }}
 			@endif <br>
 
-	{{ Form::submit() }}
+		{{ Form::submit() }}
 
 	{{ Form::close() }}
 
