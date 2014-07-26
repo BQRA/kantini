@@ -11,6 +11,8 @@
 /**
  * An attachment, in a multipart message.
  *
+ * @package    Swift
+ * @subpackage Mime
  * @author     Chris Corbyn
  */
 class Swift_Mime_Attachment extends Swift_Mime_SimpleMimeEntity

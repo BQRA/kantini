@@ -3,6 +3,8 @@
 /**
  * Base test for smoke tests.
  *
+ * @package     Swift
+ * @subpackage  Tests
  * @author      Rouven Weßling
  */
 class SwiftMailerSmokeTestCase extends SwiftMailerTestCase

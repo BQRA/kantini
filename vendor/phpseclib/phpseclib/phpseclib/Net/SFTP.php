@@ -1061,14 +1061,12 @@ class Net_SFTP extends Net_SSH2
         $dirs = explode('/', preg_replace('#^/|/(?=/)|/$#', '', $path));
 
         $temp = &$this->stat_cache;
-        $max = count($dirs) - 1;
-        foreach ($dirs as $i=>$dir) {
+        foreach ($dirs as $dir) {
             if (!isset($temp[$dir])) {
                 $temp[$dir] = array();
             }
-            if ($i === $max) {
+            if ($dir == end($dirs)) {
                 $temp[$dir] = $value;
-                break;
             }
             $temp = &$temp[$dir];
         }
@@ -1086,9 +1084,8 @@ class Net_SFTP extends Net_SSH2
         $dirs = explode('/', preg_replace('#^/|/(?=/)|/$#', '', $path));
 
         $temp = &$this->stat_cache;
-        $max = count($dirs) - 1;
-        foreach ($dirs as $i=>$dir) {
-            if ($i === $max) {
+        foreach ($dirs as $dir) {
+            if ($dir == end($dirs)) {
                 unset($temp[$dir]);
                 return true;
             }
@@ -1504,7 +1501,7 @@ class Net_SFTP extends Net_SSH2
             return false;
         }
         $i = 0;
-        $entries = $this->_list($path, true);
+        $entries = $this->_list($path, true, false);
 
         if ($entries === false) {
             return $this->_setstat($path, $attr, false);
@@ -1516,8 +1513,11 @@ class Net_SFTP extends Net_SSH2
             return false;
         }
 
-        unset($entries['.'], $entries['..']);
         foreach ($entries as $filename=>$props) {
+            if ($filename == '.' || $filename == '..') {
+                continue;
+            }
+
             if (!isset($props['type'])) {
                 return false;
             }
@@ -1868,9 +1868,7 @@ class Net_SFTP extends Net_SSH2
             $subtemp = $offset + $sent;
             $packet = pack('Na*N3a*', strlen($handle), $handle, $subtemp / 4294967296, $subtemp, strlen($temp), $temp);
             if (!$this->_send_sftp_packet(NET_SFTP_WRITE, $packet)) {
-                if ($mode & NET_SFTP_LOCAL_FILE) {
-                    fclose($fp);
-                }
+                fclose($fp);
                 return false;
             }
             $sent+= strlen($temp);
@@ -2137,7 +2135,7 @@ class Net_SFTP extends Net_SSH2
             return false;
         }
         $i = 0;
-        $entries = $this->_list($path, true);
+        $entries = $this->_list($path, true, false);
 
         // normally $entries would have at least . and .. but it might not if the directories
         // permissions didn't allow reading
@@ -2145,8 +2143,11 @@ class Net_SFTP extends Net_SSH2
             return false;
         }
 
-        unset($entries['.'], $entries['..']);
         foreach ($entries as $filename=>$props) {
+            if ($filename == '.' || $filename == '..') {
+                continue;
+            }
+
             if (!isset($props['type'])) {
                 return false;
             }
@@ -2204,7 +2205,7 @@ class Net_SFTP extends Net_SSH2
             $result = $this->_query_stat_cache($path);
 
             if (isset($result)) {
-                // return true if $result is an array or if it's an stdClass object
+                // return true if $result is an array or if it's int(1)
                 return $result !== false;
             }
         }

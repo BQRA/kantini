@@ -11,6 +11,8 @@
 /**
  * The default email message class.
  *
+ * @package    Swift
+ * @subpackage Mime
  * @author     Chris Corbyn
  */
 class Swift_Mime_SimpleMessage extends Swift_Mime_MimePart implements Swift_Mime_Message
@@ -220,7 +222,7 @@ class Swift_Mime_SimpleMessage extends Swift_Mime_MimePart implements Swift_Mime
     /**
      * Get the from address of this message.
      *
-     * @return mixed
+     * @return string
      */
     public function getFrom()
     {
@@ -613,6 +615,7 @@ class Swift_Mime_SimpleMessage extends Swift_Mime_MimePart implements Swift_Mime
         }
     }
 
+    // -- Protected methods
 
     /** @see Swift_Mime_SimpleMimeEntity::_getIdField() */
     protected function _getIdField()
@@ -634,6 +637,8 @@ class Swift_Mime_SimpleMessage extends Swift_Mime_MimePart implements Swift_Mime
 
         return $part;
     }
+
+    // -- Private methods
 
     /** Get the highest nesting level nested inside this message */
     private function _getTopNestingLevel()

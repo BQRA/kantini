@@ -11,6 +11,8 @@
 /**
  * A MIME entity, in a multipart message.
  *
+ * @package    Swift
+ * @subpackage Mime
  * @author     Chris Corbyn
  */
 class Swift_Mime_SimpleMimeEntity implements Swift_Mime_MimeEntity
@@ -575,6 +577,8 @@ class Swift_Mime_SimpleMimeEntity implements Swift_Mime_MimeEntity
         }
     }
 
+    // -- Protected methods
+
     /**
      * Get the name of the header that provides the ID of this entity
      */
@@ -694,6 +698,8 @@ class Swift_Mime_SimpleMimeEntity implements Swift_Mime_MimeEntity
 
         return $id;
     }
+
+    // -- Private methods
 
     private function _readStream(Swift_OutputByteStream $os)
     {

@@ -11,6 +11,8 @@
 /**
  * An ID MIME Header for something like Message-ID or Content-ID.
  *
+ * @package    Swift
+ * @subpackage Mime
  * @author     Chris Corbyn
  */
 class Swift_Mime_Headers_IdentificationHeader extends Swift_Mime_Headers_AbstractHeader

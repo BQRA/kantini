@@ -11,6 +11,8 @@
 /**
  * Handles binary/7/8-bit Transfer Encoding in Swift Mailer.
  *
+ * @package    Swift
+ * @subpackage Mime
  * @author     Chris Corbyn
  */
 class Swift_Mime_ContentEncoder_PlainContentEncoder implements Swift_Mime_ContentEncoder
@@ -103,6 +105,8 @@ class Swift_Mime_ContentEncoder_PlainContentEncoder implements Swift_Mime_Conten
     public function charsetChanged($charset)
     {
     }
+
+    // -- Private methods
 
     /**
      * A safer (but weaker) wordwrap for unicode.

@@ -11,6 +11,7 @@
 /**
  * Stores Messages on the filesystem.
  *
+ * @package Swift
  * @author  Fabien Potencier
  * @author  Xavier De Cock <xdecock@gmail.com>
  */

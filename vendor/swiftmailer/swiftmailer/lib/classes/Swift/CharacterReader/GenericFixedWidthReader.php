@@ -11,6 +11,8 @@
 /**
  * Provides fixed-width byte sizes for reading fixed-width character sets.
  *
+ * @package    Swift
+ * @subpackage Encoder
  * @author     Chris Corbyn
  * @author     Xavier De Cock <xdecock@gmail.com>
  */

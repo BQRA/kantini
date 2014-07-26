@@ -11,6 +11,7 @@
 /**
  * Interface for spools.
  *
+ * @package Swift
  * @author  Fabien Potencier
  */
 interface Swift_Spool

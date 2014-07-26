@@ -302,14 +302,13 @@ class Swift_Mime_AttachmentTest extends Swift_Mime_AbstractMimeEntityTest
              ->andReturn($path);
         $file->shouldReceive('read')
              ->zeroOrMoreTimes()
-             ->andReturnUsing(function () use ($data) {
+             ->andReturnUsing(function() use ($data) {
                  static $first = true;
                  if (!$first) {
                      return false;
                  }
 
                  $first = false;
-
                  return $data;
              });
 

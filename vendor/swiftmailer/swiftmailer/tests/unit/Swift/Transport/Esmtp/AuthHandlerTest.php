@@ -1,5 +1,6 @@
 <?php
 
+
 class Swift_Transport_Esmtp_AuthHandlerTest extends \SwiftMailerTestCase
 {
     private $_agent;

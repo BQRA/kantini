@@ -10,14 +10,13 @@ class Swift_MailerTest extends \SwiftMailerTestCase
         $started = false;
         $transport->shouldReceive('isStarted')
                   ->zeroOrMoreTimes()
-                  ->andReturnUsing(function () use (&$started) {
+                  ->andReturnUsing(function() use (&$started) {
                       return $started;
                   });
         $transport->shouldReceive('start')
                   ->once()
-                  ->andReturnUsing(function () use (&$started) {
+                  ->andReturnUsing(function() use (&$started) {
                       $started = true;
-
                       return;
                   });
 
@@ -33,14 +32,13 @@ class Swift_MailerTest extends \SwiftMailerTestCase
         $started = false;
         $transport->shouldReceive('isStarted')
                   ->zeroOrMoreTimes()
-                  ->andReturnUsing(function () use (&$started) {
+                  ->andReturnUsing(function() use (&$started) {
                       return $started;
                   });
         $transport->shouldReceive('start')
                   ->once()
-                  ->andReturnUsing(function () use (&$started) {
+                  ->andReturnUsing(function() use (&$started) {
                       $started = true;
-
                       return;
                   });
 

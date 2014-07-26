@@ -11,6 +11,8 @@
 /**
  * A collection of MIME headers.
  *
+ * @package    Swift
+ * @subpackage Mime
  * @author     Chris Corbyn
  */
 class Swift_Mime_SimpleHeaderSet implements Swift_Mime_HeaderSet
@@ -324,6 +326,8 @@ class Swift_Mime_SimpleHeaderSet implements Swift_Mime_HeaderSet
     {
         return $this->toString();
     }
+
+    // -- Private methods
 
     /** Save a Header to the internal collection */
     private function _storeHeader($name, Swift_Mime_Header $header, $offset = null)

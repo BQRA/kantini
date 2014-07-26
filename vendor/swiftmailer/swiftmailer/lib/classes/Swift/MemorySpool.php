@@ -11,6 +11,7 @@
 /**
  * Stores Messages in memory.
  *
+ * @package Swift
  * @author  Fabien Potencier
  */
 class Swift_MemorySpool implements Swift_Spool

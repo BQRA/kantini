@@ -33,6 +33,7 @@ class Swift_Signers_OpenDKIMSignerTest extends \SwiftMailerTestCase
     {
     }
 
+
     // Relaxed/Simple Hash Signing
     public function testSigningRelaxedSimple256()
     {

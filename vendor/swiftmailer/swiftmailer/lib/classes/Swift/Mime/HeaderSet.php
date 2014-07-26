@@ -11,6 +11,8 @@
 /**
  * A collection of MIME headers.
  *
+ * @package    Swift
+ * @subpackage Mime
  * @author     Chris Corbyn
  */
 interface Swift_Mime_HeaderSet extends Swift_Mime_CharsetObserver

@@ -11,6 +11,8 @@
 /**
  * Handles Quoted Printable (QP) Transfer Encoding in Swift Mailer using the PHP core function.
  *
+ * @package    Swift
+ * @subpackage Mime
  * @author     Lars Strojny
  */
 class Swift_Mime_ContentEncoder_NativeQpContentEncoder implements Swift_Mime_ContentEncoder

@@ -20,11 +20,11 @@ on the online [wiki](https://github.com/nrk/predis/wiki).
 
 ## Main features ##
 
-- Wide range of Redis versions supported (from __1.2__ to __3.0__ and __unstable__) using profiles.
+- Wide range of Redis versions supported (from __1.2__ to __2.8__ and unstable) using profiles.
 - Clustering via client-side sharding using consistent hashing or custom distributors.
-- Smart support for [redis-cluster](http://redis.io/topics/cluster-tutorial) (Redis >= 3.0).
+- Smart support for [redis-cluster](http://redis.io/topics/cluster-spec) (Redis >= 3.0).
 - Support for master-slave replication configurations (write on master, read from slaves).
-- Transparent key prefixing for all known Redis commands.
+- Transparent key prefixing for all Redis commands.
 - Command pipelining (works on both single and aggregate connections).
 - Abstraction for Redis transactions (Redis >= 2.0) supporting CAS operations (Redis >= 2.2).
 - Abstraction for Lua scripting (Redis >= 2.6) with automatic switching between `EVALSHA` or `EVAL`.
@@ -118,7 +118,7 @@ are usually lazily initialized only when needed. Predis by default supports the 
   - `prefix`: a prefix string that is automatically applied to keys found in commands.
   - `exceptions`: whether the client should throw or return responses upon Redis errors.
   - `connections`: connection backends or a connection factory to be used by the client.
-  - `cluster`: which backend to use for clustering (`predis`, `redis` or custom configuration).
+  - `cluster`: which backend to use for clustering (predis, redis or custom configuration).
   - `replication`: which backend to use for replication (predis or custom configuration).
 
 Users can provide custom option values, they are stored in the options container and can be accessed
@@ -131,67 +131,7 @@ Predis is able to aggregate multiple connections which is the base for clusterin
 By default the client implements clustering using either client-side sharding (default) or a Redis
 backed solution using [redis-cluster](http://redis.io/topics/cluster-tutorial). As for replication,
 Predis can handle single-master and multiple-slaves setups by executing read operations on slaves
-and switching to the master for write operations. The replication behavior is fully configurable.
-
-#### Replication ####
-
-The client can be configured to work in a master / slave replication setup by executing read-only
-commands on slave nodes and automatically switch to the master node as soon as a command performing
-a write operation is executed. This is the basic configuration needed work with replication:
-
-```php
-// Parameters require one master node specifically marked with `alias=master`.
-$parameters = ['tcp://10.0.0.1?alias=master', 'tcp://10.0.0.2?alias=slave-01'];
-$options    = ['replication' => true];
-
-$client = new Predis\Client($parameters, $options);
-```
-
-While Predis is able to distinguish commands performing write and read-only operations, `EVAL` and
-`EVALSHA` represent a corner case in which the client switches to the master node because it is not
-able to tell when a Lua script is safe to be executed on slaves. While this is the default behavior,
-when certain Lua scripts do not perform write operations it is possible to provide an hint to tell
-the client to stick with slaves for their execution.
-
-```php
-$parameters = ['tcp://10.0.0.1?alias=master', 'tcp://10.0.0.2?alias=slave-01'];
-$options    = ['replication' => function () {
-    $strategy = new Predis\Replication\ReplicationStrategy();
-
-    // This exact script won't trigger a switch from slave to the master node.
-    $strategy->setScriptReadOnly($READONLY_LUA_SCRIPT);
-
-    return new Predis\Connection\Aggregate\MasterSlaveReplication($strategy);
-}];
-
-$client = new Predis\Client($parameters, $options);
-$client->eval($READONLY_LUA_SCRIPT, 0);             // Sticks to slave using `eval`...
-$client->evalsha(sha1($READONLY_LUA_SCRIPT), 0);    // ... and `evalsha`, too.
-```
-
-The `examples` directory contains two complete scripts showing how replication can be configured for
-[simple](examples/MasterSlaveReplication.php) or [complex](examples/MasterSlaveReplicationComplex.php)
-scenarios.
-
-#### Clustering ####
-
-Simply passing an array of connection parameters to the client constructor configures Predis to work
-in clustering mode using client-side sharding. If you, on the other hand, want to leverage Redis >=
-3.0 nodes coordinated by redis-cluster, then the client must be initialized like this:
-
-```php
-$parameters = ['tcp://10.0.0.1', 'tcp://10.0.0.2'];
-$options    = ['cluster' => 'redis'];
-
-$client = new Predis\Client($parameters, $options);
-```
-
-When using redis-cluster, it is not necessary to pass all of the nodes forming your cluster but you
-can simply specify only a few nodes and Predis will automatically fetch the full and updated slots
-map directly from Redis by contacting one of the nodes.
-
-__NOTE__: our support for redis-cluster does not currently consider master / slave replication but
-this feature will be added in a future release of this library.
+and switching to the master for write operations. The replication behaviour is fully configurable.
 
 
 ### Command pipelines ###
@@ -239,70 +179,6 @@ __NOTE__: the method `transaction()` is available since `v0.8.5`, older versions
 for the same purpose but it has been deprecated and will be removed in the next major release.
 
 
-### Adding new Redis commands ###
-
-While we try to update Predis to stay up to date with all the commands available in Redis, you might
-prefer to stick with an older version of the library or provide a different way to filter arguments
-or parse responses for specific commands. To achieve that, Predis provides the ability to implement
-new command classes to define or override commands in the server profiles used by the client:
-
-```php
-// Define a new command by extending Predis\Command\AbstractCommand:
-class BrandNewRedisCommand extends Predis\Command\AbstractCommand
-{
-    public function getId()
-    {
-        return 'NEWCMD';
-    }
-}
-
-// Inject your command in the current profile:
-$client = new Predis\Client();
-$client->getProfile()->defineCommand('newcmd', 'BrandNewRedisCommand');
-
-$response = $client->newcmd();
-```
-
-
-### Script commands ###
-
-While it is possible to leverage [Lua scripting](http://redis.io/commands/eval) on Redis 2.6+ using
-[EVAL](http://redis.io/commands/eval) and [EVALSHA](http://redis.io/commands/evalsha), Predis offers
-script commands as an higher level abstraction aiming to make things simple. Script commands can be
-registered in the server profile used by the client and are accessible as if they were plain Redis
-commands, but they define a Lua script that gets transmitted to the server for remote execution.
-Internally they use [EVALSHA](http://redis.io/commands/evalsha) by default and identify a Lua script
-by its SHA1 hash to save bandwidth, but [EVAL](http://redis.io/commands/eval) is automatically used
-as a fall back when needed:
-
-```php
-// Define a new scriptable command by extending Predis\Command\ScriptedCommand:
-class ListPushRandomValue extends Predis\Command\ScriptedCommand
-{
-    public function getKeysCount()
-    {
-        return 1;
-    }
-
-    public function getScript()
-    {
-        return <<<LUA
-math.randomseed(ARGV[1])
-local rnd = tostring(math.random())
-redis.call('lpush', KEYS[1], rnd)
-return rnd
-LUA;
-    }
-}
-
-// Inject your scriptable command in the current profile:
-$client = new Predis\Client();
-$client->getProfile()->defineCommand('lpushrand', 'ListPushRandomValue');
-
-$response = $client->lpushrand('random_values', $seed = mt_rand());
-```
-
-
 ### Customizable connection backends ###
 
 Predis can use different connection backends to connect to Redis. Two of them leverage a third party
@@ -339,6 +215,69 @@ For a more in-depth insight on how to create new connection backends you can ref
 implementation of the standard connection classes available in the `Predis\Connection` namespace.
 
 
+### Adding support for new commands ###
+
+While we try to update Predis to stay up to date with all the commands available in Redis, you might
+prefer to stick with an older version of the library or provide a different way to filter arguments
+or parse responses for specific commands. To achieve that, Predis provides the ability to implement
+new command classes to define or override commands in the server profiles used by the client:
+
+```php
+// Define a new command by extending Predis\Command\AbstractCommand:
+class BrandNewRedisCommand extends Predis\Command\AbstractCommand
+{
+    public function getId()
+    {
+        return 'NEWCMD';
+    }
+}
+
+// Inject your command in the current profile:
+$client = new Predis\Client();
+$client->getProfile()->defineCommand('newcmd', 'BrandNewRedisCommand');
+
+$response = $client->newcmd();
+```
+
+
+### Scriptable commands ###
+
+A scriptable command is just an abstraction for [Lua scripting](http://redis.io/commands/eval) that
+aims to simplify the usage of scripting with Redis >= 2.6. Scriptable commands can be registered in
+the server profile used by the client and are accessible as if they were plain Redis commands, but
+they define a Lua script that gets transmitted to Redis for remote execution. Internally, scriptable
+commands use by default [EVALSHA](http://redis.io/commands/evalsha) and identify a Lua script by its
+SHA1 hash to save bandwidth but [EVAL](http://redis.io/commands/eval) is automatically preferred as
+a fall back when needed:
+
+```php
+// Define a new scriptable command by extending Predis\Command\ScriptedCommand:
+class ListPushRandomValue extends Predis\Command\ScriptedCommand
+{
+    public function getKeysCount()
+    {
+        return 1;
+    }
+
+    public function getScript()
+    {
+        return <<<LUA
+math.randomseed(ARGV[1])
+local rnd = tostring(math.random())
+redis.call('lpush', KEYS[1], rnd)
+return rnd
+LUA;
+    }
+}
+
+// Inject your scriptable command in the current profile:
+$client = new Predis\Client();
+$client->getProfile()->defineCommand('lpushrand', 'ListPushRandomValue');
+
+$response = $client->lpushrand('random_values', $seed = mt_rand());
+```
+
+
 ## Development ##
 
 
@@ -357,7 +296,7 @@ in production environments or containing data you are interested in!
 
 Predis has a comprehensive test suite covering every aspect of the library. This test suite performs
 integration tests against a running instance of Redis (>= 2.4.0 is required) to verify the correct
-behavior of the implementation of each command and automatically skips commands not defined in the
+behaviour of the implementation of each command and automatically skips commands not defined in the
 specified Redis profile. If you do not have Redis up and running, integration tests can be disabled.
 By default the test suite is configured to execute integration tests using the profile for Redis 2.8
 (which is the current stable version of Redis) but can optionally target a Redis instance built from

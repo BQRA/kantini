@@ -11,6 +11,8 @@
 /**
  * An Authentication mechanism.
  *
+ * @package    Swift
+ * @subpackage Transport
  * @author     Chris Corbyn
  */
 interface Swift_Transport_Esmtp_Authenticator

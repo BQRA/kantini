@@ -47,9 +47,9 @@ class ExecutableFinderTest extends \PHPUnit_Framework_TestCase
         $this->setPath(dirname(PHP_BINARY));
 
         $finder = new ExecutableFinder;
-        $result = $finder->find($this->getPhpBinaryName());
+        $result = $finder->find(basename(PHP_BINARY));
 
-        $this->assertSamePath(PHP_BINARY, $result);
+        $this->assertEquals($result, PHP_BINARY);
     }
 
     public function testFindWithDefault()
@@ -83,9 +83,9 @@ class ExecutableFinderTest extends \PHPUnit_Framework_TestCase
         $extraDirs = array(dirname(PHP_BINARY));
 
         $finder = new ExecutableFinder;
-        $result = $finder->find($this->getPhpBinaryName(), null, $extraDirs);
+        $result = $finder->find(basename(PHP_BINARY), null, $extraDirs);
 
-        $this->assertSamePath(PHP_BINARY, $result);
+        $this->assertEquals(PHP_BINARY, $result);
     }
 
     public function testFindWithOpenBaseDir()
@@ -105,22 +105,8 @@ class ExecutableFinderTest extends \PHPUnit_Framework_TestCase
         ini_set('open_basedir', dirname(PHP_BINARY).PATH_SEPARATOR.'/');
 
         $finder = new ExecutableFinder;
-        $result = $finder->find($this->getPhpBinaryName());
+        $result = $finder->find(basename(PHP_BINARY));
 
-        $this->assertSamePath(PHP_BINARY, $result);
-    }
-
-    private function assertSamePath($expected, $tested)
-    {
-        if (defined('PHP_WINDOWS_VERSION_BUILD')) {
-            $this->assertEquals(strtolower($expected), strtolower($tested));
-        } else {
-            $this->assertEquals($expected, $tested);
-        }
-    }
-
-    private function getPhpBinaryName()
-    {
-        return basename(PHP_BINARY, defined('PHP_WINDOWS_VERSION_BUILD') ? '.exe' : '');
+        $this->assertEquals(PHP_BINARY, $result);
     }
 }

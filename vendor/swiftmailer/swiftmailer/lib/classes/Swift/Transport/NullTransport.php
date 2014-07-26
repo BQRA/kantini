@@ -11,6 +11,7 @@
 /**
  * Pretends messages have been sent, but just ignores them.
  *
+ * @package Swift
  * @author  Fabien Potencier
  */
 class Swift_Transport_NullTransport implements Swift_Transport

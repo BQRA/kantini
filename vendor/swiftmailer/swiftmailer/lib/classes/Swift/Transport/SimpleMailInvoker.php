@@ -11,6 +11,8 @@
 /**
  * This is the implementation class for {@link Swift_Transport_MailInvoker}.
  *
+ * @package    Swift
+ * @subpackage Transport
  * @author     Chris Corbyn
  */
 class Swift_Transport_SimpleMailInvoker implements Swift_Transport_MailInvoker

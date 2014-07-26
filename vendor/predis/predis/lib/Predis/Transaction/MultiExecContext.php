@@ -123,11 +123,11 @@ class MultiExecContext implements BasicClientInterface, ExecutableContextInterfa
 
         $profile = $client->getProfile();
 
-        if ($profile->supportsCommands(array('MULTI', 'EXEC', 'DISCARD')) === false) {
+        if ($profile->supportsCommands(array('multi', 'exec', 'discard')) === false) {
             throw new NotSupportedException('The current profile does not support MULTI, EXEC and DISCARD');
         }
 
-        $this->canWatch = $profile->supportsCommands(array('WATCH', 'UNWATCH'));
+        $this->canWatch = $profile->supportsCommands(array('watch', 'unwatch'));
     }
 
     /**
@@ -200,7 +200,7 @@ class MultiExecContext implements BasicClientInterface, ExecutableContextInterfa
     /**
      * Executes the specified Redis command.
      *
-     * @param  CommandInterface $command Command instance.
+     * @param CommandInterface $command Command instance.
      * @return $this|mixed
      */
     public function executeCommand(CommandInterface $command)
@@ -215,7 +215,7 @@ class MultiExecContext implements BasicClientInterface, ExecutableContextInterfa
 
         if ($response instanceof ResponseQueued) {
             $this->commands->enqueue($command);
-        } elseif ($response instanceof ResponseErrorInterface) {
+        } else if ($response instanceof ResponseErrorInterface) {
             throw new AbortedMultiExecException($this, $response->getMessage());
         } else {
             $this->onProtocolError('The server did not return a +QUEUED status response.');

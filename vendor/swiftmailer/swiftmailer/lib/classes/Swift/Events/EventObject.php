@@ -11,6 +11,8 @@
 /**
  * A base Event which all Event classes inherit from.
  *
+ * @package    Swift
+ * @subpackage Events
  * @author     Chris Corbyn
  */
 class Swift_Events_EventObject implements Swift_Events_Event
