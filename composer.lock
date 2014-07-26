@@ -1,10 +1,9 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
-        "This file is @generated automatically"
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "9297d1868df463c187c18639a7032a51",
+    "hash": "12fc118f529ed5602d65864637016644",
     "packages": [
         {
             "name": "cartalyst/sentry",
@@ -665,12 +664,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpseclib/phpseclib.git",
-                "reference": "880bc9d9e60a4817ca138b8f5377e313741bf7db"
+                "reference": "11c4a62af68bdc681c52dd77acc0558907078881"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/880bc9d9e60a4817ca138b8f5377e313741bf7db",
-                "reference": "880bc9d9e60a4817ca138b8f5377e313741bf7db",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/11c4a62af68bdc681c52dd77acc0558907078881",
+                "reference": "11c4a62af68bdc681c52dd77acc0558907078881",
                 "shasum": ""
             },
             "require": {
@@ -755,7 +754,7 @@
                 "x.509",
                 "x509"
             ],
-            "time": "2014-07-24 15:32:38"
+            "time": "2014-07-26 15:20:06"
         },
         {
             "name": "predis/predis",
@@ -763,12 +762,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nrk/predis.git",
-                "reference": "8dd7f40d2110083724f6672035e04d85132eea9f"
+                "reference": "dea768044c0c8ca7d8d29e95217a8b5adc8ebd82"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nrk/predis/zipball/8dd7f40d2110083724f6672035e04d85132eea9f",
-                "reference": "8dd7f40d2110083724f6672035e04d85132eea9f",
+                "url": "https://api.github.com/repos/nrk/predis/zipball/dea768044c0c8ca7d8d29e95217a8b5adc8ebd82",
+                "reference": "dea768044c0c8ca7d8d29e95217a8b5adc8ebd82",
                 "shasum": ""
             },
             "require": {
@@ -805,7 +804,7 @@
                 "predis",
                 "redis"
             ],
-            "time": "2014-07-23 10:43:29"
+            "time": "2014-07-25 14:33:03"
         },
         {
             "name": "psr/log",

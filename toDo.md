@@ -5,3 +5,5 @@
 - sayfalama - 36 gonderi de bir sayfa
 - Admin sayfası
 - 404, 403 sayfaları
+- comment tablosundan gender i sil
+- son gonderileri kaldir
