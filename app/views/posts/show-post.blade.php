@@ -144,24 +144,28 @@
 						{{ Form::close() }}
 					</div>
 				</div>
-				@foreach($comments as $comment )
-					<div class="comment">
-						<div class="avatar">
-							<img src="images/users/avatar.jpg" alt="">
+				@if($comments->count() > 0)
+					@foreach($comments as $comment )
+						<div class="comment">
+							<div class="avatar">
+								<img src="images/users/avatar.jpg" alt="">
+							</div>
+							<div class="write-area">
+								<span class="username {{ $comment->gender }}">
+									@if($comment->member == 1)
+										<a href="{{ URL::action('show.profile', $comment->commenter) }}">{{ $comment->commenter }}</a>
+									@else 
+										<b>{{ $comment->commenter }}</b>
+									@endif
+								</span>
+								{{ $comment->comment }}
+								<div class="date">{{ $comment->created_at }}</div>
+							</div>
 						</div>
-						<div class="write-area">
-							<span class="username {{ $comment->gender }}">
-								@if($comment->member == 1)
-									<a href="{{ URL::action('show.profile', $comment->commenter) }}">{{ $comment->commenter }}</a>
-								@else 
-									<b>{{ $comment->commenter }}</b>
-								@endif
-							</span>
-							{{ $comment->comment }}
-							<div class="date">{{ $comment->created_at }}</div>
-						</div>
-					</div>
-				@endforeach
+					@endforeach
+				@else
+					{{'Ilk yorumu siz yazin!'}}
+				@endif
 			</div>
 		</div>	
 	</div>
