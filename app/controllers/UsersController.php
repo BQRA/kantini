@@ -44,7 +44,7 @@ class UsersController extends \BaseController {
 			$profile->save();
 
 			Session::flash('message', 'Üyeliğiniz başarıyla gerçekleştirilmiştir. Giriş yapabilirsiniz.');
-			return Redirect::route('login');
+			return Redirect::route('home');
 		} else {
 			return Redirect::route('register')
 			->withErrors($validator)

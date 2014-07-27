@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Beykent.Kantini</title>
+	<title>Beykent.Kantini @yield('title') </title>
 
 	{{HTML::style('Assets/css/bootstrap.min.css')}}
 	{{HTML::style('Assets/css/style.css')}}
@@ -25,6 +25,13 @@
 
 <div class="container">
 	<div class="left-container">
+	
+		@if(Session::has('message'))
+		<div class="session-message">
+			{{ Session::get('message') }}
+		</div>
+		@endif
+
 		@yield('content')
 	</div>
 	@include('partial.right-panel')

@@ -59,5 +59,14 @@ $(function () {
 		$(this).parents('.dedikod').find('.load-comments').load('post/'+ $(this).attr('data-id') +' #giveComments');
 	});
 
+	// session message
+	jQuery(document).ready(function($) {
+		if ( $('.session-message').length > 0 ) {
+			setTimeout(function(){
+				$('.session-message').fadeOut('200');
+			}, 5000)
+		}
+	});
+
 
 });

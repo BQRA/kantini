@@ -198,7 +198,9 @@
 						</div>
 					@endforeach
 				@else
-					{{'Ilk yorumu siz yazin!'}}
+					<div class="no-comment">
+						{{'Henüz yorum yapılmamıs, ilk yorumu siz yapın'}}
+					</div>
 				@endif
 			</div>
 		</div>	

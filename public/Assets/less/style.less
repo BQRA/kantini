@@ -472,6 +472,18 @@ p {
 	.left-container {
 		width: 685px;
 		display: inline-block;
+		.session-message {
+			padding: 10px 20px;
+			.font2(700, 12px);
+			color: rgba(0,0,0,0.5);
+			position: fixed;
+			width: 250px;
+			left: 20px;
+			bottom: 20px;
+			box-shadow: inset 0 0 0 1px rgba(0,0,0,0.2), 0 1px 3px rgba(0,0,0,0.2);
+			border-radius: 3px;
+			background-color: #f4c6c0;
+		}
 		.special-list-title {
 			padding: 0 0 20px 0;
 			margin: 0 0 20px 0;
@@ -940,6 +952,12 @@ p {
 	input[type=password] {
 		margin-bottom: 0;
 		width: 300px;
+	}
+	.error {
+		.font(bold, 11px);
+		color: rgba(255, 0, 0, 0.3);
+		display: block;
+		margin-top: 4px;
 	}
 }
 /* form #end */
