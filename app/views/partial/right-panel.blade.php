@@ -55,7 +55,7 @@
 
 			{{ Form::open(array('route' => 'login')) }}
 			
-			{{ Form::Input('email', 'email', null, array('placeholder' => 'E-posta')) }}
+			{{ Form::Input('username', 'username', null, array('placeholder' => 'Rumuz')) }}
 			{{ Form::Input('password', 'password', null, array('placeholder' => 'Şifre')) }}
 
 			{{ Form::submit(' ', ['class' => 'button blue w100']) }}

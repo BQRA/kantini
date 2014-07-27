@@ -2,7 +2,11 @@
 
 @section('content')
 	<p>Profil</p>
-	{{ HTML::image('/Avatars/'.Sentry::getUser()->username.'.jpg') }}
+	@if($user->profile->avatar == 'guest')
+		{{ HTML::image('/Avatars/guest-avatar.png') }}
+	@else
+		{{ HTML::image('/Avatars/'.$user->username.'.jpg') }}
+	@endif
 	<p>
 		Kullanıcı adı: {{ $user->username }} <i>Son görülme: {{ $user->last_login }}</i> <br>
 		Eposta: {{ $user->email }} <br>

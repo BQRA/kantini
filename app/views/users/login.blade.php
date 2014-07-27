@@ -9,10 +9,10 @@
 
 	{{ Form::open(array('route' => 'login')) }}
 	
-	{{ Form::label('email', 'Eposta') }}
-	{{ Form::Input('email', 'email') }}
-		@if($errors->has('email'))
-			{{ $errors->first('email') }}
+	{{ Form::label('username', 'Kullanici Adi') }}
+	{{ Form::Input('text', 'username') }}
+		@if($errors->has('username'))
+			{{ $errors->first('username') }}
 		@endif <br>
 
 	{{ Form::label('password', 'Şifre') }}

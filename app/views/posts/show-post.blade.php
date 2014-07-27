@@ -13,7 +13,25 @@
 	<div class="dedikods">
 		<div class="dedikod {{ $post->gender }}">
 			<div class="avatar">
-				<img src="images/users/avatar.jpg" alt="">
+			@if($post->member == '0')
+				{{ HTML::image('/Avatars/guest-avatar.png') }}
+			@endif
+
+			@if($post->member == '1')
+				<?php 
+					$username = $post->username; 
+					$user = User::with('profile')->whereUsername($username)->firstOrFail();
+				?>
+				@if($user->profile->avatar == 'guest')
+					{{ HTML::image('/Avatars/guest-avatar.png') }}
+				@else
+				<?php 
+					$username = $post->username; 
+					$user = User::with('profile')->whereUsername($username)->firstOrFail();
+				?>
+					{{ HTML::image('/Avatars/'.$username.'.jpg') }}
+				@endif
+			@endif
 			</div>
 			<div class="content">
 			@if($post->type == '0')
@@ -125,7 +143,23 @@
 			<div class="comments opened" id="giveComments">
 				<div class="write-comment">
 					<div class="avatar">
-						<img src="images/users/avatar.jpg" alt="">
+					@if(!Sentry::check())
+						{{ HTML::image('/Avatars/guest-avatar.png') }}
+					@else
+						<?php 
+							$username = Sentry::getUser()->username; 
+							$user = User::with('profile')->whereUsername($username)->firstOrFail();
+						?>
+						@if($user->profile->avatar == 'guest')
+							{{ HTML::image('/Avatars/guest-avatar.png') }}
+						@else
+							<?php 
+								$username = Sentry::getUser()->username;
+								$user = User::with('profile')->whereUsername($username)->firstOrFail();
+							?>
+							{{ HTML::image('/Avatars/'.Sentry::getUser()->username.'.jpg') }}
+						@endif
+					@endif
 					</div>
 					<div class="write-area">
 						{{ Form::open(array('action' => 'PostsController@SendComment')) }}

@@ -6,7 +6,7 @@ class UsersController extends \BaseController {
 		$data = Input::all();
 
 		$rules = array(
-			'username' 			=> 'required|min:3|max:18|alpha_dash',
+			'username' 			=> 'required|min:3|max:18|alpha_dash|unique:users',
 			'email' 			=> 'required|email|unique:users',
 			'password' 			=> 'required|min:6|max:18',
 			'password_again' 	=> 'required|same:password',
@@ -56,7 +56,7 @@ class UsersController extends \BaseController {
 		$data = Input::all();
 
 		$rules = [
-			'email' 	=> 'required|email',
+			'username' 	=> 'required',
 			'password'  => 'required|min:6|max:18'
 		];
 
@@ -70,7 +70,7 @@ class UsersController extends \BaseController {
 
 			try {
 				$credentials = [
-					'email' 	=> Input::get('email'),
+					'username' 	=> Input::get('username'),
 					'password' 	=> Input::get('password')
 				];
 
