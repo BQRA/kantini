@@ -103,31 +103,14 @@ class UsersController extends \BaseController {
 			return View::make('errors.404');
 		}
 		
-		$posts 		= Post::orderBy('created_at', 'DESC')
-							->where('username', '=', $username)
-							->where('type', '=', '0')
-							->take(3)
-							->get();
-
 		$posts_all  = Post::orderBy('created_at', 'DESC')
 							->where('username', '=', $username)
 							->where('type', '=', '0')
 							->get();
 
-		$orgs 		= Post::orderBy('created_at', 'DESC')
-							->where('username', '=', $username)
-							->where('type', '=', '1')
-							->take(3)
-							->get();
-
 		$orgs_all 	= Post::orderBy('created_at', 'DESC')
 							->where('username', '=', $username)
 							->where('type', '=', '1')
-							->get();
-
-		$comments 	= Comment::orderBy('created_at', 'DESC')
-							->where('commenter', '=', $username)
-							->take(3)
 							->get();
 
 		$comments_all = Comment::orderBy('created_at', 'DESC')
@@ -140,11 +123,8 @@ class UsersController extends \BaseController {
 		
 		return View::make('users.profile')
 		->withUser($user)
-		->with('posts', $posts)
 		->with('posts_all', $posts_all)
-		->with('orgs', $orgs)
 		->with('orgs_all', $orgs_all)
-		->with('comments', $comments)
 		->with('comments_all', $comments_all)
 		->with('likes', $likes);
 	}
@@ -191,14 +171,23 @@ class UsersController extends \BaseController {
 			return View::make('errors.404');
 		}
 
-		$posts_all 	= Post::orderBy('created_at', 'DESC')
+		$posts_all 		= Post::orderBy('created_at', 'DESC')
 							->where('username', '=', $username)
-							->where('type', '=', '0')
+							->get();
+
+		$comments_all 	= Comment::orderBy('created_at', 'DESC')
+							->where('commenter', '=', $username)
+							->get();
+
+		$likes 			= Like::orderBy('created_at', 'DESC')
+							->where('liker', '=', $username)
 							->get();
 		
 		return View::make('users.all-posts')
 		->withUser($user)
-		->with('posts_all', $posts_all);
+		->with('posts_all', $posts_all)
+		->with('comments_all', $comments_all)
+		->with('likes', $likes);
 	}
 
 	public function ShowUserAllComments($username) {
@@ -208,13 +197,23 @@ class UsersController extends \BaseController {
 			return View::make('errors.404');
 		}
 
-		$comments_all = Comment::orderBy('created_at', 'DESC')
+		$posts_all 		= Post::orderBy('created_at', 'DESC')
+							->where('username', '=', $username)
+							->get();
+
+		$comments_all 	= Comment::orderBy('created_at', 'DESC')
 							->where('commenter', '=', $username)
+							->get();
+
+		$likes 			= Like::orderBy('created_at', 'DESC')
+							->where('liker', '=', $username)
 							->get();
 		
 		return View::make('users.all-comments')
 		->withUser($user)
-		->with('comments_all', $comments_all);
+		->with('posts_all', $posts_all)
+		->with('comments_all', $comments_all)
+		->with('likes', $likes);
 	}
 
 	public function ShowUserAllOrganizations($username) {

@@ -12,19 +12,6 @@
 	}
 ?>
 
-<div class="special-list-title">
-	<span><a href="#" data-lightbox="lightbox/profile.html" data-lightboxtitle="Profil Kartı">boradan</a> kullanıcısının</span>
-	<div class="select-box">
-		<span class="text">yorum yaptığı</span>
-		<ul>
-			<li>yazdığı</li>
-			<li>yorum yaptığı</li>
-			<li>beğendiği</li>
-		</ul>
-	</div>
-	<span>gönderiler listeleniyor</span>
-</div>
-
 <div class="filter-bar">
 	<div class="left">
 		
@@ -113,15 +100,15 @@
 							<div class="row">
 								<div class="col-sm-3 detail">
 									<strong>Etkinlik Tarihi</strong>
-									<span>21 Mayis 2013</span>
+									<span>{{$post->org_date}}</span>
 								</div>
 								<div class="col-sm-3 detail">
 									<strong>Yetkili Kisi</strong>
-									<span>Bora Dan</span>
+									<span>{{$post->org_auth}}</span>
 								</div>
 								<div class="col-sm-3 detail">
 									<strong>İletisim</strong>
-									<span>0535 555 34 23</span>
+									<span>{{$post->org_auth_contact}}</span>
 								</div>
 								<div class="col-sm-3 detail">
 									<strong>Harita</strong>
@@ -132,10 +119,10 @@
 							<div class="row">
 								<div class="col-sm-8 detail address">
 									<strong>Adres</strong>
-									<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo mollitia ab deleniti totam</span>
+									<span>{{$post->org_place}}</span>
 								</div>
 								<div class="col-sm-4 detail price">
-									75 TL
+									{{$post->org_price}}
 								</div>
 							</div>
 
