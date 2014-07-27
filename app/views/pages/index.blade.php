@@ -54,11 +54,28 @@
 </div>
 
 <div class="dedikods">
-
 	@foreach($posts as $post)
 	<div class="dedikod {{ $post->gender }}">
 		<div class="avatar">
-			<img src="images/users/avatar.jpg" alt="">
+			@if($post->member == '0')
+				{{ HTML::image('/Avatars/guest-avatar.png') }}
+			@endif
+
+			@if($post->member == '1')
+				<?php 
+					$username = $post->username; 
+					$user = User::with('profile')->whereUsername($username)->firstOrFail();
+				?>
+				@if($user->profile->avatar == 'guest')
+					{{ HTML::image('/Avatars/guest-avatar.png') }}
+				@else
+				<?php 
+					$username = $post->username; 
+					$user = User::with('profile')->whereUsername($username)->firstOrFail();
+				?>
+					{{ HTML::image('/Avatars/'.$username.'.jpg') }}
+				@endif
+			@endif
 		</div>
 		<div class="content">
 		@if($post->type == '0')
