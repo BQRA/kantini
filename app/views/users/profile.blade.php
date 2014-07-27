@@ -2,7 +2,7 @@
 
 @section('content')
 	<p>Profil</p>
-
+	{{ HTML::image('/Avatars/'.Sentry::getUser()->username.'.jpg') }}
 	<p>
 		Kullanıcı adı: {{ $user->username }} <i>Son görülme: {{ $user->last_login }}</i> <br>
 		Eposta: {{ $user->email }} <br>
@@ -18,7 +18,6 @@
 
 	<p>
 		Ad: {{ $user->profile->full_name }} <br>
-		Bio: {{ $user->profile->bio }}
 	</p>
 
 	<hr>

@@ -56,24 +56,21 @@
 <div class="dedikods">
 
 	@foreach($posts as $post)
+		<?php 
+			$post_id 		= $post->id;
+			$likes 			= Like::where('post_id', '=', $post_id )->get();
+			$comments 		= Comment::where('post_id', '=', $post_id )->get();
+		?>
 	<div class="dedikod {{ $post->gender }}">
 		<div class="avatar">
 			<img src="images/users/avatar.jpg" alt="">
 		</div>
 		<div class="content">
-		@if($post->type == '0')
-
-		<?php 
-			$post_id 		= $post->id;
-			$likes 			= Like::where('post_id', '=', $post_id )->get();
-			$comments 		= Comment::where('post_id', '=', $post_id )->get();
-			$comments_count = $comments->count();
-			$likes_count 	= $likes->count();
-		?>
 		
-		<a href="{{ URL::action('show.post', $post->id) }}">{{ $post->post }}</a>
-
+		@if($post->type == '0')
+			<a href="{{ URL::action('show.post', $post->id) }}">{{ $post->post }}</a>
 		@endif
+
 		@if($post->type == '1')
 			<div class="content-ticket">
 				<div class="add-event-container">
@@ -84,7 +81,7 @@
 							<div class="row">
 								<div class="col-sm-10 detail title">
 									<strong>Etkinlik Adı</strong>
-									<span>{{$post->org_name}}</span>
+									<span>{{ $post->org_name }}</span>
 								</div>
 								<div class="col-sm-2 detail pic">
 									<div class="pic-upload">
@@ -96,15 +93,15 @@
 							<div class="row">
 								<div class="col-sm-3 detail">
 									<strong>Etkinlik Tarihi</strong>
-									<span>21 Mayis 2013</span>
+									<span>{{ $post->org_date }}</span>
 								</div>
 								<div class="col-sm-3 detail">
 									<strong>Yetkili Kisi</strong>
-									<span>Bora Dan</span>
+									<span>{{ $post->org_auth }}</span>
 								</div>
 								<div class="col-sm-3 detail">
 									<strong>İletisim</strong>
-									<span>0535 555 34 23</span>
+									<span>{{ $post->org_auth_contact }}</span>
 								</div>
 								<div class="col-sm-3 detail">
 									<strong>Harita</strong>
@@ -142,9 +139,9 @@
 				<span class="date">{{ $post->created_at}}</span>
 			</div>
 			<div class="right">
-				<span class="comment">{{ $comments_count }}</span>
+				<span class="comment">{{ $comments->count() }}</span>
 				<span class="like">
-					{{ $likes_count }}
+					{{ $likes->count() }}
 					@if(Sentry::check())
 						@if(!Like::where('post_id', $post->id)->where('liker', Sentry::getUser()->username)->count()>0)
 							{{ Form::open(array('action' => 'LikesController@Like')) }}

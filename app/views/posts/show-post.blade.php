@@ -17,13 +17,6 @@
 			</div>
 			<div class="content">
 			@if($post->type == '0')
-
-			<?php 
-				$post_id 		= $post->id;
-				$likes 			= Like::where('post_id', '=', $post_id )->get();
-				$comments_count = $comments->count();
-				$likes_count 	= $likes->count();
-			?>
 			
 			<a href="{{ URL::action('show.post', $post->id) }}">{{ $post->post }}</a>
 
@@ -96,9 +89,9 @@
 					<span class="date">{{ $post->created_at}}</span>
 				</div>
 				<div class="right">
-					<span class="comment">{{ $comments_count }}</span>
+					<span class="comment">{{ $comments->count(); }}</span>
 					<span class="like">
-						{{ $likes_count }}
+						{{ $likes->count() }}
 						@if(Sentry::check())
 							@if(!Like::where('post_id', $post->id)->where('liker', Sentry::getUser()->username)->count()>0)
 								{{ Form::open(array('action' => 'LikesController@Like')) }}

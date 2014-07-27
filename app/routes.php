@@ -68,7 +68,8 @@ Route::get('/user/profile/{username}/', array(
 
 Route::get('/user/profile/{username}/edit/', array(
 	'as' 	=> 'edit.profile',
-	'uses' 	=> 'UsersController@EditProfile'
+	'uses' 	=> 'UsersController@EditProfile',
+	'before' => 'edit'
 ));
 	
 	Route::post('/user/profile/{username}/edit/', array(

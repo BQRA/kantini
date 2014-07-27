@@ -25,13 +25,22 @@ class UsersController extends \BaseController {
 				'gender' 	=> Input::get('gender') ,
 			));
 
+			if(Input::hasFile('image')) {
+				$file            = Input::file('image');
+			    $destinationPath = public_path().'/Avatars/';
+			    $filename        = Sentry::getUser()->username. '.jpg';
+			    $uploadSuccess   = $file->move($destinationPath, $filename);
+			} else {
+				$filename = 'guest';
+			}
+
 			$profile = new Profile;
 			$profile->user_id 			 = Sentry::getUser()->id;
 			$profile->full_name 		 = Input::get('full_name');
 			$profile->twitter_username 	 = Input::get('twitter_username');
 			$profile->instagram_username = Input::get('instagram_username');
 			$profile->facebook_username  = Input::get('facebook_username');
-			$profile->bio 				 = Input::get('bio');
+			$profile->Avatar 			 = $filename;
 			$profile->save();
 
 			Session::flash('message', 'Üyeliğiniz başarıyla gerçekleştirilmiştir. Giriş yapabilirsiniz.');
@@ -155,9 +164,20 @@ class UsersController extends \BaseController {
 		} catch (Illuminate\Database\Eloquent\ModelNotFoundException $e) {
 			return View::make('errors.404');
 		}
-		
-		$data = Input::only('full_name', 'twitter_username', 'instagram_username', 'facebook_username', 'bio');
 
+		if(Input::hasFile('image')) {
+			$file            = Input::file('image');
+			$destinationPath = public_path().'/Avatars/';
+			$filename        = Sentry::getUser()->username. '.jpg';
+			$uploadSuccess   = $file->move($destinationPath, $filename);
+
+			DB::table('profiles')
+            ->where('user_id', Sentry::getUser()->id)
+            ->update(array('avatar' => $filename));
+		}
+
+		$data = Input::only('full_name', 'twitter_username', 'instagram_username', 'facebook_username');
+		
 		$user->profile->fill($data)->save();
 
 		Session::flash('message', 'Profiliniz başarıyla güncellenmiştir.');

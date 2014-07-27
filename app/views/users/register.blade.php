@@ -3,7 +3,7 @@
 @section('content')
 	<p>Kayıt</p>
 
-	{{ Form::open(array('route' => 'register')) }}
+	{{ Form::open(array('route' => 'register', 'files' => true)) }}
 
 	{{ Form::label('username', 'Kullanıcı adı') }}
 	{{ Form::Input('text', 'username') }}
@@ -61,8 +61,7 @@
 	{{ Form::label('facebook_username', 'Facebook') }}
 	{{ Form::Input('text', 'facebook_username') }} <br>
 
-	{{ Form::label('bio', 'Bio') }}
-	{{ Form::Input('text', 'bio') }} <br>
+	{{ Form::file('image') }} <br>
 
 	{{ Form::submit() }}
 

@@ -35,12 +35,14 @@ class PostsController extends \BaseController {
 	public function ShowPost($id) {
 		
 		$post 		= Post::where('id', '=', $id)->firstOrFail();
+		$likes 		= Like::where('post_id', '=', $id )->get();
 		$comments 	= Comment::orderBy('created_at', 'DESC')
 								->where('post_id', '=', $id)
 								->get();
 		
 		return View::make('posts.show-post')
 		->with('post', $post)
+		->with('likes', $likes)
 		->with('comments', $comments);
 	}
 

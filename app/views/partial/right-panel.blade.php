@@ -1,9 +1,20 @@
-<div class="right-panel">
-	
+<div class="right-panel">	
 	@if(Sentry::check())
+	<?php 
+		$username 		= Sentry::getUser()->username;
+		$user_posts 	= Post::where('username', '=', $username)->where('type', '=', '0');
+		$user_likes 	= Like::where('liker', '=', $username);
+		$user_comments 	= Comment::where('commenter', '=', $username);
+		$user 			= User::with('profile')->whereUsername($username)->firstOrFail();
+	?>
+
 	<div class="user-box {{ Sentry::getUser()->gender }}">
 		<div class="avatar">
-			{{HTML::image('Assets/images/users/', 'Avatar')}}
+			@if($user->profile->avatar == 'guest')
+				{{ HTML::image('/Avatars/guest-avatar.png') }}
+			@else
+				{{ HTML::image('/Avatars/'.Sentry::getUser()->username.'.jpg') }}
+			@endif
 		</div>
 		<div class="username">
 			<span>{{ Sentry::getUser()->username }}</span> 
@@ -13,17 +24,17 @@
 		<div class="row numbers">
 			<div class="col-sm-4">
 				<a href="#">
-					123 <small>Gönderi</small>
+					{{ $user_posts->count() }} <small>Gönderi</small>
 				</a>
 			</div>
 			<div class="col-sm-4">
 				<a href="#">
-					123 <small>Beğeni</small>
+					{{ $user_likes->count() }} <small>Beğeni</small>
 				</a>
 			</div>
 			<div class="col-sm-4">
 				<a href="#">
-					123 <small>Yorum</small>
+					{{ $user_comments->count() }} <small>Yorum</small>
 				</a>
 			</div>
 		</div>
@@ -44,8 +55,8 @@
 
 			{{ Form::open(array('route' => 'login')) }}
 			
-			{{ Form::Input('email', 'email', null, ['placeholder' => 'E-posta']) }}
-			{{ Form::Input('password', 'password', null, ['placeholder' => 'Şifre']) }}
+			{{ Form::Input('email', 'email', null, array('placeholder' => 'E-posta')) }}
+			{{ Form::Input('password', 'password', null, array('placeholder' => 'Şifre')) }}
 
 			{{ Form::submit(' ', ['class' => 'button blue w100']) }}
 

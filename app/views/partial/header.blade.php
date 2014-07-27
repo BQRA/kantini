@@ -1,7 +1,7 @@
 <div class="header">
 	<div class="logo">
 		<h1>
-			<a href="#">Beykent</a>
+			<a href="{{ URL::route('home') }}">Beykent</a>
 			<span>KANTİNİ</span>
 		</h1>
 	</div>
@@ -19,9 +19,9 @@
 	{{ Form::open(array('action' => 'PostsController@SendPost')) }}
 	<div class="dedikod-area">
 		@if(!Sentry::check())
-			{{ Form::textarea('post', null, ['placeholder' => $guest_username.' olarak dedikodla!']) }}
+			{{ Form::textarea('post', null, array('placeholder' => $guest_username.' olarak dedikodla!')) }}
 		@else 
-			{{ Form::textarea('post', null, ['placeholder' => Sentry::getUser()->username.' olarak dedikodla!']) }}
+			{{ Form::textarea('post', null, array('placeholder' => Sentry::getUser()->username.' olarak dedikodla!'))}}
 		@endif
 		<div class="bottom-bar">
 			<div class="left">
@@ -42,7 +42,7 @@
 				@endif
 				<span class="send">
 					Shift + Enter &nbsp;
-					{{ Form::submit('GÖNDER', ['class' => 'button green sm'])}}
+					{{ Form::submit('GÖNDER', array('class' => 'button green sm'))}}
 				</span>
 			</div>
 		</div>
