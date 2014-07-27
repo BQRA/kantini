@@ -41,18 +41,6 @@ Route::get('/user/register/', array(
 		'before' => 'csrf'
 	));
 
-Route::get('/user/login/', array(
-	'as' 	 => 'login',
-	'uses' 	 => 'PagesController@Login',
-	'before' => 'login'
-));
-
-	Route::post('/user/login/', array(
-		'as' 	 => 'post.login',
-		'uses'   => 'UsersController@PostLogin',
-		'before' => 'csrf'
-	));
-
 Route::get('/user/logout/', array(
 	'as' 	 => 'logout',
 	'uses' 	 => 'PagesController@Logout',
@@ -78,22 +66,22 @@ Route::get('/user/profile/{username}/edit/', array(
 		'before' => 'csrf'
 	));
 
-Route::get('/user/profile/{username}/all-posts', array(
+Route::get('/user/profile/{username}/all-posts/', array(
 	'as' 	=> 'show.users.all.posts',
 	'uses'  => 'UsersController@ShowUserAllPosts'
 ));
 
-Route::get('/user/profile/{username}/all-comments', array(
+Route::get('/user/profile/{username}/all-comments/', array(
 	'as' 	=> 'show.users.all.comments',
 	'uses'  => 'UsersController@ShowUserAllComments'
 ));
 
-Route::get('/user/profile/{username}/all-organizations', array(
+Route::get('/user/profile/{username}/all-organizations/', array(
 	'as' 	=> 'show.users.all.organizations',
 	'uses'  => 'UsersController@ShowUserAllOrganizations'
 ));
 
-Route::get('/user/profile/{username}/all-likes', array(
+Route::get('/user/profile/{username}/all-likes/', array(
 	'as' 	=> 'show.users.all.likes',
 	'uses'  => 'UsersController@ShowUserAllLikes'
 ));
@@ -104,7 +92,7 @@ Route::get('/post/{id}/', array(
 	'uses' 	=> 'PostsController@ShowPost'
 ));
 
-Route::get('/post/{id}/secret', array(
+Route::get('/post/{id}/secret/', array(
 	'as' 	=> 'secret',
 	'uses' 	=> 'PostsController@Secret'
 ));
@@ -133,6 +121,12 @@ Route::get('/post/{id}/secret', array(
 		'uses' 	 => 'LikesController@GuestLike',
 		'before' => 'csrf'
 	));
+
+	Route::post('/user/login/', array(
+		'as' 	 => 'post.login',
+		'uses'   => 'UsersController@PostLogin',
+		'before' => 'csrf'
+	));
 /* Just Post Routes */
 
 Route::get('/create-organization/', array(
@@ -147,7 +141,7 @@ Route::get('/create-organization/', array(
 		'before' => 'csrf'
 	));
 
-Route::get('/organization/{id}', array(
+Route::get('/organization/{id}/', array(
 	'as' 	=> 'show.organization',
 	'uses' 	=> 'PostsController@ShowOrganization'
 ));

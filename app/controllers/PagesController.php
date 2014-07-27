@@ -38,10 +38,6 @@ class PagesController extends \BaseController {
 		return View::make('users.register');
 	}
 
-	public function Login() {
-		return View::make('users.login');
-	}
-
 	public function Logout() {
 		Sentry::logout();
 		Session::flash('message', 'Çıkış yaptınız.');

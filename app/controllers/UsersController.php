@@ -63,7 +63,7 @@ class UsersController extends \BaseController {
 		$validator = Validator::make($data, $rules);
 
 		if($validator->fails()) {
-			return Redirect::route('login')
+			return Redirect::back()
 			->withErrors($validator)
 			->withInput();
 		} else {
@@ -81,18 +81,18 @@ class UsersController extends \BaseController {
 				->with(array('message' => 'Kimliğiniz geçici olarak askıya alınmıştır. Lütfen yönetici ile irtibata geçiniz.'));
 
 				} catch (Cartalyst\Sentry\Users\WrongPasswordException $e) {
-				return Redirect::route('login')
+				return Redirect::back()
 				->with(array('message' => 'Şifre veya Eposta hatalı.'))->withInput();
 
 				} catch (Cartalyst\Sentry\Users\UserNotFoundException $e) {
-				return Redirect::route('login')
+				return Redirect::back()
 				->with(array('message' => 'Kullanıcı bununamadı.'));
 
 				} catch (Cartalyst\Sentry\Throttling\UserBannedException $e) {
-				return Redirect::route('login')
+				return Redirect::back()
 				->with(array('message' => 'Kullanıcı Banlanmış. Lütfen yönetici ile irtibata geçiniz.'));
 
-			}	return Redirect::route('home'); 
+			}	return Redirect::back(); 
 		}
 	}
 

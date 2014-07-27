@@ -55,38 +55,38 @@
 
 <div class="dedikods">
 	@foreach($posts as $post)
-	<div class="dedikod {{ $post->gender }}">
-		<div class="avatar">
-			@if($post->member == '0')
-				{{ HTML::image('/Avatars/guest-avatar.png') }}
-			@endif
-
-			@if($post->member == '1')
-				<?php 
-					$username = $post->username; 
-					$user = User::with('profile')->whereUsername($username)->firstOrFail();
-				?>
-				@if($user->profile->avatar == 'guest')
+		<div class="dedikod {{ $post->gender }}">
+			<div class="avatar">
+				@if($post->member == '0')
 					{{ HTML::image('/Avatars/guest-avatar.png') }}
-				@else
-				<?php 
-					$username = $post->username; 
-					$user = User::with('profile')->whereUsername($username)->firstOrFail();
-				?>
-					{{ HTML::image('/Avatars/'.$username.'.jpg') }}
 				@endif
-			@endif
-		</div>
-		<div class="content">
-		@if($post->type == '0')
 
-		<?php 
-			$post_id 		= $post->id;
-			$likes 			= Like::where('post_id', '=', $post_id )->get();
-			$comments 		= Comment::where('post_id', '=', $post_id )->get();
-			$comments_count = $comments->count();
-			$likes_count 	= $likes->count();
-		?>
+				@if($post->member == '1')
+					<?php 
+						$username = $post->username; 
+						$user = User::with('profile')->whereUsername($username)->firstOrFail();
+					?>
+					@if($user->profile->avatar == 'guest')
+						{{ HTML::image('/Avatars/guest-avatar.png') }}
+					@else
+					<?php 
+						$username = $post->username; 
+						$user = User::with('profile')->whereUsername($username)->firstOrFail();
+					?>
+						{{ HTML::image('/Avatars/'.$username.'.jpg') }}
+					@endif
+				@endif
+			</div>
+			
+		<div class="content">
+			<?php 
+				$post_id 		= $post->id;
+				$likes 			= Like::where('post_id', '=', $post_id )->get();
+				$comments 		= Comment::where('post_id', '=', $post_id )->get();
+				$comments_count = $comments->count();
+				$likes_count 	= $likes->count();
+			?>
+		@if($post->type == '0')
 		
 		<a href="{{ URL::action('show.post', $post->id) }}">{{ $post->post }}</a>
 
@@ -162,6 +162,7 @@
 				<span class="comment get-comments" data-id="{{ $post->id }}">{{ $comments_count }}</span>
 				<span class="like">
 					{{ $likes_count }}
+					</span>
 					@if(Sentry::check())
 						@if(!Like::where('post_id', $post->id)->where('liker', Sentry::getUser()->username)->count()>0)
 							{{ Form::open(array('action' => 'LikesController@Like')) }}

@@ -53,7 +53,7 @@
 			<a href="{{ URL::route('register') }}" class="button green w100">KAYIT OL</a>
 			<div class="or-line"></div>
 
-			{{ Form::open(array('route' => 'login')) }}
+			{{ Form::open(array('route' => 'post.login')) }}
 			
 			{{ Form::Input('text', 'username', null, array('placeholder' => 'Kullanıcı Adı')) }}
 			{{ Form::Input('password', 'password', null, array('placeholder' => 'Şifre')) }}
