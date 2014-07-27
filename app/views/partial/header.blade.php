@@ -26,7 +26,7 @@
 		<div class="bottom-bar">
 			<div class="left">
 				<span class="bar-button selected">Dedikodla!</span>
-				<span class="bar-button" data-lightbox="lightbox/ticket.html" data-lightboxtitle="Etkinlik Olustur">Etkinlik Olustur</span>
+				<span class="bar-button" data-lightbox="{{ URL::action('home') }}/create-organization #addEvent" data-lightboxtitle="Etkinlik Olustur">Etkinlik Olustur</span>
 			</div>
 			<div class="right">
 				@if(!Sentry::check())

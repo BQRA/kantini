@@ -96,7 +96,7 @@
 			<div class="toolbar">
 				<div class="left">
 					@if($post->member == 1)
-						<a class="username" data-lightbox="lightbox/profile.html" href="{{ URL::action('show.profile', $post->username) }}">
+						<a class="username" data-lightbox="{{ URL::action('home') }}/user/profile/{{ $post->username }} #profileBox" href="javascript:;">
 							{{ $post->username }}
 						</a>
 					@else 
@@ -187,7 +187,7 @@
 							<div class="write-area">
 								<span class="username {{ $comment->gender }}">
 									@if($comment->member == 1)
-										<a href="{{ URL::action('show.profile', $comment->commenter) }}">{{ $comment->commenter }}</a>
+										<a data-lightbox="{{ URL::action('home') }}/user/profile/{{ $post->username }} #profileBox" href="javascript:;">{{ $comment->commenter }}</a>
 									@else 
 										<b>{{ $comment->commenter }}</b>
 									@endif

@@ -1,51 +1,71 @@
 @extends('layouts.master')
 
 @section('content')
-	{{ Form::open(array('action' => 'PostsController@CreateOrganization')) }}
 
-	{{ Form::label('org_name', 'Organizasyon adı') }}
-	{{ Form::Input('text', 'org_name') }}
-		@if($errors->has('org_name'))
-			{{ $errors->first('org_name') }}
-		@endif <br>
+<div id="addEvent">
 
-	{{ Form::label('org_date', 'Tarih') }}
-	{{ Form::Input('text', 'org_date') }}
-		@if($errors->has('org_date'))
-			{{ $errors->first('org_date') }}
-		@endif <br>
+	<div class="add-event-container">
+		<div class="ticket-effect"></div>
+		<div class="add-event">
+			<div class="details">
+				{{ Form::open(array('action' => 'PostsController@CreateOrganization')) }}
+				<div class="row">
+					<div class="col-xs-10 detail title">
+						<strong>Etkinlik Adı</strong>
+						{{ Form::Input('text', 'org_name', null, ['placeholder' => 'Etkinlik adını giriniz...']) }}
+					</div>
+					<div class="col-xs-2 detail pic">
+						<div class="pic-upload">
+							<input type="file">
+						</div>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+				<div class="row">
+					<div class="col-xs-3 detail">
+						<strong>Etkinlik Tarihi</strong>
+						{{ Form::Input('text', 'org_date', null, ['placeholder' => 'Tarih giriniz...']) }}
+					</div>
+					<div class="col-xs-3 detail">
+						<strong>Yetkili Kisi</strong>
+						{{ Form::Input('text', 'org_auth', null, ['placeholder' => 'İsim Soyisim']) }}
+					</div>
+					<div class="col-xs-3 detail">
+						<strong>İletisim</strong>
+						{{ Form::Input('text', 'org_auth_contact', null, ['placeholder' => '05550000000']) }}
+					</div>
+					<div class="col-xs-3 detail">
+						<strong>Harita</strong>
+						<input type="text" placeholder="Harita Linki" />
+					</div>
+				</div>
+				<div class="clearfix"></div>
+				<div class="row">
+					<div class="col-xs-8 detail">
+						<strong>Adres</strong>
+						{{ Form::textarea('org_place', null, ['placeholder' => 'Varsa etkinlik alanının adresini giriniz...', 'rows' => '2', 'cols' => '']) }}
+					</div>
+					<div class="col-xs-4 detail price">
+						{{ Form::Input('text', 'org_price', null, ['placeholder' => 'Ücretsiz']) }}
+					</div>
+				</div>
+				<div class="clearfix"></div>
+				<div class="row">
+					<div class="col-xs-12 detail">
+						<strong>Dedikod</strong>
+						{{ Form::Input('text', 'org_message', null, ['placeholder' => 'İsteğe bağlı...']) }}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-	{{ Form::label('org_place', 'Mekan') }}
-	{{ Form::Input('text', 'org_place') }}
-		@if($errors->has('org_place'))
-			{{ $errors->first('org_place') }}
-		@endif <br>
+	<div class="clear mt30"></div>
 
-	{{ Form::label('org_auth', 'Yetkili') }}
-	{{ Form::Input('text', 'org_auth') }}
-		@if($errors->has('org_auth'))
-			{{ $errors->first('org_auth') }}
-		@endif <br>
+	<div class="text-center">
+		{{ Form::submit('GÖNDER', ['class' => 'button green']) }}
+	</div>
+</div>
 
-	{{ Form::label('org_auth_contact', 'Yetkili Tel') }}
-	{{ Form::Input('text', 'org_auth_contact') }}
-		@if($errors->has('org_auth_contact'))
-			{{ $errors->first('org_auth_contact') }}
-		@endif <br>
-
-	{{ Form::label('org_price', 'Fiyat') }}
-	{{ Form::Input('text', 'org_price') }}
-		@if($errors->has('org_price'))
-			{{ $errors->first('org_price') }}
-		@endif <br>
-
-	{{ Form::label('org_message', 'Mesaj') }}
-	{{ Form::Input('text', 'org_message') }}
-		@if($errors->has('org_message'))
-			{{ $errors->first('org_message') }}
-		@endif <br>
-
-	{{ Form::submit() }}
-
-	{{ Form::close() }}
+{{ Form::close() }}
 @stop
