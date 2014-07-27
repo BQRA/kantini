@@ -61,7 +61,6 @@ class PostsController extends \BaseController {
 
 		$rules = array(
 					'commenter' => 'required|min:3|max:18|alpha_dash',
-					'gender'	=> 'required', 
 					'comment' 	=> 'required|min:5|max:800'
 				);
 
@@ -70,7 +69,6 @@ class PostsController extends \BaseController {
 		if($validator->passes()) {
 			$comment = new Comment;
 			$comment->commenter 	= trim(Input::get('commenter'));
-			$comment->gender 		= Input::get('gender');
 			$comment->member 		= Input::get('member');
 			$comment->post_id 		= Input::get('post_id');
 			$comment->comment 		= trim(Input::get('comment'));

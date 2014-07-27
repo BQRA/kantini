@@ -2,7 +2,13 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Kantini: Public Blog</title>
+	<title>Beykent.Kantini</title>
+
+	{{HTML::style('Assets/css/bootstrap.min.css')}}
+	{{HTML::style('Assets/css/style.css')}}
+
+	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+	{{HTML::script('Assets/js/custom-jquery.js')}}
 </head>
 <body>
 <?php
@@ -13,8 +19,18 @@
 	setcookie('guest', $a, time()+3600, '/');
 	$guest_username = 'misafir'.$a;
 	}
-?>	
-	@include('layouts.navigation')
-	@yield('content')
+?>
+
+@include('partial.header')
+
+<div class="container">
+	<div class="left-container">
+		@yield('content')
+	</div>
+	@include('partial.right-panel')
+</div>
+
+@include('partial.footer')
+
 </body>
 </html>
