@@ -7,7 +7,7 @@ $(function () {
 
 	// open comments
 	$('.dedikod .toolbar .button, .dedikod .toolbar .comment').click(function(){
-		$(this).parents('.dedikod').addClass('open').find('.comments').slideDown(200, 'linear');
+		$(this).parents('.dedikod').addClass('open');
 	});
 
 	// selectbox
@@ -52,6 +52,11 @@ $(function () {
 		$('.dedikod-area input[name=gender]').val($(this).attr('name'));
 		$('.bottom-bar .gender').removeClass('selected');
 		$(this).addClass('selected');
+	});
+
+	// get comments
+	$('.dedikod .toolbar .get-comments').click(function() {
+		$(this).parents('.dedikod').find('.load-comments').load('post/'+ $(this).attr('data-id') +' #giveComments');
 	});
 
 

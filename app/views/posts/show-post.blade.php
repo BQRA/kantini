@@ -122,7 +122,7 @@
 
 			<div class="clear"></div>
 
-			<div class="comments opened">
+			<div class="comments opened" id="giveComments">
 				<div class="write-comment">
 					<div class="avatar">
 						<img src="images/users/avatar.jpg" alt="">
