@@ -148,7 +148,7 @@
 		<div class="toolbar">
 			<div class="left">
 				@if($post->member == 1)
-					<a class="username" data-lightbox="lightbox/profile.html" href="{{ URL::action('show.profile', $post->username) }}">
+					<a class="username" data-lightbox="user/profile/{{ $post->username }} #profileBox" href="javascript:;">
 						{{ $post->username }}
 					</a>
 				@else 

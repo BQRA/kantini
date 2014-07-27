@@ -1,25 +1,58 @@
 @extends('layouts.master')
 
 @section('content')
-	<p>Profil Düzenle</p>
 
-	{{ Form::model($user->profile, array('action' => array('UsersController@UpdateProfile', $user->username),'files' => true)) }}
+<div class="blank-page">
+	<h2>Profil Düzenle</h2>
+
+	{{ Form::model($user->profile, array('action' => array('UsersController@UpdateProfile', $user->username),'files' => true, 'class' => 'form')) }}
 	
-	{{ Form::label('full_name', 'Ad') }}
-	{{ Form::Input('text', 'full_name') }} <br>
-
-	{{ Form::label('twitter_username', 'Twitter') }}
-	{{ Form::Input('text', 'twitter_username') }} <br>
-
-	{{ Form::label('instagram_username', 'Instagram') }}
-	{{ Form::Input('text', 'instagram_username') }} <br>
-
-	{{ Form::label('facebook_username', 'Facebook') }}
-	{{ Form::Input('text', 'facebook_username') }} <br>
-
-	{{ Form::file('image') }} <br>
-	
-	{{ Form::submit() }}
-
+	<div class="row">
+		<div class="col-sm-4 title">
+			Ad Soyad
+		</div>
+		<div class="col-sm-8">
+			{{ Form::Input('text', 'full_name') }}		
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-4 title">
+			Twitter Kullanıcı Adı	
+		</div>
+		<div class="col-sm-8">
+			{{ Form::Input('text', 'twitter_username', null, ['placeholder'=>'@username']) }}		
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-4 title">
+			Instagram Kullanıcı Adı	
+		</div>
+		<div class="col-sm-8">
+			{{ Form::Input('text', 'instagram_username', null, ['placeholder'=>'@username']) }}
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-4 title">
+			Facebook Kullanıcı Adı	
+		</div>
+		<div class="col-sm-8">
+			{{ Form::Input('text', 'facebook_username', null, ['placeholder'=>'username']) }}		
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-4 title">
+			Profil Resmi
+		</div>
+		<div class="col-sm-8">
+			{{ Form::file('image') }}
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-4 title"></div>
+		<div class="col-sm-8">
+			{{ Form::submit('KAYIT OL', ['class' => 'button green']) }}
+		</div>
+	</div>
 	{{ Form::close() }}
+</div>
 @stop

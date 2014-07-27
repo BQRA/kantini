@@ -831,6 +831,7 @@ p {
   border-radius: 3px;
   background-color: #fff;
   width: 240px;
+  display: inline-block;
 }
 .user-box .membership {
   padding: 0 20px;
@@ -900,6 +901,11 @@ p {
 .user-box .username a {
   color: #aaa;
   font: normal 11px 'Helvetica Neue', Arial;
+}
+.user-box .school {
+  font: normal 11px 'Helvetica Neue', Arial;
+  display: block;
+  margin-top: 3px;
 }
 .user-box .numbers {
   font: 700 22px 'Quattrocento Sans', 'Helvetica Neue', Arial;
