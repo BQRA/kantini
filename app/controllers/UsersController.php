@@ -144,24 +144,28 @@ class UsersController extends \BaseController {
 		} catch (Illuminate\Database\Eloquent\ModelNotFoundException $e) {
 			return View::make('errors.404');
 		}
-
-		if(Input::hasFile('image')) {
-			$file            = Input::file('image');
-			$destinationPath = public_path().'/Avatars/';
-			$filename        = Sentry::getUser()->username. '.jpg';
-			$uploadSuccess   = $file->move($destinationPath, $filename);
-
-			DB::table('profiles')
-            ->where('user_id', Sentry::getUser()->id)
-            ->update(array('avatar' => $filename));
-		}
-
-		$data = Input::only('full_name', 'twitter_username', 'instagram_username', 'facebook_username');
 		
-		$user->profile->fill($data)->save();
+		if(Sentry::getUser()->username == $username) {
+			if(Input::hasFile('image')) {
+				$file            = Input::file('image');
+				$destinationPath = public_path().'/Avatars/';
+				$filename        = Sentry::getUser()->username. '.jpg';
+				$uploadSuccess   = $file->move($destinationPath, $filename);
 
-		Session::flash('message', 'Profiliniz başarıyla güncellenmiştir.');
-		return Redirect::back();
+				DB::table('profiles')
+	            ->where('user_id', Sentry::getUser()->id)
+	            ->update(array('avatar' => $filename));
+			}
+
+			$data = Input::only('full_name', 'twitter_username', 'instagram_username', 'facebook_username');
+			
+			$user->profile->fill($data)->save();
+
+			Session::flash('message', 'Profiliniz başarıyla güncellenmiştir.');
+			return Redirect::back();
+		} else {
+			echo 'Sen hayırdır la BEBE! :)';
+		}
 	}
 
 	public function ShowUserAllPosts($username) {
