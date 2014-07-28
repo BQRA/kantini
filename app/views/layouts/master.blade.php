@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Beykent.Kantini @yield('title') </title>
+	<title>Kantini @yield('title') </title>
 
 	{{HTML::style('Assets/css/bootstrap.min.css')}}
 	{{HTML::style('Assets/css/style.css')}}

@@ -1,8 +1,8 @@
 <div class="header">
 	<div class="logo">
 		<h1>
-			<a href="{{ URL::route('home') }}">Beykent</a>
-			<span>KANTİNİ</span>
+			&nbsp;
+			<span><a href="{{ URL::route('home') }}">KANTİNİ</a></span>
 		</h1>
 	</div>
 
