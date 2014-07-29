@@ -105,12 +105,6 @@ class UsersController extends \BaseController {
 		
 		$posts_all  = Post::orderBy('created_at', 'DESC')
 							->where('username', '=', $username)
-							->where('type', '=', '0')
-							->get();
-
-		$orgs_all 	= Post::orderBy('created_at', 'DESC')
-							->where('username', '=', $username)
-							->where('type', '=', '1')
 							->get();
 
 		$comments_all = Comment::orderBy('created_at', 'DESC')
@@ -124,7 +118,6 @@ class UsersController extends \BaseController {
 		return View::make('users.profile')
 		->withUser($user)
 		->with('posts_all', $posts_all)
-		->with('orgs_all', $orgs_all)
 		->with('comments_all', $comments_all)
 		->with('likes', $likes);
 	}
