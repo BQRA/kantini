@@ -1,15 +1,6 @@
 @extends('layouts.master')
 
 @section('content')
-<?php
-	if (isset($_COOKIE['guest'])) {
-	$guest_username = 'misafir'.$_COOKIE['guest'];
-	} else {
-	$a = rand();
-	setcookie('guest', $a, time()+3600, '/');
-	$guest_username = 'misafir'.$a;
-	}
-?>
 	<div class="dedikods">
 		<div class="dedikod {{ $post->gender }}">
 			<div class="avatar">
@@ -18,17 +9,11 @@
 			@endif
 
 			@if($post->member == '1')
-				<?php 
-					$username = $post->username; 
-					$user = User::with('profile')->whereUsername($username)->firstOrFail();
-				?>
+				<?php $user = User::with('profile')->whereUsername($post->username)->firstOrFail(); ?>
 				@if($user->profile->avatar == 'guest')
 					{{ HTML::image('/Avatars/guest-avatar.png') }}
 				@else
-				<?php 
-					$username = $post->username; 
-					$user = User::with('profile')->whereUsername($username)->firstOrFail();
-				?>
+				<?php $user = User::with('profile')->whereUsername($post->username)->firstOrFail(); ?>
 					{{ HTML::image('/Avatars/'.$username.'.jpg') }}
 				@endif
 			@endif
@@ -125,7 +110,7 @@
 							@if(!Like::where('post_id', $post->id)->where('ip_address', $_SERVER['REMOTE_ADDR'])->count()>0)
 								{{ Form::open(array('action' => 'LikesController@GuestLike')) }}
 								
-								{{ Form::hidden('liker', $guest_username) }}
+								{{ Form::hidden('liker', guest_username()) }}
 								{{ Form::hidden('post_id', $post->id) }}
 								
 								{{ Form::submit(' ') }}
@@ -146,17 +131,11 @@
 					@if(!Sentry::check())
 						{{ HTML::image('/Avatars/guest-avatar.png') }}
 					@else
-						<?php 
-							$username = Sentry::getUser()->username; 
-							$user = User::with('profile')->whereUsername($username)->firstOrFail();
-						?>
+						<?php $user = User::with('profile')->whereUsername(Sentry::getUser()->username)->firstOrFail(); ?>
 						@if($user->profile->avatar == 'guest')
 							{{ HTML::image('/Avatars/guest-avatar.png') }}
 						@else
-							<?php 
-								$username = Sentry::getUser()->username;
-								$user = User::with('profile')->whereUsername($username)->firstOrFail();
-							?>
+							<?php $user = User::with('profile')->whereUsername(Sentry::getUser()->username)->firstOrFail(); ?>
 							{{ HTML::image('/Avatars/'.Sentry::getUser()->username.'.jpg') }}
 						@endif
 					@endif
@@ -166,8 +145,8 @@
 						{{ Form::hidden('post_id', $post->id) }}
 						@if(!Sentry::check())
 							{{ Form::hidden('member', 0) }}
-							{{ Form::hidden('commenter', $guest_username) }}
-							{{ Form::text('comment', null, ['placeholder' => $guest_username.' olarak yorum yaz!']) }}
+							{{ Form::hidden('commenter', guest_username()) }}
+							{{ Form::text('comment', null, ['placeholder' => guest_username().' olarak yorum yaz!']) }}
 						@else
 							{{ Form::hidden('commenter', Sentry::getUser()->username) }}
 							{{ Form::hidden('gender', Sentry::getUser()->gender) }}
@@ -182,11 +161,23 @@
 					@foreach($comments as $comment )
 						<div class="comment">
 							<div class="avatar">
-								<img src="images/users/avatar.jpg" alt="">
+							@if($comment->member == '0')
+								{{ HTML::image('/Avatars/guest-avatar.png') }}
+							@endif
+
+							@if($comment->member == '1')
+								<?php $user = User::with('profile')->whereUsername($comment->commenter)->firstOrFail(); ?>
+								@if($user->profile->avatar == 'guest')
+									{{ HTML::image('/Avatars/guest-avatar.png') }}
+								@else
+								<?php $user = User::with('profile')->whereUsername($comment->commenter)->firstOrFail(); ?>
+									{{ HTML::image('/Avatars/'.$comment->commenter.'.jpg') }}
+								@endif
+							@endif
 							</div>
 							<div class="write-area">
 								<span class="username {{ $comment->gender }}">
-									@if($comment->member == 1)
+									@if($comment->member == '1')
 										<a data-lightbox="{{ URL::action('home') }}/user/profile/{{ $post->username }} #profileBox" href="javascript:;">{{ $comment->commenter }}</a>
 									@else 
 										<b>{{ $comment->commenter }}</b>

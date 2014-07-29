@@ -6,20 +6,10 @@
 		</h1>
 	</div>
 
-	<?php
-		if (isset($_COOKIE['guest'])) {
-		$guest_username = 'misafir'.$_COOKIE['guest'];
-		} else {
-		$a = rand(1000, 100000);
-		setcookie('guest', $a, time()+3600, '/');
-		$guest_username = 'misafir'.$a;
-		}
-	?>
-
 	{{ Form::open(array('action' => 'PostsController@SendPost')) }}
 	<div class="dedikod-area">
 		@if(!Sentry::check())
-			{{ Form::textarea('post', null, array('placeholder' => $guest_username.' olarak dedikodla!')) }}
+			{{ Form::textarea('post', null, array('placeholder' => guest_username().' olarak dedikodla!')) }}
 		@else 
 			{{ Form::textarea('post', null, array('placeholder' => Sentry::getUser()->username.' olarak dedikodla!'))}}
 		@endif
@@ -31,7 +21,7 @@
 			<div class="right">
 				@if(!Sentry::check())
 					{{ Form::hidden('member', 0) }}
-					{{ Form::hidden('username', $guest_username) }}
+					{{ Form::hidden('username', guest_username()) }}
 					{{ Form::hidden('gender', '') }}
 					<span name="male" class="gender male bar-button"></span>
 					<span name="female" class="gender female bar-button"></span>

@@ -2,16 +2,6 @@
 
 @section('content')
 
-<?php
-	if (isset($_COOKIE['guest'])) {
-	$guest_username = 'misafir'.$_COOKIE['guest'];
-	} else {
-	$a = rand(1000, 100000);
-	setcookie('guest', $a, time()+3600, '/');
-	$guest_username = 'misafir'.$a;
-	}
-?>
-
 <div class="filter-bar">
 	<div class="left">
 		
@@ -154,7 +144,7 @@
 						@if(!Like::where('post_id', $post->id)->where('ip_address', $_SERVER['REMOTE_ADDR'])->count()>0)
 							{{ Form::open(array('action' => 'LikesController@GuestLike')) }}
 							
-							{{ Form::hidden('liker', $guest_username) }}
+							{{ Form::hidden('liker', guest_username()) }}
 							{{ Form::hidden('post_id', $post->id) }}
 							
 							{{ Form::submit(' ') }}

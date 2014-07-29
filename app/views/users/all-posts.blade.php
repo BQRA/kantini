@@ -1,16 +1,6 @@
 @extends('layouts.master')
 
 @section('content')
-	<?php
-		if (isset($_COOKIE['guest'])) {
-		$guest_username = 'misafir'.$_COOKIE['guest'];
-		} else {
-		$a = rand(1000, 100000);
-		setcookie('guest', $a, time()+3600, '/');
-		$guest_username = 'misafir'.$a;
-		}
-	?>
-
 <div class="special-list-title">
 	<span><a href="{{ URL::action('show.profile', $user->username) }}" data-lightbox="lightbox/profile.html" data-lightboxtitle="Profil Kartı">{{ $user->username }}</a> kullanıcısının</span>
 	<div class="select-box">
@@ -61,35 +51,25 @@
 				@endif
 
 				@if($post->member == '1')
-					<?php 
-						$username = $post->username; 
-						$user = User::with('profile')->whereUsername($username)->firstOrFail();
-					?>
+					<?php $user = User::with('profile')->whereUsername($post->username)->firstOrFail(); ?>
 					@if($user->profile->avatar == 'guest')
 						{{ HTML::image('/Avatars/guest-avatar.png') }}
 					@else
-					<?php 
-						$username = $post->username; 
-						$user = User::with('profile')->whereUsername($username)->firstOrFail();
-					?>
-						{{ HTML::image('/Avatars/'.$username.'.jpg') }}
+					<?php $user = User::with('profile')->whereUsername($post->username)->firstOrFail(); ?>
+						{{ HTML::image('/Avatars/'.$post->username.'.jpg') }}
 					@endif
 				@endif
 			</div>
 			
 		<div class="content">
 			<?php 
-				$post_id 		= $post->id;
-				$likes 			= Like::where('post_id', '=', $post_id )->get();
-				$comments 		= Comment::where('post_id', '=', $post_id )->get();
-				$comments_count = $comments->count();
-				$likes_count 	= $likes->count();
+				$likes 		= Like::where('post_id', '=', $post->id )->get();
+				$comments 	= Comment::where('post_id', '=', $post->id )->get();
 			?>
 		@if($post->type == '0')
-		
-		<a href="{{ URL::action('show.post', $post->id) }}">{{ $post->post }}</a>
-
+			<a href="{{ URL::action('show.post', $post->id) }}">{{ $post->post }}</a>
 		@endif
+		
 		@if($post->type == '1')
 			<div class="content-ticket">
 				<div class="add-event-container">
@@ -146,7 +126,7 @@
 		</div>
 		<div class="toolbar">
 			<div class="left">
-				@if($post->member == 1)
+				@if($post->member == '1')
 					<a class="username" data-lightbox="user/profile/{{ $post->username }} #profileBox" href="javascript:;">
 						{{ $post->username }}
 					</a>
@@ -158,9 +138,9 @@
 				<span class="date">{{ $post->created_at}}</span>
 			</div>
 			<div class="right">
-				<span class="comment get-comments" data-id="{{ $post->id }}">{{ $comments_count }}</span>
+				<span class="comment get-comments" data-id="{{ $post->id }}">{{ $comments->count() }}</span>
 				<span class="like">
-					{{ $likes_count }}
+					{{ $likes->count() }}
 					</span>
 					@if(Sentry::check())
 						@if(!Like::where('post_id', $post->id)->where('liker', Sentry::getUser()->username)->count()>0)
@@ -177,7 +157,7 @@
 						@if(!Like::where('post_id', $post->id)->where('ip_address', $_SERVER['REMOTE_ADDR'])->count()>0)
 							{{ Form::open(array('action' => 'LikesController@GuestLike')) }}
 							
-							{{ Form::hidden('liker', $guest_username) }}
+							{{ Form::hidden('liker', guest_username()) }}
 							{{ Form::hidden('post_id', $post->id) }}
 							
 							{{ Form::submit(' ') }}
