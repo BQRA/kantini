@@ -1,46 +1,8 @@
 @extends('layouts.master')
 
 @section('content')
-<div class="special-list-title">
-	<span><a href="{{ URL::action('show.profile', $user->username) }}" data-lightbox="lightbox/profile.html" data-lightboxtitle="Profil Kartı">{{ $user->username }}</a> kullanıcısının</span>
-	<div class="select-box">
-		<span class="text">yorum yaptığı</span>
-		<ul>
-			<li>yazdığı</li>
-			<li>yorum yaptığı</li>
-			<li>beğendiği</li>
-		</ul>
-	</div>
-	<span>gönderiler listeleniyor</span>
-</div>
-
-<div class="filter-bar">
-	<div class="left">
-		
-		<div class="select-box">
-			<span class="text">Türe göre filtrele</span>
-			<ul>
-				<li>lorem</li>
-				<li>ipsum</li>
-				<li>dolor sit amet</li>
-				<li>st</li>
-			</ul>
-		</div>
-
-	</div>
-
-	<div class="right">
-		<div class="select-box">
-			<span class="text">İçeriğe göre filtrele</span>
-			<ul>
-				<li>lorem</li>
-				<li>ipsum</li>
-				<li>dolor sit amet</li>
-				<li>st</li>
-			</ul>
-		</div>
-	</div>
-</div>
+@include('partial.special-list-title')
+@include('partial.filter-bar')
 
 <div class="dedikods">
 	@foreach($posts_all as $post)
@@ -128,7 +90,7 @@
 		<div class="toolbar">
 			<div class="left">
 				@if($post->member == '1')
-					<a class="username" data-lightbox="user/profile/{{ $post->username }} #profileBox" href="javascript:;">
+					<a class="username" data-lightbox="{{ URL::action('home') }}/user/profile/{{ $post->username }} #profileBox" href="javascript:;">
 						{{ $post->username }}
 					</a>
 				@else 

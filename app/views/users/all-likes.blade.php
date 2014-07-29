@@ -1,46 +1,8 @@
 @extends('layouts.master')
 
 @section('content')
-<div class="special-list-title">
-	<span><a href="{{ URL::action('show.profile', $user->username) }}" data-lightbox="lightbox/profile.html" data-lightboxtitle="Profil Kartı">{{ $user->username }}</a> kullanıcısının</span>
-	<div class="select-box">
-		<span class="text">yorum yaptığı</span>
-		<ul>
-			<li>yazdığı</li>
-			<li>yorum yaptığı</li>
-			<li>beğendiği</li>
-		</ul>
-	</div>
-	<span>gönderiler listeleniyor</span>
-</div>
-
-<div class="filter-bar">
-	<div class="left">
-		
-		<div class="select-box">
-			<span class="text">Türe göre filtrele</span>
-			<ul>
-				<li>lorem</li>
-				<li>ipsum</li>
-				<li>dolor sit amet</li>
-				<li>st</li>
-			</ul>
-		</div>
-
-	</div>
-
-	<div class="right">
-		<div class="select-box">
-			<span class="text">İçeriğe göre filtrele</span>
-			<ul>
-				<li>lorem</li>
-				<li>ipsum</li>
-				<li>dolor sit amet</li>
-				<li>st</li>
-			</ul>
-		</div>
-	</div>
-</div>
+@include('partial.special-list-title')
+@include('partial.filter-bar')
 
 <div class="dedikods">
 	@foreach($likes as $like)
@@ -123,51 +85,50 @@
 					</div>
 				</div>
 			@endif
-
-		</div>
-		
-		<div class="toolbar">
-			<div class="left">
-				@if($like->post->member == '1')
-					<a class="username" data-lightbox="user/profile/{{ $like->post->username }} #profileBox" href="javascript:;">
-						{{ $like->post->username }}
-					</a>
-				@else 
-					<span class="username">
-						{{ $like->post->username }}
-					</span>
-				@endif
-				<span class="date">{{ $like->post->created_at}}</span>
 			</div>
-			<div class="right">
-				<span class="comment get-comments" data-id="{{ $like->post->id }}">{{ $comments->count() }}</span>
-				<span class="like">
-					{{ $likes->count() }}
-					</span>
-					@if(Sentry::check())
-						@if(!Like::where('post_id', $like->post->id)->where('liker', Sentry::getUser()->username)->count()>0)
-							{{ Form::open(array('action' => 'LikesController@Like')) }}
-							{{ Form::hidden('post_id', $like->post->id) }}
-							{{ Form::submit(' ') }}
-							{{ Form::close() }}
-						@endif
-					@else
-						@if(!Like::where('post_id', $like->post->id)->where('ip_address', $_SERVER['REMOTE_ADDR'])->count()>0)
-							{{ Form::open(array('action' => 'LikesController@GuestLike')) }}
-							{{ Form::hidden('post_id', $like->post->id) }}
-							{{ Form::submit(' ') }}
-							{{ Form::close() }}
-						@endif
+
+			<div class="toolbar">
+				<div class="left">
+					@if($like->post->member == '1')
+						<a class="username" data-lightbox="{{ URL::action('home') }}/user/profile/{{ $like->post->username }} #profileBox" href="javascript:;">
+							{{ $like->post->username }}
+						</a>
+					@else 
+						<span class="username">
+							{{ $like->post->username }}
+						</span>
 					@endif
-				</span>
-				<span class="button sm r green get-comments" data-id="{{ $like->post->id }}">Yorum Yaz</span>
+					<span class="date">{{ $like->post->created_at}}</span>
+				</div>
+				<div class="right">
+					<span class="comment get-comments" data-id="{{ $like->post->id }}">{{ $comments->count() }}</span>
+					<span class="like">
+						{{ $likes->count() }}
+						</span>
+						@if(Sentry::check())
+							@if(!Like::where('post_id', $like->post->id)->where('liker', Sentry::getUser()->username)->count()>0)
+								{{ Form::open(array('action' => 'LikesController@Like')) }}
+								{{ Form::hidden('post_id', $like->post->id) }}
+								{{ Form::submit(' ') }}
+								{{ Form::close() }}
+							@endif
+						@else
+							@if(!Like::where('post_id', $like->post->id)->where('ip_address', $_SERVER['REMOTE_ADDR'])->count()>0)
+								{{ Form::open(array('action' => 'LikesController@GuestLike')) }}
+								{{ Form::hidden('post_id', $like->post->id) }}
+								{{ Form::submit(' ') }}
+								{{ Form::close() }}
+							@endif
+						@endif
+					</span>
+					<span class="button sm r green get-comments" data-id="{{ $like->post->id }}">Yorum Yaz</span>
+				</div>
 			</div>
+
+			<div class="clear"></div>
+
+			<div class="load-comments"></div>
 		</div>
-
-		<div class="clear"></div>
-
-		<div class="load-comments"></div>
-	</div>
 	@endforeach
 </div>
 @stop
