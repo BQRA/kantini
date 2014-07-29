@@ -8,7 +8,7 @@
 		<div class="ticket-effect"></div>
 		<div class="add-event">
 			<div class="details">
-				{{ Form::open(array('action' => 'PostsController@CreateOrganization')) }}
+				{{ Form::open(array('action' => 'PostsController@CreateOrganization', 'files' => 'true')) }}
 				<div class="row">
 					<div class="col-xs-10 detail title">
 						<strong>Etkinlik Adı</strong>
@@ -16,7 +16,7 @@
 					</div>
 					<div class="col-xs-2 detail pic">
 						<div class="pic-upload">
-							<input type="file">
+							{{ Form::file('org_photo') }}
 						</div>
 					</div>
 				</div>
@@ -36,14 +36,14 @@
 					</div>
 					<div class="col-xs-3 detail">
 						<strong>Harita</strong>
-						<input type="text" placeholder="Harita Linki" />
+						{{ Form::Input('text', 'org_map', null, ['placeholder' => 'map']) }}
 					</div>
 				</div>
 				<div class="clearfix"></div>
 				<div class="row">
 					<div class="col-xs-8 detail">
 						<strong>Adres</strong>
-						{{ Form::textarea('org_place', null, ['placeholder' => 'Varsa etkinlik alanının adresini giriniz...', 'rows' => '2', 'cols' => '']) }}
+						{{ Form::textarea('org_address', null, ['placeholder' => 'Varsa etkinlik alanının adresini giriniz...', 'rows' => '2', 'cols' => '']) }}
 					</div>
 					<div class="col-xs-4 detail price">
 						{{ Form::Input('text', 'org_price', null, ['placeholder' => 'Ücretsiz']) }}

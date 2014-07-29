@@ -92,11 +92,6 @@ Route::get('/post/{id}/', array(
 	'uses' 	=> 'PostsController@ShowPost'
 ));
 
-Route::get('/post/{id}/secret/', array(
-	'as' 	=> 'secret',
-	'uses' 	=> 'PostsController@Secret'
-));
-
 /* Just Post Routes */
 	Route::post('/send-post/', array(
 		'as' 	 => 'send.post',

@@ -90,18 +90,17 @@ class PostsController extends \BaseController {
 
 		$rules = array(
 			//kurallar geliştirelecek
-			'org_name' 			=> 'required',
-			'org_date' 			=> 'required',
-			'org_place' 		=> 'required',
-			'org_auth' 			=> 'required',
-			'org_auth_contact' 	=> 'required',
-			'org_price' 		=> 'required',
-			'org_message' 		=> 'required'
+
 		);
 
 		$validator = Validator::make($data, $rules);
 
 		if($validator->passes()) {
+			$file            = Input::file('org_photo');
+			$destinationPath = public_path().'/Organizations/';
+			$filename        = Sentry::getUser()->username.'_organization.jpg';
+			$uploadSuccess   = $file->move($destinationPath, $filename);
+			
 			$post = new Post;
 			$post->username 	= Sentry::getUser()->username;
 			$post->gender 		= Sentry::getUser()->gender;
@@ -109,20 +108,21 @@ class PostsController extends \BaseController {
 			$post->type 		= '1';
 			$post->org_name 	= trim(Input::get('org_name'));
 			$post->org_date 	= trim(Input::get('org_date'));
-			$post->org_place 	= trim(Input::get('org_place'));
+			$post->org_address 	= trim(Input::get('org_address'));
+			$post->org_map	 	= trim(Input::get('org_map'));
 			$post->org_auth 	= trim(Input::get('org_auth'));
 			$post->org_auth_contact 	= trim(Input::get('org_auth_contact'));
 			$post->org_price 	= trim(Input::get('org_price'));
 			$post->org_message 	= trim(Input::get('org_message'));
+			$post->org_photo    = Sentry::getUser()->username.'_organization.jpg';
 			$post->save();
 
 			Session::flash('message', 'İletiniz başarıyla gönderilmiştir!');
 			return Redirect::route('home');
 		} else {
-
-		return Redirect::route('create.organization')
-		->withErrors($validator)
-		->withInput();
+			return Redirect::route('create.organization')
+			->withErrors($validator)
+			->withInput();
 		}
 	}
 

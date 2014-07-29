@@ -49,35 +49,24 @@
 				@endif
 
 				@if($post->member == '1')
-					<?php 
-						$username = $post->username; 
-						$user = User::with('profile')->whereUsername($username)->firstOrFail();
-					?>
+					<?php $user = User::with('profile')->whereUsername($post->username)->firstOrFail(); ?>
 					@if($user->profile->avatar == 'guest')
 						{{ HTML::image('/Avatars/guest-avatar.png') }}
 					@else
-					<?php 
-						$username = $post->username; 
-						$user = User::with('profile')->whereUsername($username)->firstOrFail();
-					?>
-						{{ HTML::image('/Avatars/'.$username.'.jpg') }}
+						{{ HTML::image('/Avatars/'.$post->username.'.jpg') }}
 					@endif
 				@endif
 			</div>
 			
 		<div class="content">
 			<?php 
-				$post_id 		= $post->id;
-				$likes 			= Like::where('post_id', '=', $post_id )->get();
-				$comments 		= Comment::where('post_id', '=', $post_id )->get();
-				$comments_count = $comments->count();
-				$likes_count 	= $likes->count();
+				$likes 	  = Like::where('post_id', '=', $post->id )->get();
+				$comments = Comment::where('post_id', '=', $post->id )->get();
 			?>
 		@if($post->type == '0')
-		
-		<a href="{{ URL::action('show.post', $post->id) }}">{{ $post->post }}</a>
-
+			<a href="{{ URL::action('show.post', $post->id) }}">{{ $post->post }}</a>
 		@endif
+		
 		@if($post->type == '1')
 			<div class="content-ticket">
 				<div class="add-event-container">
@@ -119,7 +108,7 @@
 							<div class="row">
 								<div class="col-sm-8 detail address">
 									<strong>Adres</strong>
-									<span>{{$post->org_place}}</span>
+									<span>{{$post->org_address}}</span>
 								</div>
 								<div class="col-sm-4 detail price">
 									{{$post->org_price}}
@@ -146,9 +135,9 @@
 				<span class="date">{{ $post->created_at}}</span>
 			</div>
 			<div class="right">
-				<span class="comment get-comments" data-id="{{ $post->id }}">{{ $comments_count }}</span>
+				<span class="comment get-comments" data-id="{{ $post->id }}">{{ $comments->count() }}</span>
 				<span class="like">
-					{{ $likes_count }}
+					{{ $likes->count() }}
 					</span>
 					@if(Sentry::check())
 						@if(!Like::where('post_id', $post->id)->where('liker', Sentry::getUser()->username)->count()>0)
