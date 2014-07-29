@@ -63,12 +63,14 @@ class PostsController extends \BaseController {
 
 		if(!Sentry::check()) {
 			$commenter 	= guest_username();
+			$gender 	= '';
 			$member 	= '0';
 				$rules = array(
 					'comment' => 'required|min:5|max:800'
 				);
 		} else {
 			$commenter 	= Sentry::getUser()->username;
+			$gender 	= Sentry::getUser()->gender;
 			$member		= '1';
 				$rules = array(
 						'comment' => 'required|min:5|max:800'
@@ -81,6 +83,7 @@ class PostsController extends \BaseController {
 			$comment = new Comment;
 			$comment->commenter 	= $commenter;
 			$comment->member 		= $member;
+			$comment->gender 		= $gender;
 			$comment->post_id 		= Input::get('post_id');
 			$comment->comment 		= trim(Input::get('comment'));
 			$comment->save();

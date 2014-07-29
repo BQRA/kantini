@@ -177,9 +177,9 @@
 							</div>
 
 							<div class="write-area">
-								<span class="username">
+								<span class="username {{$comment->gender}}">
 									@if($comment->member == '1')
-										<a data-lightbox="{{ URL::action('home') }}/user/profile/{{ $post->username }} #profileBox" href="javascript:;">{{ $comment->commenter }}</a>
+										<a data-lightbox="{{ URL::action('home') }}/user/profile/{{ $comment->commenter }} #profileBox" href="javascript:;">{{ $comment->commenter }}</a>
 									@else 
 										<b>{{ $comment->commenter }}</b>
 									@endif

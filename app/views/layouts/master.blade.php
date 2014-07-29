@@ -12,6 +12,11 @@
 </head>
 <body>
 
+<?php 
+	if(Sentry::check()) {
+		$user = User::with('profile')->whereUsername(Sentry::getUser()->username)->firstOrFail(); 
+	}
+?>
 @include('partial.header')
 
 <div class="container">
