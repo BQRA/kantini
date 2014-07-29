@@ -1,32 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-
-<div class="filter-bar">
-	<div class="left">
-		<div class="select-box">
-			<span class="text">Türe göre filtrele</span>
-			<ul>
-				<li>lorem</li>
-				<li>ipsum</li>
-				<li>dolor sit amet</li>
-				<li>st</li>
-			</ul>
-		</div>
-	</div>
-
-	<div class="right">
-		<div class="select-box">
-			<span class="text">İçeriğe göre filtrele</span>
-			<ul>
-				<li>lorem</li>
-				<li>ipsum</li>
-				<li>dolor sit amet</li>
-				<li>st</li>
-			</ul>
-		</div>
-	</div>
-</div>
+@include('partial.filter-bar')
 
 <div class="dedikods">
 	@foreach($posts as $post)
@@ -69,7 +44,7 @@
 								</div>
 								<div class="col-sm-2 detail pic">
 									<div class="pic-upload">
-										<img src="http://dummyimage.com/50x50" alt="">
+										{{ HTML::image('/Organizations/'.$post->org_photo) }}
 									</div>
 								</div>
 							</div>

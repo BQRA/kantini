@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class PostsController extends \BaseController {
 
@@ -45,8 +46,12 @@ class PostsController extends \BaseController {
 	}
 
 	public function ShowPost($id) {
-		
-		$post 		= Post::where('id', '=', $id)->firstOrFail();
+		try {
+			$post = Post::where('id', '=', $id)->firstOrFail();
+		} catch (Exception $e) {
+			return View::make('errors.404');
+		}
+
 		$likes 		= Like::where('post_id', '=', $id )->get();
 		$comments 	= Comment::orderBy('created_at', 'DESC')
 								->where('post_id', '=', $id)
@@ -59,6 +64,13 @@ class PostsController extends \BaseController {
 	}
 
 	public function SendComment() {
+		try {
+			$post_id	= Input::get('post_id');
+			$post 		= Post::where('id', '=', $post_id)->firstOrFail();
+		} catch (Exception $e) {
+			return View::make('errors.404');
+		}
+
 		$data = Input::all();
 
 		if(!Sentry::check()) {
@@ -84,7 +96,7 @@ class PostsController extends \BaseController {
 			$comment->commenter 	= $commenter;
 			$comment->member 		= $member;
 			$comment->gender 		= $gender;
-			$comment->post_id 		= Input::get('post_id');
+			$comment->post_id 		= $post_id;
 			$comment->comment 		= trim(Input::get('comment'));
 			$comment->save();
 
@@ -139,8 +151,11 @@ class PostsController extends \BaseController {
 	}
 
 	public function ShowOrganization($id) {
-		
-		$post = Post::where('id', '=', $id)->firstOrFail();
+		try {
+			$post = Post::where('id', '=', $id)->firstOrFail();
+		} catch (Exception $e) {
+			return View::make('errors.404');
+		}
 		
 		return View::make('organizations.show-organization')
 		->with('post', $post);
