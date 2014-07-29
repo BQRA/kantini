@@ -177,6 +177,8 @@
 							</div>
 
 
+
+
 							<div class="write-area">
 								<span class="username {{$comment->gender}}">
 									@if($comment->member == '1')
