@@ -1,9 +1,4 @@
 - anasayfaya kişi kartı
-- Avatar
-- 'Profil düzenle' formu (Üyeler hangi bilgileri değiştirebilecek)
-- Etkinlik sayfası (konuş)
 - sayfalama - 36 gonderi de bir sayfa
 - Admin sayfası
 - 404, 403 sayfaları
-- comment tablosundan gender i sil
-- son gonderileri kaldir
