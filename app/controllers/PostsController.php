@@ -5,20 +5,32 @@ class PostsController extends \BaseController {
 	public function SendPost() {
 		$data = Input::all();
 
-		$rules = array(
-			'username' 	=> 'required|min:3|max:18|alpha_dash',
-			'gender' 	=> 'required',
-			'post'		=> 'required|min:5|max:800'
-		);
+			if(!Sentry::check()) {
+				$username 	= guest_username();
+				$member 	= '0';
+				$gender 	= Input::get('gender');
+					$rules = array(
+						'gender' 	=> 'required',
+						'post'		=> 'required|min:5|max:800'
+					);
+			} else {
+				$username 	= Sentry::getUser()->username;
+				$member		= '1';
+				$gender 	= Sentry::getUser()->gender;
+
+				$rules = array(
+						'post'		=> 'required|min:5|max:800'
+				);
+			}
 
 		$validator = Validator::make($data, $rules);
 
 		if($validator->passes()) {
 			$post = new Post;
-			$post->username = trim(Input::get('username'));
-			$post->gender 	= Input::get('gender');
+			$post->username = $username;
+			$post->gender 	= $gender;
 			$post->post 	= trim(Input::get('post'));
-			$post->member 	= Input::get('member');
+			$post->member 	= $member;
 			$post->type 	= '0';
 			$post->save();
 
@@ -46,32 +58,29 @@ class PostsController extends \BaseController {
 		->with('comments', $comments);
 	}
 
-	public function Secret($id) {
-		
-		$post 		= Post::where('id', '=', $id)->firstOrFail();
-		$comments 	= Comment::orderBy('created_at', 'DESC')
-								->where('post_id', '=', $id)
-								->get();
-		
-		return View::make('posts.secret')
-		->with('post', $post)
-		->with('comments', $comments);
-	}
-
 	public function SendComment() {
 		$data = Input::all();
 
-		$rules = array(
-					'commenter' => 'required|min:3|max:18|alpha_dash',
-					'comment' 	=> 'required|min:5|max:800'
+		if(!Sentry::check()) {
+			$commenter 	= guest_username();
+			$member 	= '0';
+				$rules = array(
+					'comment' => 'required|min:5|max:800'
 				);
+		} else {
+			$commenter 	= Sentry::getUser()->username;
+			$member		= '1';
+				$rules = array(
+						'comment' => 'required|min:5|max:800'
+				);
+		}
 
 		$validator = Validator::make($data, $rules);
 		
 		if($validator->passes()) {
 			$comment = new Comment;
-			$comment->commenter 	= trim(Input::get('commenter'));
-			$comment->member 		= Input::get('member');
+			$comment->commenter 	= $commenter;
+			$comment->member 		= $member;
 			$comment->post_id 		= Input::get('post_id');
 			$comment->comment 		= trim(Input::get('comment'));
 			$comment->save();
