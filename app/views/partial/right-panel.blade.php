@@ -66,11 +66,7 @@
 
 		<ul class="menu">
 			<li><a href="{{ URL::route('home') }}">Anasayfa</a></li>
-			<li><a href="{{ URL::route('kantini') }}">Kantini</a></li>
 			<li><a href="{{ URL::route('contact.us') }}">Kontak</a></li>
-			<li><a href="{{ URL::route('ad') }}">Reklam</a></li>
-			<li><a href="{{ URL::route('about.us') }}">Hakkımızda</a></li>
-			<li><a href="{{ URL::route('u.dont.know') }}">Bilmedikleriniz</a></li>
 			@if(Sentry::check())
 			<li><a href="{{ URL::route('logout') }}">Çıkış</a></li>
 			@endif

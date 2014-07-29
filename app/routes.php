@@ -4,29 +4,9 @@ Route::get('/', array(
 	'uses' 	=> 'PagesController@home'
 ));
 
-Route::get('/kantini/', array(
-	'as' 	=> 'kantini',
-	'uses' 	=> 'PagesController@Kantini'
-));
-
 Route::get('/contact-us/', array(
 	'as' 	=> 'contact.us',
 	'uses' 	=> 'PagesController@ContactUs'
-));
-
-Route::get('/ad/', array(
-	'as' 	=> 'ad',
-	'uses' 	=> 'PagesController@Ad'
-));
-
-Route::get('/about-us/', array(
-	'as' 	=> 'about.us',
-	'uses' 	=> 'PagesController@AboutUs'
-));
-
-Route::get('/u-dont-know/', array(
-	'as' 	=> 'u.dont.know',
-	'uses' 	=> 'PagesController@UDontKnow'
 ));
 
 Route::get('/user/register/', array(
