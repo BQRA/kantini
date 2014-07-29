@@ -132,23 +132,15 @@
 					@if(Sentry::check())
 						@if(!Like::where('post_id', $post->id)->where('liker', Sentry::getUser()->username)->count()>0)
 							{{ Form::open(array('action' => 'LikesController@Like')) }}
-							
-							{{ Form::hidden('liker', Sentry::getUser()->username) }}
 							{{ Form::hidden('post_id', $post->id) }}
-
 							{{ Form::submit(' ') }}
-
 							{{ Form::close() }}
 						@endif
 					@else
 						@if(!Like::where('post_id', $post->id)->where('ip_address', $_SERVER['REMOTE_ADDR'])->count()>0)
 							{{ Form::open(array('action' => 'LikesController@GuestLike')) }}
-							
-							{{ Form::hidden('liker', guest_username()) }}
 							{{ Form::hidden('post_id', $post->id) }}
-							
 							{{ Form::submit(' ') }}
-
 							{{ Form::close() }}
 						@endif
 					@endif

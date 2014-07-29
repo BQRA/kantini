@@ -4,7 +4,7 @@ class LikesController extends \BaseController {
 
 	public function GuestLike() {
 		$like = new Like;
-		$like->liker 	  = Input::get('liker');
+		$like->liker 	  = guest_username();
 		$like->post_id 	  = Input::get('post_id');
 		$like->ip_address = $_SERVER['REMOTE_ADDR'];
 		$like->save();
@@ -14,7 +14,7 @@ class LikesController extends \BaseController {
 
 	public function Like() {
 		$like = new Like;
-		$like->liker 	  = Input::get('liker');
+		$like->liker 	  = Sentry::getUser()->username;
 		$like->post_id 	  = Input::get('post_id');
 		$like->ip_address = $_SERVER['REMOTE_ADDR'];
 		$like->save();
