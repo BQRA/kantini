@@ -87,7 +87,7 @@
 		<div class="toolbar">
 			<div class="left">
 				@if($post->member == 1)
-					<a class="username" data-lightbox="{{ URL::action('home') }}/user/profile/{{ $post->username }} #profileBox" href="javascript:;">
+					<a class="username" data-lightbox="{{ URL::action('show.profile', $user->username) }} #profileBox" data-lightboxtitle="Profil Kartı" href="javascript:;">
 						{{ $post->username }}
 					</a>
 				@else 
@@ -98,7 +98,7 @@
 				<span class="date">{{ $post->created_at}}</span>
 			</div>
 			<div class="right">
-				<span class="comment get-comments" data-id="{{ $post->id }}">{{ $comments->count() }}</span>
+				<span class="comment get-comments" data-comments="{{ URL::action('home') }}/post/{{ $post->id }} #giveComments">{{ $comments->count() }}</span>
 				<span class="like">
 					{{ $likes->count() }}
 					</span>
@@ -118,7 +118,7 @@
 						@endif
 					@endif
 				</span>
-				<span class="button sm r green get-comments" data-id="{{ $post->id }}">Yorum Yaz</span>						
+				<span class="button sm r green get-comments" data-comments="{{ URL::action('home') }}/post/{{ $post->id }} #giveComments">Yorum Yaz</span>						
 			</div>
 		</div>
 

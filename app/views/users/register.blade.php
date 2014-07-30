@@ -1,8 +1,6 @@
 @extends('layouts.master')
 
-@section('title')
-- Kayıt Ol
-@stop
+@section('title') - Kayıt Ol @stop
 
 @section('content')
 

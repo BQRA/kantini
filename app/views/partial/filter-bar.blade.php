@@ -4,8 +4,8 @@
 		<div class="select-box">
 			<span class="text">Türe göre filtrele</span>
 			<ul>
-				<li>Dedikodla</li>
-				<li>Etkinlikler</li>
+				<li><a href="#">Dedikodla</a></li>
+				<li><a href="#">Etkinlikler</a></li>
 				<li><a href="{{ URL::to('all-photos') }}">Fotoğraflar</a></li>
 				<li><a href="{{ URL::to('all-videos') }}">Videolar</a></li>
 			</ul>

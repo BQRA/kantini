@@ -82,7 +82,7 @@
 			<div class="toolbar">
 				<div class="left">
 					@if($post->member == '1')
-						<a class="username" data-lightbox="{{ URL::action('home') }}/user/profile/{{ $post->username }} #profileBox" href="javascript:;">
+						<a class="username" data-lightbox="{{ URL::action('show.profile', $user->username) }} #profileBox" data-lightboxtitle="Profil Kartı" href="javascript:;">
 							{{ $post->username }}
 						</a>
 					@else 
@@ -120,8 +120,7 @@
 								{{ Form::close() }}
 							@endif
 						@endif
-					</span>
-					<span class="button sm r green">Yorum Yaz</span>						
+					</span>					
 				</div>
 			</div>
 
@@ -179,7 +178,7 @@
 							<div class="write-area">
 								<span class="username {{$comment->gender}}">
 									@if($comment->member == '1')
-										<a data-lightbox="{{ URL::action('home') }}/user/profile/{{ $comment->commenter }} #profileBox" href="javascript:;">{{ $comment->commenter }}</a>
+										<a data-lightbox="{{ URL::action('home') }}/user/profile/{{ $comment->commenter }} #profileBox" data-lightboxtitle="Profil Kartı" href="javascript:;">{{ $comment->commenter }}</a>
 									@else 
 										<b>{{ $comment->commenter }}</b>
 									@endif

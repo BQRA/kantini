@@ -1,6 +1,9 @@
 @extends('layouts.master')
 
 @section('content')
+{{-- select box'in icine gelecek metin --}}
+@section('select-box-selected') yorum yaptığı @stop
+{{-- select box'in icine gelecek metin #end --}}
 @include('partial.special-list-title')
 @include('partial.filter-bar')
 

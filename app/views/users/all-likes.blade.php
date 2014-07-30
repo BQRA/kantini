@@ -1,6 +1,9 @@
 @extends('layouts.master')
 
 @section('content')
+{{-- select box'in icine gelecek metin --}}
+@section('select-box-selected') beğendiği @stop
+{{-- select box'in icine gelecek metin #end --}}
 @include('partial.special-list-title')
 @include('partial.filter-bar')
 
@@ -90,7 +93,7 @@
 			<div class="toolbar">
 				<div class="left">
 					@if($like->post->member == '1')
-						<a class="username" data-lightbox="{{ URL::action('home') }}/user/profile/{{ $like->post->username }} #profileBox" href="javascript:;">
+						<a class="username" data-lightbox="{{ URL::action('show.profile', $user->username) }} #profileBox" data-lightboxtitle="Profil Kartı" href="javascript:;">
 							{{ $like->post->username }}
 						</a>
 					@else 
@@ -101,7 +104,7 @@
 					<span class="date">{{ $like->post->created_at}}</span>
 				</div>
 				<div class="right">
-					<span class="comment get-comments" data-id="{{ $like->post->id }}">{{ $comments->count() }}</span>
+					<span class="comment get-comments" data-comments="{{ URL::action('home') }}/post/{{ $like->post->id }} #giveComments">{{ $comments->count() }}</span>
 					<span class="like">
 						{{ $likes->count() }}
 						</span>
@@ -121,7 +124,7 @@
 							@endif
 						@endif
 					</span>
-					<span class="button sm r green get-comments" data-id="{{ $like->post->id }}">Yorum Yaz</span>
+					<span class="button sm r green get-comments" data-comments="{{ URL::action('home') }}/post/{{ $like->post->id }} #giveComments">Yorum Yaz</span>
 				</div>
 			</div>
 

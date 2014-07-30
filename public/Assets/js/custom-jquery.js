@@ -73,7 +73,7 @@ $(function () {
 
 	// get comments
 	$('.dedikod .toolbar .get-comments').click(function() {
-		$(this).parents('.dedikod').find('.load-comments').load('post/'+ $(this).attr('data-id') +' #giveComments');
+		$(this).parents('.dedikod').find('.load-comments').load($(this).attr('data-comments'));
 	});
 
 	// session message
