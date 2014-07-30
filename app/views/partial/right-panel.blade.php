@@ -53,7 +53,7 @@
 			{{ Form::Input('text', 'username', null, array('placeholder' => 'Kullanıcı Adı')) }}
 			{{ Form::Input('password', 'password', null, array('placeholder' => 'Şifre')) }}
 
-			{{ Form::submit(' ', ['class' => 'button blue w100']) }}
+			{{ Form::button(' ', ['class' => 'button blue w100', 'type' => 'submit']) }}
 
 			{{ Form::close() }}
 		</div>
