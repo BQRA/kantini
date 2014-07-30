@@ -1,8 +1,37 @@
+// lightbox function
+function alert(content, title) {
+	var padding = ( content == null ) ? null : 'alert'; 
+	var title = ( title == undefined ) ? '' : title; 
+	$('body').append('<div class="lightbox-bg"><div class="close-button"></div><div class="vertical-helper"></div><div class="lightbox-container"><h2>' + title + '</h2><div class="lightbox-content ' + padding + '">' + content + '</div></div></div>');
+	setTimeout(function(){
+		$('.lightbox-bg .lightbox-container').addClass('opened');
+	}, 1) 
+}
+
+// close lightbox function 
+function closeLightbox() {
+	$('.lightbox-bg .lightbox-container').removeClass('opened');
+	setTimeout(function(){
+		$('.lightbox-bg').remove();
+	}, 200)
+}
+
 $(function () {
 
 	// global close
 	$('body').click(function(event) {
+		// close selctbox
 		$('.select-box ul').hide(0);
+
+		//close lightbox
+		closeLightbox();
+	});
+	
+	// esc press down
+	$(document).on('keydown', function(event){
+		if ( event.which == 27 ) {
+			closeLightbox();
+		}
 	});
 
 	// open comments
@@ -21,31 +50,19 @@ $(function () {
 		$(this).parents('ul').hide(0);
 	});
 
-
-	// lightbox function
-	function alert(content, title) {
-		var padding = ( content == null ) ? null : 'alert'; 
-		var title = ( title == undefined ) ? '' : title; 
-		$('body').append('<div class="lightbox-bg"><div class="close-button"></div><div class="vertical-helper"></div><div class="lightbox-container"><h2>' + title + '</h2><div class="lightbox-content ' + padding + '">' + content + '</div></div></div>');
-		setTimeout(function(){
-			$('.lightbox-bg .lightbox-container').addClass('opened');
-		}, 1) 
-	}
-
 	// load content from different file
-	$('body').on('click', '[data-lightbox]', function() {
+	$('body').on('click', '[data-lightbox]', function(event) {
+		event.stopPropagation();
 		alert(null, $(this).attr('data-lightboxtitle'));
 		$('.lightbox-bg .lightbox-content').load($(this).attr('data-lightbox'));
 	});
-
-	// close action
-	$(document).on('click', '.lightbox-bg .close-button', function() {
-		$('.lightbox-bg .lightbox-container').removeClass('opened');
-		setTimeout(function(){
-			$('.lightbox-bg').remove();
-		}, 200)
+	// close lightboxes
+	$('body').on('click', '.lightbox-content', function(event) {
+		event.stopPropagation();
 	});
-
+	$(document).on('click', '.lightbox-bg .close-button', function(event) {
+		closeLightbox();
+	});
 
 	// gender selet
 	$('.bottom-bar .gender').click(function(event) {
