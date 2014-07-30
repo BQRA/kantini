@@ -26,7 +26,7 @@ $(function () {
 		//close lightbox
 		closeLightbox();
 	});
-	
+
 	// esc press down
 	$(document).on('keydown', function(event){
 		if ( event.which == 27 ) {
@@ -82,6 +82,13 @@ $(function () {
 			setTimeout(function(){
 				$('.session-message').fadeOut('200');
 			}, 5000)
+		}
+	});
+
+	// send dedikod with shift+p
+	$('.dedikod-area textarea').on('keypress', function(event) {
+		if ( event.shiftKey && event.which == 13 ) {
+			$('.dedikod-area .send input').click();
 		}
 	});
 
