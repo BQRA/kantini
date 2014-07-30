@@ -27,7 +27,6 @@ Route::get('/user/logout/', array(
 	'before' => 'guest'
 ));
 
-
 /* User Profiles */
 Route::get('/user/profile/{username}/', array(
 	'as' 	=> 'show.profile',

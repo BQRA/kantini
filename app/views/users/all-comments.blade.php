@@ -2,6 +2,7 @@
 
 @section('content')
 @include('partial.special-list-title')
+@include('partial.filter-bar')
 
 <div class="dedikods">
 	@foreach($comments_all as $comments)

@@ -1,5 +1,4 @@
 @extends('layouts.master')
-
 @section('content')
 @include('partial.special-list-title')
 @include('partial.filter-bar')
