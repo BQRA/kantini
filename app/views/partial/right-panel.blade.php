@@ -1,6 +1,9 @@
 <div class="right-panel">	
 	@if(Sentry::check())
 	<div class="user-box {{ Sentry::getUser()->gender }}">
+		@if(Sentry::check())
+		<div class="logout-button"><a href="{{ URL::route('logout') }}"></a></div>
+		@endif
 		<div class="avatar">
 			@if($user->profile->avatar == 'guest')
 				{{ HTML::image('/Avatars/guest-avatar.png') }}
@@ -67,9 +70,6 @@
 		<ul class="menu">
 			<li><a href="{{ URL::route('home') }}">Anasayfa</a></li>
 			<li><a href="{{ URL::route('contact.us') }}">Kontak</a></li>
-			@if(Sentry::check())
-			<li><a href="{{ URL::route('logout') }}">Çıkış</a></li>
-			@endif
 		</ul>
 	</div>
 

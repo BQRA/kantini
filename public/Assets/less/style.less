@@ -851,6 +851,22 @@ p {
 	background-color: #fff;
 	width: 240px;
 	display: inline-block;
+	position: relative;
+	.logout-button {
+		position: absolute;
+		right: 15px;
+		top: 15px;
+		a {
+			z-index: 91;
+			display: inline-block;
+			width: 21px;
+			height: 21px;
+			border-radius: 20px;
+			background: url('@{img-path}/sprite.png') 7px -415px rgba(0, 0, 0, 0.4);
+			box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5);
+			.transition(.2s);
+		}
+	}
 	.membership {
 		padding: 0 20px;
 		input[type=text],

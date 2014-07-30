@@ -835,6 +835,26 @@ p {
   background-color: #fff;
   width: 240px;
   display: inline-block;
+  position: relative;
+}
+.user-box .logout-button {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+}
+.user-box .logout-button a {
+  z-index: 91;
+  display: inline-block;
+  width: 21px;
+  height: 21px;
+  border-radius: 20px;
+  background: url('../images/sprite.png') 7px -415px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5);
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 .user-box .membership {
   padding: 0 20px;
