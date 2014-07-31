@@ -1,4 +1,3 @@
-{{ Form::open() }}
 <div class="filter-bar">
 	<div class="left">
 		<div class="select-box">
@@ -16,10 +15,9 @@
 		<div class="select-box">
 			<span class="text">İçeriğe göre filtrele</span>
 			<ul>
-				<li>{{Link_to_route('home','En yeniler', array('sortby' => 'created_at', 'order' => 'DESC')) }}</li>
-				<li>{{Link_to_route('home','En eskiler', array('sortby' => 'created_at', 'order' => 'ASC')) }}</li>
+				<li>{{Link_to_route('home','En yeniler', array('order' => 'DESC')) }}</li>
+				<li>{{Link_to_route('home','En eskiler', array('order' => 'ASC')) }}</li>
 			</ul>
 		</div>
 	</div>
 </div>
-{{ Form::close() }}

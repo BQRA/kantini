@@ -4,16 +4,15 @@ class PagesController extends \BaseController {
 	
 	public function Home() {
 
-		$sortby = Input::get('sortby');
 		$order 	= Input::get('order');
-
-		if($sortby && $order) {
-			$posts = Post::orderBy($sortby, $order)->get();
+		
+		if($order) {
+			$posts = Post::orderBy('created_at', $order)->get();
 		} else {
 			$posts = Post::orderBy('created_at', 'DESC')->get();
 		}
 
-		return View::make('pages.index', compact('posts', 'sortby', 'order'));
+		return View::make('pages.index', compact('posts', 'order'));
 	}
 
 	public function ContactUs() {
