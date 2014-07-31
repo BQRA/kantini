@@ -92,5 +92,61 @@ $(function () {
 		}
 	});
 
+	$('.dedikod .toolbar').on('click', '.like:not(.selected)', function(event) {
+		var $form = $(this).next('form'), serializedData = $form.serialize();
+		var likeNContainer = $(this), likeN = parseInt($(this).text());
+        $.ajax({
+            type: 'POST',
+            url: $form.attr('action'),
+            data: serializedData,
+            beforeSend: function() {
+            	likeNContainer.text(likeN+1).addClass('selected liked');
+            },
+            success: function() {
+                
+            }
+        });
+
+
+	});
+
 
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

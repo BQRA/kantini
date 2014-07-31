@@ -105,25 +105,25 @@
 				</div>
 				<div class="right">
 					<span class="comment get-comments" data-comments="{{ URL::action('home') }}/post/{{ $like->post->id }} #giveComments">{{ $comments->count() }}</span>
-					<span class="like">
-						{{ $likes->count() }}
-						</span>
-						@if(Sentry::check())
-							@if(!Like::where('post_id', $like->post->id)->where('liker', Sentry::getUser()->username)->count()>0)
-								{{ Form::open(array('action' => 'LikesController@Like')) }}
-								{{ Form::hidden('post_id', $like->post->id) }}
-								{{ Form::submit(' ') }}
-								{{ Form::close() }}
-							@endif
+					@if(Sentry::check())
+						@if(!Like::where('post_id', $post->id)->where('liker', Sentry::getUser()->username)->count()>0)
+							<span class="like">{{ $likes->count() }}</span>
+							{{ Form::open(array('action' => 'LikesController@Like')) }}
+							{{ Form::hidden('post_id', $post->id) }}
+							{{ Form::close() }}
 						@else
-							@if(!Like::where('post_id', $like->post->id)->where('ip_address', $_SERVER['REMOTE_ADDR'])->count()>0)
-								{{ Form::open(array('action' => 'LikesController@GuestLike')) }}
-								{{ Form::hidden('post_id', $like->post->id) }}
-								{{ Form::submit(' ') }}
-								{{ Form::close() }}
-							@endif
+							<span class="like selected">{{ $likes->count() }}</span>
 						@endif
-					</span>
+					@else
+						@if(!Like::where('post_id', $post->id)->where('ip_address', $_SERVER['REMOTE_ADDR'])->count()>0)
+							<span class="like">{{ $likes->count() }}</span>
+							{{ Form::open(array('action' => 'LikesController@GuestLike')) }}
+							{{ Form::hidden('post_id', $post->id) }}
+							{{ Form::close() }}
+						@else 
+							<span class="like selected">{{ $likes->count() }}</span>
+						@endif
+					@endif
 					<span class="button sm r green get-comments" data-comments="{{ URL::action('home') }}/post/{{ $like->post->id }} #giveComments">Yorum Yaz</span>
 				</div>
 			</div>

@@ -23,20 +23,12 @@
 	        transition: @w @s ease-in-out;
 }
 
-.animation(@name, @s: 0.2s) {
-	-webkit-animation: @name @s infinite linear;
-	   -moz-animation: @name @s infinite linear;
-	    -ms-animation: @name @s infinite linear;
-	     -o-animation: @name @s infinite linear;
-	        animation: @name @s infinite linear;
-}
-
-.scale(@a) {
-	-webkit-transform: scale(@a);
-	   -moz-transform: scale(@a);
-	    -ms-transform: scale(@a);
-	     -o-transform: scale(@a);
-	        transform: scale(@a);
+.animation(@name, @s: 0.2s, @n: infinite) {
+	-webkit-animation: @name @s @n linear;
+	   -moz-animation: @name @s @n linear;
+	    -ms-animation: @name @s @n linear;
+	     -o-animation: @name @s @n linear;
+	        animation: @name @s @n linear;
 }
 .rotate(@a) {
 	-webkit-transform: rotate(@a);
@@ -736,7 +728,7 @@ p {
 					height: 27px;
 					margin: 10px 0 20px 0;
 					.left {
-						width: 50%;
+						width: 60%;
 						span,
 						a {
 							float: left;
@@ -744,7 +736,7 @@ p {
 						}
 					}
 					.right {
-						width: 50%;
+						width: 40%;
 						text-align: right;
 						span,
 						a {
@@ -784,6 +776,13 @@ p {
 						background: url('@{img-path}/sprite.png') 0 -96px;
 						.font2(700, 18px);
 						cursor: pointer;
+						&.selected {
+							background: url('@{img-path}/sprite.png') -61px -96px;
+						}
+						&.liked {
+							.animation(liked, .7s, 1);
+							animation-delay-time: 0.01s;
+						}
 					}
 					.comment {
 						background-position: 0 -146px;

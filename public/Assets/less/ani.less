@@ -1,3 +1,11 @@
+.scale(@a) {
+	-webkit-transform: scale(@a);
+	   -moz-transform: scale(@a);
+	    -ms-transform: scale(@a);
+	     -o-transform: scale(@a);
+	        transform: scale(@a);
+}
+
 @-webkit-keyframes lb-footer {
 	0% { background-position: left bottom; }
 	50% { background-position: center bottom; }
@@ -22,4 +30,50 @@
 	0% { background-position: left bottom; }
 	50% { background-position: center bottom; }
 	100% { background-position: left bottom; }
+}
+
+@-webkit-keyframes liked {
+	0% { .scale(1) }
+	50% { .scale(1.8) }
+	60% { .scale(0.5) }
+	70% { .scale(1.5) }
+	80% { .scale(0.8) }
+	90% { .scale(1.2) }
+	100% { .scale(1) }
+}
+@-moz-keyframes liked {
+	0% { .scale(1) }
+	50% { .scale(1.8) }
+	60% { .scale(0.5) }
+	70% { .scale(1.5) }
+	80% { .scale(0.8) }
+	90% { .scale(1.2) }
+	100% { .scale(1) }
+}
+@-ms-keyframes liked {
+	0% { .scale(1) }
+	50% { .scale(1.8) }
+	60% { .scale(0.5) }
+	70% { .scale(1.5) }
+	80% { .scale(0.8) }
+	90% { .scale(1.2) }
+	100% { .scale(1) }
+}
+@-o-keyframes liked {
+	0% { .scale(1) }
+	50% { .scale(1.8) }
+	60% { .scale(0.5) }
+	70% { .scale(1.5) }
+	80% { .scale(0.8) }
+	90% { .scale(1.2) }
+	100% { .scale(1) }
+}
+@keyframes liked {
+	0% { .scale(1) }
+	50% { .scale(1.8) }
+	60% { .scale(0.5) }
+	70% { .scale(1.5) }
+	80% { .scale(0.8) }
+	90% { .scale(1.2) }
+	100% { .scale(1) }
 }
