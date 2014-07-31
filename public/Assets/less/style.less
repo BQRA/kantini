@@ -633,17 +633,21 @@ p {
 								color: #000 !important;
 								cursor: not-allowed;
 							}
+							&.female {
+								a {
+									color: #e881a2;
+								}
+							}
+							&.male {
+								a {
+									color: #73c3d5;
+								}
+							}
 							a {
 								text-decoration: none;
 								font-weight: bold;
 								&:hover {
 									text-decoration: underline;
-								}
-								&.female {
-									color: #e881a2;
-								}
-								&.male {
-									color: #73c3d5;
 								}
 							}
 						}
@@ -695,13 +699,6 @@ p {
 					}
 					.comments {
 						background-color: #f7e9ee;
-						.write-area {
-							.username {
-								a {
-									color: #e881a2;
-								}
-							}
-						}
 					}
 				}
 				&.male {
@@ -713,13 +710,6 @@ p {
 					}
 					.comments {
 						background-color: #e6eff1;
-						.write-area {
-							.username {
-								a {
-									color: #1999c3;
-								}
-							}
-						}
 					}
 				}
 				.toolbar {

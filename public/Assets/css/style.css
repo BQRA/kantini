@@ -900,18 +900,18 @@ p {
   color: #000 !important;
   cursor: not-allowed;
 }
+.container .left-container .dedikods .dedikod .comments .write-area .username.female a {
+  color: #e881a2;
+}
+.container .left-container .dedikods .dedikod .comments .write-area .username.male a {
+  color: #73c3d5;
+}
 .container .left-container .dedikods .dedikod .comments .write-area .username a {
   text-decoration: none;
   font-weight: bold;
 }
 .container .left-container .dedikods .dedikod .comments .write-area .username a:hover {
   text-decoration: underline;
-}
-.container .left-container .dedikods .dedikod .comments .write-area .username a.female {
-  color: #e881a2;
-}
-.container .left-container .dedikods .dedikod .comments .write-area .username a.male {
-  color: #73c3d5;
 }
 .container .left-container .dedikods .dedikod .comments .write-area .date {
   font: bold 11px 'Helvetica Neue', Arial;
@@ -955,9 +955,6 @@ p {
 .container .left-container .dedikods .dedikod.female .comments {
   background-color: #f7e9ee;
 }
-.container .left-container .dedikods .dedikod.female .comments .write-area .username a {
-  color: #e881a2;
-}
 .container .left-container .dedikods .dedikod.male .username {
   background: url('../images/sprite.png') no-repeat 0 -42px;
 }
@@ -966,9 +963,6 @@ p {
 }
 .container .left-container .dedikods .dedikod.male .comments {
   background-color: #e6eff1;
-}
-.container .left-container .dedikods .dedikod.male .comments .write-area .username a {
-  color: #1999c3;
 }
 .container .left-container .dedikods .dedikod .toolbar {
   display: inline-block;
