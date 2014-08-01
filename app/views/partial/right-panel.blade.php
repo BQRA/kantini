@@ -68,6 +68,10 @@
 		</div> -->
 
 		<ul class="menu">
+			{{ Form::open(array('method' => 'GET', 'route' => 'search')) }}
+			{{ Form::Input('search', 'q', null, array('placeholder' => 'Ara')) }}
+			{{ Form::close() }}
+			
 			<li><a href="{{ URL::route('home') }}">Anasayfa</a></li>
 			<li><a href="{{ URL::route('contact.us') }}">Kontak</a></li>
 		</ul>

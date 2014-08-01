@@ -12,4 +12,8 @@ class Post extends \Eloquent {
 	public function like() {
 		return $this->hasOne('Like');
 	}
+
+	public function scopeSearch($query, $search) {
+		return $query->where('post', 'LIKE', '%'.$search.'%')->orderBy('created_at', 'DESC');
+	}
 }

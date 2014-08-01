@@ -30,6 +30,7 @@ class PagesController extends \BaseController {
 				$posts = Post::orderBy('created_at', 'DESC')->get();
 			}
 		}
+
 		return View::make('pages.index', compact('posts', 'orderBy'));
 	}
 

@@ -27,6 +27,11 @@ Route::get('/user/logout/', array(
 	'before' => 'guest'
 ));
 
+Route::get('/search/',array(
+	'as' => 'search',
+	'uses' => 'SearchController@Search'
+));
+
 /* User Profiles */
 Route::get('/user/profile/{username}/', array(
 	'as' 	=> 'show.profile',
