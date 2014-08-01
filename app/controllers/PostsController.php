@@ -113,7 +113,7 @@ class PostsController extends \BaseController {
 		$data = Input::all();
 
 		$rules = array(
-			//kurallar geliştirelecek
+			'org_name' => 'required'
 
 		);
 
@@ -144,7 +144,7 @@ class PostsController extends \BaseController {
 			Session::flash('message', 'İletiniz başarıyla gönderilmiştir!');
 			return Redirect::route('home');
 		} else {
-			return Redirect::route('create.organization')
+			return Redirect::to('/?lightbox=false')
 			->withErrors($validator)
 			->withInput();
 		}

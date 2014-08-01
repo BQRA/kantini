@@ -89,6 +89,14 @@
 					</div>
 				</div>
 			@endif
+
+			@if($post->type == '2')
+				{{$post->post}}
+			@endif
+
+			@if($post->type == '3')
+				{{$post->post}}
+			@endif
 			
 		</div>
 		<div class="toolbar">
