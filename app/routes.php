@@ -60,6 +60,11 @@ Route::get('/user/profile/{username}/all-comments/', [
 	'uses'  => 'UsersController@ShowUserAllComments'
 ]);
 
+Route::get('/user/profile/{username}/all-organizations/', [
+	'as' 	=> 'show.users.all.organizations',
+	'uses'  => 'UsersController@ShowUserAllOrganizations'
+]);
+
 Route::get('/user/profile/{username}/all-likes/', [
 	'as' 	=> 'show.users.all.likes',
 	'uses'  => 'UsersController@ShowUserAllLikes'

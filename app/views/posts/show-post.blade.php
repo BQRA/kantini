@@ -90,7 +90,7 @@
 							{{ $post->username }}
 						</span>
 					@endif
-					<span class="date">{{ date('d.m.Y',strtotime($post->created_at))}}</span>
+					<span class="date">{{ $post->created_at}}</span>
 				</div>
 
 				<div class="right">
@@ -177,7 +177,7 @@
 									@endif
 								</span>
 								{{ $comment->comment }}
-								<div class="date">{{ date('d.m.Y',strtotime($comment->created_at)) }}</div>
+								<div class="date">{{ $comment->created_at }}</div>
 							</div>
 						</div>
 					@endforeach
