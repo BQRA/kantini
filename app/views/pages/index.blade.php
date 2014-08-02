@@ -56,17 +56,7 @@
 							<div class="row">
 								<div class="col-sm-3 detail">
 									<strong>Etkinlik Tarihi</strong>
-<<<<<<< HEAD
-<<<<<<< HEAD
 									<span>{{date('d m Y',strtotime($post->org_date))}}</span>
-=======
-									<span>dasd adad</span>
-									<!-- <span>{{$post->org_date}}</span> -->
->>>>>>> FETCH_HEAD
-=======
-									<span>dasd adad</span>
-									<!-- <span>{{$post->org_date}}</span> -->
->>>>>>> FETCH_HEAD
 								</div>
 								<div class="col-sm-3 detail">
 									<strong>Yetkili Kisi</strong>
