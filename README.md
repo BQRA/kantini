@@ -1,3 +1,3 @@
 ## Laravel PHP Framework
 
-public blog
+Public Blog project for university students

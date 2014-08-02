@@ -1,5 +1,5 @@
-/bootstrap/compiled.php
-/vendor
+bootstrap/compiled.php/
+vendor/
 composer.phar
 composer.json
 composer.lock
@@ -7,5 +7,5 @@ composer.lock
 .env.php
 .DS_Store
 Thumbs.db
-/public/Avatars
-toDo.md
+public/Avatars/
+public/Organizations/
