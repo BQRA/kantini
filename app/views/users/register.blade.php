@@ -7,7 +7,7 @@
 <div class="blank-page">
 	<h2>Kayıt Ol</h2>
 
-	{{ Form::open(array('route' => 'register', 'files' => true, 'class' => 'form')) }}
+	{{ Form::open(['route' => 'register', 'files' => true, 'class' => 'form']) }}
 
 	<div class="row">
 		<div class="col-sm-4 title">
@@ -58,11 +58,11 @@
 			Okul
 		</div>
 		<div class="col-sm-8">
-			{{ Form::select('school', array(
+			{{ Form::select('school', [
 				null => 'Seç', 
 				'Beykent' => 'Beykent Üniversitesi', 
 				'Bahçeşehir' => 'Bahçeşehir Üniversitesi'
-			)) }}		
+			]) }}		
 			@if($errors->has('school'))
 				<span class="error">{{ $errors->first('school') }}</span>
 			@endif
@@ -73,11 +73,11 @@
 			Cinsiyet
 		</div>
 		<div class="col-sm-8">
-			{{ Form::select('gender', array(
+			{{ Form::select('gender', [
 				null => 'Seç',
 				'male' => 'Erkek',
 				'female' => 'Kız'
-			)) }} 
+			]) }} 
 			@if($errors->has('gender'))
 				<span class="error">{{ $errors->first('gender') }}</span>
 			@endif

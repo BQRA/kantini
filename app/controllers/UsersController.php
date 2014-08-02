@@ -5,41 +5,65 @@ class UsersController extends \BaseController {
 	public function PostRegister() {
 		$data = Input::all();
 
-		$rules = array(
+		$rules = [
 			'username' 			=> 'required|min:3|max:18|alpha_dash|unique:users',
 			'email' 			=> 'required|email|unique:users',
 			'password' 			=> 'required|min:6|max:18',
 			'password_again' 	=> 'required|same:password',
 			'school' 			=> 'required',
 			'gender' 			=> 'required'
-		);
+		];
 
 		$validator = Validator::make($data, $rules);
 
 		if($validator->passes()) {
-			$user = Sentry::register(array(
+			$user = Sentry::register([
 				'email' 	=> Input::get('email'),
 				'username' 	=> Input::get('username'),
 				'password' 	=> Input::get('password'),
 				'school' 	=> Input::get('school'),
 				'gender' 	=> Input::get('gender') ,
-			));
+			]);
 
 			if(Input::hasFile('image')) {
 				$file            = Input::file('image');
 			    $destinationPath = public_path().'/Avatars/';
 			    $filename        = Sentry::getUser()->username. '.jpg';
 			    $uploadSuccess   = $file->move($destinationPath, $filename);
-			} else {
-				$filename = 'guest';
+				} else {
+					$filename = 'guest';
+			}
+
+			if(empty(trim(Input::get('full_name')))) {
+				$full_name = null;
+				} else {
+				$full_name = trim(Input::get('full_name'));
+			}
+
+			if(empty(trim(Input::get('twitter_username')))) {
+				$twitter_username = null;
+				} else {
+				$twitter_username = trim(Input::get('twitter_username'));
+			}
+
+			if(empty(trim(Input::get('instagram_username')))) {
+				$instagram_username = null;
+				} else {
+				$instagram_username = trim(Input::get('instagram_username'));
+			}
+
+			if(empty(trim(Input::get('facebook_username')))) {
+				$facebook_username = null;
+				} else {
+				$facebook_username = trim(Input::get('facebook_username'));
 			}
 
 			$profile = new Profile;
 			$profile->user_id 			 = Sentry::getUser()->id;
-			$profile->full_name 		 = Input::get('full_name');
-			$profile->twitter_username 	 = Input::get('twitter_username');
-			$profile->instagram_username = Input::get('instagram_username');
-			$profile->facebook_username  = Input::get('facebook_username');
+			$profile->full_name 		 = $full_name;
+			$profile->twitter_username 	 = $twitter_username;
+			$profile->instagram_username = $instagram_username;
+			$profile->facebook_username  = $facebook_username;
 			$profile->Avatar 			 = $filename;
 			$profile->save();
 
@@ -78,19 +102,19 @@ class UsersController extends \BaseController {
 
 				} catch (Cartalyst\Sentry\Throttling\UserSuspendedException $e) {
 				return Redirect::route('home')
-				->with(array('message' => 'Kimliğiniz geçici olarak askıya alınmıştır. Lütfen yönetici ile irtibata geçiniz.'));
+				->with(['message' => 'Kimliğiniz geçici olarak askıya alınmıştır. Lütfen yönetici ile irtibata geçiniz.']);
 
 				} catch (Cartalyst\Sentry\Users\WrongPasswordException $e) {
 				return Redirect::back()
-				->with(array('message' => 'Şifre veya Eposta hatalı.'))->withInput();
+				->with(['message' => 'Şifre veya Eposta hatalı.'])->withInput();
 
 				} catch (Cartalyst\Sentry\Users\UserNotFoundException $e) {
 				return Redirect::back()
-				->with(array('message' => 'Kullanıcı bununamadı.'));
+				->with(['message' => 'Kullanıcı bununamadı.']);
 
 				} catch (Cartalyst\Sentry\Throttling\UserBannedException $e) {
 				return Redirect::back()
-				->with(array('message' => 'Kullanıcı Banlanmış. Lütfen yönetici ile irtibata geçiniz.'));
+				->with(['message' => 'Kullanıcı Banlanmış. Lütfen yönetici ile irtibata geçiniz.']);
 
 			}	return Redirect::back(); 
 		}
@@ -147,7 +171,7 @@ class UsersController extends \BaseController {
 
 				DB::table('profiles')
 	            ->where('user_id', Sentry::getUser()->id)
-	            ->update(array('avatar' => $filename));
+	            ->update(['avatar' => $filename]);
 			}
 
 			$data = Input::only('full_name', 'twitter_username', 'instagram_username', 'facebook_username');

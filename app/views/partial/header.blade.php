@@ -6,12 +6,12 @@
 		</h1>
 	</div>
 
-	{{ Form::open(array('action' => 'PostsController@SendPost')) }}
+	{{ Form::open(['action' => 'PostsController@SendPost']) }}
 	<div class="dedikod-area">
 		@if(!Sentry::check())
-			{{ Form::textarea('post', null, array('placeholder' => guest_username().' olarak dedikodla!')) }}
+			{{ Form::textarea('post', null, ['placeholder' => guest_username().' olarak dedikodla!']) }}
 		@else 
-			{{ Form::textarea('post', null, array('placeholder' => Sentry::getUser()->username.' olarak dedikodla!'))}}
+			{{ Form::textarea('post', null, ['placeholder' => Sentry::getUser()->username.' olarak dedikodla!'])}}
 		@endif
 		<div class="bottom-bar">
 			<div class="left">
@@ -27,7 +27,7 @@
 				
 				<span class="send">
 					Shift + Enter &nbsp;
-					{{ Form::submit('GÖNDER', array('class' => 'button green sm'))}}
+					{{ Form::submit('GÖNDER', ['class' => 'button green sm'])}}
 				</span>
 			</div>
 		</div>

@@ -5,7 +5,7 @@
 <div class="blank-page">
 	<h2>Profil Düzenle</h2>
 
-	{{ Form::model($user->profile, array('action' => array('UsersController@UpdateProfile', $user->username),'files' => true, 'class' => 'form')) }}
+	{{ Form::model($user->profile, ['action' => ['UsersController@UpdateProfile', $user->username],'files' => true, 'class' => 'form']) }}
 	
 	<div class="row">
 		<div class="col-sm-4 title">

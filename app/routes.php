@@ -1,126 +1,126 @@
 <?php
-Route::get('/', array(
+Route::get('/', [
 	'as' 	=> 'home',
 	'uses' 	=> 'PagesController@home'
-));
+]);
 
-Route::get('/contact-us/', array(
+Route::get('/contact-us/', [
 	'as' 	=> 'contact.us',
 	'uses' 	=> 'PagesController@ContactUs'
-));
+]);
 
-Route::get('/user/register/', array(
+Route::get('/user/register/', [
 	'as' 	 => 'register',
 	'uses' 	 => 'PagesController@Register',
 	'before' => 'login'
-));
+]);
 	
-	Route::post('/user/register/', array(
+	Route::post('/user/register/', [
 		'as' 	 => 'post.register',
 		'uses' 	 => 'UsersController@PostRegister',
 		'before' => 'csrf'
-	));
+	]);
 
-Route::get('/user/logout/', array(
+Route::get('/user/logout/', [
 	'as' 	 => 'logout',
 	'uses' 	 => 'PagesController@Logout',
 	'before' => 'guest'
-));
+]);
 
-Route::get('/search/',array(
+Route::get('/search/',[
 	'as' => 'search',
 	'uses' => 'SearchController@Search'
-));
+]);
 
 /* User Profiles */
-Route::get('/user/profile/{username}/', array(
+Route::get('/user/profile/{username}/', [
 	'as' 	=> 'show.profile',
 	'uses' 	=> 'UsersController@ShowProfile'
-));
+]);
 
-Route::get('/user/profile/{username}/edit/', array(
+Route::get('/user/profile/{username}/edit/', [
 	'as' 	=> 'edit.profile',
 	'uses' 	=> 'UsersController@EditProfile',
 	'before' => 'edit'
-));
+]);
 	
-	Route::post('/user/profile/{username}/edit/', array(
+	Route::post('/user/profile/{username}/edit/', [
 		'as' 	 => 'update.profile',
 		'uses' 	 => 'UsersController@UpdateProfile',
 		'before' => 'csrf'
-	));
+	]);
 
-Route::get('/user/profile/{username}/all-posts/', array(
+Route::get('/user/profile/{username}/all-posts/', [
 	'as' 	=> 'show.users.all.posts',
 	'uses'  => 'UsersController@ShowUserAllPosts'
-));
+]);
 
-Route::get('/user/profile/{username}/all-comments/', array(
+Route::get('/user/profile/{username}/all-comments/', [
 	'as' 	=> 'show.users.all.comments',
 	'uses'  => 'UsersController@ShowUserAllComments'
-));
+]);
 
-Route::get('/user/profile/{username}/all-organizations/', array(
+Route::get('/user/profile/{username}/all-organizations/', [
 	'as' 	=> 'show.users.all.organizations',
 	'uses'  => 'UsersController@ShowUserAllOrganizations'
-));
+]);
 
-Route::get('/user/profile/{username}/all-likes/', array(
+Route::get('/user/profile/{username}/all-likes/', [
 	'as' 	=> 'show.users.all.likes',
 	'uses'  => 'UsersController@ShowUserAllLikes'
-));
+]);
 /* User Profiles */
 
-Route::get('/post/{id}/', array(
+Route::get('/post/{id}/', [
 	'as' 	=> 'show.post',
 	'uses' 	=> 'PostsController@ShowPost'
-));
+]);
 
 /* Just Post Routes */
-	Route::post('/send-post/', array(
+	Route::post('/send-post/', [
 		'as' 	 => 'send.post',
 		'uses'   => 'PostsController@SendPost',
 		'before' => 'csrf'
-	));
+	]);
 
-	Route::post('/send-comment/', array(
+	Route::post('/send-comment/', [
 		'as' 	 => 'send.comment',
 		'uses'   => 'PostsController@SendComment',
 		'before' => 'csrf'
-	));
+	]);
 
-	Route::post('/like/', array(
+	Route::post('/like/', [
 		'as' 	 => 'like',
 		'uses'   => 'LikesController@Like',
 		'before' => 'csrf'
-	));
+	]);
 
-	Route::post('/guest-like/', array(
+	Route::post('/guest-like/', [
 		'as' 	 => 'like',
 		'uses' 	 => 'LikesController@GuestLike',
 		'before' => 'csrf'
-	));
+	]);
 
-	Route::post('/user/login/', array(
+	Route::post('/user/login/', [
 		'as' 	 => 'post.login',
 		'uses'   => 'UsersController@PostLogin',
 		'before' => 'csrf'
-	));
+	]);
 /* Just Post Routes */
 
-Route::get('/create-organization/', array(
+Route::get('/create-organization/', [
 	'as' 	 => 'create.organization',
 	'uses' 	 => 'PagesController@CreateOrganization',
 	'before' => 'session'
-));
+]);
 
-	Route::post('/create-organization/', array(
+	Route::post('/create-organization/', [
 		'as' 	 => 'create.organization',
 		'uses' 	 => 'PostsController@CreateOrganization',
 		'before' => 'csrf'
-	));
+	]);
 
-Route::get('/organization/{id}/', array(
+Route::get('/organization/{id}/', [
 	'as' 	=> 'show.organization',
 	'uses' 	=> 'PostsController@ShowOrganization'
-));
+]);

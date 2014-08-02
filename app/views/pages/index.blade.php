@@ -111,7 +111,7 @@
 				@if(Sentry::check())
 					@if(!Like::where('post_id', $post->id)->where('liker', Sentry::getUser()->username)->count()>0)
 						<span class="like">{{ $likes->count() }}</span>
-						{{ Form::open(array('action' => 'LikesController@Like')) }}
+						{{ Form::open(['action' => 'LikesController@Like']) }}
 						{{ Form::hidden('post_id', $post->id) }}
 						{{ Form::close() }}
 					@else
@@ -120,7 +120,7 @@
 				@else
 					@if(!Like::where('post_id', $post->id)->where('ip_address', $_SERVER['REMOTE_ADDR'])->count()>0)
 						<span class="like">{{ $likes->count() }}</span>
-						{{ Form::open(array('action' => 'LikesController@GuestLike')) }}
+						{{ Form::open(['action' => 'LikesController@GuestLike']) }}
 						{{ Form::hidden('post_id', $post->id) }}
 						{{ Form::close() }}
 					@else 

@@ -8,7 +8,7 @@
 		<div class="ticket-effect"></div>
 		<div class="add-event">
 			<div class="details">
-				{{ Form::open(array('action' => 'PostsController@CreateOrganization', 'files' => 'true')) }}
+				{{ Form::open(['action' => 'PostsController@CreateOrganization', 'files' => 'true']) }}
 				<div class="row">
 					<div class="col-xs-10 detail title">
 						<strong>Etkinlik Adı</strong>

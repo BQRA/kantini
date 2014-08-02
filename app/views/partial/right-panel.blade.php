@@ -48,10 +48,10 @@
 			<a href="{{ URL::route('register') }}" class="button green w100">KAYIT OL</a>
 			<div class="or-line"></div>
 
-			{{ Form::open(array('route' => 'post.login')) }}
+			{{ Form::open(['route' => 'post.login']) }}
 			
-			{{ Form::Input('text', 'username', null, array('placeholder' => 'Kullanıcı Adı')) }}
-			{{ Form::Input('password', 'password', null, array('placeholder' => 'Şifre')) }}
+			{{ Form::Input('text', 'username', null, ['placeholder' => 'Kullanıcı Adı']) }}
+			{{ Form::Input('password', 'password', null, ['placeholder' => 'Şifre']) }}
 
 			{{ Form::button(' ', ['class' => 'button blue w100', 'type' => 'submit']) }}
 
@@ -68,8 +68,8 @@
 		</div> -->
 
 		<ul class="menu">
-			{{ Form::open(array('method' => 'GET', 'route' => 'search')) }}
-			{{ Form::Input('search', 'q', null, array('placeholder' => 'Ara')) }}
+			{{ Form::open(['method' => 'GET', 'route' => 'search']) }}
+			{{ Form::Input('search', 'q', null, ['placeholder' => 'Ara']) }}
 			{{ Form::close() }}
 			
 			<li><a href="{{ URL::route('home') }}">Anasayfa</a></li>

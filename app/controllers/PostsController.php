@@ -10,18 +10,18 @@ class PostsController extends \BaseController {
 				$username 	= guest_username();
 				$member 	= '0';
 				$gender 	= Input::get('gender');
-					$rules = array(
+					$rules = [
 						'gender' 	=> 'required',
 						'post'		=> 'required|min:5|max:800'
-					);
+					];
 			} else {
 				$username 	= Sentry::getUser()->username;
 				$member		= '1';
 				$gender 	= Sentry::getUser()->gender;
 
-				$rules = array(
+				$rules = [
 						'post'		=> 'required|min:5|max:800'
-				);
+				];
 			}
 
 		$validator = Validator::make($data, $rules);
@@ -77,16 +77,16 @@ class PostsController extends \BaseController {
 			$commenter 	= guest_username();
 			$gender 	= '';
 			$member 	= '0';
-				$rules = array(
+				$rules = [
 					'comment' => 'required|min:5|max:800'
-				);
+				];
 		} else {
 			$commenter 	= Sentry::getUser()->username;
 			$gender 	= Sentry::getUser()->gender;
 			$member		= '1';
-				$rules = array(
+				$rules = [
 						'comment' => 'required|min:5|max:800'
-				);
+				];
 		}
 
 		$validator = Validator::make($data, $rules);
@@ -112,10 +112,9 @@ class PostsController extends \BaseController {
 	public function CreateOrganization() {
 		$data = Input::all();
 
-		$rules = array(
+		$rules = [
 			'org_name' => 'required'
-
-		);
+		];
 
 		$validator = Validator::make($data, $rules);
 
