@@ -94,6 +94,7 @@
 
 			</div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 			<div class="toolbar">
 				<div class="left">
 					@if($post->member == 1)
@@ -131,6 +132,10 @@
 					<span class="button sm r green get-comments" data-comments="{{ URL::action('home') }}/post/{{ $post->id }} #giveComments">Yorum Yaz</span>		
 				</div>
 			</div>
+=======
+
+			@include('partial.toolbar')
+>>>>>>> FETCH_HEAD
 =======
 
 			@include('partial.toolbar')
