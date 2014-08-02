@@ -21,7 +21,7 @@
 
 			<div class="content">
 				@if($post->type == '0')
-					<a href="{{ URL::action('show.post', $post->id) }}">{{ $post->post }}</a>
+					{{ $post->post }}
 				@endif
 			
 				@if($post->type == '1')

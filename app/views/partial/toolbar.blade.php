@@ -9,7 +9,7 @@
 				{{ $post->username }}
 			</span>
 		@endif
-			<span class="date">{{date('d.m.Y',strtotime($post->created_at))}}</span>
+			<span class="date"><a href="{{ URL::action('show.post', $post->id) }}">{{date('d.m.Y',strtotime($post->created_at))}}</a></span>
 	</div>
 			
 	<div class="right">

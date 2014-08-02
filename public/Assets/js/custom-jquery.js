@@ -1,3 +1,25 @@
+// READY
+jQuery(document).ready(function($) {
+
+	// session message
+	if ( $('.session-message').length > 0 ) {
+		setTimeout(function(){
+			$('.session-message').fadeOut('200');
+		}, 5000)
+	}
+
+	// tag creator 
+	$('.dedikod').each(function() {
+		var str = $(this).find('.content').html(), regex = /(?:\s|^)(?:#(?!\d+(?:\s|$)))(\w+)(?=\s|$)/gi;
+		function replacer(hash){
+			var replacementString = $.trim(hash);
+			return ' <a href="search?q='+ replacementString.substr(1) +'" class="highlight">' + replacementString + '</a>';
+		}
+		$(this).find('.content').html( str.replace( regex , replacer ) );
+	});
+
+});
+
 // lightbox function
 function alert(content, title) {
 	var padding = ( content == null ) ? null : 'alert'; 
@@ -101,34 +123,14 @@ $(function () {
 	});
 
 	// event image 
-	$('.dedikod .pic-upload').click(function(event) {
+	$('.dedikod .pic-upload').on('click', function(event) {
 		event.stopPropagation();
 		alert($(this).html());
 	});
 
-	// READY
-	jQuery(document).ready(function($) {
-
-		// session message
-		if ( $('.session-message').length > 0 ) {
-			setTimeout(function(){
-				$('.session-message').fadeOut('200');
-			}, 5000)
-		}
-
-		// tag creator 
-		$('.dedikod').each(function() {
-			var str = $(this).find('.content').html(), regex = /(?:\s|^)(?:#(?!\d+(?:\s|$)))(\w+)(?=\s|$)/gi;
-			function replacer(hash){
-				var replacementString = $.trim(hash);
-				return ' <a href="search?q='+ replacementString.substr(1) +'" class="highlight">' + replacementString + '</a>';
-			}
-			$(this).find('.content').html( str.replace( regex , replacer ) );
-		});
-
-	});
-
 });
+
+
 
 
 
