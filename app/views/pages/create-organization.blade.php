@@ -3,12 +3,11 @@
 @section('content')
 
 <div id="addEvent">
-
+{{ Form::open(['action' => 'PostsController@CreateOrganization', 'files' => 'true']) }}
 	<div class="add-event-container">
 		<div class="ticket-effect"></div>
 		<div class="add-event">
 			<div class="details">
-				{{ Form::open(['action' => 'PostsController@CreateOrganization', 'files' => 'true']) }}
 				<div class="row">
 					<div class="col-xs-10 detail title">
 						<strong>Etkinlik Adı</strong>
@@ -65,7 +64,6 @@
 	<div class="text-center">
 		{{ Form::submit('GÖNDER', ['class' => 'button green']) }}
 	</div>
-</div>
-
 {{ Form::close() }}
+</div>
 @stop
