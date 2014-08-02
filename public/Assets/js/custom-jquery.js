@@ -92,6 +92,7 @@ $(function () {
 		}
 	});
 
+	// ajax likes
 	$('.dedikod .toolbar').on('click', '.like:not(.selected)', function(event) {
 		var $form = $(this).next('form'), serializedData = $form.serialize();
 		var likeNContainer = $(this), likeN = parseInt($(this).text());
@@ -106,8 +107,12 @@ $(function () {
                 
             }
         });
+	});
 
-
+	// event image 
+	$('.dedikod .pic-upload').click(function(event) {
+		event.stopPropagation();
+		alert($(this).html());
 	});
 
 

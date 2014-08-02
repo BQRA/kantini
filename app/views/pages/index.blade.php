@@ -35,6 +35,10 @@
 				<div class="add-event-container">
 					<div class="ticket-effect"></div>
 					<div class="add-event">
+
+						<div class="event-bg-image">
+							{{ HTML::image('/Organizations/'.$post->org_photo) }}
+						</div>
 						<div class="details">
 
 							<div class="row">
@@ -52,7 +56,8 @@
 							<div class="row">
 								<div class="col-sm-3 detail">
 									<strong>Etkinlik Tarihi</strong>
-									<span>{{$post->org_date}}</span>
+									<span>dasd adad</span>
+									<!-- <span>{{$post->org_date}}</span> -->
 								</div>
 								<div class="col-sm-3 detail">
 									<strong>Yetkili Kisi</strong>
