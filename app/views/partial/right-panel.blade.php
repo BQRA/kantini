@@ -63,15 +63,13 @@
 	<div class="clear mt30"></div>
 
 	<div class="menu-box">
-		<!-- <div class="search">
-			<input type="text" />
-		</div> -->
-
-		<ul class="menu">
+		<div class="search">
 			{{ Form::open(['method' => 'GET', 'route' => 'search']) }}
-			{{ Form::Input('search', 'q', null, ['placeholder' => 'Ara']) }}
+			{{ Form::Input('text', 'q', null, ['placeholder' => 'Ara']) }}
 			{{ Form::close() }}
-			
+		</div>
+
+		<ul class="menu">			
 			<li><a href="{{ URL::route('home') }}">Anasayfa</a></li>
 			<li><a href="{{ URL::route('contact.us') }}">Kontak</a></li>
 		</ul>
