@@ -110,7 +110,7 @@
 						{{ $post->username }}
 					</span>
 				@endif
-				<span class="date">{{ $post->created_at}}</span>
+				<span class="date">{{ date('d.m.Y',strtotime($post->created_at))}}</span>
 			</div>
 			<div class="right">
 				<span class="comment get-comments" data-comments="{{ URL::action('home') }}/post/{{ $post->id }} #giveComments">{{ $comments->count() }}</span>

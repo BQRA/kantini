@@ -27,7 +27,7 @@
 					$comments = Comment::where('post_id', '=', $post->id )->get();
 				?>
 			@if($post->type == '0')
-				<a href="{{ URL::action('show.post', $post->id) }}">{{ $post->post }}</a>
+				{{ $post->post }}
 			@endif
 			
 			@if($post->type == '1')
@@ -52,7 +52,7 @@
 								<div class="row">
 									<div class="col-sm-3 detail">
 										<strong>Etkinlik Tarihi</strong>
-										<span>{{$post->org_date}}</span>
+										<span>{{date('d m Y',strtotime($post->org_date))}}</span>
 									</div>
 									<div class="col-sm-3 detail">
 										<strong>Yetkili Kisi</strong>
@@ -93,6 +93,7 @@
 			@endif
 
 			</div>
+<<<<<<< HEAD
 			<div class="toolbar">
 				<div class="left">
 					@if($post->member == 1)
@@ -104,7 +105,7 @@
 							{{ $post->username }}
 						</span>
 					@endif
-					<span class="date">{{ $post->created_at}}</span>
+					<span class="date"><a href="{{ URL::action('show.post', $post->id) }}">{{ $post->created_at}}</a></span>
 				</div>
 				<div class="right">
 					<span class="comment get-comments" data-comments="{{ URL::action('home') }}/post/{{ $post->id }} #giveComments">{{ $comments->count() }}</span>
@@ -130,6 +131,10 @@
 					<span class="button sm r green get-comments" data-comments="{{ URL::action('home') }}/post/{{ $post->id }} #giveComments">Yorum Yaz</span>		
 				</div>
 			</div>
+=======
+
+			@include('partial.toolbar')
+>>>>>>> FETCH_HEAD
 
 			<div class="clear"></div>
 

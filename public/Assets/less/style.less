@@ -766,6 +766,12 @@ p {
 						color: #aaa;
 						position: relative;
 						padding: 8px 0 0 0;
+						a {
+							color: #aaa;
+							&:hover {
+								text-decoration: underline;
+							}
+						}
 						&:before {
 							position: absolute;
 							left: -13px;
@@ -994,7 +1000,15 @@ p {
 /* add event */
 .content {
 	& > a {
-		color: #333;
+		color: #468966 !important;
+		font-size: 12px;
+		font-weight: 700;
+		background-color: #ccf3df;
+		border-radius: 3px;
+		padding: 3px 6px;
+		color: #fff;
+		top: -1px;
+		position: relative;
 	}
 	.content-ticket {
 		width: 580px;
