@@ -35,6 +35,10 @@
 				<div class="add-event-container">
 					<div class="ticket-effect"></div>
 					<div class="add-event">
+
+						<div class="event-bg-image">
+							{{ HTML::image('/Organizations/'.$post->org_photo) }}
+						</div>
 						<div class="details">
 
 							<div class="row">
@@ -52,8 +56,12 @@
 							<div class="row">
 								<div class="col-sm-3 detail">
 									<strong>Etkinlik Tarihi</strong>
-									<span>{{$post->org_date}}</span>
+<<<<<<< HEAD
 									<span>{{date('d m Y',strtotime($post->org_date))}}</span>
+=======
+									<span>dasd adad</span>
+									<!-- <span>{{$post->org_date}}</span> -->
+>>>>>>> FETCH_HEAD
 								</div>
 								<div class="col-sm-3 detail">
 									<strong>Yetkili Kisi</strong>
@@ -94,43 +102,8 @@
 		@endif
 
 		</div>
-		<div class="toolbar">
-			<div class="left">
-				@if($post->member == 1)
-					<a class="username" data-lightbox="{{ URL::action('show.profile', $user->username) }} #profileBox" data-lightboxtitle="Profil Kartı" href="javascript:;">
-						{{ $post->username }}
-					</a>
-				@else 
-					<span class="username">
-						{{ $post->username }}
-					</span>
-				@endif
-				<span class="date">{{ $post->created_at}}</span>
-			</div>
-			<div class="right">
-				<span class="comment get-comments" data-comments="{{ URL::action('home') }}/post/{{ $post->id }} #giveComments">{{ $comments->count() }}</span>
-				@if(Sentry::check())
-					@if(!Like::where('post_id', $post->id)->where('liker', Sentry::getUser()->username)->count()>0)
-						<span class="like">{{ $likes->count() }}</span>
-						{{ Form::open(['action' => 'LikesController@Like']) }}
-						{{ Form::hidden('post_id', $post->id) }}
-						{{ Form::close() }}
-					@else
-						<span class="like selected">{{ $likes->count() }}</span>
-					@endif
-				@else
-					@if(!Like::where('post_id', $post->id)->where('ip_address', $_SERVER['REMOTE_ADDR'])->count()>0)
-						<span class="like">{{ $likes->count() }}</span>
-						{{ Form::open(['action' => 'LikesController@GuestLike']) }}
-						{{ Form::hidden('post_id', $post->id) }}
-						{{ Form::close() }}
-					@else 
-						<span class="like selected">{{ $likes->count() }}</span>
-					@endif
-				@endif
-				<span class="button sm r green get-comments" data-comments="{{ URL::action('home') }}/post/{{ $post->id }} #giveComments">Yorum Yaz</span>		
-			</div>
-		</div>
+		
+		@include('partial.toolbar')
 
 		<div class="clear"></div>
 
