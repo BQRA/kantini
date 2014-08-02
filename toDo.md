@@ -1,4 +1,0 @@
-- anasayfaya kişi kartı
-- sayfalama - 36 gonderi de bir sayfa
-- Admin sayfası
-- 404, 403 sayfaları
