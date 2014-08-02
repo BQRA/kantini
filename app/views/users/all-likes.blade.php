@@ -110,7 +110,7 @@
 							{{ $like->post->username }}
 						</span>
 					@endif
-					<span class="date">{{ $like->post->created_at}}</span>
+					<span class="date">{{ date('d.m.Y',strtotime($like->post->created_at))}}</span>
 				</div>
 				<div class="right">
 					<span class="comment get-comments" data-comments="{{ URL::action('home') }}/post/{{ $like->post->id }} #giveComments">{{ $comments->count() }}</span>
