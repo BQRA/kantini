@@ -19,7 +19,7 @@ class Post extends \Eloquent {
 							'org_photo'];
 
 	public function comment() {
-		return $this->hasOne('Comment');
+		return $this->hasMany('Comment');
 	}
 
 	public function like() {

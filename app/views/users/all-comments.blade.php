@@ -31,11 +31,11 @@
 					$likes 	  = Like::where('post_id', '=', $comment->post->id )->get();
 					$comments = Comment::where('post_id', '=', $comment->post->id )->get();
 				?>
-			@if($comment->post->type == '0')
-				<a href="{{ URL::action('show.post', $comment->post->id) }}">{{ $comment->post->post }}</a>
+			@if($comment->post->type == 'dedikod')
+				{{ $comment->post->post }}
 			@endif
 
-			@if($comment->post->type == '1')
+			@if($comment->post->type == 'event')
 				<div class="content-ticket">
 					<div class="add-event-container">
 						<div class="ticket-effect"></div>
@@ -89,11 +89,11 @@
 				</div>
 			@endif
 
-			@if($comment->post->type == '2')
+			@if($comment->post->type == 'photo')
 				{{$comment->post->post}}
 			@endif
 
-			@if($comment->post->type == '3')
+			@if($comment->post->type == 'video')
 				{{$comment->post->post}}
 			@endif
 

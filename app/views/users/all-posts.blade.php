@@ -1,7 +1,6 @@
 @extends('layouts.master')
 
 @section('content')
-
 {{-- select box'in icine gelecek metin --}}
 @section('select-box-selected') yazdığı @stop
 {{-- select box'in icine gelecek metin #end --}}
@@ -32,11 +31,11 @@
 					$likes 		= Like::where('post_id', '=', $post->id )->get();
 					$comments 	= Comment::where('post_id', '=', $post->id )->get();
 				?>
-			@if($post->type == '0')
-				<a href="{{ URL::action('show.post', $post->id) }}">{{ $post->post }}</a>
+			@if($post->type == 'dedikod')
+				{{ $post->post }}
 			@endif
 		
-			@if($post->type == '1')
+			@if($post->type == 'event')
 				<div class="content-ticket">
 					<div class="add-event-container">
 						<div class="ticket-effect"></div>
@@ -90,11 +89,11 @@
 				</div>
 			@endif
 
-			@if($post->type == '2')
+			@if($post->type == 'photo')
 				{{$post->post}}
 			@endif
 
-			@if($post->type == '3')
+			@if($post->type == 'video')
 				{{$post->post}}
 			@endif
 			

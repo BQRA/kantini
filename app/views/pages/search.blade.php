@@ -26,11 +26,11 @@
 					$likes 	  = Like::where('post_id', '=', $post->id )->get();
 					$comments = Comment::where('post_id', '=', $post->id )->get();
 				?>
-			@if($post->type == '0')
+			@if($post->type == 'dedikod')
 				{{ $post->post }}
 			@endif
 			
-			@if($post->type == '1')
+			@if($post->type == 'event')
 				<div class="content-ticket">
 					<div class="add-event-container">
 						<div class="ticket-effect"></div>
@@ -84,11 +84,11 @@
 				</div>
 			@endif
 
-			@if($post->type == '2')
+			@if($post->type == 'photo')
 				{{$post->post}}
 			@endif
 
-			@if($post->type == '3')
+			@if($post->type == 'video')
 				{{$post->post}}
 			@endif
 

@@ -4,34 +4,21 @@ class PagesController extends \BaseController {
 	
 	public function Home() {
 
-		if(empty($_GET['sort'])) {
-			if(empty($_GET['orderBy'])) {
-				$posts = Post::orderBy('created_at', 'DESC')->get();
-			} else {
-				if($_GET['orderBy']) {
-					$posts = Post::orderBy('created_at', $_GET['orderBy'])->get();
-				} else {
-					$posts = Post::orderBy('created_at', $_GET['orderBy'])->get();
-				}
-			}
+		if (isset($_GET['type']) && isset($_GET['orderBy'])) {
+			$type = $_GET['type'];
+			$orderBy = $_GET['orderBy'];
+			$posts = Post::orderBy('created_at', $orderBy)->where('type', '=', $type)->get();
+		} elseif (isset($_GET['orderBy'])) {
+			$orderBy = $_GET['orderBy'];
+			$posts = Post::orderBy('created_at', $orderBy)->get();
+		} elseif (isset($_GET['type'])) {
+			$type = $_GET['type'];
+			$posts = Post::orderBy('created_at', 'DESC')->where('type', '=', $type)->get();
 		} else {
-			if($_GET['sort'] == 'dedikods') {
-				$posts = Post::orderBy('created_at', 'DESC')->where('type', '=', '0')->get();
-
-			} elseif($_GET['sort'] == 'organizations') {
-				$posts = Post::orderBy('created_at', 'DESC')->where('type', '=', '1')->get();
-
-			} elseif($_GET['sort'] == 'photos') {
-				$posts = Post::orderBy('created_at', 'DESC')->where('type', '=', '2')->get();
-
-			} elseif($_GET['sort'] == 'videos') {
-				$posts = Post::orderBy('created_at', 'DESC')->where('type', '=', '3')->get();
-			} else {
-				$posts = Post::orderBy('created_at', 'DESC')->get();
-			}
+			$posts = Post::orderBy('created_at', 'DESC')->get();
 		}
 
-		return View::make('pages.index', compact('posts', 'orderBy'));
+		return View::make('pages.index', compact('posts', 'type', 'orderBy'));
 	}
 
 	public function ContactUs() {

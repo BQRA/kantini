@@ -26,11 +26,11 @@
 				$likes 	  = Like::where('post_id', '=', $post->id )->get();
 				$comments = Comment::where('post_id', '=', $post->id )->get();
 			?>
-		@if($post->type == '0')
+		@if($post->type == 'dedikod')
 			{{ $post->post }}
 		@endif
 		
-		@if($post->type == '1')
+		@if($post->type == 'event')
 			<div class="content-ticket">
 				<div class="add-event-container">
 					<div class="ticket-effect"></div>
@@ -44,7 +44,7 @@
 							<div class="row">
 								<div class="col-sm-10 detail title">
 									<strong>Etkinlik Adı</strong>
-									<span>{{$post->org_name}}</span>
+									<span>{{ $post->org_name }}</span>
 								</div>
 								<div class="col-sm-2 detail pic">
 									<div class="pic-upload">
@@ -56,15 +56,15 @@
 							<div class="row">
 								<div class="col-sm-3 detail">
 									<strong>Etkinlik Tarihi</strong>
-									<span>{{date('d m Y',strtotime($post->org_date))}}</span>
+									<span>{{ date('d m Y',strtotime($post->org_date)) }}</span>
 								</div>
 								<div class="col-sm-3 detail">
 									<strong>Yetkili Kisi</strong>
-									<span>{{$post->org_auth}}</span>
+									<span>{{ $post->org_auth }}</span>
 								</div>
 								<div class="col-sm-3 detail">
 									<strong>İletisim</strong>
-									<span>{{$post->org_auth_contact}}</span>
+									<span>{{ $post->org_auth_contact }}</span>
 								</div>
 								<div class="col-sm-3 detail">
 									<strong>Harita</strong>
@@ -75,10 +75,10 @@
 							<div class="row">
 								<div class="col-sm-8 detail address">
 									<strong>Adres</strong>
-									<span>{{$post->org_address}}</span>
+									<span>{{ $post->org_address }}</span>
 								</div>
 								<div class="col-sm-4 detail price">
-									{{$post->org_price}}
+									{{ $post->org_price }}
 								</div>
 							</div>
 
@@ -88,11 +88,11 @@
 			</div>
 		@endif
 
-		@if($post->type == '2')
+		@if($post->type == 'photo')
 			{{$post->post}}
 		@endif
 
-		@if($post->type == '3')
+		@if($post->type == 'video')
 			{{$post->post}}
 		@endif
 
@@ -106,6 +106,5 @@
 
 	</div>	
 	@endforeach
-	
 </div>
 @stop

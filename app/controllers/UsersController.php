@@ -192,53 +192,36 @@ class UsersController extends \BaseController {
 			return View::make('errors.404');
 		}
 
-		if(empty($_GET['sort'])) {
-			if(empty($_GET['orderBy'])) {
-				$posts_all 	= Post::orderBy('created_at', 'DESC')
+		if (isset($_GET['type']) && isset($_GET['orderBy'])) {
+			$type 		= $_GET['type'];
+			$orderBy 	= $_GET['orderBy'];
+			
+			$posts_all 	= Post::orderBy('created_at', $orderBy)
+								->where('type', '=', $type)
 								->where('username', '=', $username)
 								->get();
-			} else {
-				if($_GET['orderBy']) {
-					$posts_all 	= Post::orderBy('created_at', $_GET['orderBy'])
-									->where('username', '=', $username)
-									->get();
-				} else {
-					$posts_all 	= Post::orderBy('created_at', $_GET['orderBy'])
-									->where('username', '=', $username)
-									->get();
-				}
-			}
+
+		} elseif (isset($_GET['orderBy'])) {
+			$orderBy 	= $_GET['orderBy'];
+
+			$posts_all 	= Post::orderBy('created_at', $orderBy)
+							->where('username', '=', $username)
+							->get();
+
+		} elseif (isset($_GET['type'])) {
+			$type		 = $_GET['type'];
+			
+			$posts_all 	 = Post::orderBy('created_at', 'DESC')
+							->where('type', '=', $type)
+							->where('username', '=', $username)
+							->get();
 		} else {
-			if($_GET['sort'] == 'dedikods') {
-				$posts_all 	= Post::orderBy('created_at', 'DESC')
-								->where('username', '=', $username)
-								->where('type', '=', '0')
-								->get();
-			} elseif($_GET['sort'] == 'organizations') {
-				$posts_all 	= Post::orderBy('created_at', 'DESC')
-								->where('username', '=', $username)
-								->where('type', '=', '1')
-								->get();
-			} elseif($_GET['sort'] == 'photos') {
-				$posts_all 	= Post::orderBy('created_at', 'DESC')
-								->where('username', '=', $username)
-								->where('type', '=', '2')
-								->get();
-			} elseif($_GET['sort'] == 'videos') {
-				$posts_all 	= Post::orderBy('created_at', 'DESC')
-								->where('username', '=', $username)
-								->where('type', '=', '3')
-								->get();
-			} else {
-				$posts_all 	= Post::orderBy('created_at', 'DESC')
+			$posts_all = Post::orderBy('created_at', 'DESC')
 								->where('username', '=', $username)
 								->get();
-			}
 		}
-		
-		return View::make('users.all-posts')
-		->withUser($user)
-		->with('posts_all', $posts_all);
+
+		return View::make('users.all-posts', compact('posts_all', 'type', 'orderBy'))->withUser($user);
 	}
 
 	public function ShowUserAllComments($username) {
@@ -248,20 +231,31 @@ class UsersController extends \BaseController {
 			return View::make('errors.404');
 		}
 
-		if(empty($_GET['orderBy'])) {
-			$comments 	= Comment::orderBy('created_at', 'DESC')
+		if(isset($_GET['type']) && isset($_GET['orderBy'])) {
+			$type 		= $_GET['type'];
+			$orderBy 	= $_GET['orderBy'];
+
+			$comments 	= Comment::orderBy('created_at', $orderBy)
+								->where('type', '=', $type)
+								->where('commenter', '=', $username)
+								->get();
+		} elseif(isset($_GET['orderBy'])) {
+			$orderBy 	= $_GET['orderBy'];
+
+			$comments 	= Comment::orderBy('created_at', $orderBy)
+							->where('commenter', '=', $username)
+							->get();
+		} elseif(isset($_GET['type'])) {
+			$type		 = $_GET['type'];
+			
+			$comments 	 = Comment::orderBy('created_at', 'DESC')
+							->where('type', '=', $type)
 							->where('commenter', '=', $username)
 							->get();
 		} else {
-			if($_GET['orderBy']) {
-				$comments 	= Comment::orderBy('created_at', $_GET['orderBy'])
+			$comments = Comment::orderBy('created_at', 'DESC')
 								->where('commenter', '=', $username)
 								->get();
-			} else {
-				$comments 	= Comment::orderBy('created_at', $_GET['orderBy'])
-								->where('commenter', '=', $username)
-								->get();
-			}
 		}
 		
 		return View::make('users.all-comments')
