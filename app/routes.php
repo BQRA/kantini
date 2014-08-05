@@ -114,8 +114,3 @@ Route::get('/create-organization/', [
 		'uses' 	 => 'PostsController@CreateOrganization',
 		'before' => 'csrf'
 	]);
-
-Route::get('/organization/{id}/', [
-	'as' 	=> 'show.organization',
-	'uses' 	=> 'PostsController@ShowOrganization'
-]);

@@ -134,17 +134,6 @@ class PostsController extends \BaseController {
 		}
 	}
 
-	public function ShowOrganization($id) {
-		try {
-			$post = Post::where('id', '=', $id)->firstOrFail();
-		} catch (Exception $e) {
-			return View::make('errors.404');
-		}
-		
-		return View::make('organizations.show-organization')
-		->with('post', $post);
-	}
-
 	public function ShowPost($id) {
 		try {
 			$post = Post::where('id', '=', $id)->firstOrFail();
