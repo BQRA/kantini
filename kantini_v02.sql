@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Anamakine: localhost
--- Üretim Zamanı: 04 Ağu 2014, 16:16:03
+-- Üretim Zamanı: 05 Ağu 2014, 11:14:04
 -- Sunucu sürümü: 5.6.16
 -- PHP Sürümü: 5.5.9
 
@@ -33,19 +33,25 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `member` int(11) NOT NULL,
   `post_id` int(11) NOT NULL,
   `comment` text COLLATE utf8_unicode_ci NOT NULL,
+  `type` varchar(11) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=21 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=27 ;
 
 --
 -- Tablo döküm verisi `comments`
 --
 
-INSERT INTO `comments` (`id`, `commenter`, `gender`, `member`, `post_id`, `comment`, `created_at`, `updated_at`) VALUES
-(17, 'misafir10692', NULL, 0, 30, 'misafir yorum denemesi', '2014-08-04 08:27:09', '2014-08-04 08:27:09'),
-(18, 'barantr90', 'male', 1, 30, 'üye olarak yorum denemesi', '2014-08-04 08:27:31', '2014-08-04 08:27:31'),
-(19, 'barantr90', 'male', 1, 29, 'yorum yorum yorum', '2014-08-04 08:41:50', '2014-08-04 08:41:50'),
-(20, 'barantr90', 'male', 1, 29, 'lorem ipsum dolar sit amet.', '2014-08-04 08:41:59', '2014-08-04 08:41:59');
+INSERT INTO `comments` (`id`, `commenter`, `gender`, `member`, `post_id`, `comment`, `type`, `created_at`, `updated_at`) VALUES
+(17, 'misafir10692', NULL, 0, 30, 'misafir yorum denemesi', NULL, '2014-08-04 08:27:09', '2014-08-04 08:27:09'),
+(18, 'barantr90', 'male', 1, 30, 'üye olarak yorum denemesi', 'dedikod', '2014-08-04 08:27:31', '2014-08-04 08:27:31'),
+(19, 'barantr90', 'male', 1, 29, 'yorum yorum yorum', 'dedikod', '2014-08-04 08:41:50', '2014-08-04 08:41:50'),
+(20, 'barantr90', 'male', 1, 29, 'lorem ipsum dolar sit amet.', 'dedikod', '2014-08-04 08:41:59', '2014-08-04 08:41:59'),
+(21, 'dilem', 'female', 1, 30, 'bence de süper bir site!', 'dedikod', '2014-08-05 04:24:42', '2014-08-05 04:24:42'),
+(22, 'dilem', 'female', 1, 29, 'deneme yorumu', 'dedikod', '2014-08-05 05:34:30', '2014-08-05 05:34:30'),
+(24, 'dilem', 'female', 1, 34, 'deneme deneme', 'event', '2014-08-05 05:43:28', '2014-08-05 05:43:28'),
+(25, 'dilem', 'female', 1, 36, 'deneme 123', 'dedikod', '2014-08-05 05:48:11', '2014-08-05 05:48:11'),
+(26, 'dilem', 'female', 1, 34, 'deneme 123', 'event', '2014-08-05 05:48:23', '2014-08-05 05:48:23');
 
 -- --------------------------------------------------------
 
@@ -76,21 +82,24 @@ INSERT INTO `groups` (`id`, `name`, `permissions`, `created_at`, `updated_at`) V
 
 CREATE TABLE IF NOT EXISTS `likes` (
 `id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
   `liker` varchar(50) NOT NULL,
   `post_id` int(11) NOT NULL,
   `ip_address` varchar(255) NOT NULL,
+  `type` varchar(11) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=38 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=55 ;
 
 --
 -- Tablo döküm verisi `likes`
 --
 
-INSERT INTO `likes` (`id`, `user_id`, `liker`, `post_id`, `ip_address`, `created_at`, `updated_at`) VALUES
-(36, 0, 'barantr90', 30, '::1', '2014-08-04 08:20:31', '2014-08-04 08:20:31'),
-(37, 0, 'barantr90', 28, '::1', '2014-08-04 08:20:32', '2014-08-04 08:20:32');
+INSERT INTO `likes` (`id`, `liker`, `post_id`, `ip_address`, `type`, `created_at`, `updated_at`) VALUES
+(50, 'misafir87477', 35, '::1', NULL, '2014-08-05 06:05:16', '2014-08-05 06:05:16'),
+(51, 'barantr90', 36, '::1', 'dedikod', '2014-08-05 06:05:28', '2014-08-05 06:05:28'),
+(52, 'barantr90', 30, '::1', 'dedikod', '2014-08-05 06:05:29', '2014-08-05 06:05:29'),
+(53, 'barantr90', 29, '::1', 'dedikod', '2014-08-05 06:05:30', '2014-08-05 06:05:30'),
+(54, 'barantr90', 34, '::1', 'event', '2014-08-05 06:05:32', '2014-08-05 06:05:32');
 
 -- --------------------------------------------------------
 
@@ -128,7 +137,7 @@ CREATE TABLE IF NOT EXISTS `posts` (
   `org_photo` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=39 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=40 ;
 
 --
 -- Tablo döküm verisi `posts`
@@ -137,7 +146,13 @@ CREATE TABLE IF NOT EXISTS `posts` (
 INSERT INTO `posts` (`id`, `username`, `gender`, `post`, `member`, `type`, `org_name`, `org_date`, `org_address`, `org_map`, `org_auth`, `org_auth_contact`, `org_price`, `org_message`, `org_photo`, `created_at`, `updated_at`) VALUES
 (28, 'barantr90', 'male', 'In the previous lesson, we used Codeception to build a helpful command class generator', 1, 'dedikod', NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, '', '2014-08-04 06:38:56', '2014-08-04 06:38:56'),
 (29, 'barantr90', 'male', 'Been using Laravel for some time, and now feel ready to build a well-architected application from scratch? Excellent! Together, let''s build a light version of Facebook, called Larabook.', 1, 'dedikod', NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, '', '2014-08-04 06:39:05', '2014-08-04 06:39:05'),
-(30, 'barantr90', 'male', '#twitter süper bir site!..', 1, 'dedikod', NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, '', '2014-08-04 06:40:22', '2014-08-04 06:40:22');
+(30, 'barantr90', 'male', '#twitter süper bir site!..', 1, 'dedikod', NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, '', '2014-08-04 06:40:22', '2014-08-04 06:40:22'),
+(34, 'barantr90', 'male', NULL, 1, 'event', 'deneme', '0000-00-00 00:00:00', '', '', '', '', 0, '', 'barantr90_$2y$10$1yEyY5d85DS3861KrQY91uQaJGdYiwAimyVy4vr.jpqI6Ui85rkwa.jpg', '2014-08-05 04:22:51', '2014-08-05 04:22:51'),
+(35, 'dilem', 'female', 'lorem ipsum dolar sit amet.', 1, 'dedikod', NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, '', '2014-08-05 04:24:51', '2014-08-05 04:24:51'),
+(36, 'dilem', 'female', 'Apple’ın Dünya Geliştiriciler Konferansı’nın bu yılki etkinliğinde görücüye çıkardığı ve gerek arayüzü gerek fonksiyonel özellikleriyle büyük beğeni toplayan iOS 8′in 5. betası geliştiriciler için yayınlandı. Her yeni sürümde olduğu gibi bu güncellemede de açıkları kapatarak sistemi revize eden firmanın asıl önemli sürprizi, işlevselliği artıran ufak çaplı dokunuşları oldu.', 1, 'dedikod', NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, '', '2014-08-05 04:25:18', '2014-08-05 04:25:18'),
+(37, 'barantr90', 'male', 'Tartışmasız en popüler mesajlaşma servisi olan WhatsApp, vazgeçilemeyen bir bağımlılık gibi. Pek çok benzer uygulama olmasına karşın popülerliğini yitirmeyen mesajlaşma uygulaması, giyilebilir teknolojiye ayak uyduracak şekilde kendini geliştirmeye devam ediyor. WhatsApp’ın yeni güncellemesi Android Wear‘li cihazları hedef alıyor.', 1, 'dedikod', NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, '', '2014-08-05 06:10:42', '2014-08-05 06:10:42'),
+(38, 'misafir87477', 'female', 'iPhone 6‘nın tasarım ve donanımı hakkında resmi bilgi ve görüntülerin gelmesine daha tahminen 1,5-2 ay gibi bir süre olsa da, 5-6 aydır farklı kaynaklardan gelen benzer görseller, cihazın yuvarlak hatlı ve konturlu bir tasarıma sahip olacağını gösteriyor. Daha Apple iPhone 6′ya dair tek bir kelime etmemiş olsa da, ekim ayına kadar bekleyemeyenlerin imdadına yine kopya ürünlerin anavatanı Çin‘deki üreticiler yetişiyor.', 0, 'dedikod', NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, '', '2014-08-05 06:10:56', '2014-08-05 06:10:56'),
+(39, 'misafir87477', 'male', 'Akıllı telefonlar vazgeçilmez cihazlarımız oldu. Her yeni modelle biraz daha gelişen telefonlar zaafları da beraberinde getirdi.', 0, 'dedikod', NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, '', '2014-08-05 06:11:15', '2014-08-05 06:11:15');
 
 -- --------------------------------------------------------
 
@@ -155,14 +170,15 @@ CREATE TABLE IF NOT EXISTS `profiles` (
   `avatar` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=9 ;
 
 --
 -- Tablo döküm verisi `profiles`
 --
 
 INSERT INTO `profiles` (`id`, `user_id`, `full_name`, `twitter_username`, `instagram_username`, `facebook_username`, `avatar`, `created_at`, `updated_at`) VALUES
-(7, 10, 'Baran Şengül', 'baransngl', NULL, NULL, 'guest', '2014-08-04 06:36:49', '2014-08-04 06:36:49');
+(7, 10, 'Baran Şengül', 'baransngl', NULL, NULL, 'guest', '2014-08-04 06:36:49', '2014-08-04 06:36:49'),
+(8, 11, 'Dİlem', NULL, NULL, NULL, 'dilem.jpg', '2014-08-05 04:23:58', '2014-08-05 04:23:58');
 
 -- --------------------------------------------------------
 
@@ -180,14 +196,15 @@ CREATE TABLE IF NOT EXISTS `throttle` (
   `last_attempt_at` timestamp NULL DEFAULT NULL,
   `suspended_at` timestamp NULL DEFAULT NULL,
   `banned_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
 
 --
 -- Tablo döküm verisi `throttle`
 --
 
 INSERT INTO `throttle` (`id`, `user_id`, `ip_address`, `attempts`, `suspended`, `banned`, `last_attempt_at`, `suspended_at`, `banned_at`) VALUES
-(5, 10, '::1', 0, 0, 0, NULL, NULL, NULL);
+(5, 10, '::1', 0, 0, 0, NULL, NULL, NULL),
+(6, 11, '::1', 0, 0, 0, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -211,14 +228,15 @@ CREATE TABLE IF NOT EXISTS `users` (
   `reset_password_code` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=12 ;
 
 --
 -- Tablo döküm verisi `users`
 --
 
 INSERT INTO `users` (`id`, `email`, `username`, `password`, `permissions`, `activated`, `school`, `gender`, `activation_code`, `activated_at`, `last_login`, `persist_code`, `reset_password_code`, `created_at`, `updated_at`) VALUES
-(10, 'baransengul@outlook.com', 'barantr90', '$2y$10$oZnSnOmLeaXAw7Ka8m5fU.JgDbsHUCTJ1qsrIFf9ifEYHgqtdlIc2', NULL, 1, 'Beykent', 'male', NULL, NULL, '2014-08-04 11:27:24', '$2y$10$yowtUrwmXOy04yAY73bBiuB6ZSXX1wYi/4suapxZhqCwRPip.6KDG', NULL, '2014-08-04 06:36:49', '2014-08-04 08:27:24');
+(10, 'baransengul@outlook.com', 'barantr90', '$2y$10$oZnSnOmLeaXAw7Ka8m5fU.JgDbsHUCTJ1qsrIFf9ifEYHgqtdlIc2', NULL, 1, 'Beykent', 'male', NULL, NULL, '2014-08-05 09:05:25', '$2y$10$RmYCZVws/m6MSP8gtvCpxOzd.T31PMbHczFqNe4viTWRRDrjs1hta', NULL, '2014-08-04 06:36:49', '2014-08-05 06:05:25'),
+(11, 'dilembadali@hotmail.com', 'dilem', '$2y$10$CSsHI4wU1vMUTtza6lJ5medjkJmfSdh1HkvdySjyLyfEuceD4sOOC', NULL, 1, 'Bahçeşehir', 'female', NULL, NULL, '2014-08-05 07:24:13', '$2y$10$uqDNNF3lGzaxYfuVG60t9OG20XSlMxPsaFA8hyvBUE0jVP6l3Qqcy', NULL, '2014-08-05 04:23:58', '2014-08-05 04:24:13');
 
 -- --------------------------------------------------------
 
@@ -298,7 +316,7 @@ ALTER TABLE `users_groups`
 -- Tablo için AUTO_INCREMENT değeri `comments`
 --
 ALTER TABLE `comments`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=27;
 --
 -- Tablo için AUTO_INCREMENT değeri `groups`
 --
@@ -308,7 +326,7 @@ MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 -- Tablo için AUTO_INCREMENT değeri `likes`
 --
 ALTER TABLE `likes`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=38;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=55;
 --
 -- Tablo için AUTO_INCREMENT değeri `messages`
 --
@@ -318,22 +336,22 @@ MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT;
 -- Tablo için AUTO_INCREMENT değeri `posts`
 --
 ALTER TABLE `posts`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=39;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=40;
 --
 -- Tablo için AUTO_INCREMENT değeri `profiles`
 --
 ALTER TABLE `profiles`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
 -- Tablo için AUTO_INCREMENT değeri `throttle`
 --
 ALTER TABLE `throttle`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- Tablo için AUTO_INCREMENT değeri `users`
 --
 ALTER TABLE `users`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
 --
 -- Tablo için AUTO_INCREMENT değeri `users_groups`
 --
