@@ -270,20 +270,31 @@ class UsersController extends \BaseController {
 			return View::make('errors.404');
 		}
 
-		if(empty($_GET['orderBy'])) {
-			$likes = Like::orderBy('created_at', 'DESC')
-						->where('liker', '=', $username)
-						->get();
+		if(isset($_GET['type']) && isset($_GET['orderBy'])) {
+			$type 		= $_GET['type'];
+			$orderBy 	= $_GET['orderBy'];
+
+			$likes 	= Like::orderBy('created_at', $orderBy)
+								->where('type', '=', $type)
+								->where('liker', '=', $username)
+								->get();
+		} elseif(isset($_GET['orderBy'])) {
+			$orderBy 	= $_GET['orderBy'];
+
+			$likes 	= Like::orderBy('created_at', $orderBy)
+							->where('liker', '=', $username)
+							->get();
+		} elseif(isset($_GET['type'])) {
+			$type		 = $_GET['type'];
+			
+			$likes 	 = Like::orderBy('created_at', 'DESC')
+							->where('type', '=', $type)
+							->where('liker', '=', $username)
+							->get();
 		} else {
-			if($_GET['orderBy']) {
-				$likes = Like::orderBy('created_at', $_GET['orderBy'])
-						->where('liker', '=', $username)
-						->get();
-			} else {
-				$likes = Like::orderBy('created_at', $_GET['orderBy'])
-						->where('liker', '=', $username)
-						->get();
-			}
+			$likes = Like::orderBy('created_at', 'DESC')
+								->where('liker', '=', $username)
+								->get();
 		}
 		
 		return View::make('users.all-likes')

@@ -57,7 +57,7 @@ class PostsController extends \BaseController {
 		if($validator->passes()) {
 			$file            = Input::file('org_photo');
 			$destinationPath = public_path().'/Organizations/';
-			$filename        = Sentry::getUser()->username.'_'.Hash::make($file->getClientOriginalName()).$file->getClientOriginalExtension();
+			$filename        = Sentry::getUser()->username.'_'.Hash::make($file->getClientOriginalName()).'.'.$file->getClientOriginalExtension();
 			$uploadSuccess   = $file->move($destinationPath, $filename);
 			
 			$post = new Post;
@@ -99,6 +99,7 @@ class PostsController extends \BaseController {
 			$commenter 	= guest_username();
 			$gender 	= null;
 			$member 	= '0';
+			$type  		= null;
 				$rules = [
 					'comment' => 'required|min:5|max:800'
 				];
@@ -106,6 +107,7 @@ class PostsController extends \BaseController {
 			$commenter 	= Sentry::getUser()->username;
 			$gender 	= Sentry::getUser()->gender;
 			$member		= '1';
+			$type 	 	= Input::get('post_type');
 				$rules = [
 						'comment' => 'required|min:5|max:800'
 				];
@@ -120,6 +122,7 @@ class PostsController extends \BaseController {
 			$comment->member 		= $member;
 			$comment->post_id 		= $post_id;
 			$comment->comment 		= trim(Input::get('comment'));
+			$comment->type 			= $type;
 			$comment->save();
 
 			Session::flash('comment-message', 'Yorumunuz başarıyla gönderilmiştir!');

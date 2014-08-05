@@ -108,6 +108,7 @@
 							<span class="like">{{ $likes->count() }}</span>
 							{{ Form::open(['action' => 'LikesController@Like']) }}
 							{{ Form::hidden('post_id', $post->id) }}
+							{{ Form::hidden('post_type', $dummy->type) }}
 							{{ Form::close() }}
 						@else
 							<span class="like selected">{{ $likes->count() }}</span>
@@ -117,6 +118,7 @@
 							<span class="like">{{ $likes->count() }}</span>
 							{{ Form::open(['action' => 'LikesController@GuestLike']) }}
 							{{ Form::hidden('post_id', $post->id) }}
+							{{ Form::hidden('post_type', $dummy->type) }}
 							{{ Form::close() }}
 						@else 
 							<span class="like selected">{{ $likes->count() }}</span>
@@ -146,6 +148,7 @@
 					<div class="write-area">
 						{{ Form::open(array('action' => 'PostsController@SendComment')) }}
 						{{ Form::hidden('post_id', $post->id) }}
+						{{ Form::hidden('post_type', $post->type) }}
 						
 						@if(!Sentry::check())
 							{{ Form::text('comment', null, ['placeholder' => guest_username().' olarak yorum yaz!']) }}
