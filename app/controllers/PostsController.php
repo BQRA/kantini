@@ -49,7 +49,13 @@ class PostsController extends \BaseController {
 		$data = Input::all();
 
 		$rules = [
-			'org_name' => 'required'
+			'org_name' 			=> 'required',
+			'org_date' 			=> 'required',
+			'org_address' 		=> 'required',
+			'org_auth' 			=> 'required',
+			'org_auth_contact' 	=> 'required',
+			'org_price' 		=> 'required|alpha_num',
+			'org_photo'			=> 'required|mimes:jpeg,jpg,png'
 		];
 
 		$validator = Validator::make($data, $rules);

@@ -34,11 +34,11 @@
 							<div class="row">
 							<div class="col-sm-10 detail title">
 								<strong>Etkinlik Adı</strong>
-								<span>{{$dummy->org_name}}</span>
+								<span>{{ $dummy->org_name }}</span>
 							</div>
 							<div class="col-sm-2 detail pic">
 								<div class="pic-upload">
-									<img src="http://dummyimage.com/50x50" alt="">
+									{{ HTML::image('/Organizations/'.$post->org_photo) }}
 								</div>
 							</div>
 							</div>
@@ -46,15 +46,15 @@
 							<div class="row">
 								<div class="col-sm-3 detail">
 									<strong>Etkinlik Tarihi</strong>
-									<span>21 Mayis 2013</span>
+									<span>{{ date('d.m.Y',strtotime($dummy->org_date)) }}</span>
 								</div>
 								<div class="col-sm-3 detail">
 									<strong>Yetkili Kisi</strong>
-									<span>Bora Dan</span>
+									<span>{{ $dummy->org_auth }}</span>
 								</div>
 								<div class="col-sm-3 detail">
 									<strong>İletisim</strong>
-									<span>0535 555 34 23</span>
+									<span>{{ $dummy->org_auth_contact }}</span>
 								</div>
 								<div class="col-sm-3 detail">
 									<strong>Harita</strong>
@@ -65,10 +65,10 @@
 							<div class="row">
 								<div class="col-sm-8 detail address">
 									<strong>Adres</strong>
-									<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo mollitia ab deleniti totam</span>
+									<span>{{ $dummy->org_address }}</span>
 								</div>
 								<div class="col-sm-4 detail price">
-									75 TL
+									{{ $dummy->org_price }}
 								</div>
 							</div>
 						</div>
