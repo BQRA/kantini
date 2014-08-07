@@ -18,12 +18,16 @@ class Post extends \Eloquent {
 							'org_message', 
 							'org_photo'];
 
+	public function user() {
+		return $this->belongsTo('User');
+	}
+
 	public function comment() {
 		return $this->hasMany('Comment');
 	}
 
 	public function like() {
-		return $this->hasOne('Like');
+		return $this->hasMany('Like');
 	}
 
 	public function scopeSearch($query, $search) {

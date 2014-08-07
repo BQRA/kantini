@@ -28,6 +28,18 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		return $this->hasOne('Profile');
 	}
 
+	public function posts() {
+		return $this->hasMany('Post', 'username');
+	}
+
+	public function comment() {
+		return $this->hasMany('Comment', 'commenter');
+	}
+
+	public function like() {
+		return $this->hasMany('Like', 'liker');
+	}	
+
 	public function isCurrent() {
 
 		if(!Sentry::check()) return false;
