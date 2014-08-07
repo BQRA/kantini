@@ -8,6 +8,11 @@
 	{{HTML::style('Assets/css/style.css')}}
 
 	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+
+	<!-- Plugins -->
+	{{HTML::script('Assets/plugins/jquery-mask-plugin/js/jquery.mask.min.js')}}	
+	<!-- Plugins #end -->
+
 	{{HTML::script('Assets/js/custom-jquery.js')}}
 </head>
 <body>

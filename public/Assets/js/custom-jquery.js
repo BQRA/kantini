@@ -18,6 +18,10 @@ jQuery(document).ready(function($) {
 		$(this).find('.content').html( str.replace( regex , replacer ) );
 	});
 
+	// form masks
+	$('.add-event .detail input[name=org_date]').mask('00/00/0000');
+	$('.add-event .detail input[name=org_time]').mask('00:00');
+
 });
 
 // lightbox function

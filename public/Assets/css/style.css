@@ -1462,6 +1462,9 @@ p {
   font: 700 36px 'Quattrocento Sans', 'Helvetica Neue', Arial;
   width: 170px;
 }
+.add-event-container .add-event .details .detail.last-line {
+  height: 90px;
+}
 .add-event-container .add-event .details .detail > span {
   padding-top: 10px;
   font: 400 13px 'Quattrocento Sans', 'Helvetica Neue', Arial;
@@ -1486,7 +1489,7 @@ p {
   color: #000;
 }
 .add-event-container .add-event .details .detail textarea {
-  width: 90%;
+  width: 100%;
   font-size: 15px;
 }
 .add-event-container .add-event .details .detail.title > span {
