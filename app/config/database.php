@@ -54,10 +54,10 @@ return array(
 
 		'mysql' => array(
 			'driver'    => 'mysql',
-			'host'      => 'localhost',
-			'database'  => 'kantini_v02',
-			'username'  => 'root',
-			'password'  => 'root',
+			'host'      => '94.73.149.239',
+			'database'  => 'kantini',
+			'username'  => 'kantini',
+			'password'  => '1q2w3e4r',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
