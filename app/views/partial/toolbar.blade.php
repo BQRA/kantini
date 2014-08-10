@@ -35,6 +35,6 @@
 				<span class="like selected">{{ $likes->count() }}</span>
 			@endif
 		@endif
-			<span class="button sm r green get-comments" data-comments="{{ URL::action('home') }}/post/{{ $post->id }} #giveComments">Yorum Yaz</span>		
+		<span class="button sm r green get-comments" data-comments="{{ URL::action('home') }}/post/{{ $post->id }} #giveComments">Yorum Yaz</span>		
 	</div>
 </div>

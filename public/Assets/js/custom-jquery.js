@@ -13,7 +13,7 @@ jQuery(document).ready(function($) {
 		var str = $(this).find('.content').html(), regex = /(?:\s|^)(?:#(?!\d+(?:\s|$)))(\w+)(?=\s|$)/gi;
 		function replacer(hash){
 			var replacementString = $.trim(hash);
-			return ' <a href="search?q='+ replacementString.substr(1) +'" class="highlight">' + replacementString + '</a>';
+			return ' <a href="/kantini/public/search?q='+ replacementString.substr(1) +'" class="highlight">' + replacementString + '</a>';
 		}
 		$(this).find('.content').html( str.replace( regex , replacer ) );
 	});
