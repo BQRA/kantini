@@ -96,6 +96,18 @@ Route::get('/post/{id}/', [
 		'before' => 'csrf'
 	]);
 
+	Route::post('/dislike/', [
+		'as' 	 => 'dislike',
+		'uses'   => 'LikesController@Dislike',
+		'before' => 'csrf'
+	]);
+
+	Route::post('/guest-dislike/', [
+		'as' 	 => 'dislike',
+		'uses'   => 'LikesController@GuestDislike',
+		'before' => 'csrf'
+	]);
+
 	Route::post('/user/login/', [
 		'as' 	 => 'post.login',
 		'uses'   => 'UsersController@PostLogin',

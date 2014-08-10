@@ -22,6 +22,10 @@
 					{{ Form::hidden('post_type', $post->type) }}
 					{{ Form::close() }}
 			@else
+					{{ Form::open(['action' => 'LikesController@Dislike']) }}
+					{{ Form::hidden('post_id', $post->id) }}
+					{{ Form::submit('gonder') }}
+					{{ Form::close() }}
 				<span class="like selected">{{ $likes->count() }}</span>
 			@endif
 		@else
@@ -32,6 +36,10 @@
 					{{ Form::hidden('post_type', $post->type) }}
 					{{ Form::close() }}
 			@else 
+					{{ Form::open(['action' => 'LikesController@GuestDislike']) }}
+					{{ Form::hidden('post_id', $post->id) }}
+					{{ Form::submit('gonder') }}
+					{{ Form::close() }}
 				<span class="like selected">{{ $likes->count() }}</span>
 			@endif
 		@endif
