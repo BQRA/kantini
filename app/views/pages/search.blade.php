@@ -1,10 +1,9 @@
 @extends('layouts.master')
 
 @section('content')
-
 @if($posts->count())
 	<div class="special-list-title">
-		<strong>aranan kelime</strong> ile ilgili bulunan <strong>37</strong> sonuç gösteriliyor.
+		aranan <strong><?php echo $_GET['q'] ?></strong> kelimesi ile ilgili bulunan <strong>{{$posts->count()}}</strong> sonuç gösteriliyor.
 	</div>
 	@include('partial.filter-bar')
 	<div class="dedikods">
