@@ -3,7 +3,7 @@
 @section('content')
 
 <div id="addEvent">
-{{ Form::open(['action' => 'PostsController@CreateOrganization', 'files' => 'true']) }}
+	{{ Form::hidden('post_type', 'organization') }}
 	<div class="add-event-container">
 		<div class="ticket-effect"></div>
 		<div class="add-event">
@@ -59,8 +59,8 @@
 	<div class="clear mt30"></div>
 
 	<div class="text-center">
-		{{ Form::submit('GÖNDER', ['class' => 'button green']) }}
+		<div class="button green" id="addAttachment">Dedikod'a Ekle</div>
 	</div>
-{{ Form::close() }}
 </div>
+
 @stop

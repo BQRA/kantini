@@ -289,6 +289,9 @@ p {
 	width: 960px;
 	.font2(700, 13px);
 	color: #aaa;
+	.dedikod-attachment-infos {
+		display: none;
+	}
 	textarea {
 		width: 100%;
 		height: 80px;
@@ -462,6 +465,10 @@ p {
 	box-shadow: 0 0 4px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(0, 0, 0, 0.1);
 	padding: 40px;
 	position: relative;
+	&.box {
+		width: 500px;
+		margin: 0 auto;
+	}
 	&:after {
 		content: '';
 		display: inline-block;
@@ -1239,6 +1246,14 @@ p {
 	}
 }
 /* add event #end */
+
+/* dedikod attachments */
+#addMedia {
+	input[type=text] {
+		width: 100%;
+	}
+}
+/* dedikod attachments #end */
 
 /* lightbox */
 .lightbox-bg {

@@ -114,3 +114,9 @@ Route::get('/create-organization/', [
 		'uses' 	 => 'PostsController@CreateOrganization',
 		'before' => 'csrf'
 	]);
+
+Route::get('/add-media/', [
+	'as' 	 => 'add.media',
+	'uses' 	 => 'PagesController@AddMedia',
+	'before' => 'session'
+]);

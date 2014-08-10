@@ -8,6 +8,11 @@
 
 	{{ Form::open(['action' => 'PostsController@SendPost']) }}
 	<div class="dedikod-area">
+
+		<!-- dedikod attachment infos -->
+		<div class="dedikod-attachment-infos"></div>
+		<!-- dedikod attachment infos #end -->
+
 		@if(!Sentry::check())
 			{{ Form::textarea('post', null, ['placeholder' => guest_username().' olarak dedikodla!']) }}
 		@else 
@@ -16,7 +21,8 @@
 		<div class="bottom-bar">
 			<div class="left">
 				<span class="bar-button selected">Dedikodla!</span>
-				<span class="bar-button" data-lightbox="{{ URL::action('home') }}/create-organization #addEvent" data-lightboxtitle="Etkinlik Olustur">Etkinlik Olustur</span>
+				<span class="bar-button" data-lightbox="{{ URL::action('home') }}/create-organization #addEvent" data-lightboxtitle="Etkinlik Ekle">Etkinlik Ekle</span>
+				<span class="bar-button" data-lightbox="{{ URL::action('home') }}/add-media #addMedia" data-lightboxtitle="Resim veya Vidyo Ekle">Resim veya Vidyo Ekle</span>
 			</div>
 			<div class="right">
 				@if(!Sentry::check())

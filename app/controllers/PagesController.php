@@ -32,6 +32,10 @@ class PagesController extends \BaseController {
 		return View::make('pages.create-organization');
 	}
 
+	public function AddMedia() {
+		return View::make('pages.add-media');
+	}
+
 	public function Register() {
 		return View::make('users.register');
 	}

@@ -132,6 +132,12 @@ $(function () {
 		alert($(this).html());
 	});
 
+	// Dedikod Attachment 
+	$('body').on('click', '#addAttachment', function(event) {
+		$('.dedikod-attachment-infos').html($(this).parents('.lightbox-content').html());
+		closeLightbox();
+	});
+
 });
 
 
