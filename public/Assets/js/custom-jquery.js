@@ -18,10 +18,6 @@ jQuery(document).ready(function($) {
 		$(this).find('.content').html( str.replace( regex , replacer ) );
 	});
 
-	// form masks
-	$('.add-event .detail input[name=org_date]').mask('00/00/0000');
-	$('.add-event .detail input[name=org_time]').mask('00:00');
-
 });
 
 // lightbox function
@@ -80,7 +76,11 @@ $(function () {
 	$('body').on('click', '[data-lightbox]', function(event) {
 		event.stopPropagation();
 		alert(null, $(this).attr('data-lightboxtitle'));
-		$('.lightbox-bg .lightbox-content').load($(this).attr('data-lightbox'));
+		$('.lightbox-bg .lightbox-content').load($(this).attr('data-lightbox'), function(){
+			// form masks
+			$('.add-event .detail input[name=org_date]').mask('00/00/0000');
+			$('.add-event .detail input[name=org_time]').mask('00:00');
+		});
 	});
 	// close lightboxes
 	$('body').on('click', '.lightbox-content', function(event) {
