@@ -20,6 +20,22 @@ jQuery(document).ready(function($) {
 
 });
 
+
+///////////////////////////////////////////////////
+// GLOBAL FUNTIONS
+///////////////////////////////////////////////////
+
+// get video url with regex
+function videoId(data) {
+    data.match(/http:\/\/(player.|www.)?(vimeo\.com|youtu(be\.com|\.be))\/(video\/|embed\/|watch\?v=)?([A-Za-z0-9._%-]*)(\&\S+)?/);
+    return {
+        url: RegExp.$2,
+        id: RegExp.$5,
+        site: RegExp.$2 == 'youtube.com' || RegExp.$2 == 'youtu.be' ? 'http://www.youtube-nocookie.com/embed/' : 'http://player.vimeo.com/video/',
+        name: RegExp.$2 == 'youtube.com' || RegExp.$2 == 'youtu.be' ? 'youtube' : RegExp.$2 == 'vimeo.com' ? 'vimeo' : null
+    }
+}
+
 // lightbox function
 function alert(content, title) {
 	var padding = ( content == null ) ? null : 'alert'; 
@@ -37,6 +53,22 @@ function closeLightbox() {
 		$('.lightbox-bg').remove();
 	}, 200)
 }
+
+// attachment image resize
+function attachImg() {
+	$('.dedikod-area .attachment img').each(function(index, el) {
+		if ( $(this).height() < 55 ) {
+			$(this).css({'height':'55px','width':'auto'});
+		} else if ( $(this).width() < 55 ) {
+			$(this).css({'width':'55px','height':'auto'});
+		}
+	});
+}
+
+///////////////////////////////////////////////////
+// GLOBAL FUNTIONS #END
+///////////////////////////////////////////////////
+
 
 $(function () {
 
@@ -134,8 +166,30 @@ $(function () {
 
 	// Dedikod Attachment 
 	$('body').on('click', '#addAttachment', function(event) {
+		$('.dedikod-attachment-infos *').remove();
 		$(this).parents('.lightbox-content').clone().appendTo('.dedikod-attachment-infos');
 		closeLightbox();
+		$('.dedikod-area .textarea-container').addClass('added');
+		if ( $(this).attr('data-type') == 'media' ) {
+			var videoObj = videoId($('#mediaUrl').val());
+			if ( videoObj.name == 'youtube' ) {
+				$('input[name=post_type]').attr('value', 'video');
+				$('.dedikod-area .attachment img').attr('src', 'http://img.youtube.com/vi/' + videoObj.id + '/default.jpg');
+				$('#mediaUrl').val(videoObj.site + videoObj.id);
+			} else if ( videoObj.name == 'vimeo' ) {
+				$('input[name=post_type]').attr('value', 'video');
+				$.get('http://vimeo.com/api/v2/video/' + videoObj.id + '.json', function(data) {
+					$('.dedikod-area .attachment img').attr('src', data[0].thumbnail_large);
+		        });
+				$('#mediaUrl').val(videoObj.site + videoObj.id);
+			} else {
+				$('input[name=post_type]').attr('value', 'image');
+				$('.dedikod-area .attachment img').attr('src', $('#mediaUrl').val());
+			}
+		} else if ( $(this).attr('data-type') == 'event' ) {
+			$('.dedikod-area .attachment img').attr('src', '/kantini/public/Assets/images/event-attached.png');
+		}
+		attachImg();
 	});
 
 });

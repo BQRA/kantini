@@ -292,18 +292,56 @@ p {
 	.dedikod-attachment-infos {
 		display: none;
 	}
-	textarea {
-		width: 100%;
-		height: 80px;
-		resize: none;
+	.textarea-container {
 		margin-bottom: -5px;
 		background-color: rgba(255, 255, 255, 0.6);
 		position: relative;
 		z-index: 1;
-		color: #333;
-		&:focus {
-			background-color: rgba(255, 255, 255, 0.85);
-			box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
+		height: 80px;
+		textarea {
+			width: 100%;
+			height: 80px;
+			resize: none;
+			color: #333;
+			background-color: transparent;
+			&:focus {
+				background-color: rgba(255, 255, 255, 0.85);
+				box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
+			}
+		}
+		.attachment {
+			position: absolute;
+			top: 10px;
+			left: 10px;
+			overflow: hidden;
+			border-radius: 3px;
+			box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2);
+			width: 55px;
+			height: 55px;
+			display: none;
+			img {
+				width: 100%;
+			}
+		}
+		&.added {
+			&:after {
+				content: '';
+				display: inline-block;
+				position: absolute;
+				top: -5px;
+				left: 30px;
+				width: 28px;
+				height: 37px;
+				background: url('@{img-path}/sprite.png') -95px -471px;
+				opacity: 0.5;
+			}
+			textarea {
+				padding: 10px 10px 10px 75px;
+				.transition(background, 0.5s);
+			}
+			.attachment {
+				display: inline-block;
+			}
 		}
 	}
 	.bottom-bar {
@@ -333,22 +371,18 @@ p {
 			&.selected {
 				color: #333;
 				background-color: #eee !important;
-				&:after {
-					content: '';
-					position: absolute;
-					top: -11px;
-					left: 50%;
-					width: 0;
-					margin-left: -6px;
-					height: 0;
-					display: inline-block;
-					border: 6px solid transparent;
-					border-bottom: 5px solid #aaa;
-				}
 			}
 			&:first-child {
 				border-left: none;
 				border-radius: 0 0 0 5px;
+			}
+			&.event {
+				background: url('@{img-path}/sprite.png') no-repeat -184px -469px;
+				padding-left: 40px;
+			}
+			&.media {
+				background: url('@{img-path}/sprite.png') no-repeat -435px -469px;
+				padding-left: 40px;
 			}
 			&.male,
 			&.female {

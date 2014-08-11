@@ -12,17 +12,21 @@
 		<!-- dedikod attachment infos -->
 		<div class="dedikod-attachment-infos"></div>
 		<!-- dedikod attachment infos #end -->
+		
+		<div class="textarea-container">
 
-		@if(!Sentry::check())
-			{{ Form::textarea('post', null, ['placeholder' => guest_username().' olarak dedikodla!']) }}
-		@else 
-			{{ Form::textarea('post', null, ['placeholder' => Sentry::getUser()->username.' olarak dedikodla!'])}}
-		@endif
+			<div class="attachment"><img src="" alt=""></div>
+
+			@if(!Sentry::check())
+				{{ Form::textarea('post', null, ['placeholder' => guest_username().' olarak dedikodla!']) }}
+			@else 
+				{{ Form::textarea('post', null, ['placeholder' => Sentry::getUser()->username.' olarak dedikodla!'])}}
+			@endif
+		</div>
 		<div class="bottom-bar">
 			<div class="left">
-				<span class="bar-button selected">Dedikodla!</span>
-				<span class="bar-button" data-lightbox="{{ URL::action('home') }}/create-organization #addEvent" data-lightboxtitle="Etkinlik Ekle">Etkinlik Ekle</span>
-				<span class="bar-button" data-lightbox="{{ URL::action('home') }}/add-media #addMedia" data-lightboxtitle="Resim veya Vidyo Ekle">Resim veya Vidyo Ekle</span>
+				<span class="bar-button event" data-lightbox="{{ URL::action('home') }}/create-organization #addEvent" data-lightboxtitle="Etkinlik Ekle">Etkinlik Ekle</span>
+				<span class="bar-button media" data-lightbox="{{ URL::action('home') }}/add-media #addMedia" data-lightboxtitle="Resim veya Vidyo Ekle">Resim veya Vidyo Ekle</span>
 			</div>
 			<div class="right">
 				@if(!Sentry::check())
@@ -33,7 +37,7 @@
 				
 				<span class="send">
 					Shift + Enter &nbsp;
-					{{ Form::submit('GÖNDER', ['class' => 'button green sm'])}}
+					{{ Form::submit('DEDiKODLA', ['class' => 'button green sm'])}}
 				</span>
 			</div>
 		</div>
