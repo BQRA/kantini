@@ -16,7 +16,8 @@ class Post extends \Eloquent {
 							'org_auth_contact', 
 							'org_price', 
 							'org_message', 
-							'org_photo'];
+							'org_photo',
+							'media'];
 
 	public function user() {
 		return $this->belongsTo('User');

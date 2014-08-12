@@ -4,90 +4,103 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 class PostsController extends \BaseController {
 
 	public function SendPost() {
-		$data = Input::all();
+		if(empty(Input::get('post_type'))) {
+			$data = Input::all();
 
-			if(!Sentry::check()) {
-				$username 	= guest_username();
-				$member 	= '0';
-				$gender 	= Input::get('gender');
+				if(!Sentry::check()) {
+					$username 	= guest_username();
+					$member 	= '0';
+					$gender 	= Input::get('gender');
+						$rules = [
+							'gender' 	=> 'required',
+							'post'		=> 'required|min:5|max:800'
+						];
+				} else {
+					$username 	= Sentry::getUser()->username;
+					$member		= '1';
+					$gender 	= Sentry::getUser()->gender;
+
 					$rules = [
-						'gender' 	=> 'required',
-						'post'		=> 'required|min:5|max:800'
+							'post'		=> 'required|min:5|max:800'
 					];
+				}
+
+			$validator = Validator::make($data, $rules);
+
+			if($validator->passes()) {
+				$post = new Post;
+				$post->username = $username;
+				$post->gender 	= $gender;
+				$post->post 	= trim(Input::get('post'));
+				$post->member 	= $member;
+				$post->type 	= 'dedikod';
+				$post->save();
+
+				Session::flash('message', 'İletiniz başarıyla gönderilmiştir!');
+				return Redirect::route('home');
 			} else {
-				$username 	= Sentry::getUser()->username;
-				$member		= '1';
-				$gender 	= Sentry::getUser()->gender;
 
-				$rules = [
-						'post'		=> 'required|min:5|max:800'
-				];
+			return Redirect::route('home')
+			->withErrors($validator)
+			->withInput();
 			}
+		} elseif(Input::get('post_type') == 'organization') {
+			$data = Input::all();
 
-		$validator = Validator::make($data, $rules);
+			$rules = [
+				'org_name' 			=> 'required',
+			];
 
-		if($validator->passes()) {
-			$post = new Post;
-			$post->username = $username;
-			$post->gender 	= $gender;
-			$post->post 	= trim(Input::get('post'));
-			$post->member 	= $member;
-			$post->type 	= 'dedikod';
-			$post->save();
+			$validator = Validator::make($data, $rules);
 
-			Session::flash('message', 'İletiniz başarıyla gönderilmiştir!');
-			return Redirect::route('home');
-		} else {
+			if($validator->passes()) {
+				// $file            = Input::file('org_photo');
+				// $destinationPath = public_path().'/Organizations/';
+				// $filename        = Sentry::getUser()->username.'_'.Hash::make($file->getClientOriginalName()).'.'.$file->getClientOriginalExtension();
+				// $uploadSuccess   = $file->move($destinationPath, $filename);
+				
+				$post = new Post;
+				$post->username 	= Sentry::getUser()->username;
+				$post->gender 		= Sentry::getUser()->gender;
+				$post->member 		= '1';
+				$post->type 		= 'event';
+				$post->org_name 	= trim(Input::get('org_name'));
+				$post->org_date 	= trim(Input::get('org_date'));
+				$post->org_address 	= trim(Input::get('org_address'));
+				$post->org_map	 	= trim(Input::get('org_map'));
+				$post->org_auth 	= trim(Input::get('org_auth'));
+				$post->org_auth_contact = trim(Input::get('org_auth_contact'));
+				$post->org_price 	= trim(Input::get('org_price'));
+				$post->org_message 	= trim(Input::get('org_message'));
+				//$post->org_photo    = $filename;
+				$post->save();
 
-		return Redirect::route('home')
-		->withErrors($validator)
-		->withInput();
-		}
-	}
+				Session::flash('message', 'İletiniz başarıyla gönderilmiştir!');
+				return Redirect::route('home');
+			} else {
+				return Redirect::to('/?lightbox=false')
+				->withErrors($validator)
+				->withInput();
+			}
+		} elseif (Input::get('post_type') == 'video') {
 
-	public function CreateOrganization() {
-		$data = Input::all();
-
-		$rules = [
-			'org_name' 			=> 'required',
-			'org_date' 			=> 'required',
-			'org_address' 		=> 'required',
-			'org_auth' 			=> 'required',
-			'org_auth_contact' 	=> 'required',
-			'org_price' 		=> 'required|alpha_num',
-			'org_photo'			=> 'required|mimes:jpeg,jpg,png'
-		];
-
-		$validator = Validator::make($data, $rules);
-
-		if($validator->passes()) {
-			$file            = Input::file('org_photo');
-			$destinationPath = public_path().'/Organizations/';
-			$filename        = Sentry::getUser()->username.'_'.Hash::make($file->getClientOriginalName()).'.'.$file->getClientOriginalExtension();
-			$uploadSuccess   = $file->move($destinationPath, $filename);
-			
 			$post = new Post;
 			$post->username 	= Sentry::getUser()->username;
 			$post->gender 		= Sentry::getUser()->gender;
 			$post->member 		= '1';
-			$post->type 		= 'event';
-			$post->org_name 	= trim(Input::get('org_name'));
-			$post->org_date 	= trim(Input::get('org_date'));
-			$post->org_address 	= trim(Input::get('org_address'));
-			$post->org_map	 	= trim(Input::get('org_map'));
-			$post->org_auth 	= trim(Input::get('org_auth'));
-			$post->org_auth_contact = trim(Input::get('org_auth_contact'));
-			$post->org_price 	= trim(Input::get('org_price'));
-			$post->org_message 	= trim(Input::get('org_message'));
-			$post->org_photo    = $filename;
+			$post->media = Input::get('media');
+			$post->type = 'video';
 			$post->save();
 
-			Session::flash('message', 'İletiniz başarıyla gönderilmiştir!');
-			return Redirect::route('home');
-		} else {
-			return Redirect::to('/?lightbox=false')
-			->withErrors($validator)
-			->withInput();
+		} elseif(Input::get('post_type') == 'image') {
+
+			$post = new Post;
+			$post->username 	= Sentry::getUser()->username;
+			$post->gender 		= Sentry::getUser()->gender;
+			$post->member 		= '1';
+			$post->media = Input::get('media');
+			$post->type = 'image';
+			$post->save();
 		}
 	}
 
