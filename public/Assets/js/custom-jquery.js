@@ -150,11 +150,27 @@ $(function () {
             url: $form.attr('action'),
             data: serializedData,
             beforeSend: function() {
-            	likeNContainer.text(likeN+1).addClass('selected liked');
-            },
-            success: function() {
-                
+            	likeNContainer.addClass('loading');
             }
+        }).done(function(){
+        	likeNContainer.text(likeN+1).addClass('selected liked').removeClass('loading');
+            likeNContainer.next('form').attr('action', 'http://localhost:8888/kantini/public/dislike');
+        });
+	});
+
+	$('.dedikod .toolbar').on('click', '.like.selected', function(event) {
+		var $form = $(this).next('form'), serializedData = $form.serialize();
+		var likeNContainer = $(this), likeN = parseInt($(this).text());
+        $.ajax({
+            type: 'POST',
+            url: $form.attr('action'),
+            data: serializedData,
+            beforeSend: function() {
+            	likeNContainer.addClass('loading');
+            }
+        }).done(function(){
+        	likeNContainer.text(likeN-1).removeClass('selected liked').removeClass('loading');
+            likeNContainer.next('form').attr('action', 'http://localhost:8888/kantini/public/like');
         });
 	});
 

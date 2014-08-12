@@ -1099,6 +1099,10 @@ p {
   animation: liked 0.7s 1 linear;
   animation-delay-time: 0.01s;
 }
+.container .left-container .dedikods .dedikod .toolbar .like.loading,
+.container .left-container .dedikods .dedikod .toolbar .comment.loading {
+  background: url('../images/loading.gif') 0 5px no-repeat !important;
+}
 .container .left-container .dedikods .dedikod .toolbar .comment {
   background-position: 0 -146px;
 }

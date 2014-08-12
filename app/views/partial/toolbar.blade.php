@@ -16,33 +16,25 @@
 		<span class="comment get-comments" data-comments="{{ URL::action('home') }}/post/{{ $post->id }} #giveComments">{{ $comments->count() }}</span>
 		@if(Sentry::check())
 			@if(!Like::where('post_id', $post->id)->where('liker', Sentry::getUser()->username)->count()>0)
-				<span class="like">{{ $likes->count() }}</span>
-					{{ Form::open(['action' => 'LikesController@Like']) }}
-					{{ Form::hidden('post_id', $post->id) }}
-					{{ Form::hidden('post_type', $post->type) }}
-					{{ Form::close() }}
+			<span class="like">{{ $likes->count() }}</span>
+			{{ Form::open(['action' => 'LikesController@Like']) }}
+			{{ Form::hidden('post_type', $post->type) }}
 			@else
-					{{ Form::open(['action' => 'LikesController@Dislike']) }}
-					{{ Form::hidden('post_id', $post->id) }}
-					{{ Form::submit('gonder') }}
-					{{ Form::close() }}
-				<span class="like selected">{{ $likes->count() }}</span>
+			<span class="like selected">{{ $likes->count() }}</span>
+			{{ Form::open(['action' => 'LikesController@Dislike']) }}
 			@endif
 		@else
 			@if(!Like::where('post_id', $post->id)->where('ip_address', $_SERVER['REMOTE_ADDR'])->count()>0)
-				<span class="like">{{ $likes->count() }}</span>
-					{{ Form::open(['action' => 'LikesController@GuestLike']) }}
-					{{ Form::hidden('post_id', $post->id) }}
-					{{ Form::hidden('post_type', $post->type) }}
-					{{ Form::close() }}
+			<span class="like">{{ $likes->count() }}</span>
+			{{ Form::open(['action' => 'LikesController@GuestLike']) }}
+			{{ Form::hidden('post_type', $post->type) }}
 			@else 
-					{{ Form::open(['action' => 'LikesController@GuestDislike']) }}
-					{{ Form::hidden('post_id', $post->id) }}
-					{{ Form::submit('gonder') }}
-					{{ Form::close() }}
-				<span class="like selected">{{ $likes->count() }}</span>
+			<span class="like selected">{{ $likes->count() }}</span>
+			{{ Form::open(['action' => 'LikesController@GuestDislike']) }}
 			@endif
 		@endif
+		{{ Form::hidden('post_id', $post->id) }}
+		{{ Form::close() }}
 		<span class="button sm r green get-comments" data-comments="{{ URL::action('home') }}/post/{{ $post->id }} #giveComments">Yorum Yaz</span>		
 	</div>
 </div>
