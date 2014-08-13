@@ -132,8 +132,3 @@ Route::get('/add-media/', [
 	'uses' 	 => 'PagesController@AddMedia',
 	'before' => 'session'
 ]);
-
-Route::get('{school}', [
-	'as' 	=> 'school',
-	'uses' 	=> 'PagesController@school'
-]);

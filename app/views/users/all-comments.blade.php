@@ -13,16 +13,5 @@
 	@include('partial.users-dedikods')
 	@endforeach
 </div>
-@if(isset($_GET['type']) && isset($_GET['orderBy']))
-	{{ $comments->appends(['type' => $_GET['type'], 'orderBy' => $_GET['orderBy']])->links() }}
-
-	@elseif(isset($_GET['orderBy']))
-	{{ $comments->appends(['orderBy' => $_GET['orderBy']])->links() }}
-
-	@elseif(isset($_GET['type']))
-	{{ $comments->appends(['type' => $_GET['type']])->links() }}
-
-	@else
-	{{ $comments->links() }}
-	@endif
+{{ $comments->links() }}
 @stop

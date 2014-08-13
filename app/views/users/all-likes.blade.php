@@ -13,16 +13,5 @@
 	@include('partial.users-dedikods')
 	@endforeach
 </div>
-@if(isset($_GET['type']) && isset($_GET['orderBy']))
-	{{ $likes->appends(['type' => $_GET['type'], 'orderBy' => $_GET['orderBy']])->links() }}
-
-	@elseif(isset($_GET['orderBy']))
-	{{ $likes->appends(['orderBy' => $_GET['orderBy']])->links() }}
-
-	@elseif(isset($_GET['type']))
-	{{ $likes->appends(['type' => $_GET['type']])->links() }}
-
-	@else
-	{{ $likes->links() }}
-	@endif
+{{ $likes->links() }}
 @stop
