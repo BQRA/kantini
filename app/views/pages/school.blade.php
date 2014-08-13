@@ -106,9 +106,9 @@
 
 	</div>
 	@endforeach
-</div>	
+</div>
 
-	@if(isset($_GET['type']) && isset($_GET['orderBy']))
+@if(isset($_GET['type']) && isset($_GET['orderBy']))
 	{{ $posts->appends(['type' => $_GET['type'], 'orderBy' => $_GET['orderBy']])->links() }}
 
 	@elseif(isset($_GET['orderBy']))
@@ -120,5 +120,5 @@
 	@else
 	{{ $posts->links() }}
 	@endif
-
+	
 @stop
