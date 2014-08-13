@@ -6,7 +6,7 @@ class SearchController extends \BaseController {
 
 		$posts = $query
 		? Post::search($query)->get()
-		: Post::orderBy('created_at', 'DESC')->get();
+		: Post::orderBy('created_at', 'DESC')->simplePaginate(36);
 
 		return View::make('pages.search', compact('posts'));
 	}

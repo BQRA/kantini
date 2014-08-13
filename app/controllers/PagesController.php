@@ -8,17 +8,17 @@ class PagesController extends \BaseController {
 			$type = $_GET['type'];
 
 			$orderBy = $_GET['orderBy'];
-			$posts = Post::orderBy('created_at', $orderBy)->where('type', '=', $type)->get();
+			$posts = Post::orderBy('created_at', $orderBy)->where('type', '=', $type)->simplePaginate(36);
 		} elseif (isset($_GET['orderBy'])) {
 			$orderBy = $_GET['orderBy'];
 
-			$posts = Post::orderBy('created_at', $orderBy)->get();
+			$posts = Post::orderBy('created_at', $orderBy)->simplePaginate(36);
 		} elseif (isset($_GET['type'])) {
 			$type = $_GET['type'];
 
-			$posts = Post::orderBy('created_at', 'DESC')->where('type', '=', $type)->get();
+			$posts = Post::orderBy('created_at', 'DESC')->where('type', '=', $type)->simplePaginate(36);
 		} else {
-			$posts = Post::orderBy('created_at', 'DESC')->get();
+			$posts = Post::orderBy('created_at', 'DESC')->simplePaginate(36);
 		}
 
 		return View::make('pages.index')->with('posts', $posts);

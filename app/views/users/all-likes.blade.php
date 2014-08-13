@@ -13,4 +13,5 @@
 	@include('partial.users-dedikods')
 	@endforeach
 </div>
+{{ $likes->links() }}
 @stop

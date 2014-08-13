@@ -199,14 +199,14 @@ class UsersController extends \BaseController {
 			$posts_all 	= Post::orderBy('created_at', $orderBy)
 								->where('type', '=', $type)
 								->where('username', '=', $username)
-								->get();
+								->simplePaginate(36);
 
 		} elseif (isset($_GET['orderBy'])) {
 			$orderBy 	= $_GET['orderBy'];
 
 			$posts_all 	= Post::orderBy('created_at', $orderBy)
 							->where('username', '=', $username)
-							->get();
+							->simplePaginate(36);
 
 		} elseif (isset($_GET['type'])) {
 			$type		 = $_GET['type'];
@@ -214,11 +214,11 @@ class UsersController extends \BaseController {
 			$posts_all 	 = Post::orderBy('created_at', 'DESC')
 							->where('type', '=', $type)
 							->where('username', '=', $username)
-							->get();
+							->simplePaginate(36);
 		} else {
 			$posts_all = Post::orderBy('created_at', 'DESC')
 								->where('username', '=', $username)
-								->get();
+								->simplePaginate(36);
 		}
 
 		return View::make('users.all-posts', compact('posts_all', 'type', 'orderBy'))->withUser($user);
@@ -238,24 +238,24 @@ class UsersController extends \BaseController {
 			$comments 	= Comment::orderBy('created_at', $orderBy)
 								->where('type', '=', $type)
 								->where('commenter', '=', $username)
-								->get();
+								->simplePaginate(36);
 		} elseif(isset($_GET['orderBy'])) {
 			$orderBy 	= $_GET['orderBy'];
 
 			$comments 	= Comment::orderBy('created_at', $orderBy)
 							->where('commenter', '=', $username)
-							->get();
+							->simplePaginate(36);
 		} elseif(isset($_GET['type'])) {
 			$type		 = $_GET['type'];
 			
 			$comments 	 = Comment::orderBy('created_at', 'DESC')
 							->where('type', '=', $type)
 							->where('commenter', '=', $username)
-							->get();
+							->simplePaginate(36);
 		} else {
 			$comments = Comment::orderBy('created_at', 'DESC')
 								->where('commenter', '=', $username)
-								->get();
+								->simplePaginate(36);
 		}
 		
 		return View::make('users.all-comments')
@@ -277,24 +277,24 @@ class UsersController extends \BaseController {
 			$likes 	= Like::orderBy('created_at', $orderBy)
 								->where('type', '=', $type)
 								->where('liker', '=', $username)
-								->get();
+								->simplePaginate(36);
 		} elseif(isset($_GET['orderBy'])) {
 			$orderBy 	= $_GET['orderBy'];
 
 			$likes 	= Like::orderBy('created_at', $orderBy)
 							->where('liker', '=', $username)
-							->get();
+							->simplePaginate(36);
 		} elseif(isset($_GET['type'])) {
 			$type		 = $_GET['type'];
 			
 			$likes 	 = Like::orderBy('created_at', 'DESC')
 							->where('type', '=', $type)
 							->where('liker', '=', $username)
-							->get();
+							->simplePaginate(36);
 		} else {
 			$likes = Like::orderBy('created_at', 'DESC')
 								->where('liker', '=', $username)
-								->get();
+								->simplePaginate(36);
 		}
 		
 		return View::make('users.all-likes')

@@ -104,7 +104,9 @@
 
 		<div class="load-comments"></div>
 
-	</div>	
+	</div>
 	@endforeach
 </div>
+
+{{ $posts->links() }}
 @stop

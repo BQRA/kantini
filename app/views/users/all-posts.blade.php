@@ -13,4 +13,5 @@
 	@include('partial.users-dedikods')
 	@endforeach
 </div>
+{{ $posts_all->links() }}
 @stop

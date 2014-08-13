@@ -78,12 +78,12 @@
 					</div>
 				@endif
 
-				@if($post->type == 'photo')
-					{{$post->post}}
+				@if($post->type == 'image')
+					{{$post->media}}
 				@endif
 
 				@if($post->type == 'video')
-					{{$post->post}}
+					{{$post->media}}
 				@endif
 			</div>
 

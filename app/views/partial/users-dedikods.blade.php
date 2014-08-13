@@ -38,7 +38,7 @@
 							</div>
 							<div class="col-sm-2 detail pic">
 								<div class="pic-upload">
-									{{ HTML::image('/Organizations/'.$post->org_photo) }}
+									{{ HTML::image('/Organizations/'.$dummy->org_photo) }}
 								</div>
 							</div>
 							</div>
