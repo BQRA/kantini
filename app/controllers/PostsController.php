@@ -12,8 +12,8 @@ class PostsController extends \BaseController {
 					$member 	= '0';
 					$gender 	= Input::get('gender');
 						$rules = [
-							'gender' 	=> 'required',
-							'post'		=> 'required|min:5|max:800'
+							'gender' => 'required',
+							'post'	 => 'required|min:5|max:800'
 						];
 				} else {
 					$username 	= Sentry::getUser()->username;
@@ -21,7 +21,7 @@ class PostsController extends \BaseController {
 					$gender 	= Sentry::getUser()->gender;
 
 					$rules = [
-							'post'		=> 'required|min:5|max:800'
+							'post' => 'required|min:5|max:800'
 					];
 				}
 
@@ -48,31 +48,39 @@ class PostsController extends \BaseController {
 			$data = Input::all();
 
 			$rules = [
-				'org_name' 			=> 'required',
+				'post' 		=> 'required|min:5|max:800',
+				'org_name'  => 'required',
+				'org_aut' 	=> 'required|min:5|max:100',
+				'org_auth_contact' => 'required'
 			];
 
 			$validator = Validator::make($data, $rules);
 
 			if($validator->passes()) {
-				// $file            = Input::file('org_photo');
-				// $destinationPath = public_path().'/Organizations/';
-				// $filename        = Sentry::getUser()->username.'_'.Hash::make($file->getClientOriginalName()).'.'.$file->getClientOriginalExtension();
-				// $uploadSuccess   = $file->move($destinationPath, $filename);
+				if(Input::hasFile('org_photo')) {
+				$file            = Input::file('org_photo');
+				$destinationPath = public_path().'/Organizations/';
+				$filename        = Sentry::getUser()->username.'_'.Hash::make($file->getClientOriginalName()).'.'.$file->getClientOriginalExtension();
+				$uploadSuccess   = $file->move($destinationPath, $filename);
+			} else {
+				$filename = 'default_org_photo';
+			}
 				
 				$post = new Post;
 				$post->username 	= Sentry::getUser()->username;
 				$post->gender 		= Sentry::getUser()->gender;
+				$post->post 		= trim(Input::get('post'));
 				$post->member 		= '1';
 				$post->type 		= 'event';
 				$post->org_name 	= trim(Input::get('org_name'));
 				$post->org_date 	= trim(Input::get('org_date'));
+				$post->org_time 	= trim(Input::get('org_time'));
 				$post->org_address 	= trim(Input::get('org_address'));
 				$post->org_map	 	= trim(Input::get('org_map'));
 				$post->org_auth 	= trim(Input::get('org_auth'));
 				$post->org_auth_contact = trim(Input::get('org_auth_contact'));
 				$post->org_price 	= trim(Input::get('org_price'));
-				$post->org_message 	= trim(Input::get('org_message'));
-				//$post->org_photo    = $filename;
+				$post->org_photo    = $filename;
 				$post->save();
 
 				Session::flash('message', 'İletiniz başarıyla gönderilmiştir!');
@@ -83,24 +91,59 @@ class PostsController extends \BaseController {
 				->withInput();
 			}
 		} elseif (Input::get('post_type') == 'video') {
+			$data = Input::all();
 
-			$post = new Post;
-			$post->username 	= Sentry::getUser()->username;
-			$post->gender 		= Sentry::getUser()->gender;
-			$post->member 		= '1';
-			$post->media = Input::get('media');
-			$post->type = 'video';
-			$post->save();
+			$rules = [
+				'post' 	=> 'required|min:5|max:800',
+				'media' => 'required'
+			];
 
+			$validator = Validator::make($data, $rules);
+
+			if($validator->passes()) {
+				$post = new Post;
+				$post->username 	= Sentry::getUser()->username;
+				$post->gender 		= Sentry::getUser()->gender;
+				$post->post 		= trim(Input::get('post'));
+				$post->member 		= '1';
+				$post->media 		= Input::get('media');
+				$post->type 		= 'video';
+				$post->save();
+
+				Session::flash('message', 'İletiniz başarıyla gönderilmiştir!');
+				return Redirect::route('home');
+			} else {
+				return Redirect::route('home')
+				->withErrors($validator)
+				->withInput();
+			}
 		} elseif(Input::get('post_type') == 'image') {
+			$data = Input::all();
 
-			$post = new Post;
-			$post->username 	= Sentry::getUser()->username;
-			$post->gender 		= Sentry::getUser()->gender;
-			$post->member 		= '1';
-			$post->media = Input::get('media');
-			$post->type = 'image';
-			$post->save();
+			$rules = [
+				'post' 	=> 'required|min:5|max:800',
+				'media' => 'required'
+			];
+
+			$validator = Validator::make($data, $rules);
+
+			if($validator->passes()) {
+				$post = new Post;
+				$post->username 	= Sentry::getUser()->username;
+				$post->gender 		= Sentry::getUser()->gender;
+				$post->post 		= trim(Input::get('post'));
+				$post->member 		= '1';
+				$post->media 		= Input::get('media');
+				$post->type 		= 'image';
+				$post->save();
+
+				Session::flash('message', 'İletiniz başarıyla gönderilmiştir!');
+				return Redirect::route('home');
+			} else {
+				return Redirect::route('home')
+				->withErrors($validator)
+				->withInput();
+			}
 		}
 	}
 

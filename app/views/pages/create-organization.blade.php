@@ -42,7 +42,7 @@
 				<div class="row">
 					<div class="col-xs-5 detail last-line">
 						<strong>Adres</strong>
-						{{ Form::textarea('org_address', null, ['placeholder' => 'Varsa etkinlik alanının adresini giriniz...', 'rows' => '2', 'cols' => '']) }}
+						{{ Form::Input('text', 'org_address', null, ['placeholder' => 'Varsa etkinlik alanının adresini giriniz...']) }}
 					</div>
 					<div class="col-xs-3 detail last-line">
 						<strong>Harita</strong>

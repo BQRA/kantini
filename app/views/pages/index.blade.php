@@ -56,7 +56,7 @@
 							<div class="row">
 								<div class="col-sm-3 detail">
 									<strong>Etkinlik Tarihi</strong>
-									<span>{{ date('d m Y',strtotime($post->org_date)) }}</span>
+									<span>{{ $post->org_date }}</span>
 								</div>
 								<div class="col-sm-3 detail">
 									<strong>Yetkili Kisi</strong>
