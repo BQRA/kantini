@@ -8,20 +8,59 @@ class PagesController extends \BaseController {
 			$type = $_GET['type'];
 
 			$orderBy = $_GET['orderBy'];
-			$posts = Post::orderBy('created_at', $orderBy)->where('type', '=', $type)->simplePaginate(36);
+			$posts = Post::orderBy('created_at', $orderBy)->where('type', '=', $type)->simplePaginate(2);
 		} elseif (isset($_GET['orderBy'])) {
 			$orderBy = $_GET['orderBy'];
 
-			$posts = Post::orderBy('created_at', $orderBy)->simplePaginate(36);
+			$posts = Post::orderBy('created_at', $orderBy)->simplePaginate(2);
 		} elseif (isset($_GET['type'])) {
 			$type = $_GET['type'];
 
-			$posts = Post::orderBy('created_at', 'DESC')->where('type', '=', $type)->simplePaginate(36);
+			$posts = Post::orderBy('created_at', 'DESC')->where('type', '=', $type)->simplePaginate(2);
 		} else {
-			$posts = Post::orderBy('created_at', 'DESC')->simplePaginate(36);
+			$posts = Post::orderBy('created_at', 'DESC')->simplePaginate(2);
 		}
 
 		return View::make('pages.index')->with('posts', $posts);
+	}
+
+	public function school($school) {
+		try {
+			$user = Post::whereSchool($school)->firstOrFail();
+		} catch (Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+			return View::make('errors.404');
+		}
+
+		if (isset($_GET['type']) && isset($_GET['orderBy'])) {
+			$type = $_GET['type'];
+
+			$orderBy = $_GET['orderBy'];
+			$posts = Post::orderBy('created_at', $orderBy)
+							->where('type', '=', $type)
+							->where('school', '=', $school)
+							->simplePaginate(36);
+
+		} elseif (isset($_GET['orderBy'])) {
+			$orderBy = $_GET['orderBy'];
+
+			$posts = Post::orderBy('created_at', $orderBy)
+									->where('school', '=', $school)
+									->simplePaginate(36);
+
+		} elseif (isset($_GET['type'])) {
+			$type = $_GET['type'];
+
+			$posts = Post::orderBy('created_at', 'DESC')
+							->where('type', '=', $type)
+							->where('school', '=', $school)
+							->simplePaginate(36);
+		} else {
+			$posts = Post::orderBy('created_at', 'DESC')
+									->where('school', '=', $school)
+									->simplePaginate(36);
+		}
+
+		return View::make('pages.school')->with('posts', $posts);
 	}
 
 	public function ContactUs() {
