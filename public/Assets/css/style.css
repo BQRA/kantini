@@ -398,6 +398,12 @@ a:hover {
   color: #aaa;
   font: italic bold 11px Georgia, Arial;
 }
+.mt10 {
+  margin-top: 10px;
+}
+.mt20 {
+  margin-top: 20px;
+}
 .mt30 {
   margin-top: 30px;
 }
@@ -1001,6 +1007,16 @@ p {
 .container .left-container .dedikods .dedikod .content {
   font: 400 15px 'Quattrocento Sans', 'Helvetica Neue', Arial;
   line-height: 23px;
+}
+.container .left-container .dedikods .dedikod .content .content-img-container {
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+  background-color: #fafafa;
+  border-radius: 4px;
+  overflow: hidden;
+  text-align: center;
+}
+.container .left-container .dedikods .dedikod .content .content-img-container img {
+  max-width: 100%;
 }
 .container .left-container .dedikods .dedikod.female .username {
   background: url('../images/sprite.png') no-repeat 0 6px;

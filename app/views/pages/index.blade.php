@@ -86,14 +86,20 @@
 					</div>
 				</div>
 			</div>
+			<div class="clear mt10"></div>
+			{{ $post->post }}
 		@endif
 
 		@if($post->type == 'image')
-			{{$post->media}}
+			<div class="content-img-container"><img src="{{$post->media}}" alt="" /></div>
+			<div class="clear mt10"></div>
+			{{ $post->post }}
 		@endif
 
 		@if($post->type == 'video')
-			{{$post->media}}
+			<iframe width="580" height="360" src="{{$post->media}}?rel=0&autoplay=0&fullscreen=0" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+			<div class="clear mt10"></div>
+			{{ $post->post }}
 		@endif
 
 		</div>

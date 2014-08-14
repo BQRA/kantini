@@ -5,7 +5,7 @@
 			<span><a href="{{ URL::route('home') }}">KANTİNİ</a></span>
 		</h1>
 	</div>
-{{ Route::currentRouteName() }}
+	{{-- {{ Route::currentRouteName() }} --}}
 	{{ Form::open(['action' => 'PostsController@SendPost']) }}
 	{{ Form::hidden('school') }}
 	<div class="dedikod-area">
