@@ -77,7 +77,7 @@
 			</div>
 		@endif
 
-		@if($dummy->type == 'photo')
+		@if($dummy->type == 'image')
 			{{$dummy->post}}
 		@endif
 

@@ -91,7 +91,7 @@
 			</div>
 		@endif
 
-		@if($post->type == 'photo')
+		@if($post->type == 'image')
 			{{$post->post}}
 		@endif
 

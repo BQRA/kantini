@@ -6,12 +6,12 @@
 				@if(isset($_GET['orderBy']))
 					<li><a href="{{URL::to(URL::current().'?orderBy='.$_GET['orderBy'].'&type=dedikod')}}">Dedikodlar</a></li>
 					<li><a href="{{URL::to(URL::current().'?orderBy='.$_GET['orderBy'].'&type=event')}}">Etkinlikler</a></li>
-					<li><a href="{{URL::to(URL::current().'?orderBy='.$_GET['orderBy'].'&type=photo')}}">Fotoğraflar</a></li>
+					<li><a href="{{URL::to(URL::current().'?orderBy='.$_GET['orderBy'].'&type=image')}}">Fotoğraflar</a></li>
 					<li><a href="{{URL::to(URL::current().'?orderBy='.$_GET['orderBy'].'&type=video')}}">Videolar</a></li>
 				@else
 					<li><a href="{{URL::to(URL::current().'?type=dedikod')}}">Dedikodlar</a></li>
 					<li><a href="{{URL::to(URL::current().'?type=event')}}">Etkinlikler</a></li>
-					<li><a href="{{URL::to(URL::current().'?type=photo')}}">Fotoğraflar</a></li>
+					<li><a href="{{URL::to(URL::current().'?type=image')}}">Fotoğraflar</a></li>
 					<li><a href="{{URL::to(URL::current().'?type=video')}}">Videolar</a></li>
 				@endif
 			</ul>
