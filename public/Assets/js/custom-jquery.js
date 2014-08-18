@@ -38,12 +38,15 @@ function videoId(data) {
 
 // lightbox function
 function alert(content, title) {
-	var padding = ( content == null ) ? null : 'alert'; 
-	var title = ( title == undefined ) ? '' : title; 
-	$('body').append('<div class="lightbox-bg"><div class="close-button"></div><div class="vertical-helper"></div><div class="lightbox-container"><h2>' + title + '</h2><div class="lightbox-content ' + padding + '">' + content + '</div></div></div>');
-	setTimeout(function(){
-		$('.lightbox-bg .lightbox-container').addClass('opened');
-	}, 1) 
+	var padding = ( content == null ) ? '' : 'alert'; 
+	var title = ( title == undefined ) ? '' : title;
+	$('body').append('<div class="lightbox-bg"><div class="close-button"></div><div class="vertical-helper"></div><div class="lightbox-loading"></div><div class="lightbox-container"><h2>' + title + '</h2><div class="lightbox-content ' + padding + '">' + content + '</div></div></div>');
+	if ( content != null ) {
+		setTimeout(function(){
+			$('.lightbox-loading').remove();
+			$('.lightbox-bg .lightbox-container').addClass('opened');
+		}, 1) 
+	}
 }
 
 // close lightbox function 
@@ -74,7 +77,7 @@ $(function () {
 
 	// global close
 	$('body').click(function(event) {
-		// close selctbox
+		// close selectbox
 		$('.select-box ul').hide(0);
 
 		//close lightbox
@@ -109,6 +112,8 @@ $(function () {
 		event.stopPropagation();
 		alert(null, $(this).attr('data-lightboxtitle'));
 		$('.lightbox-bg .lightbox-content').load($(this).attr('data-lightbox'), function(){
+			$('.lightbox-loading').remove();
+			$('.lightbox-bg .lightbox-container').addClass('opened');
 			// form masks
 			$('.add-event .detail input[name=org_date]').mask('00/00/0000');
 			$('.add-event .detail input[name=org_time]').mask('00:00');
