@@ -34,25 +34,25 @@ class UsersController extends \BaseController {
 					$filename = 'guest';
 			}
 
-			if(empty(trim(Input::get('full_name')))) {
+			if(trim(Input::get('full_name')) == false) {
 				$full_name = null;
 				} else {
 				$full_name = trim(Input::get('full_name'));
 			}
 
-			if(empty(trim(Input::get('twitter_username')))) {
+			if(trim(Input::get('twitter_username')) == false) {
 				$twitter_username = null;
 				} else {
 				$twitter_username = trim(Input::get('twitter_username'));
 			}
 
-			if(empty(trim(Input::get('instagram_username')))) {
+			if(trim(Input::get('instagram_username')) == false) {
 				$instagram_username = null;
 				} else {
 				$instagram_username = trim(Input::get('instagram_username'));
 			}
 
-			if(empty(trim(Input::get('facebook_username')))) {
+			if(trim(Input::get('facebook_username')) == false) {
 				$facebook_username = null;
 				} else {
 				$facebook_username = trim(Input::get('facebook_username'));

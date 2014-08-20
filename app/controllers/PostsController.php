@@ -4,7 +4,8 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 class PostsController extends \BaseController {
 
 	public function SendPost() {
-		if(empty(Input::get('post_type'))) {
+		$var = trim(Input::get('post_type'));
+		if(empty($var)) {
 			$data = Input::all();
 
 				if(!Sentry::check()) {
