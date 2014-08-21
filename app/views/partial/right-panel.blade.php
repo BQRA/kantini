@@ -1,35 +1,33 @@
 <div class="right-panel">	
-	@if(Sentry::check())
-	<div class="user-box {{ Sentry::getUser()->gender }}">
-		@if(Sentry::check())
-		<div class="logout-button"><a href="{{ URL::route('logout') }}"></a></div>
-		@endif
+	@if(Auth::check())
+	<div class="user-box {{Auth::user()->profile->gender}}">
+		<div class="logout-button"><a href="{{ URL::route('user.logout') }}"></a></div>
 		<div class="avatar">
-			@if($user->profile->avatar == 'guest')
+			@if(Auth::user()->profile->avatar == 'guest')
 				{{ HTML::image('/Avatars/guest-avatar.png') }}
 			@else
-				{{ HTML::image('/Avatars/'.Sentry::getUser()->username.'.jpg') }}
+				{{ HTML::image('/Avatars/'.Auth::user()->username.'.jpg') }}
 			@endif
 		</div>
 		<div class="username">
-			<span>{{ Sentry::getUser()->username }}</span> 
-			<a href="{{ URL::to('user/profile/'.Sentry::getUser()->username).'/edit' }}">(Düzenle)</a>
+			<span>{{Auth::user()->username}}</span> 
+			<a href="{{ URL::to('user/profile/'.Auth::user()->username).'/edit' }}">(Düzenle)</a>
 		</div>
 		<div class="custom-line"></div>
 		<div class="row numbers">
 			<div class="col-sm-4">
-				<a href="{{ URL::to('user/profile/'.Sentry::getUser()->username).'/all-posts' }}">
-					{{ session_user_posts()->count() }} <small>Gönderi</small>
+				<a href="{{ URL::to('user/profile/'.Auth::user()->username).'/all-posts' }}">
+					{{session_user_posts()->count()}}<small>Gönderi</small>
 				</a>
 			</div>
 			<div class="col-sm-4">
-				<a href="{{ URL::to('user/profile/'.Sentry::getUser()->username).'/all-comments' }}">
-					{{ session_user_comments()->count() }} <small>Yorum</small>
+				<a href="{{ URL::to('user/profile/'.Auth::user()->username).'/all-comments' }}">
+					{{session_user_comments()->count()}}<small>Yorum</small>
 				</a>
 			</div>
 			<div class="col-sm-4">
-				<a href="{{ URL::to('user/profile/'.Sentry::getUser()->username).'/all-likes' }}">
-					{{ session_user_likes()->count() }} <small>Beğeni</small>
+				<a href="#">
+					0<small>Oy</small>
 				</a>
 			</div>
 		</div>
@@ -40,22 +38,36 @@
 			{{HTML::image('Assets/images/users/guest-avatar.png', 'Avatar')}}
 		</div>
 		<div class="username">
-			<span>{{ guest_username() }}</span>
+			<span>{{guest_username()}}</span>
 		</div>
 		<div class="custom-line"></div>
 		<div class="membership">
 			
-			<a href="{{ URL::route('register') }}" class="button green w100">KAYIT OL</a>
+			<a href="{{ URL::route('user.register') }}" class="button green w100">KAYIT OL</a>
 			<div class="or-line"></div>
 
-			{{ Form::open(['route' => 'post.login']) }}
+			{{ Form::open(['action' => 'SessionsController@login']) }}
 			
 			{{ Form::Input('text', 'username', null, ['placeholder' => 'Kullanıcı Adı']) }}
+			@if($errors->has('username'))
+				<span class="error">{{ $errors->first('username') }}</span>
+			@endif
+			
 			{{ Form::Input('password', 'password', null, ['placeholder' => 'Şifre']) }}
+			@if($errors->has('password'))
+				<span class="error">{{ $errors->first('password') }}</span>
+			@endif
 
 			{{ Form::button(' ', ['class' => 'button blue w100', 'type' => 'submit']) }}
 
 			{{ Form::close() }}
+
+			@if($errors->has('login'))
+			    {{ $errors->first('login') }}
+			@endif
+			<br>
+
+			<a href="{{ URL::to('password/remind') }}">Şifremi unuttum</a>
 		</div>
 	</div>
 	@endif
@@ -69,11 +81,9 @@
 			{{ Form::close() }}
 		</div>
 
-		<ul class="menu">			
+		<ul class="menu">		
 			<li><a href="{{ URL::route('home') }}">Anasayfa</a></li>
-			<li><a href="{{ URL::route('contact.us') }}">Kontak</a></li>
-			<li><a href="{{ URL::to('beykent') }}">Beykent</a></li>
-			<li><a href="{{ URL::to('bahcesehir') }}">Bahçeşehir</a></li>
+			<li><a href="#">Kontak</a></li>
 		</ul>
 	</div>
 

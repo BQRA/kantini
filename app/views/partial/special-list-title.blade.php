@@ -5,7 +5,6 @@
 		<ul>
 			<li><a href="{{ URL::to('user/profile/'.$user->username).'/all-posts' }}">yazdığı</a></li>
 			<li><a href="{{ URL::to('user/profile/'.$user->username).'/all-comments' }}">yorum yaptığı</a></li>
-			<li><a href="{{ URL::to('user/profile/'.$user->username).'/all-likes' }}">beğendiği</a></li>
 		</ul>
 	</div>
 	<span>gönderiler listeleniyor</span>

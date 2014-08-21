@@ -17,22 +17,22 @@
 </head>
 <body>
 
-<?php 
-	if(Sentry::check()) {
-		$user = User::with('profile')->whereUsername(Sentry::getUser()->username)->firstOrFail(); 
-	}
-?>
 @include('partial.header')
+
+@if(Session::has('message'))
+	<div class="session-message">
+		{{ Session::get('message') }}
+	</div>
+@endif
+
+@if($errors->has())
+    @foreach ($errors->all() as $error)
+        <div>{{ $error }}</div>
+    @endforeach
+@endif
 
 <div class="container">
 	<div class="left-container">
-	
-		@if(Session::has('message'))
-		<div class="session-message">
-			{{ Session::get('message') }}
-		</div>
-		@endif
-
 		@yield('content')
 	</div>
 	@include('partial.right-panel')

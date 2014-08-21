@@ -78,7 +78,7 @@ return array(
 	|
 	*/
 
-	'key' => 'te6lzoFLxPscnh7eqkcsawDZ9BAacM1F',
+	'key' => 'WTkWExNnlhKm58G32uTvMyjyc3h1uaJo',
 
 	'cipher' => MCRYPT_RIJNDAEL_128,
 
@@ -122,7 +122,6 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 
-		'Cartalyst\Sentry\SentryServiceProvider',
 		'Way\Generators\GeneratorsServiceProvider'
 
 	),
@@ -191,8 +190,6 @@ return array(
 		'URL'             => 'Illuminate\Support\Facades\URL',
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
-
-		'Sentry' => 'Cartalyst\Sentry\Facades\Laravel\Sentry',
 
 	),
 

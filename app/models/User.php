@@ -15,7 +15,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 * @var string
 	 */
 	protected $table = 'users';
-	protected $fillable = ['username', 'email', 'school', 'gender'];
+	protected $fillable = ['username', 'email', 'password'];
 
 	/**
 	 * The attributes excluded from the model's JSON form.
@@ -29,22 +29,11 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	}
 
 	public function posts() {
-		return $this->hasMany('Post', 'username');
+		return $this->hasMany('Post');
 	}
 
-	public function comment() {
-		return $this->hasMany('Comment', 'commenter');
-	}
-
-	public function like() {
-		return $this->hasMany('Like', 'liker');
-	}	
-
-	public function isCurrent() {
-
-		if(!Sentry::check()) return false;
-
-		return Sentry::getUser()->id == $this->id;
+	public function comments() {
+		return $this->hasMany('Comment');
 	}
 
 }

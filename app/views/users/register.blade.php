@@ -1,13 +1,12 @@
 @extends('layouts.master')
 
 @section('title') - Kayıt Ol @stop
-
 @section('content')
 
 <div class="blank-page">
 	<h2>Kayıt Ol</h2>
 
-	{{ Form::open(['route' => 'register', 'files' => true, 'class' => 'form']) }}
+	{{ Form::open(['action' => 'UsersController@postRegister', 'files' => true, 'class' => 'form']) }}
 
 	<div class="row">
 		<div class="col-sm-4 title">

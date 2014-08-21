@@ -2,7 +2,8 @@
 
 class UsersController extends \BaseController {
 
-	public function PostRegister() {
+	public function postRegister() {
+		
 		$data = Input::all();
 
 		$rules = [
@@ -17,165 +18,89 @@ class UsersController extends \BaseController {
 		$validator = Validator::make($data, $rules);
 
 		if($validator->passes()) {
-			$user = Sentry::register([
-				'email' 	=> Input::get('email'),
-				'username' 	=> Input::get('username'),
-				'password' 	=> Input::get('password'),
-				'school' 	=> Input::get('school'),
-				'gender' 	=> Input::get('gender') ,
-			]);
+			$user = new User;
+			$user->username 		= Input::get('username');
+			$user->email 			= Input::get('email');
+			$user->password 		= Hash::make(Input::get('password'));
+			$user->activation_code  = str_random(60);
+			$user->save();
 
 			if(Input::hasFile('image')) {
 				$file            = Input::file('image');
-			    $destinationPath = public_path().'/Avatars/';
-			    $filename        = Sentry::getUser()->username. '.jpg';
-			    $uploadSuccess   = $file->move($destinationPath, $filename);
+				$destinationPath = public_path().'/Avatars/';
+				$filename        = $user->username. '.jpg';
+				$uploadSuccess   = $file->move($destinationPath, $filename);
 				} else {
 					$filename = 'guest';
 			}
 
-			if(trim(Input::get('full_name')) == false) {
-				$full_name = null;
-				} else {
-				$full_name = trim(Input::get('full_name'));
-			}
-
-			if(trim(Input::get('twitter_username')) == false) {
-				$twitter_username = null;
-				} else {
-				$twitter_username = trim(Input::get('twitter_username'));
-			}
-
-			if(trim(Input::get('instagram_username')) == false) {
-				$instagram_username = null;
-				} else {
-				$instagram_username = trim(Input::get('instagram_username'));
-			}
-
-			if(trim(Input::get('facebook_username')) == false) {
-				$facebook_username = null;
-				} else {
-				$facebook_username = trim(Input::get('facebook_username'));
-			}
+			$full_name 	= (!empty(Input::get('full_name'))) ? trim(Input::get('full_name')) : null;
+			$twitter 	= (!empty(Input::get('twitter'))) ? trim(Input::get('twitter')) : null;
+			$instagram  = (!empty(Input::get('instagram'))) ? trim(Input::get('instagram')) : null;
+			$facebook 	= (!empty(Input::get('facebook'))) ? trim(Input::get('facebook')) : null;
 
 			$profile = new Profile;
-			$profile->user_id 			 = Sentry::getUser()->id;
-			$profile->full_name 		 = $full_name;
-			$profile->twitter_username 	 = $twitter_username;
-			$profile->instagram_username = $instagram_username;
-			$profile->facebook_username  = $facebook_username;
-			$profile->Avatar 			 = $filename;
+			$profile->user_id 	= $user->id;
+			$profile->full_name = $full_name;
+			$profile->twitter 	= $twitter;
+			$profile->instagram = $instagram;
+			$profile->facebook  = $facebook;
+			$profile->school  	= Input::get('school');
+			$profile->gender 	= Input::get('gender');
+			$profile->avatar 	= $filename;
 			$profile->save();
 
 			Session::flash('message', 'Üyeliğiniz başarıyla gerçekleştirilmiştir. Giriş yapabilirsiniz.');
 			return Redirect::route('home');
-		} else {
-			return Redirect::route('register')
-			->withErrors($validator)
-			->withInput();
-		}
-	}
-	
-	public function PostLogin() {
-		$data = Input::all();
-
-		$rules = [
-			'username' 	=> 'required',
-			'password'  => 'required|min:6|max:18'
-		];
-
-		$validator = Validator::make($data, $rules);
-
-		if($validator->fails()) {
-			return Redirect::back()
-			->withErrors($validator)
-			->withInput();
-		} else {
-
-			try {
-				$credentials = [
-					'username' 	=> Input::get('username'),
-					'password' 	=> Input::get('password')
-				];
-
-				$user = Sentry::authenticate($credentials, false);
-
-				} catch (Cartalyst\Sentry\Throttling\UserSuspendedException $e) {
-				return Redirect::route('home')
-				->with(['message' => 'Kimliğiniz geçici olarak askıya alınmıştır. Lütfen yönetici ile irtibata geçiniz.']);
-
-				} catch (Cartalyst\Sentry\Users\WrongPasswordException $e) {
-				return Redirect::back()
-				->with(['message' => 'Şifre veya Eposta hatalı.'])->withInput();
-
-				} catch (Cartalyst\Sentry\Users\UserNotFoundException $e) {
-				return Redirect::back()
-				->with(['message' => 'Kullanıcı bununamadı.']);
-
-				} catch (Cartalyst\Sentry\Throttling\UserBannedException $e) {
-				return Redirect::back()
-				->with(['message' => 'Kullanıcı Banlanmış. Lütfen yönetici ile irtibata geçiniz.']);
-
-			}	return Redirect::back(); 
-		}
+			} else {
+				return Redirect::route('user.register')
+				->withErrors($validator)
+				->withInput();
+			}
 	}
 
-	public function ShowProfile($username) {
-		try {
-			$user = User::with('profile')->whereUsername($username)->firstOrFail();
-		} catch (Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-			return View::make('errors.404');
-		}
+	public function showProfile($username) {
 		
-		$posts_all  = Post::orderBy('created_at', 'DESC')
-							->where('username', '=', $username)
-							->get();
+		$user = User::whereUsername($username)->firstOrFail();
+		$users_all_posts = Post::where('username', '=', $username)->get();
+		$users_all_comments = Comment::where('commenter', '=', $username)->get();
 
-		$comments_all = Comment::orderBy('created_at', 'DESC')
-							->where('commenter', '=', $username)
-							->get();
-
-		$likes  	 = Like::orderBy('created_at', 'DESC')
-							->where('liker', '=', $username)
-							->get();
-		
-		return View::make('users.profile')
-		->withUser($user)
-		->with('posts_all', $posts_all)
-		->with('comments_all', $comments_all)
-		->with('likes', $likes);
+		return View::make('users.profile', compact('user', 'users_all_posts', 'users_all_comments'));
 	}
 
 	public function EditProfile($username) {
+		
 		try {
-			$user = User::with('profile')->whereUsername($username)->firstOrFail();
+			$user = User::whereUsername($username)->firstOrFail();
 		} catch (Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-			return View::make('errors.404');
+			return 'Kullanıcı bulunamadı';
 		}
+
 		return View::make('users.edit-profile')->withUser($user);
 	}
 
-	public function UpdateProfile($username) {
+	public function updateProfile($username) {
+
 		try {
 			$user = User::with('profile')->whereUsername($username)->firstOrFail();
 		} catch (Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-			return View::make('errors.404');
+			return 'Kullanıcı bulunamadı';
 		}
 		
-		if(Sentry::getUser()->username == $username) {
+		if(Auth::user()->username == $username) {
 			if(Input::hasFile('image')) {
 				$file            = Input::file('image');
 				$destinationPath = public_path().'/Avatars/';
-				$filename        = Sentry::getUser()->username. '.jpg';
+				$filename        = Auth::user()->username. '.jpg';
 				$uploadSuccess   = $file->move($destinationPath, $filename);
 
 				DB::table('profiles')
-	            ->where('user_id', Sentry::getUser()->id)
+	            ->where('user_id', Auth::user()->id)
 	            ->update(['avatar' => $filename]);
 			}
 
-			$data = Input::only('full_name', 'twitter_username', 'instagram_username', 'facebook_username');
-			
+			$data = Input::only('full_name', 'twitter', 'instagram', 'facebook');
+		
 			$user->profile->fill($data)->save();
 
 			Session::flash('message', 'Profiliniz başarıyla güncellenmiştir.');
@@ -185,120 +110,72 @@ class UsersController extends \BaseController {
 		}
 	}
 
-	public function ShowUserAllPosts($username) {
+	public function changePassword() {
+
+		$data = Input::all();
+
+		$rules = [
+			'current_password' 		=> 'required|min:6|max:18',
+			'new_password' 			=> 'required|min:6|max:18',
+			'new_password_again' 	=> 'required|same:new_password'
+		];
+
+		$validator = Validator::make($data, $rules);
+
+		if($validator->passes()) {
+			$user = Auth::user();
+			$current_password = Input::get('current_password');
+
+			if (strlen($current_password) > 0 && !Hash::check($current_password, $user->password)) {
+	        	return Redirect::back()
+	        	->withErrors('Please specify the good current password');
+	    	}
+
+	    	$new_password = Input::get('new_password');
+
+	    	$user = Auth::user();
+			$user->password = Hash::make($new_password);
+			$user->save();
+
+			Session::flash('message', 'Şifreniz başarıyla değiştirilmiştir.');
+			return Redirect::back();
+		} else {
+			return Redirect::back()
+				->withErrors($validator)
+				->withInput();
+		}
+	}
+
+	public function showUserAllPosts($username) {
+
 		try {
-			$user = User::with('profile')->whereUsername($username)->firstOrFail();
+			$user = User::whereUsername($username)->firstOrFail();
 		} catch (Illuminate\Database\Eloquent\ModelNotFoundException $e) {
 			return View::make('errors.404');
 		}
 
-		if (isset($_GET['type']) && isset($_GET['orderBy'])) {
-			$type 		= $_GET['type'];
-			$orderBy 	= $_GET['orderBy'];
-			
-			$posts_all 	= Post::orderBy('created_at', $orderBy)
-								->where('type', '=', $type)
+		$users_all_posts = Post::orderBy('created_at', 'DESC')
 								->where('username', '=', $username)
+								->orderBy('created_at', 'DESC')
 								->simplePaginate(36);
 
-		} elseif (isset($_GET['orderBy'])) {
-			$orderBy 	= $_GET['orderBy'];
-
-			$posts_all 	= Post::orderBy('created_at', $orderBy)
-							->where('username', '=', $username)
-							->simplePaginate(36);
-
-		} elseif (isset($_GET['type'])) {
-			$type		 = $_GET['type'];
-			
-			$posts_all 	 = Post::orderBy('created_at', 'DESC')
-							->where('type', '=', $type)
-							->where('username', '=', $username)
-							->simplePaginate(36);
-		} else {
-			$posts_all = Post::orderBy('created_at', 'DESC')
-								->where('username', '=', $username)
-								->simplePaginate(36);
-		}
-
-		return View::make('users.all-posts', compact('posts_all', 'type', 'orderBy'))->withUser($user);
+		return View::make('users.all-posts', compact('user', 'users_all_posts'));
 	}
 
-	public function ShowUserAllComments($username) {
+	public function showUserAllComments($username) {
+
 		try {
-			$user = User::with('profile')->whereUsername($username)->firstOrFail();
+			$user = User::whereUsername($username)->firstOrFail();
 		} catch (Illuminate\Database\Eloquent\ModelNotFoundException $e) {
 			return View::make('errors.404');
 		}
 
-		if(isset($_GET['type']) && isset($_GET['orderBy'])) {
-			$type 		= $_GET['type'];
-			$orderBy 	= $_GET['orderBy'];
+		$users_all_comments = Comment::where('commenter', '=', $username)
+										->groupBy('post_id')
+										->orderBy('created_at', 'DESC')
+										->simplePaginate(36);
 
-			$comments 	= Comment::orderBy('created_at', $orderBy)
-								->where('type', '=', $type)
-								->where('commenter', '=', $username)
-								->simplePaginate(36);
-		} elseif(isset($_GET['orderBy'])) {
-			$orderBy 	= $_GET['orderBy'];
-
-			$comments 	= Comment::orderBy('created_at', $orderBy)
-							->where('commenter', '=', $username)
-							->simplePaginate(36);
-		} elseif(isset($_GET['type'])) {
-			$type		 = $_GET['type'];
-			
-			$comments 	 = Comment::orderBy('created_at', 'DESC')
-							->where('type', '=', $type)
-							->where('commenter', '=', $username)
-							->simplePaginate(36);
-		} else {
-			$comments = Comment::orderBy('created_at', 'DESC')
-								->where('commenter', '=', $username)
-								->simplePaginate(36);
-		}
-		
-		return View::make('users.all-comments')
-		->withUser($user)
-		->with('comments', $comments);
+		return View::make('users.all-comments', compact('user', 'users_all_comments'));
 	}
 
-	public function ShowUserAllLikes($username) {
-		try {
-			$user = User::with('profile')->whereUsername($username)->firstOrFail();
-		} catch (Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-			return View::make('errors.404');
-		}
-
-		if(isset($_GET['type']) && isset($_GET['orderBy'])) {
-			$type 		= $_GET['type'];
-			$orderBy 	= $_GET['orderBy'];
-
-			$likes 	= Like::orderBy('created_at', $orderBy)
-								->where('type', '=', $type)
-								->where('liker', '=', $username)
-								->simplePaginate(36);
-		} elseif(isset($_GET['orderBy'])) {
-			$orderBy 	= $_GET['orderBy'];
-
-			$likes 	= Like::orderBy('created_at', $orderBy)
-							->where('liker', '=', $username)
-							->simplePaginate(36);
-		} elseif(isset($_GET['type'])) {
-			$type		 = $_GET['type'];
-			
-			$likes 	 = Like::orderBy('created_at', 'DESC')
-							->where('type', '=', $type)
-							->where('liker', '=', $username)
-							->simplePaginate(36);
-		} else {
-			$likes = Like::orderBy('created_at', 'DESC')
-								->where('liker', '=', $username)
-								->simplePaginate(36);
-		}
-		
-		return View::make('users.all-likes')
-		->withUser($user)
-		->with('likes', $likes);
-	}
 }

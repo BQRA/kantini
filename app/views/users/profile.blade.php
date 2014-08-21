@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="text-center">
-	<div class="user-box {{ $user->gender }}" id="profileBox">
+	<div class="user-box {{ $user->profile->gender }}" id="profileBox">
 		<div class="avatar">
 			@if($user->profile->avatar == 'guest')
 				{{ HTML::image('/Avatars/guest-avatar.png') }}
@@ -15,54 +15,36 @@
 			<span>{{ $user->username }}</span>
 		</div>
 		<div class="school">
-			{{ $user->school }} Üniversitesi
+			{{ $user->profile->school }} Üniversitesi <br>
+			{{--son görülme {{ date('H:i',strtotime($user->last_login)) }} --}}
 		</div>
 		<div class="custom-line"></div>
 		<div class="row numbers">
 			<div class="col-sm-4">
-				<a href="#">
-					@if($posts_all->count() > 0)
-						<a href="{{ URL::action('show.users.all.posts', $user->username) }}">{{ $posts_all->count() }}</a>
-					@else
-						{{ $posts_all->count() }}
-					@endif
-					<small>Gönderi</small>
-				</a>
+				@if($users_all_posts->count() > 0)
+					<a href="{{ URL::action('user.all.posts', $user->username) }}">{{ $users_all_posts->count() }}</a>
+				@else
+					{{ $users_all_posts->count() }}
+				@endif
+				<small>Gönderi</small>
 			</div>
+
+			<div class="col-sm-4">
+				@if($users_all_comments->count() > 0)
+					<a href="{{ URL::action('user.all.comments', $user->username) }}">{{ $users_all_comments->count() }}</a>
+				@else
+					{{ $users_all_comments->count() }}
+				@endif
+				<small>Yorum</small>
+			</div>
+
 			<div class="col-sm-4">
 				<a href="#">
-					@if($comments_all->count() > 0)
-						<a href="{{ URL::action('show.users.all.comments', $user->username) }}">{{ $comments_all->count() }}</a>
-					@else
-						{{ $comments_all->count() }}
-					@endif
-					<small>Yorum</small>
+					0<small>Oy</small>
 				</a>
 			</div>
-			<div class="col-sm-4">
-				<a href="#">
-					@if($likes->count() > 0)
-						<a href="{{ URL::action('show.users.all.likes', $user->username) }}">{{ $likes->count() }}</a>
-					@else
-						{{ $likes->count() }}
-					@endif
-					<small>Beğeni</small>
-				</a>
-			</div>
+
 		</div>
 	</div>
-
-	<!-- <i>Son görülme: {{ $user->last_login }}</i> <br>
-	Eposta: {{ $user->email }} <br>
-	Twitter: {{ $user->profile->twitter_username }} <br>
-	Instagram: {{ $user->profile->instagram_username }} <br>
-	Facebook: {{ $user->profile->facebook_username }}
-	Ad: {{ $user->profile->full_name }} <br> -->
-
-	{{--@if($orgs_all->count() > 0)
-		Toplam organizasyon: {{ $orgs_all->count() }} &rarr; <a href="{{ URL::action('show.users.all.organizations', $user->username) }}">Tümü</a> <br>
-	@else
-		Toplam organizasyon: {{ $orgs_all->count() }} <br>
-	@endif--}}
 </div>
 @stop
