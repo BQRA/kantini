@@ -51,7 +51,7 @@ class PostsController extends \BaseController {
 			$rules = [
 				'post' 		=> 'required|min:5|max:800',
 				'org_name'  => 'required',
-				'org_aut' 	=> 'required|min:5|max:100',
+				'org_auth' 	=> 'required|min:5|max:100',
 				'org_auth_contact' => 'required'
 			];
 
