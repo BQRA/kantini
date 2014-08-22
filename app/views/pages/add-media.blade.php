@@ -10,7 +10,8 @@
 			Dedikod'unuza resim veya vidyo eklemek icin eklemek istediğiniz medyanın URL'sini giriniz. <br>
 			Örn: <b>http://images.boomsbeat.com/data/images/full/209/jobs-jpg.jpg</b> veya <b>http://www.youtube.com/watch?v=bd6dQmN-mPw</b>
 		</p>
-		<input id="mediaUrl" type="text" placeholder="http://">
+
+		{{ Form::Input('text', 'media' ,null, ['placeholder' => 'http://', 'id' => 'mediaUrl'] ) }}
 
 		<div class="clear mt30"></div>
 

@@ -3,7 +3,9 @@
 class PostsController extends \BaseController {
 
 	public function sendPost() {
-		if(empty(Input::get('post_type'))) {
+		$var = trim(Input::get('post_type'));
+		
+		if(empty($var)) {
 			$data = Input::all();
 
 			if(Auth::check()) {
@@ -40,6 +42,102 @@ class PostsController extends \BaseController {
 			return Redirect::route('home')
 			->withErrors($validator)
 			->withInput();
+			}
+		} elseif(Input::get('post_type') == 'event') {
+			$data = Input::all();
+
+			$rules = [
+			//gerekli kontroller eklenecek
+				'dedikod' 		=> 'required|min:3|max:800',
+				'event_name' 	=> 'required|min:5|max:50'
+			];
+
+			$validator = Validator::make($data, $rules);
+
+			if($validator->passes()) {
+				if(Input::hasFile('org_photo')) {
+				$file            = Input::file('event_photo');
+				$destinationPath = public_path().'/Organizations/';
+				$filename        = Auth::user()->username.'_'.Hash::make($file->getClientOriginalName()).'.'.$file->getClientOriginalExtension();
+				$uploadSuccess   = $file->move($destinationPath, $filename);
+			} else {
+				$filename = 'default_org_photo';
+			}
+
+				$post = new Post;
+				$post->username 			= Auth::user()->username;
+				$post->gender 				= Auth::user()->profile->gender;
+				$post->type 				= Input::get('post_type');
+				$post->event_name 			= trim(Input::get('event_name'));
+				$post->event_date 			= Input::get('event_date');
+				$post->event_address 		= trim(Input::get('event_address'));
+				$post->event_map 			= trim(Input::get('event_map'));
+				$post->event_auth 			= trim(Input::get('event_auth'));
+				$post->event_auth_contact 	= trim(Input::get('event_auth_contact'));
+				$post->event_price 			= trim(Input::get('event_price'));
+				$post->event_photo 			= $filename;
+				$post->dedikod 				= trim(Input::get('dedikod'));
+				$post->save();
+
+				Session::flash('message', 'İletiniz başarıyla gönderilmiştir!');
+				return Redirect::route('home');
+			} else {
+				//Validasyon hatalı döndüğünde etkinlik lightbox'ı açık ve doldurulan alanların dolu gelmesi gerek
+				return Redirect::to('/?lightbox=false')
+				->withErrors($validator)
+				->withInput();
+			}
+		} elseif(Input::get('post_type') == 'video') {
+			$data = Input::all();
+
+			$rules = [
+				'dedikod' 	=> 'required|min:5|max:800',
+				'media' 	=> 'required'
+			];
+
+			$validator = Validator::make($data, $rules);
+
+			if($validator->passes()) {
+				$post = new Post;
+				$post->username 	= Auth::user()->username;
+				$post->gender 		= Auth::user()->profile->gender;
+				$post->type 		= Input::get('post_type');
+				$post->dedikod 		= trim(Input::get('dedikod'));
+				$post->links 		= Input::get('media');
+				$post->save();
+
+				Session::flash('message', 'İletiniz başarıyla gönderilmiştir!');
+				return Redirect::route('home');
+			} else {
+				return Redirect::route('home')
+				->withErrors($validator)
+				->withInput();
+			}
+		} elseif(Input::get('post_type') == 'image') {
+			$data = Input::all();
+
+			$rules = [
+				'dedikod' 	=> 'required|min:5|max:800',
+				'media' 	=> 'required'
+			];
+
+			$validator = Validator::make($data, $rules);
+
+			if($validator->passes()) {
+				$post = new Post;
+				$post->username 	= Auth::user()->username;
+				$post->gender 		= Auth::user()->profile->gender;
+				$post->type 		= Input::get('post_type');
+				$post->dedikod 		= trim(Input::get('dedikod'));
+				$post->links 		= Input::get('media');
+				$post->save();
+
+				Session::flash('message', 'İletiniz başarıyla gönderilmiştir!');
+				return Redirect::route('home');
+			} else {
+				return Redirect::route('home')
+				->withErrors($validator)
+				->withInput();
 			}
 		}
 	}

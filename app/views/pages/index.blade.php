@@ -53,6 +53,89 @@
 				@if($post->type == 'dedikod')
 					{{ $post->dedikod }}
 				@endif
+			
+				@if($post->type == 'event')
+					<div class="content-ticket">
+						<div class="add-event-container">
+							<div class="ticket-effect"></div>
+							
+							<div class="add-event">
+								
+								<div class="event-bg-image">
+									{{ HTML::image('/Organizations/'.$post->event_photo) }}
+								</div>
+
+								<div class="details">
+									<div class="row">
+									
+										<div class="col-sm-10 detail title">
+											<strong>Etkinlik Adı</strong>
+											<span>{{ $post->event_name }}</span>
+										</div>
+								
+										<div class="col-sm-2 detail pic">
+											<div class="pic-upload">
+												{{ HTML::image('/Organizations/'.$post->event_photo) }}
+											</div>
+										</div>
+									</div>
+							
+									<div class="clearfix"></div>
+							
+									<div class="row">
+										<div class="col-sm-3 detail">
+											<strong>Etkinlik Tarihi</strong>
+											<span>{{ $post->event_date }}</span>
+										</div>
+								
+										<div class="col-sm-3 detail">
+											<strong>Yetkili Kisi</strong>
+											<span>{{ $post->event_auth }}</span>
+										</div>
+								
+										<div class="col-sm-3 detail">
+											<strong>İletisim</strong>
+											<span>{{ $post->event_auth_contact }}</span>
+										</div>
+								
+										<div class="col-sm-3 detail">
+											<strong>Harita</strong>
+											<span><a target="_blank" href="https://www.google.com/maps/place/Mihrişah+Valide+Sultan+Caddesi+(A.+Hisarı+E-80+Bağlantı+Yolu),+Anadolu+Hisarı+Mh.,+34398+İstanbul,+Türkiye/@41.0818107,29.0721677,17z/data=!3m1!4b1!4m2!3m1!1s0x14caca20f7e62653:0xb3d15fcbd31e51ae">Haritada Gör</a></span>
+										</div>
+									</div>
+							
+									<div class="clearfix"></div>
+							
+									<div class="row">
+										<div class="col-sm-8 detail address">
+											<strong>Adres</strong>
+											<span>{{ $post->event_address }}</span>
+										</div>
+										
+										<div class="col-sm-4 detail price">
+											{{ $post->event_price }}
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="clear mt10"></div>
+					{{ $post->dedikod }}
+				@endif
+
+				@if($post->type == 'image')
+					<div class="content-img-container"><img src="{{$post->links}}" alt="" /></div>
+					<div class="clear mt10"></div>
+					{{ $post->dedikod }}
+				@endif
+
+				@if($post->type == 'video')
+					<iframe width="580" height="360" src="{{$post->links}}?rel=0&autoplay=0&fullscreen=0" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+					<div class="clear mt10"></div>
+					{{ $post->dedikod }}
+				@endif
 			</div>
 				
 			<div class="toolbar">
