@@ -9,12 +9,13 @@
 <div class="dedikods">
 	@foreach($users_all_posts as $post)
 	<?php
-		$post_id 	= $post->id;
+		$dummy 		= $post;
+		$post_id 	= $dummy->id;
 	 	$comments 	= Comment::where('post_id', '=', $post_id)->get();
 	 	$up 		= Up::where('post_id', '=', $post_id)->get();
 		$down 		= Down::where('post_id', '=', $post_id)->get();
 	 ?>
-		<div class="dedikod {{$post->gender}}">
+		<div class="dedikod {{$dummy->gender}}">
 			{{-- Main Page Avatar --}}
 			<div class="avatar">
 				@if(empty($user))
@@ -25,26 +26,26 @@
 					@if($user->profile->avatar == 'guest')
 						{{ HTML::image('/Avatars/guest-avatar.png') }}
 					@else
-						{{ HTML::image('/Avatars/'.$post->username.'.jpg') }}
+						{{ HTML::image('/Avatars/'.$dummy->username.'.jpg') }}
 					@endif
 				@endif
 			</div>
 			{{-- Main Page Avatar --}}
 
 			<div class="content">
-				{{$post->dedikod}}
+				@include('partial.dummy')
 			</div>
 
 			<div class="toolbar">
 				<div class="left">
 					@if(!empty($user))
 						<a class="username" data-lightbox="{{ URL::action('show.profile', $user->username) }} #profileBox" data-lightboxtitle="Profil Kartı" href="javascript:;">
-							{{ $post->username }}
+							{{ $dummy->username }}
 						</a>
 					@else 
-						<span class="username">{{ $post->username }}</span>
+						<span class="username">{{ $dummy->username }}</span>
 						@endif
-						<span class="date"><a href="{{ URL::action('show.post', $post_id) }}">{{date('d.m.Y',strtotime($post->created_at))}}</a></span>
+						<span class="date"><a href="{{ URL::action('show.post', $post_id) }}">{{date('d.m.Y',strtotime($dummy->created_at))}}</a></span>
 				</div>
 						
 				<div class="right">

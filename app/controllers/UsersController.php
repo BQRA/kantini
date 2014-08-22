@@ -157,7 +157,7 @@ class UsersController extends \BaseController {
 		$users_all_posts = Post::orderBy('created_at', 'DESC')
 								->where('username', '=', $username)
 								->orderBy('created_at', 'DESC')
-								->simplePaginate(36);
+								->Paginate(36);
 
 		return View::make('users.all-posts', compact('user', 'users_all_posts'));
 	}
@@ -173,7 +173,7 @@ class UsersController extends \BaseController {
 		$users_all_comments = Comment::where('commenter', '=', $username)
 										->groupBy('post_id')
 										->orderBy('created_at', 'DESC')
-										->simplePaginate(36);
+										->Paginate(36);
 
 		return View::make('users.all-comments', compact('user', 'users_all_comments'));
 	}

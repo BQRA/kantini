@@ -2,7 +2,7 @@
 <p>
 @if(!Up::where('post_id', $post_id)->where('ip_address', $_SERVER['REMOTE_ADDR'])->count()>0)	
 				
-	{{ Form::hidden('post_type', $post->type) }}
+	{{ Form::hidden('post_type', $dummy->type) }}
 	{{ Form::hidden('post_id', $post_id) }}
 	{{ Form::hidden('rate', 'up') }}
 
@@ -10,7 +10,7 @@
 
 @elseif(Up::where('post_id', $post_id)->where('ip_address', $_SERVER['REMOTE_ADDR'])->count()>0)
 	
-	{{ Form::hidden('post_type', $post->type) }}
+	{{ Form::hidden('post_type', $dummy->type) }}
 	{{ Form::hidden('post_id', $post_id) }}
 	{{ Form::hidden('rate', 'up') }}
 
@@ -25,7 +25,7 @@
 @if(!Down::where('post_id', $post_id)->where('ip_address', $_SERVER['REMOTE_ADDR'])->count()>0)
 						
 				
-	{{ Form::hidden('post_type', $post->type) }}
+	{{ Form::hidden('post_type', $dummy->type) }}
 	{{ Form::hidden('post_id', $post_id) }}
 	{{ Form::hidden('rate', 'down') }}
 
@@ -34,7 +34,7 @@
 
 @elseif(Down::where('post_id', $post_id)->where('ip_address', $_SERVER['REMOTE_ADDR'])->count()>0)
 		
-	{{ Form::hidden('post_type', $post->type) }}
+	{{ Form::hidden('post_type', $dummy->type) }}
 	{{ Form::hidden('post_id', $post_id) }}
 	{{ Form::hidden('rate', 'down') }}
 

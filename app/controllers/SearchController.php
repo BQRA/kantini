@@ -9,7 +9,7 @@ class SearchController extends \BaseController {
 		if($validator->passes()) {
 			$posts = $query
 			? Post::search($query)->get()
-			: Post::orderBy('created_at', 'DESC')->simplePaginate(36);
+			: Post::orderBy('created_at', 'DESC')->Paginate(36);
 
 			return View::make('pages.search', compact('posts'));	
 		} else {

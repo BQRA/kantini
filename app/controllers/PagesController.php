@@ -8,7 +8,7 @@ class PagesController extends \BaseController {
 			$login_user = User::whereUsername(Auth::user()->username)->first();
 		}
 				
-		$posts = Post::orderBy('created_at', 'DESC')->get();
+		$posts = Post::orderBy('created_at', 'DESC')->Paginate(36);
 		return View::make('pages.index', compact('posts', 'login_user'));
 	}
 
