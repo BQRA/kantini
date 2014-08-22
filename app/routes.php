@@ -42,6 +42,11 @@ Route::get('create-event', [
 	'uses'	=> 'PagesController@createEvent'
 ]);
 
+Route::get('add-media', [
+	'as' 	=> 'add.media',
+	'uses' 	=> 'PagesController@addMedia'
+]);
+
 Route::get('post/{id}', [
 	'as' 	=> 'show.post',
 	'uses' 	=> 'PostsController@showPost'
@@ -64,7 +69,6 @@ Route::get('search',[
 	'uses' => 'SearchController@Search'
 ]);
 
-	Route::post('up', 'RatesController@up');
-	Route::post('down', 'RatesController@down');
+	Route::post('rate', 'RatesController@rate');
 
-Route::get('add-media', 'PagesController@addMedia');
+
