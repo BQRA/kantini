@@ -12,11 +12,11 @@ function guest_username() {
 }
 
 function session_user_posts() {
-	$user_posts = Post::where('username', '=', Auth::user()->username)->get();
+	$user_posts = Post::where('username', Auth::user()->username)->get();
 	return $user_posts;
 }
 
 function session_user_comments() {
-	$user_comments = Comment::where('commenter', '=', Auth::user()->username)->get();
+	$user_comments = Comment::where('commenter', Auth::user()->username)->get();
 	return $user_comments;
 }

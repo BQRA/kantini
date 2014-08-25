@@ -5,7 +5,6 @@
 	<?php 
 		$dummy 		= $post;
 		$post_id 	= $dummy->id;
-		$comments 	= Comment::where('post_id', '=', $post_id)->get();
 		$up 		= Up::where('post_id', '=', $post_id)->get();
 		$down 		= Down::where('post_id', '=', $post_id)->get();
 	?>
@@ -108,4 +107,5 @@
 			</div>
 		</div>	
 	</div>
+	{{ $post->links }}
 @stop

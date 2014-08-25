@@ -61,9 +61,9 @@ class UsersController extends \BaseController {
 
 	public function showProfile($username) {
 		
-		$user = User::whereUsername($username)->firstOrFail();
-		$users_all_posts = Post::where('username', '=', $username)->get();
-		$users_all_comments = Comment::where('commenter', '=', $username)->get();
+		$user 				= User::whereUsername($username)->firstOrFail();
+		$users_all_posts 	= Post::where('username', $username)->get();
+		$users_all_comments = Comment::where('commenter', $username)->get();
 
 		return View::make('users.profile', compact('user', 'users_all_posts', 'users_all_comments'));
 	}
@@ -154,10 +154,35 @@ class UsersController extends \BaseController {
 			return View::make('errors.404');
 		}
 
-		$users_all_posts = Post::orderBy('created_at', 'DESC')
-								->where('username', '=', $username)
+		if (isset($_GET['type']) && isset($_GET['orderBy'])) {
+			$type 	 = $_GET['type'];
+			$orderBy = $_GET['orderBy'];
+
+			$users_all_posts = Post::where('username', $username)
+								->where('type', $type)
+								->orderBy('created_at', $orderBy)
+								->Paginate(3);
+
+		} elseif (isset($_GET['orderBy'])) {
+			$orderBy = $_GET['orderBy'];
+
+			$users_all_posts = Post::where('username', $username)
+								->orderBy('created_at', $orderBy)
+								->Paginate(3);
+
+		} elseif (isset($_GET['type'])) {
+			$type = $_GET['type'];
+
+			$users_all_posts = Post::orderBy('created_at', 'DESC')
+								->where('username', $username)
+								->where('type', $type)
+								->Paginate(3);
+			
+		} else {
+			$users_all_posts = Post::where('username', $username)
 								->orderBy('created_at', 'DESC')
-								->Paginate(36);
+								->Paginate(3);
+		}
 
 		return View::make('users.all-posts', compact('user', 'users_all_posts'));
 	}
@@ -170,10 +195,39 @@ class UsersController extends \BaseController {
 			return View::make('errors.404');
 		}
 
-		$users_all_comments = Comment::where('commenter', '=', $username)
+		if (isset($_GET['type']) && isset($_GET['orderBy'])) {
+			$type = $_GET['type'];
+			$orderBy = $_GET['orderBy'];
+
+			$users_all_comments = Comment::with('post')->where('commenter', $username)
+										->groupBy('post_id')
+										->where('type', $type)
+										->orderBy('created_at', $orderBy)
+										->Paginate(3);
+
+		} elseif (isset($_GET['orderBy'])) {
+			$orderBy = $_GET['orderBy'];
+
+			$users_all_comments = Comment::with('post')->where('commenter', $username)
+										->groupBy('post_id')
+										->orderBy('created_at', $orderBy)
+										->Paginate(3);
+
+		} elseif (isset($_GET['type'])) {
+			$type = $_GET['type'];
+
+			$users_all_comments = Comment::with('post')->where('commenter', $username)
+										->groupBy('post_id')
+										->where('type', $type)
+										->orderBy('created_at', 'DESC')
+										->Paginate(3);
+			
+		} else {
+			$users_all_comments = Comment::with('post')->where('commenter', $username)
 										->groupBy('post_id')
 										->orderBy('created_at', 'DESC')
-										->Paginate(36);
+										->Paginate(3);
+		}
 
 		return View::make('users.all-comments', compact('user', 'users_all_comments'));
 	}
