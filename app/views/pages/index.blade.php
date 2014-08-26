@@ -1,3 +1,5 @@
+baran
+
 @extends('layouts.master')
 
 @section('content')
