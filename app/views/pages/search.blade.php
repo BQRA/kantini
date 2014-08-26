@@ -54,4 +54,17 @@
 			<p class="text-center">Arama kelimenizi kısaltıp sonuç yelpazenizi genisletebilirsiniz.</p>
 		</div>
 	@endif
+
+	@if(isset($_GET['type']) && isset($_GET['orderBy']))
+	{{ $posts->appends(['q' => $_GET['q'], 'type' => $_GET['type'], 'orderBy' => $_GET['orderBy']])->links() }}
+
+	@elseif(isset($_GET['orderBy']))
+	{{ $posts->appends(['q' => $_GET['q'], 'orderBy' => $_GET['orderBy']])->links() }}
+
+	@elseif(isset($_GET['type']))
+	{{ $posts->appends(['q' => $_GET['q'], 'type' => $_GET['type']])->links() }}
+
+	@else
+	{{ $posts->appends(['q' => $_GET['q']])->links() }}
+	@endif
 @stop
