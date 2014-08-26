@@ -1,5 +1,3 @@
-baran sengul
-
 @extends('layouts.master')
 
 @section('content')
