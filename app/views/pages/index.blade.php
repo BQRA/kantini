@@ -1,27 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-<div class="filter-bar">
-	<div class="left">
-		<div class="select-box">
-			<span class="text">Türe göre filtrele</span>
-			<ul>
-				<li><a href="#">Dedikodlar</a></li>
-				<li><a href="#">Etkinlikler</a></li>
-			</ul>
-		</div>
-	</div>
-
-	<div class="right">
-		<div class="select-box">
-			<span class="text">İçeriğe göre filtrele</span>
-			<ul>
-				<li><a href="#">En yeniler</a></li>
-				<li><a href="#">En eskiler</a></li>
-			</ul>
-		</div>
-	</div>
-</div>
+@include('partial.filter-bar')
 
 <div class="dedikods">
 	@foreach($posts as $post)
@@ -29,9 +9,9 @@
 		$dummy 		= $post;
 		$post_id 	= $dummy->id;
 		$user 		= User::whereUsername($dummy->username)->first(); 
-		$comments 	= Comment::where('post_id', '=', $post_id)->get();
-		$up 		= Up::where('post_id', '=', $post_id)->get();
-		$down 		= Down::where('post_id', '=', $post_id)->get();
+		$comments 	= Comment::where('post_id', $post_id)->get();
+		$up 		= Up::where('post_id', $post_id)->get();
+		$down 		= Down::where('post_id', $post_id)->get();
 	?>
 		<div class="dedikod {{$dummy->gender}}">
 		{{-- Main Page Avatar --}}
@@ -54,14 +34,30 @@
 				@include('partial.dummy')
 			</div>
 				
+<<<<<<< HEAD
 			<div class="toolbar">
 				@include('partial.toolbar')
 			</div>
 				
+=======
+			@include('partial.toolbar')
+			
+>>>>>>> FETCH_HEAD
 			<div class="clear"></div>
 			<div class="load-comments"></div>
 		</div>
 	@endforeach
 </div>
-{{ $posts->links() }}
+	@if(isset($_GET['type']) && isset($_GET['orderBy']))
+	{{ $posts->appends(['type' => $_GET['type'], 'orderBy' => $_GET['orderBy']])->links() }}
+
+	@elseif(isset($_GET['orderBy']))
+	{{ $posts->appends(['orderBy' => $_GET['orderBy']])->links() }}
+
+	@elseif(isset($_GET['type']))
+	{{ $posts->appends(['type' => $_GET['type']])->links() }}
+
+	@else
+	{{ $posts->links() }}
+	@endif
 @stop

@@ -5,6 +5,7 @@
 @section('select-box-selected') yazdığı @stop
 {{-- select box'in icine gelecek metin #end --}}
 @include('partial.special-list-title')
+@include('partial.filter-bar')
 
 <div class="dedikods">
 	@foreach($users_all_posts as $post)
@@ -35,6 +36,7 @@
 			<div class="content">
 				@include('partial.dummy')
 			</div>
+<<<<<<< HEAD
 
 			<div class="toolbar">
 				<div class="left">
@@ -55,11 +57,26 @@
 					<span class="like">{{$up->count() - $down->count()}}</span>
 				</div>
 			</div>
+=======
+			
+			@include('partial.toolbar')
+>>>>>>> FETCH_HEAD
 
 			<div class="clear"></div>
 			<div class="load-comments"></div>
 		</div>
 	@endforeach
 </div>
+	@if(isset($_GET['type']) && isset($_GET['orderBy']))
+	{{ $users_all_posts->appends(['type' => $_GET['type'], 'orderBy' => $_GET['orderBy']])->links() }}
 
+	@elseif(isset($_GET['orderBy']))
+	{{ $users_all_posts->appends(['orderBy' => $_GET['orderBy']])->links() }}
+
+	@elseif(isset($_GET['type']))
+	{{ $users_all_posts->appends(['type' => $_GET['type']])->links() }}
+
+	@else
+	{{ $users_all_posts->links() }}
+	@endif
 @stop

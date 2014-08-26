@@ -5,16 +5,18 @@
 		<div class="special-list-title">
 			aranan <strong><?php echo $_GET['q'] ?></strong> kelimesi ile ilgili bulunan <strong>{{$posts->count()}}</strong> sonuç gösteriliyor.
 		</div>
-
+		
+		@include('partial.filter-bar')
+		
 		<div class="dedikods">
 		@foreach($posts as $post)
 		<?php
 			$dummy 		= $post;
 			$post_id 	= $dummy->id;
 			$user 		= User::whereUsername($dummy->username)->first(); 
-			$comments 	= Comment::where('post_id', '=', $post_id)->get();
-			$up 		= Up::where('post_id', '=', $post_id)->get();
-			$down 		= Down::where('post_id', '=', $post_id)->get();
+			$comments 	= Comment::where('post_id', $post_id)->get();
+			$up 		= Up::where('post_id', $post_id)->get();
+			$down 		= Down::where('post_id', $post_id)->get();
 		?>
 		
 		<div class="dedikod {{ $dummy->gender }}">
@@ -38,10 +40,15 @@
 				@include('partial.dummy')
 			</div>
 
+<<<<<<< HEAD
 			<div class="toolbar">
 				@include('partial.toolbar')
 			</div>
 
+=======
+			@include('partial.toolbar')
+			
+>>>>>>> FETCH_HEAD
 			<div class="clear"></div>
 
 			<div class="load-comments"></div>
@@ -54,4 +61,5 @@
 			<p class="text-center">Arama kelimenizi kısaltıp sonuç yelpazenizi genisletebilirsiniz.</p>
 		</div>
 	@endif
+	{{ $posts->appends(['q' => $_GET['q']])->links() }}
 @stop

@@ -144,7 +144,7 @@ class PostsController extends \BaseController {
 
 	public function showPost($id) {
 		try {
-			$post = Post::where('id', '=', $id)->firstOrFail();
+			$post = Post::where('id', $id)->firstOrFail();
 		} catch (Exception $e) {
 			return View::make('errors.404');
 		}
@@ -154,12 +154,12 @@ class PostsController extends \BaseController {
 		}
 
 		$post_id 	= $post->id;
-		$up 		= Up::where('post_id', '=', $post_id);
-		$down 		= Down::where('post_id', '=', $post_id);
+		$up 		= Up::where('post_id', $post_id);
+		$down 		= Down::where('post_id', $post_id);
 		$user 		= User::whereUsername($post->username)->first();
 
 		$comments 	= Comment::orderBy('created_at', 'DESC')
-							->where('post_id', '=', $id)
+							->where('post_id', $id)
 							->get();
 
 		return View::make('posts.show-post', compact('post', 'comments', 'login_user', 'user', 'post_id', 'up', 'down'));
@@ -167,7 +167,7 @@ class PostsController extends \BaseController {
 
 	public function sendComment() {
 		try {
-			$post 	= Post::where('id', '=', Input::get('post_id'))->firstOrFail();
+			$post 	= Post::where('id', Input::get('post_id'))->firstOrFail();
 		} catch (Exception $e) {
 			return View::make('errors.404');
 		}
@@ -176,11 +176,15 @@ class PostsController extends \BaseController {
 
 		if(Auth::check()) {
 			$commenter = Auth::user()->username;
+			$user_id   = Auth::user()->id;	
+			$post_type = $post->type;
 			$rules = [
 					'comment' => 'required|min:5|max:800'
 				];
 		} else {
 			$commenter = guest_username();
+			$user_id   = null;
+			$post_type = null;
 			$rules = [
 					'comment' => 'required|min:5|max:800'
 				];
@@ -191,8 +195,10 @@ class PostsController extends \BaseController {
 		if($validator->passes()) {
 			$comment = new Comment;
 			$comment->commenter 	= $commenter;
+			$comment->user_id 		= $user_id;
 			$comment->post_id 		= Input::get('post_id');
 			$comment->comment 		= trim(Input::get('comment'));
+			$comment->post_type 	= $post_type;
 			$comment->save();
 
 			Session::flash('message', 'Yorumunuz başarıyla gönderilmiştir!');
