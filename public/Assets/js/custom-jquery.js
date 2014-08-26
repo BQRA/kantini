@@ -115,8 +115,8 @@ $(function () {
 			$('.lightbox-loading').remove();
 			$('.lightbox-bg .lightbox-container').addClass('opened');
 			// form masks
-			$('.add-event .detail input[name=org_date]').mask('00/00/0000');
-			$('.add-event .detail input[name=org_time]').mask('00:00');
+			$('.add-event .detail input[name=event_date]').mask('00/00/0000');
+			$('.add-event .detail input[name=event_time]').mask('00:00');
 		});
 	});
 	// close lightboxes

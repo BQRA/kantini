@@ -40,15 +40,8 @@
 				@include('partial.dummy')
 			</div>
 
-<<<<<<< HEAD
-			<div class="toolbar">
-				@include('partial.toolbar')
-			</div>
-
-=======
 			@include('partial.toolbar')
 			
->>>>>>> FETCH_HEAD
 			<div class="clear"></div>
 
 			<div class="load-comments"></div>
