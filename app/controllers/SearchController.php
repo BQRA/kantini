@@ -8,8 +8,8 @@ class SearchController extends \BaseController {
 
 		if($validator->passes()) {
 			$posts = $query
-			? Post::search($query)->get()
-			: Post::orderBy('created_at', 'DESC')->get();
+			? Post::search($query)->paginate(3)
+			: Post::orderBy('created_at', 'DESC')->paginate(3);
 
 			return View::make('pages.search', compact('posts'));	
 		} else {
