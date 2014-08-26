@@ -49,6 +49,18 @@ function alert(content, title) {
 	}
 }
 
+// input mask in lightbox
+function lbMask() {
+	$('.add-event .detail input[name=event_date]').mask('00/00/0000');
+	$('.add-event .detail input[name=event_time]').mask('00:00');
+}
+
+// lightbox opened effect
+function lbOpened() {
+	$('.lightbox-loading').remove();
+	$('.lightbox-bg .lightbox-container').addClass('opened');
+}
+
 // close lightbox function 
 function closeLightbox() {
 	$('.lightbox-bg .lightbox-container').removeClass('opened');
@@ -112,11 +124,8 @@ $(function () {
 		event.stopPropagation();
 		alert(null, $(this).attr('data-lightboxtitle'));
 		$('.lightbox-bg .lightbox-content').load($(this).attr('data-lightbox'), function(){
-			$('.lightbox-loading').remove();
-			$('.lightbox-bg .lightbox-container').addClass('opened');
-			// form masks
-			$('.add-event .detail input[name=event_date]').mask('00/00/0000');
-			$('.add-event .detail input[name=event_time]').mask('00:00');
+			lbOpened();
+			lbMask();
 		});
 	});
 	// close lightboxes
@@ -188,7 +197,7 @@ $(function () {
 		alert($(this).html());
 	});
 
-	// Dedikod Attachment 
+	// Dedikod Attachment
 	$('body').on('click', '#addAttachment', function(event) {
 		$('.dedikod-attachment-infos *').remove();
 		$(this).parents('.lightbox-content').clone().appendTo('.dedikod-attachment-infos');
@@ -210,10 +219,22 @@ $(function () {
 				$('input[name=post_type]').attr('value', 'image');
 				$('.dedikod-area .attachment img').attr('src', $('#mediaUrl').val());
 			}
+			$('.bar-button.media').removeAttr('data-lightbox').attr('data-edit', '').text('Resim veya Video"yu Düzenle');
+			$('.bar-button.event').remove();
 		} else if ( $(this).attr('data-type') == 'event' ) {
+			$('.bar-button.event').removeAttr('data-lightbox').attr('data-edit', '').text('Etkinliği Düzenle');
+			$('.bar-button.media').remove();
 			$('.dedikod-area .attachment img').attr('src', '/kantini/public/Assets/images/event-attached.png');
 		}
 		attachImg();
+	});
+	$('body').on('click', '[data-edit]', function(event) {
+		event.stopPropagation();
+		alert(null, $(this).attr('data-lightboxtitle'));
+		$('.lightbox-container .lightbox-content').html('');
+		$('.dedikod-attachment-infos .lightbox-content > *').clone().appendTo('.lightbox-container .lightbox-content');
+		lbOpened();
+		lbMask();
 	});
 
 });

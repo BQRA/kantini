@@ -7,7 +7,7 @@
 	<div class="blank-page box">
 		<h2>Baska bir URL'den Link Ekle</h2>
 		<p>
-			Dedikod'unuza resim veya vidyo eklemek icin eklemek istediğiniz medyanın URL'sini giriniz. <br>
+			Dedikod'unuza resim veya video eklemek icin eklemek istediğiniz medyanın URL'sini giriniz. <br>
 			Örn: <b>http://images.boomsbeat.com/data/images/full/209/jobs-jpg.jpg</b> veya <b>http://www.youtube.com/watch?v=bd6dQmN-mPw</b>
 		</p>
 

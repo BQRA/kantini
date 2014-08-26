@@ -29,9 +29,7 @@
 				@include('partial.dummy')
 			</div>
 
-			<div class="toolbar">
-				@include('partial.toolbar')
-			</div>
+			@include('partial.toolbar')
 			
 			<div class="clear"></div>
 

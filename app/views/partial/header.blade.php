@@ -26,7 +26,7 @@
 		<div class="bottom-bar">
 			<div class="left">
 				<span class="bar-button event" data-lightbox="{{ URL::action('home') }}/create-event #addEvent" data-lightboxtitle="Etkinlik Ekle">Etkinlik Ekle</span>
-				<span class="bar-button media" data-lightbox="{{ URL::action('home') }}/add-media #addMedia" data-lightboxtitle="Resim veya Vidyo Ekle">Resim veya Vidyo Ekle</span>
+				<span class="bar-button media" data-lightbox="{{ URL::action('home') }}/add-media #addMedia" data-lightboxtitle="Resim veya Video Ekle">Resim veya Video Ekle</span>
 			</div>
 			<div class="right">
 				@if(!Auth::check())
