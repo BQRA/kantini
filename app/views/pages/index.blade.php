@@ -1,3 +1,5 @@
+bora
+
 @extends('layouts.master')
 
 @section('content')
