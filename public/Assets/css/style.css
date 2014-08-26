@@ -1040,10 +1040,10 @@ p {
   display: inline-block;
   width: 100%;
   height: 27px;
-  margin: 10px 0 20px 0;
+  margin: 15px 0;
 }
 .container .left-container .dedikods .dedikod .toolbar .left {
-  width: 60%;
+  width: 55%;
 }
 .container .left-container .dedikods .dedikod .toolbar .left span,
 .container .left-container .dedikods .dedikod .toolbar .left a {
@@ -1051,7 +1051,7 @@ p {
   margin-right: 20px;
 }
 .container .left-container .dedikods .dedikod .toolbar .right {
-  width: 40%;
+  width: 45%;
   text-align: right;
 }
 .container .left-container .dedikods .dedikod .toolbar .right span,
@@ -1095,19 +1095,53 @@ p {
   color: #aaa;
   font-size: 24px;
 }
-.container .left-container .dedikods .dedikod .toolbar .like,
-.container .left-container .dedikods .dedikod .toolbar .comment {
-  padding: 4px 0 0 25px;
-  background: url('../images/sprite.png') 0 -96px;
+.container .left-container .dedikods .dedikod .toolbar .like form {
+  display: inline-block;
+  float: left;
+}
+.container .left-container .dedikods .dedikod .toolbar .like .up,
+.container .left-container .dedikods .dedikod .toolbar .like .down,
+.container .left-container .dedikods .dedikod .toolbar .like .result {
+  background: url('../images/sprite.png');
   font: 700 18px 'Quattrocento Sans', 'Helvetica Neue', Arial;
+  width: 32px;
+  height: 27px;
   cursor: pointer;
+  display: inline-block;
+  float: left;
+  margin: 0;
 }
-.container .left-container .dedikods .dedikod .toolbar .like.selected,
-.container .left-container .dedikods .dedikod .toolbar .comment.selected {
-  background: url('../images/sprite.png') -61px -96px;
+.container .left-container .dedikods .dedikod .toolbar .like .up:hover,
+.container .left-container .dedikods .dedikod .toolbar .like .down:hover {
+  border-color: rgba(0, 0, 0, 0.2);
 }
-.container .left-container .dedikods .dedikod .toolbar .like.liked,
-.container .left-container .dedikods .dedikod .toolbar .comment.liked {
+.container .left-container .dedikods .dedikod .toolbar .like .up {
+  background-position: -126px -96px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 3px 0 0 3px;
+}
+.container .left-container .dedikods .dedikod .toolbar .like .up.selected {
+  background-position: -187px -96px;
+  border-color: rgba(99, 192, 133, 0.7);
+}
+.container .left-container .dedikods .dedikod .toolbar .like .down {
+  background-position: -249px -95px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 0 3px 3px 0;
+  position: relative;
+  left: -1px;
+}
+.container .left-container .dedikods .dedikod .toolbar .like .down.selected {
+  background-position: -310px -95px;
+  border-color: rgba(203, 76, 47, 0.4);
+}
+.container .left-container .dedikods .dedikod .toolbar .like .result {
+  background: none;
+  padding-top: 4px;
+  width: 50px;
+  text-align: center;
+}
+.container .left-container .dedikods .dedikod .toolbar .like .result.liked {
   -webkit-animation: liked 0.7s 1 linear;
   -moz-animation: liked 0.7s 1 linear;
   -ms-animation: liked 0.7s 1 linear;
@@ -1115,12 +1149,17 @@ p {
   animation: liked 0.7s 1 linear;
   animation-delay-time: 0.01s;
 }
-.container .left-container .dedikods .dedikod .toolbar .like.loading,
-.container .left-container .dedikods .dedikod .toolbar .comment.loading {
-  background: url('../images/loading.gif') 0 5px no-repeat !important;
+.container .left-container .dedikods .dedikod .toolbar .like .result.loading {
+  background: url('../images/loading.gif') center 5px no-repeat !important;
+  color: rgba(0, 0, 0, 0);
 }
 .container .left-container .dedikods .dedikod .toolbar .comment {
-  background-position: 0 -146px;
+  padding: 4px 0 0 25px;
+  background: url('../images/sprite.png') 0 -146px;
+  font: 700 18px 'Quattrocento Sans', 'Helvetica Neue', Arial;
+  cursor: pointer;
+  width: 75px;
+  text-align: center;
 }
 .container .right-panel {
   width: 240px;

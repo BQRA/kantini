@@ -147,35 +147,38 @@ $(function () {
 	});
 
 	// ajax likes
-	$('.dedikod .toolbar').on('click', '.like:not(.selected)', function(event) {
-		var $form = $(this).next('form'), serializedData = $form.serialize();
-		var likeNContainer = $(this), likeN = parseInt($(this).text());
-        $.ajax({
-            type: 'POST',
-            url: $form.attr('action'),
-            data: serializedData,
-            beforeSend: function() {
-            	likeNContainer.addClass('loading');
-            }
-        }).done(function(){
-        	likeNContainer.text(likeN+1).addClass('selected liked').removeClass('loading');
-            likeNContainer.next('form').attr('action', 'http://localhost:8888/kantini/public/dislike');
-        });
-	});
+	var ajax = null;
+	$('.dedikod .toolbar').on('click', '.like .up, .like .down', function(event) {
+		var $form = $(this).parents('form'), serializedData = $form.serialize();
+		var likeNContainer = $(this).parents('.like').find('.result'), likeN = parseInt($(this).parents('.like').find('.result').text());
 
-	$('.dedikod .toolbar').on('click', '.like.selected', function(event) {
-		var $form = $(this).next('form'), serializedData = $form.serialize();
-		var likeNContainer = $(this), likeN = parseInt($(this).text());
-        $.ajax({
+		var up = $(this).parents('.like').find('.up'), down = $(this).parents('.like').find('.down'), trans, way;
+		if ( $(this).attr('class') == 'up' && down.attr('class') == 'down selected' ) {
+			trans = likeN+2, way = '.up';
+		} else if ( $(this).attr('class') == 'up' ) {
+			trans = likeN+1, way = '.up';
+		} else if ( $(this).attr('class') == 'up selected' ) {
+			trans = likeN-1, way = null;
+		} else if ( $(this).attr('class') == 'down' && up.attr('class') == 'up selected' ) {
+			trans = likeN-2, way = '.down';
+		} else if ( $(this).attr('class') == 'down' ) {
+			trans = likeN-1, way = '.down';
+		} else if ( $(this).attr('class') == 'down selected' ) {
+			trans = likeN+1, way = null;
+		}
+
+		if( ajax ) { return false; }
+        ajax = $.ajax({
             type: 'POST',
             url: $form.attr('action'),
             data: serializedData,
             beforeSend: function() {
-            	likeNContainer.addClass('loading');
+            	likeNContainer.parents('.like').find('.selected').removeClass('selected');
+            	likeNContainer.addClass('loading').parents('.like').find(way).addClass('selected');
             }
         }).done(function(){
-        	likeNContainer.text(likeN-1).removeClass('selected liked').removeClass('loading');
-            likeNContainer.next('form').attr('action', 'http://localhost:8888/kantini/public/like');
+        	likeNContainer.text(trans).addClass('liked').removeClass('loading');
+        	ajax = null;
         });
 	});
 

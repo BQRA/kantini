@@ -33,8 +33,6 @@
 			<div class="toolbar">
 				@include('partial.toolbar')
 			</div>
-
-			@include('partial.rating')
 			
 			<div class="clear"></div>
 

@@ -42,8 +42,6 @@
 				@include('partial.toolbar')
 			</div>
 
-			@include('partial.rating')
-
 			<div class="clear"></div>
 
 			<div class="load-comments"></div>

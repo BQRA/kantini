@@ -788,9 +788,9 @@ p {
 					display: inline-block;
 					width: 100%;
 					height: 27px;
-					margin: 10px 0 20px 0;
+					margin: 15px 0;
 					.left {
-						width: 60%;
+						width: 55%;
 						span,
 						a {
 							float: left;
@@ -798,7 +798,7 @@ p {
 						}
 					}
 					.right {
-						width: 40%;
+						width: 45%;
 						text-align: right;
 						span,
 						a {
@@ -838,25 +838,69 @@ p {
 							font-size: 24px;
 						}
 					}
-					.like,
-					.comment {
-						padding: 4px 0 0 25px;
-						background: url('@{img-path}/sprite.png') 0 -96px;
-						.font2(700, 18px);
-						cursor: pointer;
-						&.selected {
-							background: url('@{img-path}/sprite.png') -61px -96px;
+					.like {
+						form {
+							display: inline-block;
+							float: left;
 						}
-						&.liked {
-							.animation(liked, .7s, 1);
-							animation-delay-time: 0.01s;
+						.up,
+						.down,
+						.result {
+							background: url('@{img-path}/sprite.png');
+							.font2(700, 18px);
+							width: 32px;
+							height: 27px;
+							cursor: pointer;
+							display: inline-block;
+							float: left;
+							margin: 0;
 						}
-						&.loading {
-							background: url('@{img-path}/loading.gif') 0 5px no-repeat !important;
+						.up:hover, 
+						.down:hover {
+							border-color: rgba(0, 0, 0, 0.2);
+						}
+						.up {
+							background-position: -126px -96px;
+							border: 1px solid rgba(0, 0, 0, 0.1);
+							border-radius: 3px 0 0 3px;
+							&.selected {
+								background-position: -187px -96px;
+								border-color: rgba(99, 192, 133, 0.7);
+							}
+						}
+						.down {
+							background-position: -249px -95px;
+							border: 1px solid rgba(0, 0, 0, 0.1);
+							border-radius: 0 3px 3px 0;
+							position: relative;
+							left: -1px;
+							&.selected {
+								background-position: -310px -95px;
+								border-color: rgba(203, 76, 47, 0.4);
+							}
+						}
+						.result {
+							background: none;
+							padding-top: 4px;
+							width: 50px;
+							text-align: center;
+							&.liked {
+								.animation(liked, .7s, 1);
+								animation-delay-time: 0.01s;
+							}
+							&.loading {
+								background: url('@{img-path}/loading.gif') center 5px no-repeat !important;
+								color: rgba(0, 0, 0, 0);
+							}
 						}
 					}
 					.comment {
-						background-position: 0 -146px;
+						padding: 4px 0 0 25px;
+						background: url('@{img-path}/sprite.png') 0 -146px;
+						.font2(700, 18px);
+						cursor: pointer;
+						width: 75px;
+						text-align: center;
 					}
 				}
 			}
