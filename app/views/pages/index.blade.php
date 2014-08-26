@@ -1,4 +1,4 @@
-osman
+baran sengul
 
 @extends('layouts.master')
 
