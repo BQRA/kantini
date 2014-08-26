@@ -54,5 +54,4 @@
 			<p class="text-center">Arama kelimenizi kısaltıp sonuç yelpazenizi genisletebilirsiniz.</p>
 		</div>
 	@endif
-	{{ $posts->appends(['q' => $_GET['q']])->links() }}
 @stop
