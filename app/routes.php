@@ -7,17 +7,19 @@ Route::get('/', [
 ]);
 
 Route::get('register', [
-	'as' 	=> 'user.register',
-	'uses' 	=> 'PagesController@register'
+	'as' 	 => 'user.register',
+	'uses' 	 => 'PagesController@register',
+	'before' => 'login'
 ]);
 
-	Route::post('register', 'UsersController@postRegister');
+	Route::post('register', 'UsersController@postRegister')->before('crsf');
 
-	Route::post('login', 'SessionsController@login');
+	Route::post('login', 'SessionsController@login')->before('crsf');
 
 Route::get('logout', [
-	'as' 	=> 'user.logout',
-	'uses' 	=> 'SessionsController@logout'
+	'as' 	 => 'user.logout',
+	'uses' 	 => 'SessionsController@logout',
+	'before' => 'guest'
 ]);
 
 Route::get('user/profile/{username}', [
@@ -31,20 +33,22 @@ Route::get('user/profile/{username}/edit', [
 	'before' => 'edit'
 ]);
 
-	Route::post('user/profile/{username}/edit', 'UsersController@updateProfile');
+	Route::post('user/profile/{username}/edit', 'UsersController@updateProfile')->before('edit', 'crsf');
 
-	Route::post('user/profile/{username}/change-password', 'UsersController@changePassword');
+	Route::post('user/profile/{username}/change-password', 'UsersController@changePassword')->before('edit', 'crsf');
 
-	Route::post('send-post', 'PostsController@sendPost');
+	Route::post('send-post', 'PostsController@sendPost')->before('crsf');
 
 Route::get('create-event', [
-	'as' 	=> 'create.event',
-	'uses'	=> 'PagesController@createEvent'
+	'as' 	 => 'create.event',
+	'uses'	 => 'PagesController@createEvent',
+	'before' => 'session'
 ]);
 
 Route::get('add-media', [
-	'as' 	=> 'add.media',
-	'uses' 	=> 'PagesController@addMedia'
+	'as' 	 => 'add.media',
+	'uses' 	 => 'PagesController@addMedia',
+	'before' => 'session'
 ]);
 
 Route::get('post/{id}', [
@@ -52,7 +56,7 @@ Route::get('post/{id}', [
 	'uses' 	=> 'PostsController@showPost'
 ]);
 
-	Route::post('send-comment', 'PostsController@sendComment');
+	Route::post('send-comment', 'PostsController@sendComment')->before('crsf');
 
 Route::get('user/profile/{username}/all-posts', [
 	'as' 	=> 'user.all.posts',
@@ -69,6 +73,4 @@ Route::get('search',[
 	'uses' => 'SearchController@Search'
 ]);
 
-	Route::post('rate', 'RatesController@rate');
-
-
+	Route::post('rate', 'RatesController@rate')->before('crsf');

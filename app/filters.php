@@ -99,3 +99,14 @@ Route::filter('edit', function($route) {
 		return Redirect::home();
 	}
 });
+
+Route::filter('session', function() {
+	if (!Auth::check()) 
+		return Redirect::to('/')
+		->with('message', 'Yapmak istediğiniz işlem üye girişi gerektirmektedir. <br><br>');
+});
+
+Route::filter('login', function() {
+	if(Auth::check()) 
+		return Redirect::to('/');
+});
