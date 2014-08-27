@@ -15,7 +15,7 @@
 					</div>
 					<div class="col-xs-2 detail pic">
 						<div class="pic-upload">
-							{{ Form::file('event_photo') }}
+							{{ Form::file('image') }}
 						</div>
 					</div>
 				</div>

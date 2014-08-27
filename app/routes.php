@@ -80,7 +80,7 @@ Route::get('user/profile/{username}/all-comments', [
 	'uses' 	=> 'UsersController@showUserAllComments'
 ]);
 
-Route::get('/{school}',[
+Route::get('/uni/{school}',[
 	'as' 	=> 'school',
 	'uses'  => 'PagesController@school'
 ]);

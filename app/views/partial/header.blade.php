@@ -6,7 +6,7 @@
 		</h1>
 	</div>
 
-	{{ Form::open(['action' => 'PostsController@sendPost']) }}
+	{{ Form::open(['action' => 'PostsController@sendPost', 'files' => true]) }}
 	@if(!empty($school))
 	{{ Form::hidden('school', $school) }}
 	@endif

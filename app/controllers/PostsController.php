@@ -3,16 +3,17 @@
 class PostsController extends \BaseController {
 
 	public function sendPost() {
+		
+		if(Input::has('school')) {
+			$school = Input::get('school');
+		} else {
+			$school = null;
+		}
+
 		$var = trim(Input::get('post_type'));
 		
 		if(empty($var)) {
 			$data = Input::all();
-
-			if(Input::has('school')) {
-				$school = Input::get('school');
-			} else {
-				$school = null;
-			}
 
 			if(Auth::check()) {
 				$username 	= Auth::user()->username;
@@ -52,31 +53,42 @@ class PostsController extends \BaseController {
 			}
 		} elseif(Input::get('post_type') == 'event') {
 			$data = Input::all();
+			return $data;
 
 			$rules = [
 			//gerekli kontroller eklenecek
 				'dedikod' 		=> 'required|min:3|max:800',
-				'event_name' 	=> 'required|min:5|max:50'
+				'event_name' 	=> 'required|min:5|max:50',
+				//'event_date'	=> 'required',
+				'event_auth' 	=> 'required|alpha_dash',
+				'event_auth_contact' => 'required|numeric',
+				//'image' 		=> 'mimes:jpeg,png'
+
 			];
 
 			$validator = Validator::make($data, $rules);
 
 			if($validator->passes()) {
-				if(Input::hasFile('org_photo')) {
-				$file            = Input::file('event_photo');
-				$destinationPath = public_path().'/Organizations/';
+
+				if(Input::hasFile('image')) {
+				$file            = Input::file('image');
+				$destinationPath = public_path().'/Events/';
 				$filename        = Auth::user()->username.'_'.Hash::make($file->getClientOriginalName()).'.'.$file->getClientOriginalExtension();
 				$uploadSuccess   = $file->move($destinationPath, $filename);
-			} else {
-				$filename = 'default_org_photo';
-			}
+				} else {
+					$filename = 'default_image';
+				}
+
+				//ayraçları nokta kullanmamız gerek
+				$date 		= Input::get('event_date');
+				$timestamp 	= date('Y/m/d H:i:s', strtotime($date));
 
 				$post = new Post;
 				$post->username 			= Auth::user()->username;
 				$post->gender 				= Auth::user()->profile->gender;
 				$post->type 				= Input::get('post_type');
 				$post->event_name 			= trim(Input::get('event_name'));
-				$post->event_date 			= Input::get('event_date');
+				$post->event_date 			= $timestamp;
 				$post->event_address 		= trim(Input::get('event_address'));
 				$post->event_map 			= trim(Input::get('event_map'));
 				$post->event_auth 			= trim(Input::get('event_auth'));

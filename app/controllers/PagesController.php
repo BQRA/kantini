@@ -37,6 +37,12 @@ class PagesController extends \BaseController {
 
 	public function school($school) {
 
+		try {
+			$value = Post::whereSchool($school)->firstOrFail();
+		} catch (Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+			return 'Okul bulunamadı';
+		}
+
 		if(Auth::check()) {
 			$login_user = User::whereUsername(Auth::user()->username)->first();
 		}
