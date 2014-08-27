@@ -27,6 +27,6 @@ class Post extends \Eloquent {
 	}
 
 	public function scopeSearch($query, $search) {
-		return $query->where('dedikod', 'LIKE', '%'.$search.'%')->orderBy('created_at', 'DESC');
+		return $query->where('dedikod', 'LIKE', '%'.$search.'%');
 	}
 }

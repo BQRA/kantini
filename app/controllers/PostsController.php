@@ -198,7 +198,7 @@ class PostsController extends \BaseController {
 			$comment->user_id 		= $user_id;
 			$comment->post_id 		= Input::get('post_id');
 			$comment->comment 		= trim(Input::get('comment'));
-			$comment->post_type 	= $post_type;
+			$comment->type 			= $post_type;
 			$comment->save();
 
 			Session::flash('message', 'Yorumunuz başarıyla gönderilmiştir!');

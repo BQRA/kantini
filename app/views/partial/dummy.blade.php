@@ -61,9 +61,8 @@
 										
 						<div class="col-sm-4 detail price">
 							{{ $dummy->event_price }}
-						</div>
-									
-				</div>
+						</div>				
+					</div>
 			</div>
 		</div>
 	</div>

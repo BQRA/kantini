@@ -3,7 +3,7 @@
 @section('content')
 	@if($posts->count())
 		<div class="special-list-title">
-			aranan <strong><?php echo $_GET['q'] ?></strong> kelimesi ile ilgili bulunan <strong>{{$posts->count()}}</strong> sonuç gösteriliyor.
+			aranan <strong><?php echo $_GET['q'] ?></strong> kelimesi ile ilgili bulunan <strong>{{$count->count()}}</strong> sonuç gösteriliyor.
 		</div>
 		
 		@include('partial.filter-bar')
