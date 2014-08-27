@@ -7,6 +7,7 @@
 	</div>
 
 	{{ Form::open(['action' => 'PostsController@sendPost']) }}
+	{{ Form::hidden('school', $school) }}
 	<div class="dedikod-area">
 
 		<!-- dedikod attachment infos -->
@@ -34,7 +35,7 @@
 					<span name="male" class="gender male bar-button"></span>
 					<span name="female" class="gender female bar-button"></span>
 				@endif
-				
+
 				<span class="send">
 					Shift + Enter &nbsp;
 					{{ Form::submit('DEDiKODLA', ['class' => 'button green sm'])}}

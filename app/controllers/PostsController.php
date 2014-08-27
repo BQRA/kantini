@@ -8,6 +8,12 @@ class PostsController extends \BaseController {
 		if(empty($var)) {
 			$data = Input::all();
 
+			if(Input::has('school')) {
+				$school = Input::get('school');
+			} else {
+				$school = null;
+			}
+
 			if(Auth::check()) {
 				$username 	= Auth::user()->username;
 				$gender 	= Auth::user()->profile->gender;
@@ -33,13 +39,14 @@ class PostsController extends \BaseController {
 				$post->gender 	= $gender;
 				$post->dedikod 	= trim(Input::get('dedikod'));
 				$post->type 	= 'dedikod';
+				$post->school 	= $school;
 				$post->save();
 
 				Session::flash('message', 'İletiniz başarıyla gönderilmiştir!');
-				return Redirect::route('home');
+				return Redirect::back();
 			} else {
 
-			return Redirect::route('home')
+			return Redirect::back()
 			->withErrors($validator)
 			->withInput();
 			}
@@ -80,7 +87,7 @@ class PostsController extends \BaseController {
 				$post->save();
 
 				Session::flash('message', 'İletiniz başarıyla gönderilmiştir!');
-				return Redirect::route('home');
+				return Redirect::back();
 			} else {
 				//Validasyon hatalı döndüğünde etkinlik lightbox'ı açık ve doldurulan alanların dolu gelmesi gerek
 				return Redirect::to('/?lightbox=false')
@@ -107,9 +114,9 @@ class PostsController extends \BaseController {
 				$post->save();
 
 				Session::flash('message', 'İletiniz başarıyla gönderilmiştir!');
-				return Redirect::route('home');
+				return Redirect::back();
 			} else {
-				return Redirect::route('home')
+				return Redirect::back()
 				->withErrors($validator)
 				->withInput();
 			}
@@ -133,9 +140,9 @@ class PostsController extends \BaseController {
 				$post->save();
 
 				Session::flash('message', 'İletiniz başarıyla gönderilmiştir!');
-				return Redirect::route('home');
+				return Redirect::back();
 			} else {
-				return Redirect::route('home')
+				return Redirect::back()
 				->withErrors($validator)
 				->withInput();
 			}

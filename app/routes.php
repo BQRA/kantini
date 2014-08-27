@@ -9,7 +9,7 @@ Route::get('/', [
 Route::get('register', [
 	'as' 	 => 'user.register',
 	'uses' 	 => 'PagesController@register',
-	'before' => 'login'
+	'before' => 'guest'
 ]);
 
 	Route::post('register', 'UsersController@postRegister')->before('crsf');
@@ -19,8 +19,31 @@ Route::get('register', [
 Route::get('logout', [
 	'as' 	 => 'user.logout',
 	'uses' 	 => 'SessionsController@logout',
-	'before' => 'guest'
+	'before' => 'auth'
 ]);
+
+Route::get('search',[
+	'as' 	=> 'search',
+	'uses'  => 'SearchController@Search'
+]);
+
+	Route::post('rate', 'RatesController@rate');
+
+Route::get('create-event', [
+	'as' 	 => 'create.event',
+	'uses'	 => 'PagesController@createEvent',
+	'before' => 'auth'
+]);
+
+Route::get('add-media', [
+	'as' 	 => 'add.media',
+	'uses' 	 => 'PagesController@addMedia',
+	'before' => 'auth'
+]);
+
+	Route::post('send-post', 'PostsController@sendPost')->before('crsf');
+
+	Route::post('send-comment', 'PostsController@sendComment')->before('crsf');
 
 Route::get('user/profile/{username}', [
 	'as' 	=> 'show.profile',
@@ -33,30 +56,14 @@ Route::get('user/profile/{username}/edit', [
 	'before' => 'edit'
 ]);
 
-	Route::post('user/profile/{username}/edit', 'UsersController@updateProfile')->before('edit', 'crsf');
+	Route::post('user/profile/{username}/edit', 'UsersController@updateProfile')->before('crsf');
 
-	Route::post('user/profile/{username}/change-password', 'UsersController@changePassword')->before('edit', 'crsf');
-
-	Route::post('send-post', 'PostsController@sendPost')->before('crsf');
-
-Route::get('create-event', [
-	'as' 	 => 'create.event',
-	'uses'	 => 'PagesController@createEvent',
-	'before' => 'session'
-]);
-
-Route::get('add-media', [
-	'as' 	 => 'add.media',
-	'uses' 	 => 'PagesController@addMedia',
-	'before' => 'session'
-]);
+	Route::post('user/profile/{username}/change-password', 'UsersController@changePassword')->before('crsf');
 
 Route::get('post/{id}', [
 	'as' 	=> 'show.post',
 	'uses' 	=> 'PostsController@showPost'
 ]);
-
-	Route::post('send-comment', 'PostsController@sendComment')->before('crsf');
 
 Route::get('user/profile/{username}/all-posts', [
 	'as' 	=> 'user.all.posts',
@@ -68,9 +75,7 @@ Route::get('user/profile/{username}/all-comments', [
 	'uses' 	=> 'UsersController@showUserAllComments'
 ]);
 
-Route::get('search',[
-	'as' => 'search',
-	'uses' => 'SearchController@Search'
+Route::get('/{school}',[
+	'as' 	=> 'school',
+	'uses'  => 'PagesController@school'
 ]);
-
-	Route::post('rate', 'RatesController@rate')->before('crsf');

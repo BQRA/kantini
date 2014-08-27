@@ -31,7 +31,7 @@ class UsersController extends \BaseController {
 				$filename        = $user->username. '.jpg';
 				$uploadSuccess   = $file->move($destinationPath, $filename);
 				} else {
-					$filename = 'guest';
+				$filename = 'guest';
 			}
 
 			$full_name 	= (!empty(Input::get('full_name'))) ? trim(Input::get('full_name')) : null;
@@ -154,23 +154,23 @@ class UsersController extends \BaseController {
 			return View::make('errors.404');
 		}
 
-		if (isset($_GET['type']) && isset($_GET['orderBy'])) {
-			$type 	 = $_GET['type'];
-			$orderBy = $_GET['orderBy'];
+		if (Input::has('type') && Input::has('orderBy')) {
+			$type 		= $_GET['type'];
+			$orderBy 	= $_GET['orderBy'];
 
 			$users_all_posts = Post::where('username', $username)
 								->where('type', $type)
 								->orderBy('created_at', $orderBy)
 								->Paginate(3);
 
-		} elseif (isset($_GET['orderBy'])) {
+		} elseif (Input::has('orderBy')) {
 			$orderBy = $_GET['orderBy'];
 
 			$users_all_posts = Post::where('username', $username)
 								->orderBy('created_at', $orderBy)
 								->Paginate(3);
 
-		} elseif (isset($_GET['type'])) {
+		} elseif (Input::has('type')) {
 			$type = $_GET['type'];
 
 			$users_all_posts = Post::orderBy('created_at', 'DESC')
@@ -195,9 +195,9 @@ class UsersController extends \BaseController {
 			return View::make('errors.404');
 		}
 
-		if (isset($_GET['type']) && isset($_GET['orderBy'])) {
-			$type = $_GET['type'];
-			$orderBy = $_GET['orderBy'];
+		if (Input::has('type') && Input::has('orderBy')) {
+			$type 		= $_GET['type'];
+			$orderBy 	= $_GET['orderBy'];
 
 			$users_all_comments = Comment::with('post')->where('commenter', $username)
 										->groupBy('post_id')
@@ -205,7 +205,7 @@ class UsersController extends \BaseController {
 										->orderBy('created_at', $orderBy)
 										->Paginate(3);
 
-		} elseif (isset($_GET['orderBy'])) {
+		} elseif (Input::has('orderBy')) {
 			$orderBy = $_GET['orderBy'];
 
 			$users_all_comments = Comment::with('post')->where('commenter', $username)
@@ -213,7 +213,7 @@ class UsersController extends \BaseController {
 										->orderBy('created_at', $orderBy)
 										->Paginate(3);
 
-		} elseif (isset($_GET['type'])) {
+		} elseif (Input::has('type')) {
 			$type = $_GET['type'];
 
 			$users_all_comments = Comment::with('post')->where('commenter', $username)

@@ -9,33 +9,58 @@ class SearchController extends \BaseController {
 		if($validator->passes()) {
 
 			if($posts = $query) {
-				if (isset($_GET['type']) && isset($_GET['orderBy'])) {
+				if (Input::has('type') && Input::has('orderBy')) {
 					$type 		= $_GET['type'];
 					$orderBy 	= $_GET['orderBy'];
 
-					$count = Post::search($query)->orderBy('created_at', $orderBy)->where('type', $type)->get();
-					$posts = Post::search($query)->orderBy('created_at', $orderBy)->where('type', $type)->Paginate(3);
+					$count = Post::search($query)
+								->orderBy('created_at', $orderBy)
+								->where('type', $type)
+								->get();
 
-				} elseif (isset($_GET['orderBy'])) {
+					$posts = Post::search($query)
+								->orderBy('created_at', $orderBy)
+								->where('type', $type)
+								->Paginate(3);
+
+				} elseif (Input::has('orderBy')) {
 					$orderBy = $_GET['orderBy'];
 
-					$count = Post::search($query)->orderBy('created_at', $orderBy)->get();
-					$posts = Post::search($query)->orderBy('created_at', $orderBy)->Paginate(3);
+					$count = Post::search($query)
+								->orderBy('created_at', $orderBy)
+								->get();
 
-				} elseif (isset($_GET['type'])) {
+					$posts = Post::search($query)
+								->orderBy('created_at', $orderBy)
+								->Paginate(3);
+
+				} elseif (Input::has('type')) {
 					$type = $_GET['type'];
 
-					$count = Post::search($query)->orderBy('created_at', 'DESC')->where('type', $type)->get();
-					$posts = Post::search($query)->orderBy('created_at', 'DESC')->where('type', $type)->Paginate(3);
+					$count = Post::search($query)
+								->orderBy('created_at', 'DESC')
+								->where('type', $type)
+								->get();
+
+					$posts = Post::search($query)
+								->orderBy('created_at', 'DESC')
+								->where('type', $type)
+								->Paginate(3);
 					
 				} else {
-					$count = Post::search($query)->orderBy('created_at', 'DESC')->get();
-					$posts = Post::search($query)->orderBy('created_at', 'DESC')->Paginate(3);
+					$count = Post::search($query)
+								->orderBy('created_at', 'DESC')
+								->get();
+
+					$posts = Post::search($query)
+								->orderBy('created_at', 'DESC')
+								->Paginate(3);
 				}
 			} else {
 				$count = Post::orderBy('created_at', 'DESC')->get();
 				$posts = Post::orderBy('created_at', 'DESC')->Paginate(3);
 			}
+			
 			return View::make('pages.search', compact('posts', 'count'));
 
 		} else {
