@@ -13,6 +13,7 @@
 		$up 		= Up::where('post_id', $post_id)->get();
 		$down 		= Down::where('post_id', $post_id)->get();
 	?>
+	
 		<div class="dedikod {{$dummy->gender}}">
 			@include('partial.avatar')
 			

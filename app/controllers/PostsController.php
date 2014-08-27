@@ -216,4 +216,14 @@ class PostsController extends \BaseController {
 			->withErrors($validator);
 		}
 	}
+
+	public function userDeleteDedikod($id) {
+
+		Post::find($id)->delete();
+		Comment::wherePost_id($id)->delete();
+		Down::wherePost_id($id)->delete();
+		Up::wherePost_id($id)->delete();
+
+		return Redirect::back()->with('message', 'Gönderiniz başarıyla silinmiştir.');
+	}
 }

@@ -161,14 +161,14 @@ class UsersController extends \BaseController {
 			$users_all_posts = Post::where('username', $username)
 								->where('type', $type)
 								->orderBy('created_at', $orderBy)
-								->Paginate(3);
+								->Paginate(36);
 
 		} elseif (Input::has('orderBy')) {
 			$orderBy = $_GET['orderBy'];
 
 			$users_all_posts = Post::where('username', $username)
 								->orderBy('created_at', $orderBy)
-								->Paginate(3);
+								->Paginate(36);
 
 		} elseif (Input::has('type')) {
 			$type = $_GET['type'];
@@ -176,12 +176,12 @@ class UsersController extends \BaseController {
 			$users_all_posts = Post::orderBy('created_at', 'DESC')
 								->where('username', $username)
 								->where('type', $type)
-								->Paginate(3);
+								->Paginate(36);
 			
 		} else {
 			$users_all_posts = Post::where('username', $username)
 								->orderBy('created_at', 'DESC')
-								->Paginate(3);
+								->Paginate(36);
 		}
 
 		return View::make('users.all-posts', compact('user', 'users_all_posts'));
@@ -203,7 +203,7 @@ class UsersController extends \BaseController {
 										->groupBy('post_id')
 										->where('type', $type)
 										->orderBy('created_at', $orderBy)
-										->Paginate(3);
+										->Paginate(36);
 
 		} elseif (Input::has('orderBy')) {
 			$orderBy = $_GET['orderBy'];
@@ -211,7 +211,7 @@ class UsersController extends \BaseController {
 			$users_all_comments = Comment::with('post')->where('commenter', $username)
 										->groupBy('post_id')
 										->orderBy('created_at', $orderBy)
-										->Paginate(3);
+										->Paginate(36);
 
 		} elseif (Input::has('type')) {
 			$type = $_GET['type'];
@@ -220,13 +220,13 @@ class UsersController extends \BaseController {
 										->groupBy('post_id')
 										->where('type', $type)
 										->orderBy('created_at', 'DESC')
-										->Paginate(3);
+										->Paginate(36);
 			
 		} else {
 			$users_all_comments = Comment::with('post')->where('commenter', $username)
 										->groupBy('post_id')
 										->orderBy('created_at', 'DESC')
-										->Paginate(3);
+										->Paginate(36);
 		}
 
 		return View::make('users.all-comments', compact('user', 'users_all_comments'));

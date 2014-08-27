@@ -61,15 +61,15 @@
 										
 						<div class="col-sm-4 detail price">
 							{{ $dummy->event_price }}
-						</div>				
+						</div>		
 					</div>
+				</div>
 			</div>
 		</div>
 	</div>
-
 	<div class="clear mt10"></div>
 	{{ $dummy->dedikod }}
-	</div>
+	
 @endif
 
 @if($dummy->type == 'image')

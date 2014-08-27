@@ -45,6 +45,11 @@ Route::get('add-media', [
 
 	Route::post('send-comment', 'PostsController@sendComment')->before('crsf');
 
+Route::get('delete-dedikod/{id}',[
+	'as' 	=> 'user.delete.dedikod',
+	'uses' 	=> 'PostsController@userDeleteDedikod'
+]);
+
 Route::get('user/profile/{username}', [
 	'as' 	=> 'show.profile',
 	'uses' 	=> 'UsersController@showProfile'

@@ -7,7 +7,9 @@
 	</div>
 
 	{{ Form::open(['action' => 'PostsController@sendPost']) }}
+	@if(!empty($school))
 	{{ Form::hidden('school', $school) }}
+	@endif
 	<div class="dedikod-area">
 
 		<!-- dedikod attachment infos -->

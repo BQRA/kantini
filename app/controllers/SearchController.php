@@ -21,7 +21,7 @@ class SearchController extends \BaseController {
 					$posts = Post::search($query)
 								->orderBy('created_at', $orderBy)
 								->where('type', $type)
-								->Paginate(3);
+								->Paginate(36);
 
 				} elseif (Input::has('orderBy')) {
 					$orderBy = $_GET['orderBy'];
@@ -32,7 +32,7 @@ class SearchController extends \BaseController {
 
 					$posts = Post::search($query)
 								->orderBy('created_at', $orderBy)
-								->Paginate(3);
+								->Paginate(36);
 
 				} elseif (Input::has('type')) {
 					$type = $_GET['type'];
@@ -45,7 +45,7 @@ class SearchController extends \BaseController {
 					$posts = Post::search($query)
 								->orderBy('created_at', 'DESC')
 								->where('type', $type)
-								->Paginate(3);
+								->Paginate(36);
 					
 				} else {
 					$count = Post::search($query)
@@ -54,11 +54,11 @@ class SearchController extends \BaseController {
 
 					$posts = Post::search($query)
 								->orderBy('created_at', 'DESC')
-								->Paginate(3);
+								->Paginate(36);
 				}
 			} else {
 				$count = Post::orderBy('created_at', 'DESC')->get();
-				$posts = Post::orderBy('created_at', 'DESC')->Paginate(3);
+				$posts = Post::orderBy('created_at', 'DESC')->Paginate(36);
 			}
 			
 			return View::make('pages.search', compact('posts', 'count'));

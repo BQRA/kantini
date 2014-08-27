@@ -38,4 +38,13 @@
 			<span class="result">{{$up->count() - $down->count()}}</span>
 		</span>
 	</div>
+	
+	{{--Düzenle ve Sil--}}
+	@if(Auth::check())
+		@if(Auth::user()->username == $dummy->username)
+			<a href="#">Düzenle</a> - <a href="{{ URL::route('user.delete.dedikod', $dummy->id) }}">Sil</a>
+		@endif
+	@endif
+	{{--Düzenle ve Sil--}}
+	
 </div>

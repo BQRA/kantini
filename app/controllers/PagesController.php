@@ -14,22 +14,22 @@ class PagesController extends \BaseController {
 
 			$posts = Post::orderBy('created_at', $orderBy)
 						->where('type', $type)
-						->Paginate(3);
+						->Paginate(36);
 
 		} elseif (Input::has('orderBy')) {
 			$orderBy = $_GET['orderBy'];
 
-			$posts = Post::orderBy('created_at', $orderBy)->Paginate(3);
+			$posts = Post::orderBy('created_at', $orderBy)->Paginate(36);
 
 		} elseif (Input::has('type')) {
 			$type = $_GET['type'];
 
 			$posts = Post::orderBy('created_at', 'DESC')
 						->where('type', $type)
-						->Paginate(3);
+						->Paginate(36);
 			
 		} else {
-			$posts = Post::orderBy('created_at', 'DESC')->Paginate(3);
+			$posts = Post::orderBy('created_at', 'DESC')->Paginate(36);
 		}
 
 		return View::make('pages.index', compact('posts', 'login_user', 'school'));
@@ -48,14 +48,14 @@ class PagesController extends \BaseController {
 			$posts = Post::orderBy('created_at', $orderBy)
 						->where('type', $type)
 						->where('school', $school)
-						->Paginate(3);
+						->Paginate(36);
 
 		} elseif (Input::has('orderBy')) {
 			$orderBy = $_GET['orderBy'];
 
 			$posts = Post::orderBy('created_at', $orderBy)
 						->where('school', $school)
-						->Paginate(3);
+						->Paginate(36);
 
 		} elseif (Input::has('type')) {
 			$type = $_GET['type'];
@@ -63,12 +63,12 @@ class PagesController extends \BaseController {
 			$posts = Post::orderBy('created_at', 'DESC')
 						->where('type', $type)
 						->where('school', $school)
-						->Paginate(3);
+						->Paginate(36);
 			
 		} else {
 			$posts = Post::orderBy('created_at', 'DESC')
 						->where('school', $school)
-						->Paginate(3);
+						->Paginate(36);
 		}
 
 		return View::make('pages.index', compact('posts', 'login_user', 'school'));
