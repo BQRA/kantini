@@ -14,21 +14,7 @@
 		$down 		= Down::where('post_id', $post_id)->get();
 	?>
 		<div class="dedikod {{$dummy->gender}}">
-		{{-- Main Page Avatar --}}
-			<div class="avatar">
-				@if(empty($user))
-					{{ HTML::image('/Avatars/guest-avatar.png') }}
-				@endif
-
-				@if(!empty($user))
-					@if($user->profile->avatar == 'guest')
-						{{ HTML::image('/Avatars/guest-avatar.png') }}
-					@else
-						{{ HTML::image('/Avatars/'.$dummy->username.'.jpg') }}
-					@endif
-				@endif
-			</div>
-		{{-- Main Page Avatar --}}
+			@include('partial.avatar')
 			
 			<div class="content">
 				@include('partial.dummy')
