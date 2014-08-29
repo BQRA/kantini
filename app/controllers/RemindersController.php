@@ -19,13 +19,15 @@ class RemindersController extends Controller {
 	 */
 	public function postRemind()
 	{
-		switch ($response = Password::remind(Input::only('email')))
+		switch ($response = Password::remind(Input::only('email'), function($message) {
+			$message->subject('Şifre Sıfırla');
+		}))
 		{
 			case Password::INVALID_USER:
-				return Redirect::back()->with('error', Lang::get($response));
+				return Redirect::back()->with('message', 'Kullanıcı bulunamadı.');
 
 			case Password::REMINDER_SENT:
-				return Redirect::back()->with('status', Lang::get($response));
+				return Redirect::back()->with('message', 'Şifre sıfırlama epostası gönderildi!');
 		}
 	}
 
@@ -38,6 +40,10 @@ class RemindersController extends Controller {
 	public function getReset($token = null)
 	{
 		if (is_null($token)) App::abort(404);
+		
+		if(DB::table('password_reminders')->where('token', $token)->first() == false) {
+			return Redirect::home()->with('message', 'Yanlış işler peşindesin (: ');
+		}
 
 		return View::make('password.reset')->with('token', $token);
 	}
