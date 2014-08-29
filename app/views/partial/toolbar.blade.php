@@ -19,20 +19,36 @@
 			{{ Form::hidden('post_type', $dummy->type) }}
 			{{ Form::hidden('post_id', $post_id) }}
 			{{ Form::hidden('rate', 'up') }}
-			@if(!Up::where('post_id', $post_id)->where('ip_address', $_SERVER['REMOTE_ADDR'])->count()>0)	
-				<span class="up"></span>
-			@elseif(Up::where('post_id', $post_id)->where('ip_address', $_SERVER['REMOTE_ADDR'])->count()>0)
-				<span class="up selected"></span>
+			@if(Auth::check())
+				@if(!Up::where('post_id', $post_id)->where('rater', Auth::user()->username)->count()>0)	
+					<span class="up"></span>
+				@elseif(Up::where('post_id', $post_id)->where('rater', Auth::user()->username)->count()>0)
+					<span class="up selected"></span>
+				@endif
+			@else
+				@if(!Up::where('post_id', $post_id)->where('rater', guest_username())->count()>0)	
+					<span class="up"></span>
+				@elseif(Up::where('post_id', $post_id)->where('rater', guest_username())->count()>0)
+					<span class="up selected"></span>
+				@endif
 			@endif
 			{{ Form::close() }}
 			{{ Form::open(['action' => 'RatesController@rate']) }}
 			{{ Form::hidden('post_type', $dummy->type) }}
 			{{ Form::hidden('post_id', $post_id) }}
 			{{ Form::hidden('rate', 'down') }}
-			@if(!Down::where('post_id', $post_id)->where('ip_address', $_SERVER['REMOTE_ADDR'])->count()>0)			
-				<span class="down"></span>
-			@elseif(Down::where('post_id', $post_id)->where('ip_address', $_SERVER['REMOTE_ADDR'])->count()>0)
-				<span class="down selected"></span>
+			@if(Auth::check())
+				@if(!Down::where('post_id', $post_id)->where('rater', Auth::user()->username)->count()>0)
+					<span class="down"></span>
+				@elseif(Down::where('post_id', $post_id)->where('rater', Auth::user()->username)->count()>0)
+					<span class="down selected"></span>
+				@endif
+			@else
+				@if(!Down::where('post_id', $post_id)->where('rater', guest_username())->count()>0)
+					<span class="down"></span>
+				@elseif(Down::where('post_id', $post_id)->where('rater', guest_username())->count()>0)
+					<span class="down selected"></span>
+				@endif
 			@endif
 			{{ Form::close() }}
 			<span class="result">{{$up->count() - $down->count()}}</span>

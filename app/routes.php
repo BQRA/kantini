@@ -16,6 +16,10 @@ Route::get('register', [
 
 	Route::post('login', 'SessionsController@login')->before('crsf');
 
+	//
+	Route::post('create-event', 'PostsController@eventImage')->before('csrf');
+	//
+
 Route::get('logout', [
 	'as' 	 => 'user.logout',
 	'uses' 	 => 'SessionsController@logout',

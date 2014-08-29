@@ -2,6 +2,12 @@
 
 @section('content')
 
+{{ Form::open(['action' => 'PostsController@eventImage', 'files' => true]) }}
+{{ Form::file('image') }}
+
+{{ Form::submit('Gönder') }}
+{{ Form::close() }}
+
 <div id="addEvent">
 	{{ Form::hidden('post_type', 'event') }}
 	<div class="add-event-container">
