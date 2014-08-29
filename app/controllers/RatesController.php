@@ -15,102 +15,52 @@ class RatesController extends \BaseController {
 		}
 
 		if(Input::get('rate') == 'up') {
-			if(Auth::check()) {
-				if (!Up::where('post_id', $post_id)->where('rater', Auth::user()->username)->count()>0) {
+			if (!Up::where('post_id', $post_id)->where('ip_address', $_SERVER['REMOTE_ADDR'])->count()>0) {
 			
-					if(Down::where('post_id', $post_id)->where('rater', Auth::user()->username)->count()>0) {
-						$down_delete = Down::wherePost_id($post_id)->firstOrFail();
-						$down_delete->delete($down_delete);
-					}
-
-				$up = new Up;
-				$up->rater 		= $rater;
-				$up->post_id 	= $post_id;
-				$up->type 		= $type;
-				$up->ip_address = $_SERVER['REMOTE_ADDR'];
-				$up->save();
-
-				return Redirect::back();
-
-				} else {
-					$up_delete = Up::wherePost_id($post_id)->firstOrFail();
-					$up_delete->delete($up_delete);
-
-					return Redirect::back();
-				}
-			} else {
-				if (!Up::where('post_id', $post_id)->where('rater', guest_username())->count()>0) {
-			
-					if(Down::where('post_id', $post_id)->where('rater', guest_username())->count()>0) {
-						$down_delete = Down::wherePost_id($post_id)->firstOrFail();
-						$down_delete->delete($down_delete);
-					}
-
-				$up = new Up;
-				$up->rater 		= $rater;
-				$up->post_id 	= $post_id;
-				$up->type 		= $type;
-				$up->ip_address = $_SERVER['REMOTE_ADDR'];
-				$up->save();
-
-				return Redirect::back();
-
-				} else {
-					$up_delete = Up::wherePost_id($post_id)->firstOrFail();
-					$up_delete->delete($up_delete);
-
-					return Redirect::back();
-				}
+			if(Down::where('post_id', $post_id)->where('ip_address', $_SERVER['REMOTE_ADDR'])->count()>0) {
+				$down_delete = Down::wherePost_id($post_id)->firstOrFail();
+				$down_delete->delete($down_delete);
 			}
-		}
+
+			$up = new Up;
+			$up->rater 		= $rater;
+			$up->post_id 	= $post_id;
+			$up->type 		= $type;
+			$up->ip_address = $_SERVER['REMOTE_ADDR'];
+			$up->save();
+
+			return Redirect::back();
+
+			} else {
+				$up_delete = Up::wherePost_id($post_id)->firstOrFail();
+				$up_delete->delete($up_delete);
+
+				return Redirect::back();
+			}
+		}  
 
 		if(Input::get('rate') == 'down') {
-			if(Auth::check()) {
-				if (!Down::where('post_id', $post_id)->where('rater', Auth::user()->username)->count()>0) {
+			if (!Down::where('post_id', $post_id)->where('ip_address', $_SERVER['REMOTE_ADDR'])->count()>0) {
 
-					if(Up::where('post_id', $post_id)->where('rater', Auth::user()->username)->count()>0) {
-						$up_delete = Up::wherePost_id($post_id)->firstOrFail();
-						$up_delete->delete($up_delete);
-					}
-				
-				$down = new Down;
-				$down->rater 		= $rater;
-				$down->post_id 		= $post_id;
-				$down->type 		= $type;
-				$down->ip_address 	= $_SERVER['REMOTE_ADDR'];
-				$down->save();
+			if(Up::where('post_id', $post_id)->where('ip_address', $_SERVER['REMOTE_ADDR'])->count()>0) {
+				$up_delete = Up::wherePost_id($post_id)->firstOrFail();
+				$up_delete->delete($up_delete);
+			}
+			
+			$down = new Down;
+			$down->rater 		= $rater;
+			$down->post_id 		= $post_id;
+			$down->type 		= $type;
+			$down->ip_address 	= $_SERVER['REMOTE_ADDR'];
+			$down->save();
 
-				return Redirect::back();
+			return Redirect::back();
 
-				} else {
-					$down_delete = Down::wherePost_id($post_id)->firstOrFail();
-					$down_delete->delete($down_delete);
-
-					return Redirect::back();
-				}
 			} else {
-				if (!Down::where('post_id', $post_id)->where('rater', guest_username())->count()>0) {
-
-					if(Up::where('post_id', $post_id)->where('rater', guest_username())->count()>0) {
-						$up_delete = Up::wherePost_id($post_id)->firstOrFail();
-						$up_delete->delete($up_delete);
-					}
-				
-				$down = new Down;
-				$down->rater 		= $rater;
-				$down->post_id 		= $post_id;
-				$down->type 		= $type;
-				$down->ip_address 	= $_SERVER['REMOTE_ADDR'];
-				$down->save();
+				$down_delete = Down::wherePost_id($post_id)->firstOrFail();
+				$down_delete->delete($down_delete);
 
 				return Redirect::back();
-
-				} else {
-					$down_delete = Down::wherePost_id($post_id)->firstOrFail();
-					$down_delete->delete($down_delete);
-
-					return Redirect::back();
-				}
 			}
 		}
 	}

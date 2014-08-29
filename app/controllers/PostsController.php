@@ -238,17 +238,4 @@ class PostsController extends \BaseController {
 
 		return Redirect::back()->with('message', 'Gönderiniz başarıyla silinmiştir.');
 	}
-
-	//
-
-	public function eventImage() {
-		if(Input::hasFile('image')) {
-			$file            = Input::file('image');
-			$destinationPath = public_path().'/Events/';
-			$filename        = Auth::user()->username.'.'.$file->getClientOriginalExtension();
-			$uploadSuccess   = $file->move($destinationPath, $filename);
-		}
-	}
-
-	//
 }
