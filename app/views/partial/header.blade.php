@@ -18,18 +18,31 @@
 		
 		<div class="textarea-container">
 
-			<div class="attachment"><img src="" alt=""></div>
+			<div class="attachment">
+				<div class="del-attach">
+					<span class="icon">&#61956</span>
+				</div>
+				<img src="" alt="">
+			</div>
 
-		@if(!Auth::check())
-			{{ Form::textarea('dedikod', null, ['placeholder' => guest_username().' olarak dedikodla!']) }}
-		@else 
-			{{ Form::textarea('dedikod', null, ['placeholder' => Auth::user()->username.' olarak dedikodla!'])}}
-		@endif
+			@if(!Auth::check())
+				{{ Form::textarea('dedikod', null, ['placeholder' => guest_username().' olarak dedikodla!']) }}
+			@else 
+				{{ Form::textarea('dedikod', null, ['placeholder' => Auth::user()->username.' olarak dedikodla!'])}}
+			@endif
 		</div>
 		<div class="bottom-bar">
 			<div class="left">
-				<span class="bar-button event" data-lightbox="{{ URL::action('home') }}/create-event #addEvent" data-lightboxtitle="Etkinlik Ekle">Etkinlik Ekle</span>
-				<span class="bar-button media" data-lightbox="{{ URL::action('home') }}/add-media #addMedia" data-lightboxtitle="Resim veya Video Ekle">Resim veya Video Ekle</span>
+				<div class="no-attachment">
+					<span class="bar-button event" data-lightbox="{{ URL::action('home') }}/create-event #addEvent" data-lightboxtitle="Etkinlik Ekle">Etkinlik Ekle</span>
+					<span class="bar-button media" data-lightbox="{{ URL::action('home') }}/add-media #addMedia" data-lightboxtitle="Resim veya Video Ekle">Resim veya Video Ekle</span>
+				</div>
+				<div class="event-attached attached">
+					<span class="bar-button event" data-edit data-lightboxtitle="Etkinliği Düzenle">Etkinliği Düzenle</span>
+				</div>
+				<div class="media-attached attached">
+					<span class="bar-button media" data-edit data-lightboxtitle="Resim veya Videoyu Düzenle">Resim veya Videoyu Düzenle</span>
+				</div>
 			</div>
 			<div class="right">
 				@if(!Auth::check())

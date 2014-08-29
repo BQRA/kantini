@@ -2,6 +2,7 @@
 @import url(http://fonts.googleapis.com/css?family=Quattrocento+Sans:400,700&subset=latin,latin-ext);
 
 @import url(ani.less);
+@import url(icon.less);
 
 .font(@w: normal, @s: 16px) {
 	font: @w @s 'Helvetica Neue', Arial;
@@ -325,6 +326,29 @@ p {
 			width: 55px;
 			height: 55px;
 			display: none;
+			&:hover {
+				background-color: rgba(0, 0, 0, 0.2);
+				.del-attach {
+					display: inline-block;
+				}
+			}
+			.del-attach {
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				display: none;
+				text-align: center;
+				color: #fff;
+				font-size: 26px;
+				&:hover {
+					background-color: rgba(0, 0, 0, 0.4);
+				}
+				.icon {
+					cursor: pointer;
+				}
+			}
 			img {
 				width: 100%;
 			}
@@ -359,6 +383,9 @@ p {
 		width: 100%;
 		position: relative;
 		z-index: 2;
+		.attached {
+			display: none;
+		}
 		span {
 			padding: 7px;
 			display: inline-block;

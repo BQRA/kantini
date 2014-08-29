@@ -217,6 +217,7 @@ $(function () {
 		$('.dedikod-attachment-infos *').remove();
 		$(this).parents('.lightbox-content').clone().appendTo('.dedikod-attachment-infos');
 		closeLightbox();
+		$('.dedikod-area .no-attachment').hide();
 		$('.dedikod-area .textarea-container').addClass('added');
 		if ( $(this).attr('data-type') == 'media' ) {
 			var videoObj = videoId($('#mediaUrl').val());
@@ -234,15 +235,14 @@ $(function () {
 				$('input[name=post_type]').attr('value', 'image');
 				$('.dedikod-area .attachment img').attr('src', $('#mediaUrl').val());
 			}
-			$('.bar-button.media').removeAttr('data-lightbox').attr('data-edit', '').text('Resim veya Video"yu Düzenle');
-			$('.bar-button.event').remove();
+			$('.dedikod-area .media-attached').show();
 		} else if ( $(this).attr('data-type') == 'event' ) {
-			$('.bar-button.event').removeAttr('data-lightbox').attr('data-edit', '').text('Etkinliği Düzenle');
-			$('.bar-button.media').remove();
+			$('.dedikod-area .event-attached').show();
 			$('.dedikod-area .attachment img').attr('src', '/kantini/public/Assets/images/event-attached.png');
 		}
 		attachImg();
 	});
+	// Edit Attachment
 	$('body').on('click', '[data-edit]', function(event) {
 		event.stopPropagation();
 		alert(null, $(this).attr('data-lightboxtitle'));
@@ -250,6 +250,13 @@ $(function () {
 		$('.dedikod-attachment-infos .lightbox-content > *').clone().appendTo('.lightbox-container .lightbox-content');
 		lbOpened();
 		lbMask();
+	});
+	// Delete Attachment
+	$('body').on('click', '.attachment .del-attach .icon', function(event) {
+		$('.dedikod-attachment-infos').html('');
+		$('.dedikod-area .no-attachment').show();
+		$('.dedikod-area .attached').hide();
+		$('.dedikod-area .textarea-container').removeClass('added');
 	});
 
 });

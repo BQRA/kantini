@@ -1,0 +1,35 @@
+/*  iOS7-icon-font
+ *  (c) 2014 AKIRA-MIAYEK
+ *
+ *  jQuery.expandAccordion is freely distributable under the terms of an MIT-style license.
+ *
+ *--------------------------------------------------------------------------*/
+@font-face {
+  font-family: 'ios7-icon';
+  src: url('../fonts/ios7-icon.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+.icon {
+  display: inline;
+  font-size: 32px;
+  position: relative;
+  top: 3px;
+  font-family: 'ios7-icon';
+  -webkit-text-rendering: geometricPrecision;
+  -moz-text-rendering: geometricPrecision;
+  -ms-text-rendering: geometricPrecision;
+  -o-text-rendering: geometricPrecision;
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: antialiased;
+  -moz-font-smoothing: antialiased;
+  -ms-font-smoothing: antialiased;
+  -o-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+}
+.icon:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
