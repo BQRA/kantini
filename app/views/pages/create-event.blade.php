@@ -15,7 +15,9 @@
 					</div>
 					<div class="col-xs-2 detail pic">
 						<div class="pic-upload">
-							{{ Form::file('image') }}
+							<img id="htmlImageApi" src="Assets/images/select-image.png" />
+							<input type="file" onchange="previewImage(this)" accept="image/*" />
+							<input type="hidden" id="event-image" name="event-image" />
 						</div>
 					</div>
 				</div>

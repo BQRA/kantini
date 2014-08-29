@@ -25,6 +25,21 @@ jQuery(document).ready(function($) {
 // GLOBAL FUNTIONS
 ///////////////////////////////////////////////////
 
+// HTML5 image preview for upload
+function previewImage(input) {
+	var preview = document.getElementById('htmlImageApi');
+	if (input.files && input.files[0]) {
+		var reader = new FileReader();
+		reader.onload = function (e) {
+			preview.setAttribute('src', e.target.result);
+			document.getElementById('event-image').value = e.target.result;
+		}
+		reader.readAsDataURL(input.files[0]);
+	} else {
+		preview.setAttribute('src', 'Assets/images/select-image.png');
+	}
+}
+
 // get video url with regex
 function videoId(data) {
     data.match(/http:\/\/(player.|www.)?(vimeo\.com|youtu(be\.com|\.be))\/(video\/|embed\/|watch\?v=)?([A-Za-z0-9._%-]*)(\&\S+)?/);
