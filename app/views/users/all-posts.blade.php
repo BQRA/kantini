@@ -26,7 +26,9 @@
 			@include('partial.toolbar')
 
 			<div class="clear"></div>
-			<div class="comments loading"><i></i></div>
+			<div class="load-comments">
+				<div class="comments loading"><i></i></div>
+			</div>
 		</div>
 	@endforeach
 </div>

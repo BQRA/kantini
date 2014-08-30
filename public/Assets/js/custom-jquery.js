@@ -105,7 +105,8 @@ $(function () {
 	// global close
 	$('body').click(function(event) {
 		// close selectbox
-		$('.select-box ul').hide(0);
+		$('.select-box ul').hide(0).parents('.select-box').removeClass('opened');
+
 
 		//close lightbox
 		closeLightbox();
@@ -121,12 +122,12 @@ $(function () {
 	// selectbox
 	$('.select-box').click(function(event) {
 		event.stopPropagation();
-		$(this).find('ul').show(0);
+		$(this).addClass('opened').find('ul').show(0);
 	});
-	$('.select-box ul li').on('click', function(event){
+	$('.select-box:not(.custom) ul li').on('click', function(event){
 		$(this).parents('.select-box').find('.text').text($(this).text());
 		event.stopPropagation();
-		$(this).parents('ul').hide(0);
+		$(this).parents('ul').hide(0).parents('.select-box').removeClass('opened');
 	});
 
 	// load content from different file

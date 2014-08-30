@@ -9,6 +9,22 @@
 		@endif
 							
 		<span class="date"><a href="{{ URL::action('show.post', $post_id) }}">{{date('d.m.Y',strtotime($dummy->created_at))}}</a></span>
+		<div class="select-box custom">
+			<div class="text">
+				<span class="icon more">&#61703</span>
+			</div>
+			<ul>
+				<li><a href="javascript:;">Facebook'ta Paylas</a></li>
+				<li><a href="javascript:;">Twiter'da Paylas</a></li>
+				<li><a href="javascript:;">Bu gönderiyi raporla</a></li>
+				@if(Auth::check())
+				@if(Auth::user()->username == $dummy->username)
+				<li><a href="#">Düzenle</a></li>
+				<li><a class="danger" href="{{ URL::route('user.delete.dedikod', $dummy->id) }}">Sil</a></li>
+				@endif
+				@endif
+			</ul>
+		</div>
 	</div>
 							
 	<div class="right">
@@ -54,13 +70,5 @@
 			<span class="result">{{$up->count() - $down->count()}}</span>
 		</span>
 	</div>
-	
-	{{--Düzenle ve Sil--}}
-	@if(Auth::check())
-		@if(Auth::user()->username == $dummy->username)
-			<a href="#">Düzenle</a> - <a href="{{ URL::route('user.delete.dedikod', $dummy->id) }}">Sil</a>
-		@endif
-	@endif
-	{{--Düzenle ve Sil--}}
 	
 </div>

@@ -158,6 +158,9 @@ a:hover {
 .text-center {
 	text-align: center;
 }
+.danger {
+	color: #ea5c49 !important;
+}
 /* layout #end */
 
 /* buttons */
@@ -449,9 +452,24 @@ p {
 	.font(bold, 13px);
 	border-radius: 2px;
 	padding-right: 30px;
-	position: relative;
 	display: inline-block;
 	height: 30px;
+	&.custom {
+		box-shadow: none;
+		background-color: transparent;
+		border-radius: 0;
+		padding: 0;
+		height: auto;
+		&:after {
+			display: none;
+		}
+		.text {
+			padding: 0;
+			border-right: none;
+			min-width: inherit;
+			height: 25px;
+		}
+	}
 	&:after {
 		position: absolute;
 		right: 11px;
@@ -494,7 +512,7 @@ p {
 			border: 7px solid transparent;
 			border-bottom: 7px solid #ccc;
 			position: absolute;
-			left: 50%;
+			left: 7px;
 			top: -14px;
 			margin-left: -7px;
 		}
@@ -502,19 +520,20 @@ p {
 			color: #333;
 			white-space: nowrap;
 			&:hover {
-				background: url('@{img-path}/button-sprite.png') 0 -30px;
+				background: url('@{img-path}/button-sprite.png') 0 -30px !important;
 				color: #fff;
 				text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 				box-shadow: inset 0 1px 0 0 rgba(0, 0, 0, 0.1), inset 0 -1px 0 0 rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.2);
 				a {
-					color: #fff;
+					color: #fff !important;
 				}
 			}
 			a {
 				padding: 7px 10px;
 				text-decoration: none;
 				color: inherit;
-				display: block;
+				display: block !important;
+				float: none;
 			}
 		}
 	}
@@ -655,6 +674,16 @@ p {
 						&:before {
 							display: none !important;
 						}
+					}
+				}
+				&:hover {
+					.more {
+						opacity: 1 !important;
+					}
+				}
+				.select-box.opened {
+					.more {
+						opacity: 1 !important;
 					}
 				}
 				.load-comments {
@@ -840,26 +869,25 @@ p {
 					height: 27px;
 					margin: 15px 0;
 					.left {
-						width: 55%;
-						span,
-						a {
+						width: 60%;
+						& > span,
+						& > a {
 							float: left;
 							margin-right: 20px;
+							height: 27px;
+							display: inline-block;
 						}
 					}
 					.right {
-						width: 45%;
+						width: 40%;
 						text-align: right;
-						span,
-						a {
+						& > span,
+						& > a {
 							float: right;
 							margin-left: 20px;
+							height: 27px;
+							display: inline-block;
 						}
-					}
-					span,
-					a {
-						height: 27px;
-						display: inline-block;
 					}
 					.username {
 						.font2(700, 18px);
@@ -867,6 +895,10 @@ p {
 						text-decoration: none;
 						color: #333;
 						.transition(.2s);
+						white-space: nowrap;
+						text-overflow: ellipsis;
+						max-width: 220px;
+						overflow: hidden;
 					}
 					.date {
 						.font2(400, 13px);
@@ -875,6 +907,7 @@ p {
 						padding: 8px 0 0 0;
 						a {
 							color: #aaa;
+							margin-right: 0;
 							&:hover {
 								text-decoration: underline;
 							}
@@ -887,6 +920,14 @@ p {
 							color: #aaa;
 							font-size: 24px;
 						}
+					}
+					.more {
+						font-size: 16px !important;
+						font-weight: normal !important;
+						color: #333;
+						cursor: pointer;
+						opacity: 0;
+						.transition(.2s);
 					}
 					.like {
 						form {
