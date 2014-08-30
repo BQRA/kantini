@@ -947,12 +947,17 @@ p {
 .container .left-container .dedikods .dedikod:last-child .comments:before {
   display: none !important;
 }
+.container .left-container .dedikods .dedikod .load-comments {
+  display: none;
+}
+.container .left-container .dedikods .dedikod .load-comments.opened {
+  display: block;
+}
 .container .left-container .dedikods .dedikod .comments {
   padding: 20px 25px;
   position: relative;
   margin-left: -25px;
   margin-right: -25px;
-  display: none;
   font: normal 12px 'Helvetica Neue', Arial;
   color: #444;
 }
@@ -975,8 +980,18 @@ p {
   top: auto;
   bottom: 0;
 }
-.container .left-container .dedikods .dedikod .comments.opened {
-  display: block;
+.container .left-container .dedikods .dedikod .comments.loading {
+  height: 100px;
+  position: relative;
+  text-align: center;
+}
+.container .left-container .dedikods .dedikod .comments.loading i {
+  background: url('../images/loading.gif') center center no-repeat #ffffff;
+  display: inline-block;
+  width: 26px;
+  height: 26px;
+  border-radius: 3px;
+  margin: 16px auto 0 auto;
 }
 .container .left-container .dedikods .dedikod .comments .no-comment {
   text-align: center;

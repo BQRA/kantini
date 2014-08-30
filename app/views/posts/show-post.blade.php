@@ -19,7 +19,7 @@
 			
 			<div class="clear"></div>
 
-			<div class="comments opened" id="giveComments">
+			<div class="comments" id="giveComments">
 				<div class="write-comment">
 					<div class="avatar">
 						@if(!Auth::check())

@@ -118,11 +118,6 @@ $(function () {
 		}
 	});
 
-	// open comments
-	$('.dedikod .toolbar .button, .dedikod .toolbar .comment').click(function(){
-		$(this).parents('.dedikod').addClass('open');
-	});
-
 	// selectbox
 	$('.select-box').click(function(event) {
 		event.stopPropagation();
@@ -160,7 +155,8 @@ $(function () {
 
 	// get comments
 	$('.dedikod .toolbar .get-comments').click(function() {
-		$(this).parents('.dedikod').find('.load-comments').load($(this).attr('data-comments'));
+		$(this).parents('.dedikod').find('.load-comments').addClass('opened');
+		$(this).parents('.dedikod').addClass('open').find('.load-comments').load($(this).attr('data-comments'));
 	});
 
 	// send dedikod with shift+p

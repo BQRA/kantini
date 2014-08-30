@@ -657,12 +657,17 @@ p {
 						}
 					}
 				}
+				.load-comments {
+					display: none;
+					&.opened {
+						display: block;
+					}
+				}
 				.comments {
 					padding: 20px 25px;
 					position: relative;
 					margin-left: -25px;
 					margin-right: -25px;
-					display: none;
 					.font(normal, 12px);
 					color: #444;
 					&:after,
@@ -684,8 +689,18 @@ p {
 						top: auto;
 						bottom: 0;
 					}
-					&.opened {
-						display: block;
+					&.loading {
+						height: 100px;
+						position: relative;
+						text-align: center;
+						i {
+							background: url('@{img-path}/loading.gif') center center no-repeat #fff;
+							display: inline-block;
+							width: 26px;
+							height: 26px;
+							border-radius: 3px;
+							margin: 16px auto 0 auto;
+						}
 					}
 					.no-comment {
 						text-align: center;
