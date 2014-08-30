@@ -27,7 +27,7 @@
 			</div>
 			<div class="col-sm-4">
 				<a href="#">
-					0<small>Oy</small>
+					{{session_user_rates()}}<small>Oy</small>
 				</a>
 			</div>
 		</div>

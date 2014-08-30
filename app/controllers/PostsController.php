@@ -1,3 +1,4 @@
+
 <?php
 
 class PostsController extends \BaseController {
@@ -62,8 +63,6 @@ class PostsController extends \BaseController {
 				//'event_date'	=> 'required',
 				'event_auth' 	=> 'required|alpha_dash',
 				'event_auth_contact' => 'required|numeric',
-				//'image' 		=> 'mimes:jpeg,png'
-
 			];
 
 			$validator = Validator::make($data, $rules);
@@ -239,16 +238,18 @@ class PostsController extends \BaseController {
 		return Redirect::back()->with('message', 'Gönderiniz başarıyla silinmiştir.');
 	}
 
-	//
-
 	public function eventImage() {
 		if(Input::hasFile('image')) {
 			$file            = Input::file('image');
 			$destinationPath = public_path().'/Events/';
-			$filename        = Auth::user()->username.'.'.$file->getClientOriginalExtension();
+			$filename        = eventImage().'.'.$file->getClientOriginalExtension();
 			$uploadSuccess   = $file->move($destinationPath, $filename);
 		}
-	}
 
-	//
+		$post = new Post;
+		$post->event_photo = $filename;
+		$post->save();
+
+		return Redirect::back();
+	}
 }

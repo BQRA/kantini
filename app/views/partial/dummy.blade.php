@@ -10,7 +10,7 @@
 							
 			<div class="add-event">
 				<div class="event-bg-image">
-					{{ HTML::image('/Organizations/'.$dummy->event_photo) }}
+					{{ HTML::image('/Events/'.$dummy->event_photo) }}
 				</div>
 
 				<div class="details">
@@ -22,7 +22,7 @@
 								
 						<div class="col-sm-2 detail pic">
 							<div class="pic-upload">
-								{{ HTML::image('/Organizations/'.$dummy->event_photo) }}
+								{{ HTML::image('/Events/'.$dummy->event_photo) }}
 							</div>
 						</div>
 					</div>
@@ -32,7 +32,7 @@
 					<div class="row">
 						<div class="col-sm-3 detail">
 							<strong>Etkinlik Tarihi</strong>
-							<span>{{ $dummy->event_date }}</span>
+							<span>{{ date('d.m.Y',strtotime($dummy->event_date)) }}</span>
 						</div>
 								
 						<div class="col-sm-3 detail">
