@@ -5,7 +5,6 @@
 	<title>Kantini @yield('title') </title>
 
 	{{HTML::style('Assets/css/bootstrap.min.css')}}
-	{{HTML::style('Assets/css/font-awesome.min.css')}}
 	{{HTML::style('Assets/css/style.css')}}
 
 	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>

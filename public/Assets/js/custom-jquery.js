@@ -236,6 +236,8 @@ $(function () {
 				$('.dedikod-area .attachment img').attr('src', $('#mediaUrl').val());
 			}
 			$('.dedikod-area .media-attached').show();
+			$('#addMedia .tab').remove();
+			$('#addMedia .tab-content-item:not(.selected)').remove();
 		} else if ( $(this).attr('data-type') == 'event' ) {
 			$('.dedikod-area .event-attached').show();
 			$('.dedikod-area .attachment img').attr('src', '/kantini/public/Assets/images/event-attached.png');
@@ -257,6 +259,16 @@ $(function () {
 		$('.dedikod-area .no-attachment').show();
 		$('.dedikod-area .attached').hide();
 		$('.dedikod-area .textarea-container').removeClass('added');
+	});
+
+
+
+	// tab
+	$('body').on('click', '.tab .item', function(event) {
+		$(this).parents('.tab').find('.item').removeClass('selected');
+		$(this).addClass('selected');
+		$(this).parents('.tab').next('.tab-content').find('.tab-content-item').removeClass('selected');
+		$(this).parents('.tab').next('.tab-content').find('.tab-content-item').eq($(this).index()).addClass('selected');
 	});
 
 });
