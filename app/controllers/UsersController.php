@@ -18,11 +18,15 @@ class UsersController extends \BaseController {
 		$validator = Validator::make($data, $rules);
 
 		if($validator->passes()) {
+			$username 	= Input::get('username');
+			$email 		= Input::get('email');
+			$code 		= str_random(60);
+
 			$user = new User;
-			$user->username 		= Input::get('username');
-			$user->email 			= Input::get('email');
+			$user->username 		= $username;
+			$user->email 			= $email;
 			$user->password 		= Hash::make(Input::get('password'));
-			$user->activation_code  = str_random(60);
+			$user->activation_code  = $code;
 			$user->save();
 
 			if(Input::hasFile('image')) {
@@ -34,10 +38,29 @@ class UsersController extends \BaseController {
 				$filename = 'guest';
 			}
 
-			$full_name 	= (!empty(Input::get('full_name'))) ? trim(Input::get('full_name')) : null;
-			$twitter 	= (!empty(Input::get('twitter'))) ? trim(Input::get('twitter')) : null;
-			$instagram  = (!empty(Input::get('instagram'))) ? trim(Input::get('instagram')) : null;
-			$facebook 	= (!empty(Input::get('facebook'))) ? trim(Input::get('facebook')) : null;
+			if(trim(Input::get('full_name')) == false) {
+				$full_name = null;
+				} else {
+				$full_name = trim(Input::get('full_name'));
+			}
+
+			if(trim(Input::get('twitter')) == false) {
+				$twitter = null;
+				} else {
+				$twitter = trim(Input::get('twitter'));
+			}
+
+			if(trim(Input::get('instagram')) == false) {
+				$instagram = null;
+				} else {
+				$instagram = trim(Input::get('instagram'));
+			}
+
+			if(trim(Input::get('facebook')) == false) {
+				$facebook = null;
+				} else {
+				$facebook = trim(Input::get('facebook'));
+			}
 
 			$profile = new Profile;
 			$profile->user_id 	= $user->id;
@@ -50,13 +73,34 @@ class UsersController extends \BaseController {
 			$profile->avatar 	= $filename;
 			$profile->save();
 
-			Session::flash('message', 'Üyeliğiniz başarıyla gerçekleştirilmiştir. Giriş yapabilirsiniz.');
+			Mail::send('emails.auth.account-activate', ['link'=> URL::route('account.activate', $code), 'username' => $username], function($message) use ($user) {
+				$message->to($user->email, $user->username)->subject('Kantini - Hoşgeldiniz!');
+			});
+
+			Session::flash('message', 'Üyeliğiniz başarıyla gerçekleştirilmiştir. Lütfen eposta adresinizi kontrol ediniz ve üyeliğinizi aktifleştiriniz.');
 			return Redirect::route('home');
 			} else {
 				return Redirect::route('user.register')
 				->withErrors($validator)
 				->withInput();
 			}
+	}
+
+	public function accountActivate($code) {
+		$user = User::where('activation_code', $code)->where('active', 0);
+
+		if($user->count()) {
+			$user = $user->first();
+
+			$user->active = 1;
+			$user->activation_code = null;
+
+			if($user->save()) {
+				return Redirect::route('home')->with('message', 'Üyeliğiniz başarıyla aktifleştirilmiştir.');
+			}
+		} else {
+			return Redirect::route('home')->with('message', 'Üyeliğiniz aktifleştirilirken bir hata meydana geldi.');
+		}
 	}
 
 	public function showProfile($username) {
@@ -231,5 +275,4 @@ class UsersController extends \BaseController {
 
 		return View::make('users.all-comments', compact('user', 'users_all_comments'));
 	}
-
 }

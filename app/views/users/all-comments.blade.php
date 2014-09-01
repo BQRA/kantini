@@ -14,9 +14,9 @@
 		$post_id 	= $dummy->id;
 		//$user artık gönderi yapan kişinin bilgilerini çekiyor.
 		$user 		= User::whereUsername($dummy->username)->first(); 
-		$comments 	= Comment::where('post_id', '=', $post_id)->get();
-		$up 		= Up::where('post_id', '=', $post_id)->get();
-		$down 		= Down::where('post_id', '=', $post_id)->get();
+		$comments 	= Comment::where('post_id', $post_id)->get();
+		$up 		= Up::where('post_id', $post_id)->get();
+		$down 		= Down::where('post_id', $post_id)->get();
 	?>
 		<div class="dedikod {{$dummy->gender}}">
 			@include('partial.avatar')

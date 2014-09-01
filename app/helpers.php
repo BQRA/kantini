@@ -29,10 +29,22 @@ function session_user_comments() {
 }
 
 function session_user_rates() {
-	$user_ups = UP::where('rater', Auth::user()->username)->get();
-	$user_downs = DOWN::where('rater', Auth::user()->username)->get();
-	$user_ups_count = $user_ups->count();
-	$user_downs_count = $user_downs->count();
+	$user_ups = Up::where('rater', Auth::user()->username)->get();
+	if($user_ups->count() > 0 ) {
+		$user_ups = Up::where('rater', Auth::user()->username)->get();
+		$user_ups_count = $user_ups->count();
+	} else {
+		$user_ups_count = 0;
+	}
+
+
+	$user_downs = Down::where('rater', Auth::user()->username)->get();
+	if($user_downs->count() > 0) {
+		$user_downs = Down::where('rater', Auth::user()->username)->get();
+		$user_downs_count = $user_downs->count();
+	} else {
+		$user_downs_count = 0;
+	}
 
 	return $user_ups_count + $user_downs_count;
 }

@@ -10,7 +10,7 @@
 			Şifrenizi sıfırlamak için linke tıklayınız. <br>
 			<a href="{{ URL::to('password/reset', array($token)) }}">Şifre Sıfırla</a><br/>
 			
-			Bu link kendini {{ Config::get('auth.reminder.expire', 10) }} dakika içinde imha edecektir.
+			Bu link kendini {{ Config::get('auth.reminder.expire', 30) }} dakika içinde imha edecektir.
 		</div>
 	</body>
 </html>

@@ -6,7 +6,7 @@ Route::get('/', [
 	'uses' 	=> 'PagesController@home'
 ]);
 
-Route::get('register', [
+Route::get('user/register', [
 	'as' 	 => 'user.register',
 	'uses' 	 => 'PagesController@register',
 	'before' => 'guest'
@@ -84,7 +84,17 @@ Route::get('user/profile/{username}/all-comments', [
 	'uses' 	=> 'UsersController@showUserAllComments'
 ]);
 
+Route::get('user/profile/{username}/all-rates', [
+	'as' 	=> 'user.all.rates',
+	'uses' 	=> 'UsersController@showUserAllRates'
+]);
+
 Route::get('/uni/{school}',[
 	'as' 	=> 'school',
 	'uses'  => 'PagesController@school'
+]);
+
+Route::get('/user/account-activate/{code}', [
+	'as' 	=> 'account.activate',
+	'uses' 	=> 'UsersController@accountActivate'
 ]);
