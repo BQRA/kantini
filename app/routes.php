@@ -31,7 +31,7 @@ Route::get('search',[
 	'uses'  => 'SearchController@Search'
 ]);
 
-	Route::post('rate', 'RatesController@rate');
+	Route::post('rate/{id}', 'RatesController@rate');
 
 Route::get('create-event', [
 	'as' 	 => 'create.event',
@@ -47,7 +47,7 @@ Route::get('add-media', [
 
 	Route::post('send-post', 'PostsController@sendPost')->before('crsf');
 
-	Route::post('send-comment', 'PostsController@sendComment')->before('crsf');
+	Route::post('send-comment/{id}', 'PostsController@sendComment')->before('crsf');
 
 Route::get('delete-dedikod/{id}',[
 	'as' 	=> 'user.delete.dedikod',

@@ -27,6 +27,10 @@ class Post extends \Eloquent {
 		return $this->hasMany('Comment');
 	}
 
+	public function votes() {
+		return $this->hasMany('Vote');
+	}
+
 	public function scopeSearch($query, $search) {
 		return $query->where('dedikod', 'LIKE', '%'.$search.'%');
 	}

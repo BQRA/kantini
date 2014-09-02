@@ -4,7 +4,7 @@
 			<a class="username" data-lightbox="{{ URL::action('show.profile', $user->username) }} #profileBox" data-lightboxtitle="Profil Kartı" href="javascript:;">
 			{{ $dummy->username }}
 			</a>
-		@else 
+		@else
 			<span class="username">{{ $dummy->username }}</span>
 		@endif
 							
@@ -18,10 +18,10 @@
 				<li><a href="javascript:;">Twiter'da Paylas</a></li>
 				<li><a href="javascript:;">Bu gönderiyi raporla</a></li>
 				@if(Auth::check())
-				@if(Auth::user()->username == $dummy->username)
-				<li><a href="#">Düzenle</a></li>
-				<li><a class="danger" href="{{ URL::route('user.delete.dedikod', $dummy->id) }}">Sil</a></li>
-				@endif
+					@if(Auth::user()->username == $dummy->username)
+					<li><a href="#">Düzenle</a></li>
+					<li><a class="danger" href="{{ URL::route('user.delete.dedikod', $dummy->id) }}">Sil</a></li>
+					@endif
 				@endif
 			</ul>
 		</div>
@@ -31,38 +31,34 @@
 		<span class="comment get-comments" data-comments="{{ URL::action('home') }}/post/{{ $post_id }} #giveComments">{{$comments->count()}}</span>
 		<!-- <span class="button sm r green get-comments" data-comments="{{ URL::action('home') }}/post/{{ $post_id }} #giveComments">Yorum Yaz</span> -->
 		<span class="like">
-			{{ Form::open(['action' => 'RatesController@rate']) }}
-			{{ Form::hidden('post_type', $dummy->type) }}
-			{{ Form::hidden('post_id', $post_id) }}
+			{{ Form::open(['action' => ['RatesController@rate', $post_id]]) }}
 			{{ Form::hidden('rate', 'up') }}
 			@if(Auth::check())
-				@if(!Up::where('post_id', $post_id)->where('rater', Auth::user()->username)->count()>0)	
+				@if(!Vote::where('post_id', $post_id)->where('value', 'up')->where('rater', Auth::user()->username)->count()>0)	
 					<span class="up"></span>
-				@elseif(Up::where('post_id', $post_id)->where('rater', Auth::user()->username)->count()>0)
+				@elseif(Vote::where('post_id', $post_id)->where('value', 'up')->where('rater', Auth::user()->username)->count()>0)
 					<span class="up selected"></span>
 				@endif
 			@else
-				@if(!Up::where('post_id', $post_id)->where('rater', guest_username())->count()>0)	
+				@if(!Vote::where('post_id', $post_id)->where('value', 'up')->where('rater', guest_username())->count()>0)
 					<span class="up"></span>
-				@elseif(Up::where('post_id', $post_id)->where('rater', guest_username())->count()>0)
+				@elseif(Vote::where('post_id', $post_id)->where('value', 'up')->where('rater', guest_username())->count()>0)
 					<span class="up selected"></span>
 				@endif
 			@endif
 			{{ Form::close() }}
-			{{ Form::open(['action' => 'RatesController@rate']) }}
-			{{ Form::hidden('post_type', $dummy->type) }}
-			{{ Form::hidden('post_id', $post_id) }}
+			{{ Form::open(['action' => ['RatesController@rate', $post_id]]) }}
 			{{ Form::hidden('rate', 'down') }}
 			@if(Auth::check())
-				@if(!Down::where('post_id', $post_id)->where('rater', Auth::user()->username)->count()>0)
+				@if(!Vote::where('post_id', $post_id)->where('value', 'down')->where('rater', Auth::user()->username)->count()>0)
 					<span class="down"></span>
-				@elseif(Down::where('post_id', $post_id)->where('rater', Auth::user()->username)->count()>0)
+				@elseif(Vote::where('post_id', $post_id)->where('value', 'down')->where('rater', Auth::user()->username)->count()>0)
 					<span class="down selected"></span>
 				@endif
 			@else
-				@if(!Down::where('post_id', $post_id)->where('rater', guest_username())->count()>0)
+				@if(!Vote::where('post_id', $post_id)->where('value', 'down')->where('rater', guest_username())->count()>0)
 					<span class="down"></span>
-				@elseif(Down::where('post_id', $post_id)->where('rater', guest_username())->count()>0)
+				@elseif(Vote::where('post_id', $post_id)->where('value', 'down')->where('rater', guest_username())->count()>0)
 					<span class="down selected"></span>
 				@endif
 			@endif

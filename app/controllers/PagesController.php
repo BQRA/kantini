@@ -3,11 +3,7 @@
 class PagesController extends \BaseController {
 
 	public function home($school = null) {
-
-		if(Auth::check()) {
-			$login_user = User::whereUsername(Auth::user()->username)->first();
-		}
-
+		
 		if (Input::has('type') && Input::has('orderBy')) {
 			$type 		= $_GET['type'];
 			$orderBy 	= $_GET['orderBy'];
@@ -32,7 +28,7 @@ class PagesController extends \BaseController {
 			$posts = Post::orderBy('created_at', 'DESC')->Paginate(36);
 		}
 
-		return View::make('pages.index', compact('posts', 'login_user', 'school'));
+		return View::make('pages.index', compact('posts', 'school'));
 	}
 
 	public function school($school) {
@@ -41,10 +37,6 @@ class PagesController extends \BaseController {
 			$value = Post::whereSchool($school)->firstOrFail();
 		} catch (Illuminate\Database\Eloquent\ModelNotFoundException $e) {
 			return 'Okul bulunamadı';
-		}
-
-		if(Auth::check()) {
-			$login_user = User::whereUsername(Auth::user()->username)->first();
 		}
 
 		if (Input::has('type') && Input::has('orderBy')) {
@@ -77,7 +69,7 @@ class PagesController extends \BaseController {
 						->Paginate(36);
 		}
 
-		return View::make('pages.index', compact('posts', 'login_user', 'school'));
+		return View::make('pages.index', compact('posts', 'school'));
 	}
 
 	public function register() {

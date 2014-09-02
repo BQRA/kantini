@@ -2,114 +2,83 @@
 
 class RatesController extends \BaseController {
 
-	public function rate() {
+	public function rate($id) {
 
-		$post_id = Input::get('post_id');
-
-		if(Auth::check()) {
-			$rater 	= Auth::user()->username;
-			$type 	= Input::get('post_type');
-		} else {
-			$rater 	= guest_username();
-			$type 	= null;
-		}
+		$post = Post::find($id);
+		$type = $post['type'];
 
 		if(Input::get('rate') == 'up') {
 			if(Auth::check()) {
-				if (!Up::where('post_id', $post_id)->where('rater', Auth::user()->username)->count()>0) {
-			
-					if(Down::where('post_id', $post_id)->where('rater', Auth::user()->username)->count()>0) {
-						$down_delete = Down::wherePost_id($post_id)->firstOrFail();
-						$down_delete->delete($down_delete);
+				if (!Vote::where('post_id', $id)->where('rater', Auth::user()->username)->where('value', 'up')->count()>0) {
+					
+					if(Vote::where('post_id', $id)->where('rater', Auth::user()->username)->where('value', 'down')->count()>0) {
+						Vote::wherePost_id($id)->where('rater', Auth::user()->username)->where('value', 'down')->delete();
 					}
 
-				$up = new Up;
-				$up->rater 		= $rater;
-				$up->post_id 	= $post_id;
-				$up->type 		= $type;
-				$up->ip_address = $_SERVER['REMOTE_ADDR'];
-				$up->save();
-
-				return Redirect::back();
+					$vote = new Vote;
+					$vote->rater = Auth::user()->username;
+					$vote->post_id = $id;
+					$vote->type = $type;
+					$vote->value = 'up';
+					$vote->save();
 
 				} else {
-					$up_delete = Up::wherePost_id($post_id)->firstOrFail();
-					$up_delete->delete($up_delete);
-
-					return Redirect::back();
+					Vote::wherePost_id($id)->where('rater', Auth::user()->username)->where('value', 'up')->delete();
 				}
 			} else {
-				if (!Up::where('post_id', $post_id)->where('rater', guest_username())->count()>0) {
-			
-					if(Down::where('post_id', $post_id)->where('rater', guest_username())->count()>0) {
-						$down_delete = Down::wherePost_id($post_id)->firstOrFail();
-						$down_delete->delete($down_delete);
+				if (!Vote::where('post_id', $id)->where('rater', guest_username())->where('value', 'up')->count()>0) {
+					
+					if(Vote::where('post_id', $id)->where('rater', guest_username())->where('value', 'down')->count()>0) {
+						Vote::wherePost_id($id)->where('rater', guest_username())->where('value', 'down')->delete();
 					}
 
-				$up = new Up;
-				$up->rater 		= $rater;
-				$up->post_id 	= $post_id;
-				$up->type 		= $type;
-				$up->ip_address = $_SERVER['REMOTE_ADDR'];
-				$up->save();
-
-				return Redirect::back();
+					$vote = new Vote;
+					$vote->rater = guest_username();
+					$vote->post_id = $id;
+					$vote->type = $type;
+					$vote->value = 'up';
+					$vote->save();
 
 				} else {
-					$up_delete = Up::wherePost_id($post_id)->firstOrFail();
-					$up_delete->delete($up_delete);
-
-					return Redirect::back();
+					Vote::wherePost_id($id)->where('rater', guest_username())->where('value', 'up')->delete();
 				}
 			}
-		}  
+		}
 
 		if(Input::get('rate') == 'down') {
 			if(Auth::check()) {
-				if (!Down::where('post_id', $post_id)->where('rater', Auth::user()->username)->count()>0) {
-
-					if(Up::where('post_id', $post_id)->where('rater', Auth::user()->username)->count()>0) {
-						$up_delete = Up::wherePost_id($post_id)->firstOrFail();
-						$up_delete->delete($up_delete);
+				if (!Vote::where('post_id', $id)->where('rater', Auth::user()->username)->where('value', 'down')->count()>0) {
+					
+					if(Vote::where('post_id', $id)->where('rater', Auth::user()->username)->where('value', 'up')->count()>0) {
+						Vote::wherePost_id($id)->where('rater', Auth::user()->username)->where('value', 'up')->delete();
 					}
-			
-				$down = new Down;
-				$down->rater 		= $rater;
-				$down->post_id 		= $post_id;
-				$down->type 		= $type;
-				$down->ip_address 	= $_SERVER['REMOTE_ADDR'];
-				$down->save();
 
-				return Redirect::back();
+					$vote = new Vote;
+					$vote->rater = Auth::user()->username;
+					$vote->post_id = $id;
+					$vote->type = $type;
+					$vote->value = 'down';
+					$vote->save();
 
 				} else {
-					$down_delete = Down::wherePost_id($post_id)->firstOrFail();
-					$down_delete->delete($down_delete);
-
-					return Redirect::back();
+					Vote::wherePost_id($id)->where('rater', Auth::user()->username)->where('value', 'down')->delete();
 				}
 			} else {
-				if (!Down::where('post_id', $post_id)->where('rater', guest_username())->count()>0) {
-
-					if(Up::where('post_id', $post_id)->where('rater', guest_username())->count()>0) {
-						$up_delete = Up::wherePost_id($post_id)->firstOrFail();
-						$up_delete->delete($up_delete);
+				if (!Vote::where('post_id', $id)->where('rater', guest_username())->where('value', 'down')->count()>0) {
+					
+					if(Vote::where('post_id', $id)->where('rater', guest_username())->where('value', 'up')->count()>0) {
+						Vote::wherePost_id($id)->where('rater', guest_username())->where('value', 'up')->delete();
 					}
-			
-				$down = new Down;
-				$down->rater 		= $rater;
-				$down->post_id 		= $post_id;
-				$down->type 		= $type;
-				$down->ip_address 	= $_SERVER['REMOTE_ADDR'];
-				$down->save();
 
-				return Redirect::back();
+					$vote = new Vote;
+					$vote->rater = guest_username();
+					$vote->post_id = $id;
+					$vote->type = $type;
+					$vote->value = 'down';
+					$vote->save();
 
 				} else {
-				$down_delete = Down::wherePost_id($post_id)->firstOrFail();
-				$down_delete->delete($down_delete);
-
-				return Redirect::back();
+					Vote::wherePost_id($id)->where('rater', guest_username())->where('value', 'down')->delete();
 				}
 			}
 		}

@@ -167,25 +167,21 @@ class PostsController extends \BaseController {
 			return View::make('errors.404');
 		}
 
-		if(Auth::check()) {
-			$login_user = User::whereUsername(Auth::user()->username)->first();
-		}
-
 		$post_id 	= $post->id;
-		$up 		= Up::where('post_id', $post_id);
-		$down 		= Down::where('post_id', $post_id);
 		$user 		= User::whereUsername($post->username)->first();
+		$up 		= up($post_id);
+		$down 		= down($post_id);
 
 		$comments 	= Comment::orderBy('created_at', 'DESC')
 							->where('post_id', $id)
 							->get();
 
-		return View::make('posts.show-post', compact('post', 'comments', 'login_user', 'user', 'post_id', 'up', 'down'));
+		return View::make('posts.show-post', compact('post', 'comments', 'user', 'post_id', 'up', 'down'));
 	}
 
-	public function sendComment() {
+	public function sendComment($id) {
 		try {
-			$post 	= Post::where('id', Input::get('post_id'))->firstOrFail();
+			$post = Post::select('id', 'type')->where('id', $id)->firstOrFail();
 		} catch (Exception $e) {
 			return View::make('errors.404');
 		}
@@ -214,7 +210,7 @@ class PostsController extends \BaseController {
 			$comment = new Comment;
 			$comment->commenter 	= $commenter;
 			$comment->user_id 		= $user_id;
-			$comment->post_id 		= Input::get('post_id');
+			$comment->post_id 		= $id;
 			$comment->comment 		= trim(Input::get('comment'));
 			$comment->type 			= $post_type;
 			$comment->save();

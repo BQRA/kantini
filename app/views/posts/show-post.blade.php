@@ -2,12 +2,7 @@
 
 @section('content')
 	<div class="dedikods">
-	<?php 
-		$dummy 		= $post;
-		$post_id 	= $dummy->id;
-		$up 		= Up::where('post_id', $post_id)->get();
-		$down 		= Down::where('post_id', $post_id)->get();
-	?>
+	<?php $dummy = $post; ?>
 		<div class="dedikod {{ $dummy->gender }}">
 			@include('partial.avatar')
 
@@ -25,7 +20,7 @@
 						@if(!Auth::check())
 							{{ HTML::image('/Avatars/guest-avatar.png') }}
 						@else
-							@if($login_user->profile->avatar == 'guest')
+							@if(Auth::user()->profile->avatar == 'guest')
 								{{ HTML::image('/Avatars/guest-avatar.png') }}
 							@else
 								{{ HTML::image('/Avatars/'.Auth::user()->username.'.jpg') }}
@@ -34,9 +29,7 @@
 					</div>
 
 					<div class="write-area">
-						{{ Form::open(['action' => 'PostsController@sendComment']) }}
-						{{ Form::hidden('post_id', $post_id) }}
-						{{ Form::hidden('post_type', $dummy->type) }}
+						{{ Form::open(['action' => ['PostsController@sendComment', $post_id]]) }}
 						
 						@if(!Auth::check())
 							{{ Form::text('comment', null, ['placeholder' => guest_username().' olarak yorum yaz!']) }}
@@ -50,9 +43,7 @@
 
 				@if($comments->count() > 0)
 					@foreach($comments as $comment)
-					<?php 
-						$commenter = User::whereUsername($comment->commenter)->first(); 
-					?>
+					<?php $commenter = User::whereUsername($comment->commenter)->first(); ?>
 						<div class="comment">
 							<div class="avatar">
 								@if(empty($commenter))
