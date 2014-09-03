@@ -1,8 +1,16 @@
+<div id="allUni">
+	<div class="universities">
+		<a href="{{ URL::route('home') }}" class="all-unis">Tüm Üniversiteler</a>
+		<a class="bahcesehir" href="{{ URL::route('home') }}/uni/bahcesehir">Bahçesehir Üniversitesi</a>
+		<a class="beykent" href="{{ URL::route('home') }}/uni/beykent">Beykent Üniversitesi</a>
+	</div>
+</div>
+
 <div class="header">
 	<div class="logo">
 		<h1>
-			&nbsp;
-			<span><a href="{{ URL::route('home') }}">KANTİNİ</a></span>
+			<b><span class="icon">&#61701</span> Tüm Okullar</b>
+			<span class="title"><a href="{{ URL::route('home') }}">KANTİNİ</a></span>
 		</h1>
 	</div>
 

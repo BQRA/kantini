@@ -147,6 +147,12 @@ $(function () {
 		closeLightbox();
 	});
 
+	// all unis
+	$('.header .logo b').click(function(event) {
+		event.stopPropagation();
+		alert($('#allUni').html());
+	});
+
 	// gender selet
 	$('.bottom-bar .gender').click(function(event) {
 		$('.dedikod-area input[name=gender]').val($(this).attr('name'));

@@ -84,8 +84,6 @@
 		<ul class="menu">		
 			<li><a href="{{ URL::route('home') }}">Anasayfa</a></li>
 			<li><a href="#">Kontak</a></li>
-			<li><a href="{{ URL::to('uni/beykent') }}">Beykent</a></li>
-			<li><a href="{{ URL::to('uni/bahcesehir') }}">Bahçeşehir</a></li>
 		</ul>
 	</div>
 

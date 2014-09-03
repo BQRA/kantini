@@ -13,8 +13,6 @@
 .icon {
   display: inline;
   font-size: 32px;
-  position: relative;
-  top: 3px;
   font-family: 'ios7-icon';
   -webkit-text-rendering: geometricPrecision;
   -moz-text-rendering: geometricPrecision;
