@@ -66,7 +66,7 @@ function alert(content, title) {
 
 // input mask in lightbox
 function lbMask() {
-	$('.add-event .detail input[name=event_date]').mask('00/00/0000');
+	$('.add-event .detail input[name=event_date]').mask('00.00.0000');
 	$('.add-event .detail input[name=event_time]').mask('00:00');
 }
 

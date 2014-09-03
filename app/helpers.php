@@ -12,8 +12,8 @@ function guest_username() {
 }
 
 function eventImage() {
-		$a = rand(1000, 100000);
-		$eventImage = Auth::user()->username.'-'.$a;
+		$number		 = rand(1000, 1000000000000);
+		$eventImage  = Auth::user()->username.$number;
 
 	return $eventImage;
 }

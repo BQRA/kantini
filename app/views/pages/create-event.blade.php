@@ -2,11 +2,13 @@
 
 @section('content')
 
-{{ Form::open(['action' => 'PostsController@eventImage', 'files' => true]) }}
-{{ Form::file('image') }}
+<!-- 
+{{ Form::open(['action' => 'PostsController@eventImage']) }}
+{{ Form::hidden('image', '') }}
 
 {{ Form::submit('Gönder') }}
 {{ Form::close() }}
+-->
 
 <div id="addEvent">
 	{{ Form::hidden('post_type', 'event') }}
@@ -31,7 +33,7 @@
 				<div class="row">
 					<div class="col-xs-3 detail">
 						<strong>Etkinlik Tarihi</strong>
-						{{ Form::Input('text', 'event_date', null, ['placeholder' => 'GG/AA/YYYY']) }}
+						{{ Form::Input('text', 'event_date', null, ['placeholder' => 'GG.AA.YYYY']) }}
 					</div>
 					<div class="col-xs-3 detail">
 						<strong>Etkinlik Saati</strong>

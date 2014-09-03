@@ -54,33 +54,23 @@ class PostsController extends \BaseController {
 			}
 		} elseif(Input::get('post_type') == 'event') {
 			$data = Input::all();
-			return $data;
 
 			$rules = [
 			//gerekli kontroller eklenecek
-				'dedikod' 		=> 'required|min:3|max:800',
-				'event_name' 	=> 'required|min:5|max:50',
+				//'dedikod' 		=> 'required|min:3|max:800',
+				//'event_name' 	=> 'required|min:5|max:50',
 				//'event_date'	=> 'required',
-				'event_auth' 	=> 'required|alpha_dash',
-				'event_auth_contact' => 'required|numeric',
+				//'event_auth' 	=> 'required|alpha_dash',
+				//'event_auth_contact' => 'required|numeric',
 			];
 
 			$validator = Validator::make($data, $rules);
 
 			if($validator->passes()) {
 
-				if(Input::hasFile('image')) {
-				$file            = Input::file('image');
-				$destinationPath = public_path().'/Events/';
-				$filename        = Auth::user()->username.'_'.Hash::make($file->getClientOriginalName()).'.'.$file->getClientOriginalExtension();
-				$uploadSuccess   = $file->move($destinationPath, $filename);
-				} else {
-					$filename = 'default_image';
-				}
-
-				//ayraçları nokta kullanmamız gerek
 				$date 		= Input::get('event_date');
-				$timestamp 	= date('Y/m/d H:i:s', strtotime($date));
+				$timestamp 	= date('Y-m-d', strtotime($date));
+				$filename 	= 'default_event_image.png';
 
 				$post = new Post;
 				$post->username 			= Auth::user()->username;
@@ -181,7 +171,7 @@ class PostsController extends \BaseController {
 
 	public function sendComment($id) {
 		try {
-			$post = Post::select('id', 'type')->where('id', $id)->firstOrFail();
+			$post = Post::select('id', 'type', 'username')->where('id', $id)->firstOrFail();
 		} catch (Exception $e) {
 			return View::make('errors.404');
 		}
@@ -215,6 +205,17 @@ class PostsController extends \BaseController {
 			$comment->type 			= $post_type;
 			$comment->save();
 
+			/*
+			$user = User::whereUsername($post->username)->first();
+			
+			if(!empty($user)) {
+				//geliştirelecek!!!
+				Mail::send('emails.auth.comment', ['link'=> URL::route('show.post', $id)], function($message) use ($user) {
+					$message->to($user->email)->subject('Kantini - Cevap!');
+				});
+			}
+			*/
+
 			Session::flash('message', 'Yorumunuz başarıyla gönderilmiştir!');
 			return Redirect::back();
 
@@ -234,17 +235,12 @@ class PostsController extends \BaseController {
 	}
 
 	public function eventImage() {
-		if(Input::hasFile('image')) {
-			$file            = Input::file('image');
-			$destinationPath = public_path().'/Events/';
-			$filename        = eventImage().'.'.$file->getClientOriginalExtension();
-			$uploadSuccess   = $file->move($destinationPath, $filename);
-		}
+		$data = Input::get('image');
 
-		$post = new Post;
-		$post->event_photo = $filename;
-		$post->save();
+		list($type, $data) = explode(';', $data);
+		list(, $data)      = explode(',', $data);
+		$data = base64_decode($data);
 
-		return Redirect::back();
+		file_put_contents(public_path().'/Events/'.eventImage().'.JPG', $data);
 	}
 }
