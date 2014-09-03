@@ -98,3 +98,5 @@ Route::get('/user/account-activate/{code}', [
 	'as' 	=> 'account.activate',
 	'uses' 	=> 'UsersController@accountActivate'
 ]);
+
+	Route::post('flag/{id}', 'FlagsController@flag');

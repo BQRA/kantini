@@ -16,7 +16,13 @@
 			<ul>
 				<li><a href="javascript:;">Facebook'ta Paylas</a></li>
 				<li><a href="javascript:;">Twiter'da Paylas</a></li>
-				<li><a href="javascript:;">Bu gönderiyi raporla</a></li>
+				
+				<!-- Gönderi Raporlama -->
+				{{ Form::open(['action' => ['FlagsController@flag', $post_id]]) }}
+				{{ Form::submit() }}
+				{{ Form::close() }}
+				<!-- Gönderi Raporlama -->
+
 				@if(Auth::check())
 					@if(Auth::user()->username == $dummy->username)
 					<li><a href="#">Düzenle</a></li>

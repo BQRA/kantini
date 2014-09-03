@@ -19,7 +19,7 @@ function eventImage() {
 }
 
 function session_user_posts() {
-	$user_posts = Post::where('username', Auth::user()->username)->get();
+	$user_posts = Post::select('username')->where('username', Auth::user()->username)->get();
 	return $user_posts;
 }
 
