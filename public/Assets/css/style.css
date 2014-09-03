@@ -454,6 +454,9 @@ a:hover {
 .danger {
   color: #ea5c49 !important;
 }
+.rel {
+  position: relative;
+}
 /* layout #end */
 /* buttons */
 .button {
@@ -1405,6 +1408,15 @@ p {
   top: 12px;
   margin-left: -6px;
   background: url('../images/sprite.png') 0 -344px;
+}
+.user-box .membership .forgot-pass {
+  position: absolute;
+  right: 10px;
+  top: 6px;
+}
+.user-box .membership .forgot-pass span {
+  font-size: 19px;
+  color: #000;
 }
 .user-box.male {
   background: url('../images/male-bg.png') center top no-repeat #ffffff;

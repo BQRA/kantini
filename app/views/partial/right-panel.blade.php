@@ -49,25 +49,15 @@
 			{{ Form::open(['action' => 'SessionsController@login']) }}
 			
 			{{ Form::Input('text', 'username', null, ['placeholder' => 'Kullanıcı Adı']) }}
-			@if($errors->has('username'))
-				<span class="error">{{ $errors->first('username') }}</span>
-			@endif
 			
-			{{ Form::Input('password', 'password', null, ['placeholder' => 'Şifre']) }}
-			@if($errors->has('password'))
-				<span class="error">{{ $errors->first('password') }}</span>
-			@endif
+			<div class="rel">
+				<a href="{{ URL::to('password/remind') }}" class="forgot-pass"><span class="icon">&#61780</span></a>
+				{{ Form::Input('password', 'password', null, ['placeholder' => 'Şifre']) }}
+			</div>
 
 			{{ Form::button(' ', ['class' => 'button blue w100', 'type' => 'submit']) }}
 
 			{{ Form::close() }}
-
-			@if($errors->has('login'))
-			    {{ $errors->first('login') }}
-			@endif
-			<br>
-
-			<a href="{{ URL::to('password/remind') }}">Şifremi unuttum</a>
 		</div>
 	</div>
 	@endif
