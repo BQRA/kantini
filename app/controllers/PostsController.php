@@ -216,8 +216,8 @@ class PostsController extends \BaseController {
 			}
 			*/
 
-			Session::flash('message', 'Yorumunuz başarıyla gönderilmiştir!');
-			return Redirect::back();
+			$date = Comment::find($comment->id);
+			$comment_date = $date->created_at;
 
 		} else {
 			return Redirect::back()
