@@ -218,6 +218,7 @@ class PostsController extends \BaseController {
 
 			$date = Comment::find($comment->id);
 			$comment_date = $date->created_at;
+			return $comment_date;
 
 		} else {
 			return Redirect::back()

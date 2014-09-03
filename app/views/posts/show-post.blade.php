@@ -15,7 +15,7 @@
 			<div class="clear"></div>
 
 			<div class="comments" id="giveComments">
-				<div class="write-comment">
+				<div class="write-comment" data-username="{{ Auth::user()->username }}" data-lb="{{ URL::action('home') }}/user/profile/{{ Auth::user()->username }}" data-gender="{{ Auth::user()->profile->gender }}">
 					<div class="avatar">
 						@if(!Auth::check())
 							{{ HTML::image('/Avatars/guest-avatar.png') }}
@@ -32,9 +32,9 @@
 						{{ Form::open(['action' => ['PostsController@sendComment', $post_id]]) }}
 						
 						@if(!Auth::check())
-							{{ Form::text('comment', null, ['placeholder' => guest_username().' olarak yorum yaz!']) }}
+							{{ Form::text('comment', null, ['placeholder' => guest_username().' olarak yorum yaz!', 'autocomplete' => 'off']) }}
 						@else
-							{{ Form::text('comment', null, ['placeholder' => Auth::user()->username.' olarak yorum yaz!']) }}
+							{{ Form::text('comment', null, ['placeholder' => Auth::user()->username.' olarak yorum yaz!', 'autocomplete' => 'off']) }}
 						@endif
 						{{ Form::submit('', ['style'=> 'display:none']) }}
 						{{ Form::close() }}
@@ -80,5 +80,4 @@
 			</div>
 		</div>	
 	</div>
-	{{ $post->links }}
 @stop

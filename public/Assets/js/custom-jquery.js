@@ -99,6 +99,7 @@ function attachImg() {
 // GLOBAL FUNTIONS #END
 ///////////////////////////////////////////////////
 
+var ajax = null;
 
 $(function () {
 
@@ -174,7 +175,6 @@ $(function () {
 	});
 
 	// ajax likes
-	var ajax = null;
 	$('.dedikod .toolbar').on('click', '.like .up, .like .down', function(event) {
 		var $form = $(this).parents('form'), serializedData = $form.serialize();
 		var likeNContainer = $(this).parents('.like').find('.result'), likeN = parseInt($(this).parents('.like').find('.result').text());
@@ -264,7 +264,33 @@ $(function () {
 		$('.dedikod-area .textarea-container').removeClass('added');
 	});
 
-
+	// ajax comment
+	$('body').on('submit', '.dedikod .write-area form', function(event) {
+		event.preventDefault();
+		var $form = $(this), serializedData = $form.serialize(), writeA = $form.parents('.write-comment');
+		$.ajax({
+			url: $form.attr('action'),
+			type: 'POST',
+			cache: false,
+			data: serializedData,
+			beforeSend: function() {
+				console.log('gonderiliyor... ')
+			}
+		})
+		.done(function(e) {
+			writeA.parents('.comments').find('.no-comment').remove();
+			writeA.after('<div class="comment"><div class="avatar"><img src="' + 
+				writeA.find('.avatar img').attr('src') + 
+				'" alt="" /></div><div class="write-area"><span class="username ' + writeA.attr('data-gender') + 
+				'"><a data-lightbox="' + writeA.attr('data-lb') + 
+				' #profileBox" data-lightboxtitle="Profil Kartı" href="javascript:;">' + 
+				writeA.attr('data-username') + '</a></span> ' + writeA.find('input[name=comment]').val() + 
+				'<div class="date">' + e + '</div></div></div>');
+			writeA.find('input[name=comment]').val('');
+			writeA.parents('.dedikod').find('.right .comment').text(parseInt( writeA.parents('.dedikod').find('.right .comment').text() ) + 1);
+		});
+	})
+	
 
 	// tab
 	$('body').on('click', '.tab .item', function(event) {
