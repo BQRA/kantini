@@ -1,7 +1,7 @@
 <div class="right-panel">	
 	@if(Auth::check())
 	<div class="user-box {{Auth::user()->profile->gender}}">
-		<div class="logout-button"><a href="{{ URL::route('user.logout') }}"></a></div>
+		<div class="logout-button tooltip" data-content="Çıkıs Yap"><a href="{{ URL::route('user.logout') }}"></a></div>
 		<div class="avatar">
 			@if(Auth::user()->profile->avatar == 'guest')
 				{{ HTML::image('/Avatars/guest-avatar.png') }}
@@ -51,7 +51,7 @@
 			{{ Form::Input('text', 'username', null, ['placeholder' => 'Kullanıcı Adı']) }}
 			
 			<div class="rel">
-				<a href="{{ URL::to('password/remind') }}" class="forgot-pass"><span class="icon">&#61780</span></a>
+				<a href="{{ URL::to('password/remind') }}" class="forgot-pass"><span class="icon tooltip" data-content="Şifremi Unuttum">&#61780</span></a>
 				{{ Form::Input('password', 'password', null, ['placeholder' => 'Şifre']) }}
 			</div>
 

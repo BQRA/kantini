@@ -9,7 +9,7 @@
 <div class="header">
 	<div class="logo">
 		<h1>
-			<b><span class="icon">&#61701</span> Tüm Okullar</b>
+			<b><span class="icon">&#61701</span> <span class="tooltip" data-content="Diğer üniversiteleri göster">Tüm Okullar</span></b>
 			<span class="title"><a href="{{ URL::route('home') }}">KANTİNİ</a></span>
 		</h1>
 	</div>

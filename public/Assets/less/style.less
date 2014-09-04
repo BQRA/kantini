@@ -164,6 +164,9 @@ a:hover {
 .rel {
 	position: relative;
 }
+.d-none {
+	display: none !important;
+}
 /* layout #end */
 
 /* buttons */
@@ -550,7 +553,7 @@ p {
 				padding: 18px 0 0 0;
 				display: inline-block;
 				cursor: pointer;
-				span {
+				.icon {
 					font-size: 20px;
 					display: inline-block;
 					margin-right: 10px;
@@ -790,16 +793,20 @@ p {
 						}
 						.username {
 							background: none;
-							b {
-								color: #000 !important;
-								cursor: not-allowed;
+							color: #000;
+							cursor: not-allowed;
+							font-weight: bold;
+							&:hover {
+								color: #000;
 							}
 							&.female {
+								cursor: pointer;
 								a {
 									color: #e881a2;
 								}
 							}
 							&.male {
+								cursor: pointer;
 								a {
 									color: #73c3d5;
 								}
@@ -888,7 +895,7 @@ p {
 					display: inline-block;
 					width: 100%;
 					height: 27px;
-					margin: 15px 0;
+					margin: 15px 0 10px 0;
 					.left {
 						width: 60%;
 						& > span,
@@ -966,6 +973,9 @@ p {
 							display: inline-block;
 							float: left;
 							margin: 0;
+							.tooltip {
+								width: 100%;
+							}
 						}
 						.up:hover, 
 						.down:hover {
@@ -1132,7 +1142,7 @@ p {
 			position: absolute;
 			right: 10px;
 			top: 6px;
-			span {
+			.icon {
 				font-size: 19px;
 				color: #000;
 			}
@@ -1197,6 +1207,13 @@ p {
 		a {
 			text-decoration: none;
 			color: inherit;
+			display: inline-block;
+			width: 100%;
+			&:hover {
+				small {
+					color: #000;
+				}
+			}
 		}
 		small {
 			font-size: 10px;
@@ -1725,6 +1742,95 @@ p {
 		background-position: -75px 15px;
 	}
 }
+
+/* tooltip */
+.tooltip {
+	position: relative;
+	display: inline-block;
+	cursor: pointer;
+	.tooltip-content {
+		width: 300px;
+		margin-left: -150px;
+		position: absolute;
+		top: -33px;
+		left: 50%;
+		display: inline-block;
+		text-align: center;
+		.font(bold, 11px);
+		span {
+			display: inline-block;
+			padding: 5px 10px;
+			border-radius: 3px;
+			background-color: rgba(0, 0, 0, 0.8);
+			color: #fff;
+			.font(bold, 11px);
+			&:after {
+				content: '';
+				display: inline-block;
+				border: 5px solid transparent;
+				border-top: 5px solid rgba(0, 0, 0, 0.8);
+				position: absolute;
+				left: 50%;
+				bottom: -10px;
+				margin-left: -5px;
+			}
+		}
+	}
+	&.left-w {
+		.tooltip-content {
+			text-align: right;
+			left: -310px;
+			top: -4px;
+			margin-left: 0;
+			span {
+				&:after {
+					border: 5px solid transparent;
+					border-left: 5px solid rgba(0, 0, 0, 0.8);
+					right: -10px;
+					left: inherit;
+					bottom: inherit;
+					top: 50%;
+					margin-top: -5px;
+				}
+			}
+		}
+	}
+	&.right-w {
+		.tooltip-content {
+			text-align: left;
+			left: inherit;
+			right: -310px;
+			top: -4px;
+			margin-left: 0;
+			span {
+				&:after {
+					border: 5px solid transparent;
+					border-right: 5px solid rgba(0, 0, 0, 0.8);
+					left: -5px;
+					right: inherit;
+					bottom: inherit;
+					top: 50%;
+					margin-top: -5px;
+				}
+			}
+		}
+	}
+	&.bottom-w {
+		.tooltip-content {
+			top: inherit;
+			bottom: -33px;
+			span {
+				&:after {
+					border: 5px solid transparent;
+					border-bottom: 5px solid rgba(0, 0, 0, 0.8);
+					top: -10px;
+					bottom: inherit;
+				}
+			}
+		}
+	}
+}
+/* tooltip #end */
 
 
 

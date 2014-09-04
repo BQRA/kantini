@@ -8,7 +8,7 @@
 			<span class="username">{{ $dummy->username }}</span>
 		@endif
 							
-		<span class="date"><a href="{{ URL::action('show.post', $post_id) }}">{{date('d.m.Y',strtotime($dummy->created_at))}}</a></span>
+		<span class="date tooltip" data-content="Dedikod detayına git"><a href="{{ URL::action('show.post', $post_id) }}">{{date('d.m.Y',strtotime($dummy->created_at))}}</a></span>
 		<div class="select-box custom">
 			<div class="text">
 				<span class="icon more">&#61703</span>
@@ -41,15 +41,15 @@
 			{{ Form::hidden('rate', 'up') }}
 			@if(Auth::check())
 				@if(!Vote::where('post_id', $post_id)->where('value', 'up')->where('rater', Auth::user()->username)->count()>0)	
-					<span class="up"></span>
+					<span class="up"><span class="tooltip" data-content="+1">&nbsp;</span></span>
 				@elseif(Vote::where('post_id', $post_id)->where('value', 'up')->where('rater', Auth::user()->username)->count()>0)
-					<span class="up selected"></span>
+					<span class="up selected"><span class="tooltip" data-content="+1'inizi kaldırın">&nbsp;</span></span>
 				@endif
 			@else
 				@if(!Vote::where('post_id', $post_id)->where('value', 'up')->where('rater', guest_username())->count()>0)
-					<span class="up"></span>
+					<span class="up"><span class="tooltip" data-content="+1">&nbsp;</span></span>
 				@elseif(Vote::where('post_id', $post_id)->where('value', 'up')->where('rater', guest_username())->count()>0)
-					<span class="up selected"></span>
+					<span class="up selected"><span class="tooltip" data-content="+1'inizi kaldırın">&nbsp;</span></span>
 				@endif
 			@endif
 			{{ Form::close() }}
@@ -57,15 +57,15 @@
 			{{ Form::hidden('rate', 'down') }}
 			@if(Auth::check())
 				@if(!Vote::where('post_id', $post_id)->where('value', 'down')->where('rater', Auth::user()->username)->count()>0)
-					<span class="down"></span>
+					<span class="down"><span class="tooltip" data-content="-1">&nbsp;</span></span>
 				@elseif(Vote::where('post_id', $post_id)->where('value', 'down')->where('rater', Auth::user()->username)->count()>0)
-					<span class="down selected"></span>
+					<span class="down selected"><span class="tooltip" data-content="-1'inizi kaldırın">&nbsp;</span></span>
 				@endif
 			@else
 				@if(!Vote::where('post_id', $post_id)->where('value', 'down')->where('rater', guest_username())->count()>0)
-					<span class="down"></span>
+					<span class="down"><span class="tooltip" data-content="-1">&nbsp;</span></span>
 				@elseif(Vote::where('post_id', $post_id)->where('value', 'down')->where('rater', guest_username())->count()>0)
-					<span class="down selected"></span>
+					<span class="down selected"><span class="tooltip" data-content="-1'inizi kaldırın">&nbsp;</span></span>
 				@endif
 			@endif
 			{{ Form::close() }}

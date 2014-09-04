@@ -457,6 +457,9 @@ a:hover {
 .rel {
   position: relative;
 }
+.d-none {
+  display: none !important;
+}
 /* layout #end */
 /* buttons */
 .button {
@@ -848,7 +851,7 @@ p {
   display: inline-block;
   cursor: pointer;
 }
-.header .logo h1 b span {
+.header .logo h1 b .icon {
   font-size: 20px;
   display: inline-block;
   margin-right: 10px;
@@ -1075,13 +1078,21 @@ p {
 }
 .container .left-container .dedikods .dedikod .comments .write-area .username {
   background: none;
-}
-.container .left-container .dedikods .dedikod .comments .write-area .username b {
-  color: #000 !important;
+  color: #000;
   cursor: not-allowed;
+  font-weight: bold;
+}
+.container .left-container .dedikods .dedikod .comments .write-area .username:hover {
+  color: #000;
+}
+.container .left-container .dedikods .dedikod .comments .write-area .username.female {
+  cursor: pointer;
 }
 .container .left-container .dedikods .dedikod .comments .write-area .username.female a {
   color: #e881a2;
+}
+.container .left-container .dedikods .dedikod .comments .write-area .username.male {
+  cursor: pointer;
 }
 .container .left-container .dedikods .dedikod .comments .write-area .username.male a {
   color: #73c3d5;
@@ -1159,7 +1170,7 @@ p {
   display: inline-block;
   width: 100%;
   height: 27px;
-  margin: 15px 0;
+  margin: 15px 0 10px 0;
 }
 .container .left-container .dedikods .dedikod .toolbar .left {
   width: 60%;
@@ -1245,6 +1256,11 @@ p {
   display: inline-block;
   float: left;
   margin: 0;
+}
+.container .left-container .dedikods .dedikod .toolbar .like .up .tooltip,
+.container .left-container .dedikods .dedikod .toolbar .like .down .tooltip,
+.container .left-container .dedikods .dedikod .toolbar .like .result .tooltip {
+  width: 100%;
 }
 .container .left-container .dedikods .dedikod .toolbar .like .up:hover,
 .container .left-container .dedikods .dedikod .toolbar .like .down:hover {
@@ -1414,7 +1430,7 @@ p {
   right: 10px;
   top: 6px;
 }
-.user-box .membership .forgot-pass span {
+.user-box .membership .forgot-pass .icon {
   font-size: 19px;
   color: #000;
 }
@@ -1478,6 +1494,11 @@ p {
 .user-box .numbers a {
   text-decoration: none;
   color: inherit;
+  display: inline-block;
+  width: 100%;
+}
+.user-box .numbers a:hover small {
+  color: #000;
 }
 .user-box .numbers small {
   font-size: 10px;
@@ -2037,3 +2058,79 @@ p {
 .universities a.bahcesehir {
   background-position: -75px 15px;
 }
+/* tooltip */
+.tooltip {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+.tooltip .tooltip-content {
+  width: 300px;
+  margin-left: -150px;
+  position: absolute;
+  top: -33px;
+  left: 50%;
+  display: inline-block;
+  text-align: center;
+  font: bold 11px 'Helvetica Neue', Arial;
+}
+.tooltip .tooltip-content span {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 3px;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  font: bold 11px 'Helvetica Neue', Arial;
+}
+.tooltip .tooltip-content span:after {
+  content: '';
+  display: inline-block;
+  border: 5px solid transparent;
+  border-top: 5px solid rgba(0, 0, 0, 0.8);
+  position: absolute;
+  left: 50%;
+  bottom: -10px;
+  margin-left: -5px;
+}
+.tooltip.left-w .tooltip-content {
+  text-align: right;
+  left: -310px;
+  top: -4px;
+  margin-left: 0;
+}
+.tooltip.left-w .tooltip-content span:after {
+  border: 5px solid transparent;
+  border-left: 5px solid rgba(0, 0, 0, 0.8);
+  right: -10px;
+  left: inherit;
+  bottom: inherit;
+  top: 50%;
+  margin-top: -5px;
+}
+.tooltip.right-w .tooltip-content {
+  text-align: left;
+  left: inherit;
+  right: -310px;
+  top: -4px;
+  margin-left: 0;
+}
+.tooltip.right-w .tooltip-content span:after {
+  border: 5px solid transparent;
+  border-right: 5px solid rgba(0, 0, 0, 0.8);
+  left: -5px;
+  right: inherit;
+  bottom: inherit;
+  top: 50%;
+  margin-top: -5px;
+}
+.tooltip.bottom-w .tooltip-content {
+  top: inherit;
+  bottom: -33px;
+}
+.tooltip.bottom-w .tooltip-content span:after {
+  border: 5px solid transparent;
+  border-bottom: 5px solid rgba(0, 0, 0, 0.8);
+  top: -10px;
+  bottom: inherit;
+}
+/* tooltip #end */

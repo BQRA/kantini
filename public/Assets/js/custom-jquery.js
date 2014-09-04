@@ -176,22 +176,22 @@ $(function () {
 
 	// ajax likes
 	$('.dedikod .toolbar').on('click', '.like .up, .like .down', function(event) {
-		var $form = $(this).parents('form'), serializedData = $form.serialize();
-		var likeNContainer = $(this).parents('.like').find('.result'), likeN = parseInt($(this).parents('.like').find('.result').text());
+		var that = $(this), $form = that.parents('form'), serializedData = $form.serialize();
+		var likeNContainer = that.parents('.like').find('.result'), likeN = parseInt(that.parents('.like').find('.result').text());
 
-		var up = $(this).parents('.like').find('.up'), down = $(this).parents('.like').find('.down'), trans, way;
-		if ( $(this).attr('class') == 'up' && down.attr('class') == 'down selected' ) {
-			trans = likeN+2, way = '.up';
-		} else if ( $(this).attr('class') == 'up' ) {
-			trans = likeN+1, way = '.up';
-		} else if ( $(this).attr('class') == 'up selected' ) {
-			trans = likeN-1, way = null;
-		} else if ( $(this).attr('class') == 'down' && up.attr('class') == 'up selected' ) {
-			trans = likeN-2, way = '.down';
-		} else if ( $(this).attr('class') == 'down' ) {
-			trans = likeN-1, way = '.down';
-		} else if ( $(this).attr('class') == 'down selected' ) {
-			trans = likeN+1, way = null;
+		var up = that.parents('.like').find('.up'), down = that.parents('.like').find('.down'), trans, way, dataC, dataC_;
+		if ( that.attr('class') == 'up' && down.attr('class') == 'down selected' ) {
+			trans = likeN+2, way = '.up', dataC = "+1'inizi kaldırın", dataC_ = '-1';
+		} else if ( that.attr('class') == 'up' ) {
+			trans = likeN+1, way = '.up', dataC = "+1'inizi kaldırın";
+		} else if ( that.attr('class') == 'up selected' ) {
+			trans = likeN-1, way = null, dataC = "+1";
+		} else if ( that.attr('class') == 'down' && up.attr('class') == 'up selected' ) {
+			trans = likeN-2, way = '.down', dataC = "-1'inizi kaldırın", dataC_ = '+1';
+		} else if ( that.attr('class') == 'down' ) {
+			trans = likeN-1, way = '.down', dataC = "-1'inizi kaldırın";
+		} else if ( that.attr('class') == 'down selected' ) {
+			trans = likeN+1, way = null, dataC = "-1";
 		}
 
 		if( ajax ) { return false; }
@@ -205,6 +205,9 @@ $(function () {
             }
         }).done(function(){
         	likeNContainer.text(trans).addClass('liked').removeClass('loading');
+        	that.find('.tooltip').data('content', dataC);
+        	$form.next('form').find('.tooltip').data('content', dataC_);
+        	$form.prev('form').find('.tooltip').data('content', dataC_);
         	ajax = null;
         });
 	});
@@ -279,18 +282,20 @@ $(function () {
 		})
 		.done(function(e) {
 			writeA.parents('.comments').find('.no-comment').remove();
-			writeA.after('<div class="comment"><div class="avatar"><img src="' + 
-				writeA.find('.avatar img').attr('src') + 
-				'" alt="" /></div><div class="write-area"><span class="username ' + writeA.attr('data-gender') + 
-				'"><a data-lightbox="' + writeA.attr('data-lb') + 
-				' #profileBox" data-lightboxtitle="Profil Kartı" href="javascript:;">' + 
-				writeA.attr('data-username') + '</a></span> ' + writeA.find('input[name=comment]').val() + 
-				'<div class="date">' + e + '</div></div></div>');
+			writeA.after('<div class="comment"><div class="avatar"><img src="' + writeA.find('.avatar img').attr('src') + '" alt="" /></div>' + $form.find('.ajax-comment-values').html() + '</div>');
+			writeA.next('.comment').find('.comment-content').html(writeA.find('input[name=comment]').val());
+			writeA.next('.comment').find('.date').text(e);
 			writeA.find('input[name=comment]').val('');
 			writeA.parents('.dedikod').find('.right .comment').text(parseInt( writeA.parents('.dedikod').find('.right .comment').text() ) + 1);
 		});
 	})
 	
+	// tooltip
+	$('.tooltip').hover(function(event) {
+		$(this).prepend('<span class="tooltip-content"><span>' + $(this).data('content') + '</span></span>');
+	}, function(){
+		$('.tooltip-content').remove();
+	});
 
 	// tab
 	$('body').on('click', '.tab .item', function(event) {

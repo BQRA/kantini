@@ -15,7 +15,7 @@
 			<div class="clear"></div>
 
 			<div class="comments" id="giveComments">
-				<div class="write-comment" data-username="{{ Auth::user()->username }}" data-lb="{{ URL::action('home') }}/user/profile/{{ Auth::user()->username }}" data-gender="{{ Auth::user()->profile->gender }}">
+				<div class="write-comment">
 					<div class="avatar">
 						@if(!Auth::check())
 							{{ HTML::image('/Avatars/guest-avatar.png') }}
@@ -33,8 +33,20 @@
 						
 						@if(!Auth::check())
 							{{ Form::text('comment', null, ['placeholder' => guest_username().' olarak yorum yaz!', 'autocomplete' => 'off']) }}
+							<div class="d-none ajax-comment-values">
+								<div class="write-area">
+									<span class="username">{{ guest_username() }}</span>&nbsp;<span class="comment-content"></span><div class="date"></div>
+								</div>
+							</div>
 						@else
 							{{ Form::text('comment', null, ['placeholder' => Auth::user()->username.' olarak yorum yaz!', 'autocomplete' => 'off']) }}
+							<div class="d-none ajax-comment-values">
+								<div class="write-area">
+									<span class="username {{ Auth::user()->profile->gender }}">
+										<a href="javascript:;" data-lightbox="{{ URL::action('home') }}/user/profile/{{ Auth::user()->username }} #profileBox" data-lightboxtitle="Profil Kartı">{{ Auth::user()->username }}</a>
+									</span><span class="comment-content"></span><div class="date"></div>
+								</div>
+							</div>
 						@endif
 						{{ Form::submit('', ['style'=> 'display:none']) }}
 						{{ Form::close() }}
@@ -64,10 +76,10 @@
 									@if(!empty($commenter))
 										<a data-lightbox="{{ URL::action('home') }}/user/profile/{{ $comment->commenter }} #profileBox" data-lightboxtitle="Profil Kartı" href="javascript:;">{{ $comment->commenter }}</a>
 									@else 
-										<b>{{ $comment->commenter }}</b>
+										{{ $comment->commenter }}
 									@endif
 								</span>
-								{{ $comment->comment }}
+								<span class="comment-content">{{ $comment->comment }}</span>
 								<div class="date">{{ date('d.m.Y',strtotime($comment->created_at)) }}</div>
 							</div>
 						</div>

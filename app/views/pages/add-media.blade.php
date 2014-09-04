@@ -15,7 +15,7 @@
 			<div class="tab-content-item selected">
 				<h2>Baska bir URL'den Link Ekle</h2>
 				<p>
-					Dedikod'unuza resim veya video eklemek icin eklemek istediğiniz medyanın URL'sini giriniz. <br>
+					<span class="tooltip" data-content="Lorem ipsum">Dedikod'unuza resim</span> veya video eklemek icin eklemek istediğiniz medyanın URL'sini giriniz. <br>
 					Örn: <b>http://images.boomsbeat.com/data/images/full/209/jobs-jpg.jpg</b> veya <b>http://www.youtube.com/watch?v=bd6dQmN-mPw</b>
 				</p>
 				
