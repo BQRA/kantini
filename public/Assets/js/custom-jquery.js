@@ -13,7 +13,7 @@ jQuery(document).ready(function($) {
 		var str = $(this).find('.content').html(), regex = /(?:\s|^)(?:#(?!\d+(?:\s|$)))(\w+)(?=\s|$)/gi;
 		function replacer(hash){
 			var replacementString = $.trim(hash);
-			return ' <a href="/kantini/public/search?q='+ replacementString.substr(1) +'" class="highlight">' + replacementString + '</a>';
+			return ' <a href="/kantini/public/search?q=%23'+ replacementString.substr(1) +'" class="highlight">' + replacementString + '</a>';
 		}
 		$(this).find('.content').html( str.replace( regex , replacer ) );
 	});
@@ -27,16 +27,30 @@ jQuery(document).ready(function($) {
 
 // HTML5 image preview for upload
 function previewImage(input) {
-	var preview = document.getElementById('htmlImageApi');
 	if (input.files && input.files[0]) {
 		var reader = new FileReader();
 		reader.onload = function (e) {
-			preview.setAttribute('src', e.target.result);
-			document.getElementById('event-image').value = e.target.result;
+			$('form.image-upload input[name=image]').val(e.target.result);
+			var $form = $('form.image-upload'), serializedData = $form.serialize();
+			$.ajax({
+				url: $form.attr('action'),
+				type: 'POST',
+				cache: false,
+				data: serializedData,
+				beforeSend: function(){
+					$(input).prev('img').remove();
+					$(input).before('<div class="loading"/>');
+				}
+			}).done(function(e) { 
+				$('form.image-upload input[name=data-imagetype]').val($(input).data('imagetype'));
+				$(input).prev('img').remove();
+				$(input).prev('.loading');
+				$(input).before(e); 
+				$(input).parents('.add-event').find('.event-bg-image').html(e);
+			});
+			
 		}
 		reader.readAsDataURL(input.files[0]);
-	} else {
-		preview.setAttribute('src', 'Assets/images/select-image.png');
 	}
 }
 

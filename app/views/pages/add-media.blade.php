@@ -33,9 +33,7 @@
 
 				<div class="upload-from-computer">
 					<div class="pic-upload">
-						<img id="htmlImageApi" src="Assets/images/select-image.png" />
-						<input type="file" onchange="previewImage(this)" accept="image/*" />
-						<input type="hidden" id="event-image" name="computer-image" />
+						<input type="file" data-imagetype="image" onchange="previewImage(this)" accept="image/*" />
 					</div>
 				</div>
 

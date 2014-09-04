@@ -1718,11 +1718,11 @@ p {
   z-index: 1;
 }
 .add-event-container .add-event .event-bg-image img {
-  -webkit-filter: blur(4px);
-  -moz-filter: blur(4px);
-  -o-filter: blur(4px);
-  -ms-filter: blur(4px);
-  filter: blur(4px);
+  -webkit-filter: blur(2px);
+  -moz-filter: blur(2px);
+  -o-filter: blur(2px);
+  -ms-filter: blur(2px);
+  filter: blur(2px);
   height: 100%;
   opacity: 0.3;
 }
@@ -1746,7 +1746,7 @@ p {
   z-index: 10;
 }
 .add-event-container .add-event .details .detail {
-  padding: 15px 20px;
+  padding: 14px 20px;
   border-left: 3px solid rgba(0, 0, 0, 0.05);
   min-height: 70px;
 }
@@ -1799,6 +1799,7 @@ p {
   width: 100%;
   resize: none;
   color: #000;
+  background-color: transparent;
 }
 .add-event-container .add-event .details .detail textarea {
   width: 100%;
@@ -1831,6 +1832,12 @@ p {
   overflow: hidden;
   background: url('../images/sprite.png') 12px -463px no-repeat;
   cursor: pointer;
+}
+.pic-upload .loading {
+  background: url('../images/loading.gif') center center no-repeat #ffffff;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
 }
 .pic-upload input {
   height: 50px;

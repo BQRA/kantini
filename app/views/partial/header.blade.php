@@ -6,6 +6,11 @@
 	</div>
 </div>
 
+{{ Form::open(['url' => 'event-image-upload', null, 'class'=>'image-upload']) }}
+{{ Form::hidden('image', '') }}
+{{ Form::hidden('data-imagetype', '') }}
+{{ Form::close() }}
+
 <div class="header">
 	<div class="logo">
 		<h1>
