@@ -45,6 +45,12 @@ Route::get('add-media', [
 	'before' => 'auth'
 ]);
 
+Route::get('authorization', function()
+{
+	return View::make('pages.authorization');
+});
+
+
 	Route::post('send-post', 'PostsController@sendPost')->before('crsf');
 
 	Route::post('send-comment/{id}', 'PostsController@sendComment')->before('crsf');

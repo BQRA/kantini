@@ -10,7 +10,7 @@
 	<div class="logo">
 		<h1>
 			<b><span class="icon">&#61701</span> <span class="tooltip" data-content="Diğer üniversiteleri göster">Tüm Okullar</span></b>
-			<span class="title"><a href="{{ URL::route('home') }}">KANTİNİ</a></span>
+			<a class="title" href="{{ URL::route('home') }}">KANTİNİ</a>
 		</h1>
 	</div>
 
@@ -41,6 +41,12 @@
 		</div>
 		<div class="bottom-bar">
 			<div class="left">
+				@if(!Auth::check())
+				<div class="no-attachment">
+					<span class="bar-button event" data-lightbox="{{ URL::action('home') }}/authorization #authorization">Etkinlik Ekle</span>
+					<span class="bar-button media" data-lightbox="{{ URL::action('home') }}/authorization #authorization">Resim veya Video Ekle</span>
+				</div>
+				@else
 				<div class="no-attachment">
 					<span class="bar-button event" data-lightbox="{{ URL::action('home') }}/create-event #addEvent" data-lightboxtitle="Etkinlik Ekle">Etkinlik Ekle</span>
 					<span class="bar-button media" data-lightbox="{{ URL::action('home') }}/add-media #addMedia" data-lightboxtitle="Resim veya Video Ekle">Resim veya Video Ekle</span>
@@ -51,6 +57,7 @@
 				<div class="media-attached attached">
 					<span class="bar-button media" data-edit data-lightboxtitle="Resim veya Videoyu Düzenle">Resim veya Videoyu Düzenle</span>
 				</div>
+				@endif
 			</div>
 			<div class="right">
 				@if(!Auth::check())
