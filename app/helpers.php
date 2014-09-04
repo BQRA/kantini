@@ -1,21 +1,21 @@
 <?php
 function guest_username() {
 	if (isset($_COOKIE['guest'])) {
-		$guest_username = 'misafir'.$_COOKIE['guest'];
+		$guest_username = '0'.$_COOKIE['guest'];
 	} else {
 		$a = rand(1000, 100000);
 		setcookie('guest', $a, time()+3600, '/');
-		$guest_username = 'misafir'.$a;
+		$guest_username = '0'.$a;
 	}
 
 	return $guest_username;
 }
 
-function eventImage() {
-		$number		 = rand(1000, 1000000000000);
-		$eventImage  = Auth::user()->username.$number;
+function imageNumber() {
+	$image_number = User::find(Auth::user()->id);
+	$number = Auth::user()->username.'-'.$image_number->profile->image_number;
 
-	return $eventImage;
+	return $number;
 }
 
 function session_user_posts() {

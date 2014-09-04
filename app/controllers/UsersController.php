@@ -71,6 +71,7 @@ class UsersController extends \BaseController {
 			$profile->school  	= Input::get('school');
 			$profile->gender 	= Input::get('gender');
 			$profile->avatar 	= $filename;
+			$profile->image_number = str_random(22);
 			$profile->save();
 
 			Mail::send('emails.auth.account-activate', ['link'=> URL::route('account.activate', $code), 'username' => $username], function($message) use ($user) {

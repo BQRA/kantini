@@ -87,6 +87,12 @@ class PostsController extends \BaseController {
 				$post->dedikod 				= trim(Input::get('dedikod'));
 				$post->save();
 
+				if(Auth::check()) {
+					$image_number = Profile::find(Auth::user()->id);
+					$image_number->image_number = str_random(22);
+					$image_number->save();
+				}
+
 				Session::flash('message', 'İletiniz başarıyla gönderilmiştir!');
 				return Redirect::back();
 			} else {
@@ -139,6 +145,12 @@ class PostsController extends \BaseController {
 				$post->dedikod 		= trim(Input::get('dedikod'));
 				$post->links 		= Input::get('media');
 				$post->save();
+
+				if(Auth::check()) {
+					$image_number = Profile::find(Auth::user()->id);
+					$image_number->image_number = str_random(22);
+					$image_number->save();
+				}
 
 				Session::flash('message', 'İletiniz başarıyla gönderilmiştir!');
 				return Redirect::back();

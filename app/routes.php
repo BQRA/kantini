@@ -39,6 +39,17 @@ Route::get('create-event', [
 	'before' => 'auth'
 ]);
 
+	Route::post('event-image-upload', function() {
+
+		$data = Input::get('image');
+
+		list($type, $data) = explode(';', $data);
+		list(, $data)      = explode(',', $data);
+		$data = base64_decode($data);
+
+		file_put_contents(public_path().'/Events/'.imageNumber().'.JPG', $data);
+	});
+
 Route::get('add-media', [
 	'as' 	 => 'add.media',
 	'uses' 	 => 'PagesController@addMedia',
