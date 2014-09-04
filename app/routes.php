@@ -49,7 +49,7 @@ Route::get('create-event', [
 
 		file_put_contents(public_path().'/Events/'.imageNumber().'.JPG', $data);
 
-		return public_path().'/Events/'.imageNumber().'.JPG';
+		return HTML::image('/Events/'.imageNumber().'.jpg');
 	});
 
 Route::get('add-media', [
