@@ -48,6 +48,8 @@ Route::get('create-event', [
 		$data = base64_decode($data);
 
 		file_put_contents(public_path().'/Events/'.imageNumber().'.JPG', $data);
+
+		return public_path().'/Events/'.imageNumber().'.JPG';
 	});
 
 Route::get('add-media', [
