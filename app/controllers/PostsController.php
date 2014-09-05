@@ -184,7 +184,7 @@ class PostsController extends \BaseController {
 		$post_id 	= $post->id;
 		$user 		= User::whereUsername($post->username)->first();
 
-		$comments 	= Comment::orderBy('comment_created_at', 'DESC')
+		$comments 	= Comment::orderBy('created_at', 'DESC')
 							->where('post_id', $id)
 							->get();
 

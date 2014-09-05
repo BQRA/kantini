@@ -255,7 +255,7 @@ class UsersController extends \BaseController {
 									->where('flag', 'NO')
 									->where('type', $type)
 									->groupBy('post_id')
-									->orderBy('comment_created_at', $orderBy)
+									->orderBy('comments.created_at', $orderBy)
 									->Paginate(36);
 
 		} elseif (Input::has('orderBy')) {
@@ -266,7 +266,7 @@ class UsersController extends \BaseController {
 									->where('commenter', $username)
 									->where('flag', 'NO')
 									->groupBy('post_id')
-									->orderBy('comment_created_at', $orderBy)
+									->orderBy('comments.created_at', $orderBy)
 									->Paginate(36);
 
 		} elseif (Input::has('type')) {
@@ -278,7 +278,7 @@ class UsersController extends \BaseController {
 									->where('flag', 'NO')
 									->where('type', $type)
 									->groupBy('post_id')
-									->orderBy('comment_created_at', 'DESC')
+									->orderBy('comments.created_at', 'DESC')
 									->Paginate(36);
 			
 		} else {
@@ -287,7 +287,7 @@ class UsersController extends \BaseController {
 									->where('commenter', $username)
 									->where('flag', 'NO')
 									->groupBy('post_id')
-									->orderBy('comment_created_at', 'DESC')
+									->orderBy('comments.created_at', 'DESC')
 									->Paginate(36);
 		}
 
@@ -312,7 +312,7 @@ class UsersController extends \BaseController {
 									->where('flag', 'NO')
 									->where('type', $type)
 									->groupBy('post_id')
-									->orderBy('vote_created_at', $orderBy)
+									->orderBy('votes.created_at', $orderBy)
 									->Paginate(36);
 
 		} elseif (Input::has('orderBy')) {
@@ -323,7 +323,7 @@ class UsersController extends \BaseController {
 									->where('rater', $username)
 									->where('flag', 'NO')
 									->groupBy('post_id')
-									->orderBy('vote_created_at', $orderBy)
+									->orderBy('votes.created_at', $orderBy)
 									->Paginate(36);
 
 		} elseif (Input::has('type')) {
@@ -335,7 +335,7 @@ class UsersController extends \BaseController {
 									->where('flag', 'NO')
 									->where('type', $type)
 									->groupBy('post_id')
-									->orderBy('vote_created_at', 'DESC')
+									->orderBy('votes.created_at', 'DESC')
 									->Paginate(36);
 			
 		} else {
@@ -344,7 +344,7 @@ class UsersController extends \BaseController {
 									->where('rater', $username)
 									->where('flag', 'NO')
 									->groupBy('post_id')
-									->orderBy('vote_created_at', 'DESC')
+									->orderBy('votes.created_at', 'DESC')
 									->Paginate(36);
 		}
 
