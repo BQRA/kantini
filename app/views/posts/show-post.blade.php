@@ -28,18 +28,22 @@
 						@endif
 					</div>
 
-					<div class="write-area">
+					<div class="write-area req">
 						{{ Form::open(['action' => ['PostsController@sendComment', $post_id]]) }}
 						
 						@if(!Auth::check())
-							{{ Form::text('comment', null, ['placeholder' => guest_username().' olarak yorum yaz!', 'autocomplete' => 'off']) }}
+							<div>
+							{{ Form::text('comment', null, ['placeholder' => guest_username().' olarak yorum yaz!', 'autocomplete' => 'off', 'data-valid' => 'required', 'data-message' => 'Mesajınızı bos geçmeyiniz']) }}
+							</div>
 							<div class="d-none ajax-comment-values">
 								<div class="write-area">
 									<span class="username">{{ guest_username() }}</span>&nbsp;<span class="comment-content"></span><div class="date"></div>
 								</div>
 							</div>
 						@else
-							{{ Form::text('comment', null, ['placeholder' => Auth::user()->username.' olarak yorum yaz!', 'autocomplete' => 'off']) }}
+							<div>
+							{{ Form::text('comment', null, ['placeholder' => Auth::user()->username.' olarak yorum yaz!', 'autocomplete' => 'off', 'data-valid' => 'required', 'data-message' => 'Mesajınızı bos geçmeyiniz']) }}
+							</div>
 							<div class="d-none ajax-comment-values">
 								<div class="write-area">
 									<span class="username {{ Auth::user()->profile->gender }}">
@@ -48,7 +52,7 @@
 								</div>
 							</div>
 						@endif
-						{{ Form::submit('', ['style'=> 'display:none']) }}
+						{{ Form::submit('', ['style'=> 'display:none', 'data-validator']) }}
 						{{ Form::close() }}
 					</div>
 				</div>

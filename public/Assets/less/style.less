@@ -173,6 +173,9 @@ a:hover {
 .d-none {
 	display: none !important;
 }
+.d-inlineblock {
+	display: inline-block;
+}
 /* layout #end */
 
 /* buttons */
@@ -1542,6 +1545,12 @@ p {
 	overflow: hidden;
 	background: url('@{img-path}/sprite.png') 12px -463px no-repeat;
 	cursor: pointer;
+	&.not-valid {
+		border-color: red;
+		.tooltip {
+			display: none;
+		}
+	}
 	.loading {
 		background: url('@{img-path}/loading.gif') center center no-repeat #fff;
 		display: inline-block;
@@ -1771,6 +1780,7 @@ p {
 		display: inline-block;
 		text-align: center;
 		.font(bold, 11px);
+		z-index: 9999;
 		span {
 			display: inline-block;
 			padding: 5px 10px;
@@ -1857,6 +1867,37 @@ p {
 	}
 }
 
+
+/* validation messages */ 
+.not-valid {
+	position: relative;
+	select + .validation-msg {
+		right: -30px;
+	}
+	.validation-msg {
+		position: absolute;
+		right: 10px;
+		top: 50%;
+		color: red;
+		display: inline-block;
+		height: 16px;
+		margin-top: -8px;
+		font-size: 0 !important;
+		padding-top: 0 !important;
+		.icon {
+			font-size: 16px;
+		}
+	}
+}
+.membership {
+	.validation-msg {
+		margin-top: -15px;
+	}
+	input[name=password] + .validation-msg {
+		right: 35px;
+	}
+}
+/* validation messages #end */ 
 
 
 

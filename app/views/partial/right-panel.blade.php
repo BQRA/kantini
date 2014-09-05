@@ -41,21 +41,22 @@
 			<span>{{guest_username()}}</span>
 		</div>
 		<div class="custom-line"></div>
-		<div class="membership">
+		<div class="membership req">
 			
 			<a href="{{ URL::route('user.register') }}" class="button green w100">KAYIT OL</a>
 			<div class="or-line"></div>
 
 			{{ Form::open(['action' => 'SessionsController@login']) }}
 			
-			{{ Form::Input('text', 'username', null, ['placeholder' => 'Kullanıcı Adı']) }}
-			
+			<div class="rel">
+				{{ Form::Input('text', 'username', null, ['placeholder' => 'Kullanıcı Adı', 'data-valid' => 'required', 'data-message' => 'Bu Alan Zorunludur']) }}
+			</div>
 			<div class="rel">
 				<a href="{{ URL::to('password/remind') }}" class="forgot-pass"><span class="icon tooltip" data-content="Şifremi Unuttum">&#61780</span></a>
-				{{ Form::Input('password', 'password', null, ['placeholder' => 'Şifre']) }}
+				{{ Form::Input('password', 'password', null, ['placeholder' => 'Şifre', 'data-valid' => 'required', 'data-message' => 'Bu Alan Zorunludur']) }}
 			</div>
 
-			{{ Form::button(' ', ['class' => 'button blue w100', 'type' => 'submit']) }}
+			{{ Form::button(' ', ['class' => 'button blue w100', 'type' => 'submit', 'data-validator']) }}
 
 			{{ Form::close() }}
 		</div>
@@ -65,9 +66,12 @@
 	<div class="clear mt30"></div>
 
 	<div class="menu-box">
-		<div class="search">
+		<div class="search req">
 			{{ Form::open(['method' => 'GET', 'route' => 'search']) }}
-			{{ Form::Input('text', 'q', null, ['placeholder' => 'Ara']) }}
+			<label>
+				{{ Form::Input('text', 'q', null, ['placeholder' => 'Ara', 'data-valid' => 'required', 'data-message' => 'Aramak için bir kelime girin']) }}
+			</label>
+			{{ Form::button(' ', ['class' => 'd-none', 'type' => 'submit', 'data-validator']) }}
 			{{ Form::close() }}
 		</div>
 

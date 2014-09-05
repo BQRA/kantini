@@ -12,7 +12,7 @@
 		</div>
 
 		<div class="tab-content" data-tab-number="1">
-			<div class="tab-content-item selected">
+			<div class="tab-content-item req selected">
 				<h2>Baska bir URL'den Link Ekle</h2>
 				<p>
 					<span class="tooltip" data-content="Lorem ipsum">Dedikod'unuza resim</span> veya video eklemek icin eklemek istediğiniz medyanın URL'sini giriniz. <br>
@@ -20,11 +20,19 @@
 				</p>
 				
 				<div class="upload-from-url">
-					{{ Form::Input('text', 'media' ,null, ['placeholder' => 'http://', 'id' => 'mediaUrl'] ) }}
+					<label>
+					{{ Form::Input('text', 'media' ,null, ['placeholder' => 'http://', 'id' => 'mediaUrl', 'data-valid' => 'required', 'data-message' => 'Bu Alan Zorunludur'] ) }}
+					</label>
+				</div>
+
+				<div class="clear mt30"></div>
+
+				<div class="text-center">
+					<div class="button green" data-validator data-type="media" id="addAttachment">Dedikod'a Ekle</div>
 				</div>
 
 			</div>
-			<div class="tab-content-item">
+			<div class="tab-content-item req">
 				<h2>Bilgisayarından Görsel Ekle</h2>
 				<p>
 					Dedikod'unuza bilgisayarınızdan görsel eklemek için, eklemek istediğiniz görseli bilgisayarınızdan seçin. <br> 
@@ -33,17 +41,17 @@
 
 				<div class="upload-from-computer">
 					<div class="pic-upload">
-						<input type="file" data-imagetype="image" onchange="previewImage(this)" accept="image/*" />
+						<input type="file" data-imagetype="image" onchange="previewImage(this)" accept="image/*" data-valid="required" data-message="Bu Alan Zorunludur" />
 					</div>
 				</div>
 
+				<div class="clear mt30"></div>
+
+				<div class="text-center">
+					<div class="button green" data-validator data-type="media" id="addAttachment">Dedikod'a Ekle</div>
+				</div>
+
 			</div>
-		</div>
-
-		<div class="clear mt30"></div>
-
-		<div class="text-center">
-			<div class="button green" data-type="media" id="addAttachment">Dedikod'a Ekle</div>
 		</div>
 
 	</div>

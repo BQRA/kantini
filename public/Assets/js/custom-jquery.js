@@ -25,6 +25,31 @@ jQuery(document).ready(function($) {
 // GLOBAL FUNTIONS
 ///////////////////////////////////////////////////
 
+// validator function
+var validator = function (a) {
+    var errors = 0;
+    a.parents('.req').find('[data-valid=required]').map(function(){
+         if( $(this).val() == '' || $(this).val() == $(this).attr('data-select') || $(this).val() == null ) {
+              $(this).parent().addClass('not-valid').find('span.validation-msg').remove();
+              $(this).parent().append( $(document.createElement('span')).addClass('validation-msg tooltip').attr( 'data-content', $(this).attr('data-message') ).html('<span class="icon">&#61730</span>') );
+              $(this).parents('form').addClass('not-valid');
+              errors++;
+        } else if ( $(this).val() != '' ) {
+              $(this).parent().removeClass('not-valid').find('span.validation-msg').remove();
+              $(this).parents('form').removeClass('not-valid');
+        }   
+    });
+    if ( errors > 0 ) {
+    	if ( a[0].tagName == 'BUTTON' || a[0].tagName == 'FORM' ) {
+    		return false;
+    		alert(324)
+    	} else {
+    		stopImmediatePropagation();
+    		return false;
+    	}
+    }
+}
+
 // HTML5 image preview for upload
 function previewImage(input) {
 	if (input.files && input.files[0]) {
@@ -117,6 +142,14 @@ var ajax = null;
 
 $(function () {
 
+	// validator action
+	$('body').on('submit', 'form', function(event) {
+		return validator($(this));
+	});
+	$('body').on('click', '[data-validator]', function(event) {
+        return validator($(this));
+    }); 
+
 	// global close
 	$('body').click(function(event) {
 		// close selectbox
@@ -152,6 +185,7 @@ $(function () {
 		$('.lightbox-bg .lightbox-content').load($(this).attr('data-lightbox'), function(){
 			lbOpened();
 			lbMask();
+			$('.lightbox-content input[type=text]:eq(0)').trigger('focus');
 		});
 	});
 	// close lightboxes
@@ -233,6 +267,11 @@ $(function () {
 	});
 
 	// Dedikod Attachment
+	$('body').on('keypress', '#addMedia input, #addEvent input', function(e) {
+		if ( e.which == 13 ) {
+			$(this).parents('.lightbox-content').find('#addAttachment').click();
+		}
+	});
 	$('body').on('click', '#addAttachment', function(event) {
 		$('.dedikod-attachment-infos *').remove();
 		$(this).parents('.lightbox-content').clone().appendTo('.dedikod-attachment-infos');
@@ -282,7 +321,7 @@ $(function () {
 	});
 
 	// ajax comment
-	$('body').on('submit', '.dedikod .write-area form', function(event) {
+	$('body').on('submit', '.dedikod .write-area form:not(.not-valid)', function(event) {
 		event.preventDefault();
 		var $form = $(this), serializedData = $form.serialize(), writeA = $form.parents('.write-comment');
 		$.ajax({
@@ -305,9 +344,10 @@ $(function () {
 	})
 	
 	// tooltip
-	$('.tooltip').hover(function(event) {
+	$('body').on('mouseover', '.tooltip', function(event) {
 		$(this).prepend('<span class="tooltip-content"><span>' + $(this).data('content') + '</span></span>');
-	}, function(){
+	});
+	$('body').on('mouseout', '.tooltip', function(event) {
 		$('.tooltip-content').remove();
 	});
 

@@ -466,6 +466,9 @@ a:hover {
 .d-none {
   display: none !important;
 }
+.d-inlineblock {
+  display: inline-block;
+}
 /* layout #end */
 /* buttons */
 .button {
@@ -1833,6 +1836,12 @@ p {
   background: url('../images/sprite.png') 12px -463px no-repeat;
   cursor: pointer;
 }
+.pic-upload.not-valid {
+  border-color: red;
+}
+.pic-upload.not-valid .tooltip {
+  display: none;
+}
 .pic-upload .loading {
   background: url('../images/loading.gif') center center no-repeat #ffffff;
   display: inline-block;
@@ -2089,6 +2098,7 @@ p {
   display: inline-block;
   text-align: center;
   font: bold 11px 'Helvetica Neue', Arial;
+  z-index: 9999;
 }
 .tooltip .tooltip-content span {
   display: inline-block;
@@ -2160,3 +2170,31 @@ p {
 #authorization p {
   color: #fff;
 }
+/* validation messages */
+.not-valid {
+  position: relative;
+}
+.not-valid select + .validation-msg {
+  right: -30px;
+}
+.not-valid .validation-msg {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  color: red;
+  display: inline-block;
+  height: 16px;
+  margin-top: -8px;
+  font-size: 0 !important;
+  padding-top: 0 !important;
+}
+.not-valid .validation-msg .icon {
+  font-size: 16px;
+}
+.membership .validation-msg {
+  margin-top: -15px;
+}
+.membership input[name=password] + .validation-msg {
+  right: 35px;
+}
+/* validation messages #end */

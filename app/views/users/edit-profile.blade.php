@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="blank-page">
+<div class="blank-page req">
 	<h2>Profil Düzenle</h2>
 
 	{{ Form::model($user->profile, ['action' => ['UsersController@updateProfile', $user->username],'files' => true, 'class' => 'form']) }}
@@ -80,7 +80,9 @@
 			Şifre
 		</div>
 		<div class="col-sm-8">
-			{{ Form::Input('password', 'current_password') }}
+			<div class="d-inlineblock">
+			{{ Form::Input('password', 'current_password', null, ['data-valid' => 'required', 'data-message' => 'Bu Alan Zorunludur']) }}
+			</div>
 			@if($errors->has('current_password'))
 				<span class="error">{{ $errors->first('current_password') }}</span>
 			@endif	
@@ -92,7 +94,9 @@
 			Yeni Şifre
 		</div>
 		<div class="col-sm-8">
-			{{ Form::Input('password', 'new_password') }}
+			<div class="d-inlineblock">
+			{{ Form::Input('password', 'new_password', null, ['data-valid' => 'required', 'data-message' => 'Bu Alan Zorunludur']) }}
+			</div>
 			@if($errors->has('new_password'))
 				<span class="error">{{ $errors->first('new_password') }}</span>
 			@endif
@@ -104,7 +108,9 @@
 			Yeni Şifre Tekrar
 		</div>
 		<div class="col-sm-8">
-			{{ Form::Input('password', 'new_password_again') }}
+			<div class="d-inlineblock">
+			{{ Form::Input('password', 'new_password_again', null, ['data-valid' => 'required', 'data-message' => 'Bu Alan Zorunludur']) }}
+			</div>
 			@if($errors->has('new_password_again'))
 				<span class="error">{{ $errors->first('new_password_again') }}</span>
 			@endif
@@ -114,7 +120,7 @@
 	<div class="row">
 		<div class="col-sm-4 title"></div>
 		<div class="col-sm-8">
-			{{ Form::submit('DEĞİŞTİR', ['class' => 'button green']) }}
+			{{ Form::submit('DEĞİŞTİR', ['class' => 'button green', 'data-validator']) }}
 		</div>
 	</div>
 	{{ Form::close() }}
