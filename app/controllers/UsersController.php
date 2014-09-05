@@ -109,8 +109,9 @@ class UsersController extends \BaseController {
 		$user 				= User::whereUsername($username)->firstOrFail();
 		$users_all_posts 	= Post::where('username', $username)->get();
 		$users_all_comments = Comment::where('commenter', $username)->get();
+		$users_all_votes 	= Vote::where('rater', $username)->get();
 
-		return View::make('users.profile', compact('user', 'users_all_posts', 'users_all_comments'));
+		return View::make('users.profile', compact('user', 'users_all_posts', 'users_all_comments', 'users_all_votes'));
 	}
 
 	public function EditProfile($username) {
@@ -206,6 +207,7 @@ class UsersController extends \BaseController {
 			$users_all_posts = Post::where('username', $username)
 								->where('type', $type)
 								->orderBy('created_at', $orderBy)
+								->where('flag', 'NO')
 								->Paginate(36);
 
 		} elseif (Input::has('orderBy')) {
@@ -213,6 +215,7 @@ class UsersController extends \BaseController {
 
 			$users_all_posts = Post::where('username', $username)
 								->orderBy('created_at', $orderBy)
+								->where('flag', 'NO')
 								->Paginate(36);
 
 		} elseif (Input::has('type')) {
@@ -221,11 +224,13 @@ class UsersController extends \BaseController {
 			$users_all_posts = Post::orderBy('created_at', 'DESC')
 								->where('username', $username)
 								->where('type', $type)
+								->where('flag', 'NO')
 								->Paginate(36);
 			
 		} else {
 			$users_all_posts = Post::where('username', $username)
 								->orderBy('created_at', 'DESC')
+								->where('flag', 'NO')
 								->Paginate(36);
 		}
 
@@ -244,36 +249,105 @@ class UsersController extends \BaseController {
 			$type 		= $_GET['type'];
 			$orderBy 	= $_GET['orderBy'];
 
-			$users_all_comments = Comment::with('post')->where('commenter', $username)
-										->groupBy('post_id')
-										->where('type', $type)
-										->orderBy('created_at', $orderBy)
-										->Paginate(36);
+			$users_all_comments = DB::table('comments')
+									->leftjoin('posts', 'posts.id', '=', 'comments.post_id')
+									->where('commenter', $username)
+									->where('flag', 'NO')
+									->where('type', $type)
+									->groupBy('post_id')
+									->orderBy('comment_created_at', $orderBy)
+									->Paginate(36);
 
 		} elseif (Input::has('orderBy')) {
 			$orderBy = $_GET['orderBy'];
 
-			$users_all_comments = Comment::with('post')->where('commenter', $username)
-										->groupBy('post_id')
-										->orderBy('created_at', $orderBy)
-										->Paginate(36);
+			$users_all_comments = DB::table('comments')
+									->leftjoin('posts', 'posts.id', '=', 'comments.post_id')
+									->where('commenter', $username)
+									->where('flag', 'NO')
+									->groupBy('post_id')
+									->orderBy('comment_created_at', $orderBy)
+									->Paginate(36);
 
 		} elseif (Input::has('type')) {
 			$type = $_GET['type'];
 
-			$users_all_comments = Comment::with('post')->where('commenter', $username)
-										->groupBy('post_id')
-										->where('type', $type)
-										->orderBy('created_at', 'DESC')
-										->Paginate(36);
+			$users_all_comments = DB::table('comments')
+									->leftjoin('posts', 'posts.id', '=', 'comments.post_id')
+									->where('commenter', $username)
+									->where('flag', 'NO')
+									->where('type', $type)
+									->groupBy('post_id')
+									->orderBy('comment_created_at', 'DESC')
+									->Paginate(36);
 			
 		} else {
-			$users_all_comments = Comment::with('post')->where('commenter', $username)
-										->groupBy('post_id')
-										->orderBy('created_at', 'DESC')
-										->Paginate(36);
+			$users_all_comments = DB::table('comments')
+									->leftjoin('posts', 'posts.id', '=', 'comments.post_id')
+									->where('commenter', $username)
+									->where('flag', 'NO')
+									->groupBy('post_id')
+									->orderBy('comment_created_at', 'DESC')
+									->Paginate(36);
 		}
 
 		return View::make('users.all-comments', compact('user', 'users_all_comments'));
+	}
+
+	public function showUserAllVotes($username) {
+
+		try {
+			$user = User::whereUsername($username)->firstOrFail();
+		} catch (Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+			return View::make('errors.404');
+		}
+
+		if (Input::has('type') && Input::has('orderBy')) {
+			$type 		= $_GET['type'];
+			$orderBy 	= $_GET['orderBy'];
+
+			$users_all_votes = DB::table('votes')
+									->leftjoin('posts', 'posts.id', '=', 'votes.post_id')
+									->where('rater', $username)
+									->where('flag', 'NO')
+									->where('type', $type)
+									->groupBy('post_id')
+									->orderBy('vote_created_at', $orderBy)
+									->Paginate(36);
+
+		} elseif (Input::has('orderBy')) {
+			$orderBy = $_GET['orderBy'];
+
+			$users_all_votes = DB::table('votes')
+									->leftjoin('posts', 'posts.id', '=', 'votes.post_id')
+									->where('rater', $username)
+									->where('flag', 'NO')
+									->groupBy('post_id')
+									->orderBy('vote_created_at', $orderBy)
+									->Paginate(36);
+
+		} elseif (Input::has('type')) {
+			$type = $_GET['type'];
+
+			$users_all_votes = DB::table('votes')
+									->leftjoin('posts', 'posts.id', '=', 'votes.post_id')
+									->where('rater', $username)
+									->where('flag', 'NO')
+									->where('type', $type)
+									->groupBy('post_id')
+									->orderBy('vote_created_at', 'DESC')
+									->Paginate(36);
+			
+		} else {
+			$users_all_votes = DB::table('votes')
+									->leftjoin('posts', 'posts.id', '=', 'votes.post_id')
+									->where('rater', $username)
+									->where('flag', 'NO')
+									->groupBy('post_id')
+									->orderBy('vote_created_at', 'DESC')
+									->Paginate(36);
+		}
+
+		return View::make('users.all-rates', compact('user', 'users_all_votes'));
 	}
 }

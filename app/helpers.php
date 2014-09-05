@@ -1,11 +1,11 @@
 <?php
 function guest_username() {
 	if (isset($_COOKIE['guest'])) {
-		$guest_username = '0'.$_COOKIE['guest'];
+		$guest_username = $_COOKIE['guest'];
 	} else {
 		$a = rand(1000, 100000);
 		setcookie('guest', $a, time()+3600, '/');
-		$guest_username = '0'.$a;
+		$guest_username = $a;
 	}
 
 	return $guest_username;
@@ -28,12 +28,7 @@ function session_user_comments() {
 	return $user_comments;
 }
 
-function up($post_id) {
-	$up = Vote::where('post_id', $post_id)->where('value', 'up')->get();
-	return $up;
-}
-
-function down($post_id) {
-	$down = Vote::where('post_id', $post_id)->where('value', 'down')->get();
-	return $down;
+function session_user_votes() {
+	$user_votes = Vote::where('rater', Auth::user()->username)->get();
+	return $user_votes;
 }

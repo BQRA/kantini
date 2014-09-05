@@ -39,9 +39,12 @@
 			</div>
 
 			<div class="col-sm-4">
-				<a href="#">
-					0<small>Oy</small>
-				</a>
+				@if($users_all_votes->count() > 0)
+					<a href="{{ URL::action('user.all.votes', $user->username) }}">{{ $users_all_votes->count() }}</a>
+				@else
+					{{ $users_all_votes->count() }}
+				@endif
+				<small>Yorum</small>
 			</div>
 
 		</div>

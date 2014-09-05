@@ -18,6 +18,8 @@ class PostsController extends \BaseController {
 
 			if(Auth::check()) {
 				$username 	= Auth::user()->username;
+				$user_id 	= Auth::user()->id;
+				$anonymous 	= 0;
 				$gender 	= Auth::user()->profile->gender;
 
 				$rules = [
@@ -25,6 +27,8 @@ class PostsController extends \BaseController {
 				];
 			} else {
 				$username 	= guest_username();
+				$user_id 	= null;
+				$anonymous 	= 1;
 				$gender 	= Input::get('gender');
 
 				$rules = [
@@ -38,6 +42,8 @@ class PostsController extends \BaseController {
 			if($validator->passes()) {
 				$post = new Post;
 				$post->username = $username;
+				$post->user_id  = $user_id;
+				$post->anonymous = $anonymous;
 				$post->gender 	= $gender;
 				$post->dedikod 	= trim(Input::get('dedikod'));
 				$post->type 	= 'dedikod';
@@ -74,6 +80,8 @@ class PostsController extends \BaseController {
 
 				$post = new Post;
 				$post->username 			= Auth::user()->username;
+				$post->user_id  			= Auth::user()->id;
+				$post->anonymous 			= 0;
 				$post->gender 				= Auth::user()->profile->gender;
 				$post->type 				= Input::get('post_type');
 				$post->event_name 			= trim(Input::get('event_name'));
@@ -97,7 +105,7 @@ class PostsController extends \BaseController {
 				return Redirect::back();
 			} else {
 				//Validasyon hatalı döndüğünde etkinlik lightbox'ı açık ve doldurulan alanların dolu gelmesi gerek
-				return Redirect::to('/?lightbox=false')
+				return Redirect::to('/')
 				->withErrors($validator)
 				->withInput();
 			}
@@ -114,6 +122,8 @@ class PostsController extends \BaseController {
 			if($validator->passes()) {
 				$post = new Post;
 				$post->username 	= Auth::user()->username;
+				$post->user_id  	= Auth::user()->id;
+				$post->anonymous 	= 0;
 				$post->gender 		= Auth::user()->profile->gender;
 				$post->type 		= Input::get('post_type');
 				$post->dedikod 		= trim(Input::get('dedikod'));
@@ -140,6 +150,8 @@ class PostsController extends \BaseController {
 			if($validator->passes()) {
 				$post = new Post;
 				$post->username 	= Auth::user()->username;
+				$post->user_id  	= Auth::user()->id;
+				$post->anonymous 	= 0;
 				$post->gender 		= Auth::user()->profile->gender;
 				$post->type 		= Input::get('post_type');
 				$post->dedikod 		= trim(Input::get('dedikod'));
@@ -171,19 +183,17 @@ class PostsController extends \BaseController {
 
 		$post_id 	= $post->id;
 		$user 		= User::whereUsername($post->username)->first();
-		$up 		= up($post_id);
-		$down 		= down($post_id);
 
-		$comments 	= Comment::orderBy('created_at', 'DESC')
+		$comments 	= Comment::orderBy('comment_created_at', 'DESC')
 							->where('post_id', $id)
 							->get();
 
-		return View::make('posts.show-post', compact('post', 'comments', 'user', 'post_id', 'up', 'down'));
+		return View::make('posts.show-post', compact('post', 'comments', 'user', 'post_id'));
 	}
 
 	public function sendComment($id) {
 		try {
-			$post = Post::select('id', 'type', 'username')->where('id', $id)->firstOrFail();
+			$post = Post::select('id')->where('id', $id)->firstOrFail();
 		} catch (Exception $e) {
 			return View::make('errors.404');
 		}
@@ -192,15 +202,11 @@ class PostsController extends \BaseController {
 
 		if(Auth::check()) {
 			$commenter = Auth::user()->username;
-			$user_id   = Auth::user()->id;	
-			$post_type = $post->type;
 			$rules = [
 					'comment' => 'required|min:5|max:800'
 				];
 		} else {
 			$commenter = guest_username();
-			$user_id   = null;
-			$post_type = null;
 			$rules = [
 					'comment' => 'required|min:5|max:800'
 				];
@@ -211,11 +217,16 @@ class PostsController extends \BaseController {
 		if($validator->passes()) {
 			$comment = new Comment;
 			$comment->commenter 	= $commenter;
-			$comment->user_id 		= $user_id;
 			$comment->post_id 		= $id;
 			$comment->comment 		= trim(Input::get('comment'));
-			$comment->type 			= $post_type;
 			$comment->save();
+
+			$comments = Comment::select('post_id')->where('post_id', $id)->get();
+			$comments_count = $comments->count();
+
+			$post = Post::find($id);
+			$post->comments_count = $comments_count;
+			$post->save();
 
 			/*
 			$user = User::whereUsername($post->username)->first();
@@ -245,15 +256,5 @@ class PostsController extends \BaseController {
 		Vote::wherePost_id($id)->delete();
 
 		return Redirect::back()->with('message', 'Gönderiniz başarıyla silinmiştir.');
-	}
-
-	public function eventImage() {
-		$data = Input::get('image');
-
-		list($type, $data) = explode(';', $data);
-		list(, $data)      = explode(',', $data);
-		$data = base64_decode($data);
-
-		file_put_contents(public_path().'/Events/'.eventImage().'.JPG', $data);
 	}
 }

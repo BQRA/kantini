@@ -103,9 +103,9 @@ Route::get('user/profile/{username}/all-comments', [
 	'uses' 	=> 'UsersController@showUserAllComments'
 ]);
 
-Route::get('user/profile/{username}/all-rates', [
-	'as' 	=> 'user.all.rates',
-	'uses' 	=> 'UsersController@showUserAllRates'
+Route::get('user/profile/{username}/all-votes', [
+	'as' 	=> 'user.all.votes',
+	'uses' 	=> 'UsersController@showUserAllVotes'
 ]);
 
 Route::get('/uni/{school}',[

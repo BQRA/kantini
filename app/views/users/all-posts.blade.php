@@ -12,9 +12,6 @@
 	<?php
 		$dummy 		= $post;
 		$post_id 	= $dummy->id;
-	 	$comments 	= Comment::where('post_id', $post_id)->get();
-	 	$up 		= up($post_id);
-		$down 		= down($post_id);
 	 ?>
 		<div class="dedikod {{$dummy->gender}}">
 			@include('partial.avatar')

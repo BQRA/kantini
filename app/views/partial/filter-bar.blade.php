@@ -23,7 +23,7 @@
 					<li><a href="{{URL::to(URL::current().'?orderBy='.$_GET['orderBy'].'&type=image')}}">Fotoğraflar</a></li>
 					<li><a href="{{URL::to(URL::current().'?orderBy='.$_GET['orderBy'].'&type=video')}}">Videolar</a></li>
 				@else
-					<li><a href="{{URL::to(URL::current().'?type=dedikod')}}">Dediksdasd asdas dsaodlar</a></li>
+					<li><a href="{{URL::to(URL::current().'?type=dedikod')}}">Dedikodlar</a></li>
 					<li><a href="{{URL::to(URL::current().'?type=event')}}">Etkinlikler</a></li>
 					<li><a href="{{URL::to(URL::current().'?type=image')}}">Fotoğraflar</a></li>
 					<li><a href="{{URL::to(URL::current().'?type=video')}}">Videolar</a></li>

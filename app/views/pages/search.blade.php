@@ -14,9 +14,6 @@
 			$dummy 		= $post;
 			$post_id 	= $dummy->id;
 			$user 		= User::whereUsername($dummy->username)->first();
-			$comments 	= Comment::select('post_id')->where('post_id', $post_id)->get();
-			$up 		= up($post_id);
-			$down 		= down($post_id);
 		?>
 		
 		<div class="dedikod {{ $dummy->gender }}">

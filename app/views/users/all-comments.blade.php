@@ -10,12 +10,9 @@
 <div class="dedikods">
 	@foreach($users_all_comments as $post)
 	<?php
-		$dummy 		= $post->post;
+		$dummy 		= $post;
 		$post_id 	= $dummy->id;
 		$user 		= User::whereUsername($dummy->username)->first(); 
-		$comments 	= Comment::where('post_id', $post_id)->get();
-		$up 		= up($post_id);
-		$down 		= down($post_id);
 	?>
 		<div class="dedikod {{$dummy->gender}}">
 			@include('partial.avatar')

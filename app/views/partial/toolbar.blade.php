@@ -34,7 +34,7 @@
 	</div>
 							
 	<div class="right">
-		<span class="comment get-comments" data-comments="{{ URL::action('home') }}/post/{{ $post_id }} #giveComments">{{$comments->count()}}</span>
+		<span class="comment get-comments" data-comments="{{ URL::action('home') }}/post/{{ $post_id }} #giveComments">{{$dummy->comments_count}}</span>
 		<!-- <span class="button sm r green get-comments" data-comments="{{ URL::action('home') }}/post/{{ $post_id }} #giveComments">Yorum Yaz</span> -->
 		<span class="like">
 			{{ Form::open(['action' => ['RatesController@rate', $post_id]]) }}
@@ -69,7 +69,7 @@
 				@endif
 			@endif
 			{{ Form::close() }}
-			<span class="result">{{$up->count() - $down->count()}}</span>
+			<span class="result">{{$dummy->votes_count}}</span>
 		</span>
 	</div>
 	

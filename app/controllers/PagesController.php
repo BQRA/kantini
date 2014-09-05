@@ -10,6 +10,7 @@ class PagesController extends \BaseController {
 
 			$posts = Post::orderBy('created_at', $orderBy)
 						->where('type', $type)
+						->where('flag', 'NO')
 						->Paginate(36);
 
 		} elseif (Input::has('orderBy')) {
@@ -22,10 +23,11 @@ class PagesController extends \BaseController {
 
 			$posts = Post::orderBy('created_at', 'DESC')
 						->where('type', $type)
+						->where('flag', 'NO')
 						->Paginate(36);
 			
 		} else {
-			$posts = Post::orderBy('created_at', 'DESC')->Paginate(36);
+			$posts = Post::orderBy('created_at', 'DESC')->where('flag', 'NO')->Paginate(36);
 		}
 
 		return View::make('pages.index', compact('posts', 'school'));
@@ -34,7 +36,7 @@ class PagesController extends \BaseController {
 	public function school($school) {
 
 		try {
-			$value = Post::whereSchool($school)->firstOrFail();
+			$value = School::whereSchool($school)->firstOrFail();
 		} catch (Illuminate\Database\Eloquent\ModelNotFoundException $e) {
 			return 'Okul bulunamadı';
 		}
@@ -46,6 +48,7 @@ class PagesController extends \BaseController {
 			$posts = Post::orderBy('created_at', $orderBy)
 						->where('type', $type)
 						->where('school', $school)
+						->where('flag', 'NO')
 						->Paginate(36);
 
 		} elseif (Input::has('orderBy')) {
@@ -53,6 +56,7 @@ class PagesController extends \BaseController {
 
 			$posts = Post::orderBy('created_at', $orderBy)
 						->where('school', $school)
+						->where('flag', 'NO')
 						->Paginate(36);
 
 		} elseif (Input::has('type')) {
@@ -61,11 +65,13 @@ class PagesController extends \BaseController {
 			$posts = Post::orderBy('created_at', 'DESC')
 						->where('type', $type)
 						->where('school', $school)
+						->where('flag', 'NO')
 						->Paginate(36);
 			
 		} else {
 			$posts = Post::orderBy('created_at', 'DESC')
 						->where('school', $school)
+						->where('flag', 'NO')
 						->Paginate(36);
 		}
 

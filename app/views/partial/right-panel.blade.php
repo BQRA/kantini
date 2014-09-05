@@ -26,8 +26,8 @@
 				</a>
 			</div>
 			<div class="col-sm-4">
-				<a href="#">
-					0<small>Oy</small>
+				<a href="{{ URL::to('user/profile/'.Auth::user()->username).'/all-votes' }}">
+					{{session_user_votes()->count()}}<small>Oy</small>
 				</a>
 			</div>
 		</div>

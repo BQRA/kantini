@@ -1,8 +1,8 @@
 <div id="allUni">
 	<div class="universities">
 		<a href="{{ URL::route('home') }}" class="all-unis">Tüm Üniversiteler</a>
-		<a class="bahcesehir" href="{{ URL::route('home') }}/uni/bahcesehir">Bahçesehir Üniversitesi</a>
-		<a class="beykent" href="{{ URL::route('home') }}/uni/beykent">Beykent Üniversitesi</a>
+		<a class="bahcesehir" href="{{ URL::route('home') }}/uni/Bahcesehir">Bahçesehir Üniversitesi</a>
+		<a class="beykent" href="{{ URL::route('home') }}/uni/Beykent">Beykent Üniversitesi</a>
 	</div>
 </div>
 
@@ -20,9 +20,11 @@
 	</div>
 
 	{{ Form::open(['action' => 'PostsController@sendPost', 'files' => true]) }}
-	@if(!empty($school))
-	{{ Form::hidden('school', $school) }}
-	@endif
+	
+		@if(!empty($school))
+		{{ Form::hidden('school', $school) }}
+		@endif
+	
 	<div class="dedikod-area">
 
 		<!-- dedikod attachment infos -->
