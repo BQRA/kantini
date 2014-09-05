@@ -19,14 +19,13 @@
 				
 				@if(Auth::check())
 					@if(!Flag::where('post_id', $dummy->id)->where('user_id', Auth::user()->id)->count()>0)
-					<!-- Gönderi Raporlama -->
-					{{ Form::open(['action' => ['FlagsController@flag', $post_id]]) }}
-					{{ Form::submit() }}
-					{{ Form::close() }}
-					<!-- Gönderi Raporlama -->
+						{{ Form::open(['action' => ['FlagsController@flag', $post_id]]) }}
+						<li class="post-flag"><a href="javascript:;">Bu Gönderiyi Raporla</a></li>
+						{{ Form::close() }}
 					@endif
 
 					@if(Auth::user()->username == $dummy->username)
+						<li class="hr"></li>
 						<li><a href="#">Düzenle</a></li>
 						<li><a class="danger" href="{{ URL::route('user.delete.dedikod', $dummy->id) }}">Sil</a></li>
 					@endif
