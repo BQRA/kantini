@@ -27,7 +27,9 @@
 			
 			<div class="clear"></div>
 
-			<div class="load-comments"></div>
+			<div class="load-comments">
+				<div class="comments loading"><i></i></div>
+			</div>
 		</div>
 		@endforeach
 		</div>

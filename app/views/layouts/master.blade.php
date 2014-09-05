@@ -20,15 +20,17 @@
 @include('partial.header')
 
 @if(Session::has('message'))
-	<div class="session-message">
-		{{ Session::get('message') }}
+	<div class="notification info">
+		<p>{{ Session::get('message') }}</p>
 	</div>
 @endif
 
 @if($errors->has())
-    @foreach ($errors->all() as $error)
-        <div>{{ $error }}</div>
-    @endforeach
+	<div class="notification error">
+	    @foreach ($errors->all() as $error)
+	        <p>{{ $error }}</p>
+	    @endforeach
+	</div>
 @endif
 
 <div class="container">

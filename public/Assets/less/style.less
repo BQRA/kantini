@@ -675,16 +675,15 @@ p {
 			display: inline-block;
 			width: 630px;
 			margin-left: 55px;
-			position: relative;
 			&:after {
 				width: 3px;
 				display: inline-block;
 				background: #eee;
 				content: '';
-				height: 100%;
 				position: absolute;
-				left: -38px;
-				top: -42px;
+				left: 18px;
+				top: -30px;
+				bottom: -30px;
 			}
 			.dedikod {
 				// &:hover {
@@ -1899,7 +1898,33 @@ p {
 }
 /* validation messages #end */ 
 
-
+/* general info and error messages */
+.notification {
+	position: fixed;
+	left: 30px;
+	bottom: 50px;
+	background-color: rgba(255, 255, 255, 0.9);
+	.font2(400, 13px);
+	color: #444;
+	border-radius: 3px;
+	z-index: 10;
+	min-width: 350px;
+	padding: 20px 0 0 0;
+	&.info {
+		border-left: 3px solid rgba(232, 215, 100, 1);
+		box-shadow: inset 0 0 2px rgba(232, 215, 100, 1), 0 0 100px 50px rgba(0, 0, 0, 0.05);
+	}
+	&.error {
+		border-left: 3px solid rgba(232, 100, 100, 1);
+		box-shadow: inset 0 0 2px rgba(232, 100, 100, 1), 0 0 100px 50px rgba(0, 0, 0, 0.05);
+	}
+	p {
+		margin: 0;
+		.font2(400, 13px);
+		padding: 0 20px 20px 20px;
+	}
+}
+/* general info and error messages #end */
 
 
 
