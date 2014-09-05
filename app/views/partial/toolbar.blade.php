@@ -17,16 +17,18 @@
 				<li><a href="javascript:;">Facebook'ta Paylas</a></li>
 				<li><a href="javascript:;">Twiter'da Paylas</a></li>
 				
-				<!-- Gönderi Raporlama -->
-				{{ Form::open(['action' => ['FlagsController@flag', $post_id]]) }}
-				{{ Form::submit() }}
-				{{ Form::close() }}
-				<!-- Gönderi Raporlama -->
-
 				@if(Auth::check())
+					@if(!Flag::where('post_id', $dummy->id)->where('user_id', Auth::user()->id)->count()>0)
+					<!-- Gönderi Raporlama -->
+					{{ Form::open(['action' => ['FlagsController@flag', $post_id]]) }}
+					{{ Form::submit() }}
+					{{ Form::close() }}
+					<!-- Gönderi Raporlama -->
+					@endif
+
 					@if(Auth::user()->username == $dummy->username)
-					<li><a href="#">Düzenle</a></li>
-					<li><a class="danger" href="{{ URL::route('user.delete.dedikod', $dummy->id) }}">Sil</a></li>
+						<li><a href="#">Düzenle</a></li>
+						<li><a class="danger" href="{{ URL::route('user.delete.dedikod', $dummy->id) }}">Sil</a></li>
 					@endif
 				@endif
 			</ul>

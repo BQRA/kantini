@@ -9,7 +9,13 @@
 		$dummy 		= $post;
 		$post_id 	= $dummy->id;
 		$user 		= User::whereUsername($dummy->username)->first();
-	?>
+	?>	
+		@if(Auth::check())
+			@if(Flag::where('post_id', $post->id)->where('user_id', Auth::user()->id)->count()>0)
+				{{'ok'}}
+			@endif
+		@endif
+		
 		<div class="dedikod {{$dummy->gender}}">
 			@include('partial.avatar')
 			
