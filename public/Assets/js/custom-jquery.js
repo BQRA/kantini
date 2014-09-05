@@ -42,7 +42,6 @@ var validator = function (a) {
     if ( errors > 0 ) {
     	if ( a[0].tagName == 'BUTTON' || a[0].tagName == 'FORM' ) {
     		return false;
-    		alert(324)
     	} else {
     		stopImmediatePropagation();
     		return false;
@@ -169,8 +168,13 @@ $(function () {
 
 	// selectbox
 	$('.select-box').click(function(event) {
+		$('.select-box ul').hide(0).parents('.select-box').removeClass('opened');
 		event.stopPropagation();
 		$(this).addClass('opened').find('ul').show(0);
+	});
+	$('.select-box ul li').on('click', function(event){
+		event.stopPropagation();
+		$(this).parents('ul').hide(0).parents('.select-box').removeClass('opened');
 	});
 	$('.select-box:not(.custom) ul li').on('click', function(event){
 		$(this).parents('.select-box').find('.text').text($(this).text());
@@ -357,6 +361,21 @@ $(function () {
 		$(this).addClass('selected');
 		$(this).parents('.tab').next('.tab-content').find('.tab-content-item').removeClass('selected');
 		$(this).parents('.tab').next('.tab-content').find('.tab-content-item').eq($(this).index()).addClass('selected');
+	});
+
+	// post report
+	$('.post-flag a').click(function(event) {
+		var $form = $(this).parents('form');
+		$.ajax({
+			url: $form.attr('action'),
+			type: 'POST',
+			data: $form.serialize(),
+			beforeSend: function(){
+				$form.parents('.dedikod').addClass('reported').prepend('<span class="reporting">Rapor Ediliyor...</span>');
+			}
+		}).done(function() {
+			$form.parents('.dedikod').find('span.reporting').text('Raporlandı');
+		});		
 	});
 
 });

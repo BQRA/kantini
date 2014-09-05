@@ -19,12 +19,13 @@
 				
 				<!-- Gönderi Raporlama -->
 				{{ Form::open(['action' => ['FlagsController@flag', $post_id]]) }}
-				{{ Form::submit() }}
+				<li class="post-flag"><a href="javascript:;">Bu Gönderiyi Raporla</a></li>
 				{{ Form::close() }}
 				<!-- Gönderi Raporlama -->
 
 				@if(Auth::check())
 					@if(Auth::user()->username == $dummy->username)
+					<li class="hr"></li>
 					<li><a href="#">Düzenle</a></li>
 					<li><a class="danger" href="{{ URL::route('user.delete.dedikod', $dummy->id) }}">Sil</a></li>
 					@endif
