@@ -383,13 +383,10 @@ $(function () {
 
 	// edit dedikod
 	$('.edit-dedikod').click(function(event) {
-		$(this).parents('.dedikod').addClass('editing').find('span.dedikod-content').after('<div class="new-edit-area"><textarea class="edit">' + $(this).parents('.dedikod').find('span.dedikod-content').html().trim() + '</textarea><div class="text-right"><span class="cancel-edit">Vazgeç</span><input class="button sm green" type="submit" value="Düzenlemeyi Gönder" /></div></div>');
-		$('textarea.edit').select();
-		$(this).parents('.dedikod').find('span.dedikod-content').remove();
+		$(this).parents('.dedikod').addClass('editing').find('textarea.edit').select();
 	});
 	$('body').on('click', 'span.cancel-edit', function(event) {
-		$(this).parents('.dedikod').removeClass('editing').find('.new-edit-area').before('<span class="dedikod-content">' + $(this).parents('.dedikod').find('textarea.edit').val() + '</span>');
-		$(this).parents('.dedikod').find('.new-edit-area').remove();
+		$(this).parents('.dedikod').removeClass('editing');
 	});
 
 });

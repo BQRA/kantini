@@ -1072,8 +1072,15 @@ p {
 .container .left-container .dedikods .dedikod.editing .toolbar {
   display: none;
 }
+.container .left-container .dedikods .dedikod.editing span.dedikod-content {
+  display: none;
+}
+.container .left-container .dedikods .dedikod.editing .new-edit-area {
+  display: block;
+}
 .container .left-container .dedikods .dedikod .new-edit-area {
   margin-bottom: 15px;
+  display: none;
 }
 .container .left-container .dedikods .dedikod textarea.edit {
   width: 100%;

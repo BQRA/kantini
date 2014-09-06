@@ -1,9 +1,9 @@
 @if(Auth::check())
 	@if(Flag::where('post_id', $post->id)->where('user_id', Auth::user()->id)->count()>0)
-		<div class="dedikod {{$dummy->gender}} reported">
+		<div class="dedikod {{$dummy->gender}} reported beykent">
 			<span class="reporting">Raporlandı</span>
 	@else
-		<div class="dedikod {{$dummy->gender}}">
+		<div class="dedikod {{$dummy->gender}} beykent">
 	@endif
 @else
 <div class="dedikod {{$dummy->gender}} beykent">

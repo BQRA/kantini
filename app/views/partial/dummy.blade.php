@@ -74,3 +74,13 @@
 <span class="dedikod-content">
 	{{ $dummy->dedikod }}
 </span>
+@if(Auth::check())
+	@if(Auth::user()->username == $dummy->username)
+	<div class="new-edit-area">
+		<textarea class="edit">{{ $dummy->dedikod }}</textarea>
+		<div class="text-right">
+			<span class="cancel-edit">Vazgeç</span><input class="button sm green" type="submit" value="Düzenlemeyi Gönder" />
+		</div>
+	</div>
+	@endif
+@endif
