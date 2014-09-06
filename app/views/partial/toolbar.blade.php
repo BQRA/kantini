@@ -23,7 +23,11 @@
 						<li class="post-flag"><a href="javascript:;">Bu Gönderiyi Raporla</a></li>
 						{{ Form::close() }}
 					@endif
-
+				@else 
+					<li data-lightbox="{{ URL::action('home') }}/authorization #authorization"><a href="javascript:void(0);">Bu Gönderiyi Raporla</a></li>
+				@endif
+				
+				@if(Auth::check())
 					@if(Auth::user()->username == $dummy->username)
 						<li class="hr"></li>
 						<li><a href="#">Düzenle</a></li>

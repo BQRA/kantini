@@ -3,7 +3,17 @@
 @section('content')
 	<div class="dedikods">
 	<?php $dummy = $post; ?>
-		<div class="dedikod {{ $dummy->gender }}">
+	
+		@if(Auth::check())
+			@if(Flag::where('post_id', $post->id)->where('user_id', Auth::user()->id)->count()>0)
+				<div class="dedikod {{$dummy->gender}} reported">
+					<span class="reporting">Raporlandı</span>
+			@else
+				<div class="dedikod {{$dummy->gender}}">
+			@endif
+		@else
+		<div class="dedikod {{$dummy->gender}}">
+		@endif
 			@include('partial.avatar')
 
 			<div class="content">

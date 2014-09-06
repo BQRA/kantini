@@ -5,6 +5,8 @@
 	@else
 		<div class="dedikod {{$dummy->gender}}">
 	@endif
+@else
+<div class="dedikod {{$dummy->gender}}">
 @endif
 	@include('partial.avatar')
 	

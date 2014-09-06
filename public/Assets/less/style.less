@@ -453,7 +453,6 @@ p {
 	cursor: pointer;
 	.font(bold, 13px);
 	border-radius: 2px;
-	padding-right: 30px;
 	display: inline-block;
 	height: 30px;
 	&.custom {
@@ -462,12 +461,12 @@ p {
 		border-radius: 0;
 		padding: 2px 0 0 0;
 		height: auto;
-		&:after {
+		&:after,
+		&:before {
 			display: none;
 		}
 		.text {
 			padding: 0;
-			border-right: none;
 			min-width: inherit;
 			height: 25px;
 		}
@@ -483,10 +482,19 @@ p {
 		border: 4px solid transparent;
 		border-top: 5px solid #ea5c49;
 	}
-	.text {
-		padding: 6px 14px 8px 14px;
+	&:before {
+		width: 1px;
+		position: absolute;
+		height: 100%;
+		content: '';
 		display: inline-block;
-		border-right: 1px solid #ddd;
+		background-color: #ddd;
+		right: 30px;
+		top: 0;
+	}
+	.text {
+		padding: 6px 54px 8px 14px;
+		display: inline-block;
 		min-width: 100px;
 		max-width: 200px;
 		text-overflow: ellipsis;
@@ -742,7 +750,7 @@ p {
 					span.reporting {
 						.font2(400, 11px);
 						color: #fff;
-						padding: 3px 8px;
+						padding: 3px 11px;
 						border-radius: 10px;
 						background-color: #ea5c49;
 						position: absolute;

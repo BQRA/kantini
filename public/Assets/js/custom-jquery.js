@@ -167,13 +167,12 @@ $(function () {
 	});
 
 	// selectbox
-	$('.select-box').click(function(event) {
-		$('.select-box ul').hide(0).parents('.select-box').removeClass('opened');
+	$('.select-box:not(.opened) .text').click(function(event) {
 		event.stopPropagation();
-		$(this).addClass('opened').find('ul').show(0);
+		$('.select-box ul').hide(0).parents('.select-box').removeClass('opened');
+		$(this).parent().addClass('opened').find('ul').show(0);
 	});
 	$('.select-box ul li').on('click', function(event){
-		event.stopPropagation();
 		$(this).parents('ul').hide(0).parents('.select-box').removeClass('opened');
 	});
 	$('.select-box:not(.custom) ul li').on('click', function(event){

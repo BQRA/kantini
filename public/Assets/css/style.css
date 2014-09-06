@@ -751,7 +751,6 @@ p {
   cursor: pointer;
   font: bold 13px 'Helvetica Neue', Arial;
   border-radius: 2px;
-  padding-right: 30px;
   display: inline-block;
   height: 30px;
 }
@@ -762,12 +761,12 @@ p {
   padding: 2px 0 0 0;
   height: auto;
 }
-.select-box.custom:after {
+.select-box.custom:after,
+.select-box.custom:before {
   display: none;
 }
 .select-box.custom .text {
   padding: 0;
-  border-right: none;
   min-width: inherit;
   height: 25px;
 }
@@ -782,10 +781,19 @@ p {
   border: 4px solid transparent;
   border-top: 5px solid #ea5c49;
 }
-.select-box .text {
-  padding: 6px 14px 8px 14px;
+.select-box:before {
+  width: 1px;
+  position: absolute;
+  height: 100%;
+  content: '';
   display: inline-block;
-  border-right: 1px solid #ddd;
+  background-color: #ddd;
+  right: 30px;
+  top: 0;
+}
+.select-box .text {
+  padding: 6px 54px 8px 14px;
+  display: inline-block;
   min-width: 100px;
   max-width: 200px;
   text-overflow: ellipsis;
@@ -1032,7 +1040,7 @@ p {
 .container .left-container .dedikods .dedikod.reported span.reporting {
   font: 400 11px 'Roboto', 'Helvetica Neue', Arial;
   color: #fff;
-  padding: 3px 8px;
+  padding: 3px 11px;
   border-radius: 10px;
   background-color: #ea5c49;
   position: absolute;
