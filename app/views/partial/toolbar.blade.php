@@ -30,7 +30,7 @@
 				@if(Auth::check())
 					@if(Auth::user()->username == $dummy->username)
 						<li class="hr"></li>
-						<li><a href="#">Düzenle</a></li>
+						<li class="edit-dedikod"><a href="javascript:;">Düzenle</a></li>
 						<li><a class="danger" href="{{ URL::route('user.delete.dedikod', $dummy->id) }}">Sil</a></li>
 					@endif
 				@endif

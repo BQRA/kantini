@@ -1,7 +1,3 @@
-@if($dummy->type == 'dedikod')
-	{{ $dummy->dedikod }}
-@endif
-
 @if($dummy->type == 'event')
 	<div class="content-ticket">
 		<div class="add-event-container">
@@ -68,18 +64,13 @@
 		</div>
 	</div>
 	<div class="clear mt10"></div>
-	{{ $dummy->dedikod }}
-	
-@endif
-
-@if($dummy->type == 'image')
+@elseif($dummy->type == 'image')
 	<div class="content-img-container"><img src="{{$dummy->links}}" alt="" /></div>
 	<div class="clear mt10"></div>
-	{{ $dummy->dedikod }}
-@endif
-
-@if($dummy->type == 'video')
+@elseif($dummy->type == 'video')
 	<iframe width="580" height="360" src="{{$dummy->links}}?rel=0&autoplay=0&fullscreen=0" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 	<div class="clear mt10"></div>
-	{{ $dummy->dedikod }}
 @endif
+<span class="dedikod-content">
+	{{ $dummy->dedikod }}
+</span>

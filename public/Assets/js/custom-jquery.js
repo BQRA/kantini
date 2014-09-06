@@ -324,26 +324,30 @@ $(function () {
 	});
 
 	// ajax comment
-	$('body').on('submit', '.dedikod .write-area form:not(.not-valid)', function(event) {
+	$('body').on('submit', '.dedikod .write-area form', function(event) {
 		event.preventDefault();
-		var $form = $(this), serializedData = $form.serialize(), writeA = $form.parents('.write-comment');
-		$.ajax({
-			url: $form.attr('action'),
-			type: 'POST',
-			cache: false,
-			data: serializedData,
-			beforeSend: function() {
-				console.log('gonderiliyor... ')
-			}
-		})
-		.done(function(e) {
-			writeA.parents('.comments').find('.no-comment').remove();
-			writeA.after('<div class="comment"><div class="avatar"><img src="' + writeA.find('.avatar img').attr('src') + '" alt="" /></div>' + $form.find('.ajax-comment-values').html() + '</div>');
-			writeA.next('.comment').find('.comment-content').html(writeA.find('input[name=comment]').val());
-			writeA.next('.comment').find('.date').text(e);
-			writeA.find('input[name=comment]').val('');
-			writeA.parents('.dedikod').find('.right .comment').text(parseInt( writeA.parents('.dedikod').find('.right .comment').text() ) + 1);
-		});
+		if ( $(this).find('[data-valid]').val().length < 5 ) {
+			return false;
+		} else {
+			var $form = $(this), serializedData = $form.serialize(), writeA = $form.parents('.write-comment');
+			$.ajax({
+				url: $form.attr('action'),
+				type: 'POST',
+				cache: false,
+				data: serializedData,
+				beforeSend: function() {
+					console.log('gonderiliyor... ')
+				}
+			})
+			.done(function(e) {
+				writeA.parents('.comments').find('.no-comment').remove();
+				writeA.after('<div class="comment"><div class="avatar"><img src="' + writeA.find('.avatar img').attr('src') + '" alt="" /></div>' + $form.find('.ajax-comment-values').html() + '</div>');
+				writeA.next('.comment').find('.comment-content').html(writeA.find('input[name=comment]').val());
+				writeA.next('.comment').find('.date').text(e);
+				writeA.find('input[name=comment]').val('');
+				writeA.parents('.dedikod').find('.right .comment').text(parseInt( writeA.parents('.dedikod').find('.right .comment').text() ) + 1);
+			});
+		}
 	})
 	
 	// tooltip
@@ -375,6 +379,17 @@ $(function () {
 		}).done(function() {
 			$form.parents('.dedikod').find('span.reporting').text('Raporlandı');
 		});		
+	});
+
+	// edit dedikod
+	$('.edit-dedikod').click(function(event) {
+		$(this).parents('.dedikod').addClass('editing').find('span.dedikod-content').after('<div class="new-edit-area"><textarea class="edit">' + $(this).parents('.dedikod').find('span.dedikod-content').html().trim() + '</textarea><div class="text-right"><span class="cancel-edit">Vazgeç</span><input class="button sm green" type="submit" value="Düzenlemeyi Gönder" /></div></div>');
+		$('textarea.edit').select();
+		$(this).parents('.dedikod').find('span.dedikod-content').remove();
+	});
+	$('body').on('click', 'span.cancel-edit', function(event) {
+		$(this).parents('.dedikod').removeClass('editing').find('.new-edit-area').before('<span class="dedikod-content">' + $(this).parents('.dedikod').find('textarea.edit').val() + '</span>');
+		$(this).parents('.dedikod').find('.new-edit-area').remove();
 	});
 
 });

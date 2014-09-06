@@ -164,6 +164,9 @@ a:hover {
 .text-center {
 	text-align: center;
 }
+.text-right {
+	text-align: right;
+}
 .danger {
 	color: #ea5c49 !important;
 }
@@ -504,7 +507,7 @@ p {
 	ul {
 		display: none;
 		position: absolute;
-		z-index: 11;
+		z-index: 1000;
 		top: 40px;
 		left: 0;
 		margin: 0;
@@ -756,7 +759,7 @@ p {
 						position: absolute;
 						top: 20px;
 						right: 20px;
-						z-index: 99;
+						z-index: 90;
 					}
 				}
 				&:last-child {
@@ -781,6 +784,30 @@ p {
 					display: none;
 					&.opened {
 						display: block;
+					}
+				}
+				&.editing {
+					.toolbar {
+						display: none;	
+					}
+				}
+				.new-edit-area {
+					margin-bottom: 15px;
+				}
+				textarea.edit {
+					width: 100%;
+					height: 70px;
+					resize: none;
+					color: #000;
+				}
+				span.cancel-edit {
+					display: inline-block;
+					margin-right: 20px;
+					.font(normal, 12px);
+					color: #555;
+					cursor: pointer;
+					&:hover {
+						text-decoration: underline;
 					}
 				}
 				.comments {
