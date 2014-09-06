@@ -9,27 +9,8 @@
 		$dummy 		= $post;
 		$post_id 	= $dummy->id;
 		$user 		= User::whereUsername($dummy->username)->first();
-	?>	
-		@if(Auth::check())
-			@if(Flag::where('post_id', $post->id)->where('user_id', Auth::user()->id)->count()>0)
-				{{'ok'}}
-			@endif
-		@endif
-		
-		<div class="dedikod {{$dummy->gender}}">
-			@include('partial.avatar')
-			
-			<div class="content">
-				@include('partial.dummy')
-			</div>
-			
-			@include('partial.toolbar')
-			
-			<div class="clear"></div>
-			<div class="load-comments">
-				<div class="comments loading"><i></i></div>
-			</div>
-		</div>
+	?>			
+	@include('partial.dedikod')
 	@endforeach
 </div>
 	@if(isset($_GET['type']) && isset($_GET['orderBy']))
