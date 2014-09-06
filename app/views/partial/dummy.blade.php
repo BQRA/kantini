@@ -74,13 +74,28 @@
 <span class="dedikod-content">
 	{{ $dummy->dedikod }}
 </span>
+
 @if(Auth::check())
 	@if(Auth::user()->username == $dummy->username)
 	<div class="new-edit-area">
-		<textarea class="edit">{{ $dummy->dedikod }}</textarea>
+	
+	{{ Form::open(['action' => ['PostsController@editPost', $dummy->id]]) }}
+	{{ Form::textarea('edit-dedikod', $dummy->dedikod, ['class' => 'edit']) }}
 		<div class="text-right">
 			<span class="cancel-edit">Vazgeç</span><input class="button sm green" type="submit" value="Düzenlemeyi Gönder" />
 		</div>
+	{{ Form::close() }}
 	</div>
 	@endif
 @endif
+
+
+
+
+
+
+
+
+
+
+

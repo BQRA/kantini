@@ -191,6 +191,37 @@ class PostsController extends \BaseController {
 		return View::make('posts.show-post', compact('post', 'comments', 'user', 'post_id'));
 	}
 
+	public function editPost($id) {
+		try {
+			$post = Post::where('id', $id)->firstOrFail();
+		} catch (Exception $e) {
+			return View::make('errors.404');
+		}
+
+		if(Auth::user()->username == $post->username) {
+			$data = Input::get('edit-dedikod');
+
+			$rules = [
+				'edit-dedikod' => 'required|min:5|max:800'
+			];
+
+			$validator = Validator::make(Input::all(), $rules);
+
+			if ($validator->passes()) {
+				$post = Post::find($id);
+				$post->dedikod = $data;
+				$post->save();
+
+				return Redirect::back();
+			} else {
+				return Redirect::back()
+				->withErrors($validator);
+			}
+		} else {
+			return 'sen hayirdir la!';
+		}
+	}
+
 	public function sendComment($id) {
 		try {
 			$post = Post::select('id')->where('id', $id)->firstOrFail();

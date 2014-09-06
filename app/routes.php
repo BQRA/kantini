@@ -20,6 +20,8 @@ Route::get('user/register', [
 	Route::post('create-event', 'PostsController@eventImage')->before('csrf');
 	//
 
+	Route::post('edit-post/{id}', 'PostsController@editPost');
+
 Route::get('logout', [
 	'as' 	 => 'user.logout',
 	'uses' 	 => 'SessionsController@logout',
