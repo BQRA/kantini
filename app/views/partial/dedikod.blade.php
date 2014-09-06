@@ -6,8 +6,11 @@
 		<div class="dedikod {{$dummy->gender}}">
 	@endif
 @else
-<div class="dedikod {{$dummy->gender}}">
+<div class="dedikod {{$dummy->gender}} beykent">
 @endif
+
+	<div class="uni tooltip" data-content="Beykent Üniversitesi"></div>
+
 	@include('partial.avatar')
 	
 	<div class="content">
