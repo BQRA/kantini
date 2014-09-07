@@ -8,7 +8,7 @@ class PostsController extends \BaseController {
 		if(Input::has('school')) {
 			$school = Input::get('school');
 		} else {
-			$school = null;
+			$school = 'kantini';
 		}
 
 		$var = trim(Input::get('post_type'));
