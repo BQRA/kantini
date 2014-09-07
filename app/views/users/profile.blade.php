@@ -15,7 +15,7 @@
 			<span>{{ $user->username }}</span>
 		</div>
 		<div class="school">
-			{{ $user->profile->school }} Üniversitesi <br>
+			{{ $user->profile->school }}<br>
 			{{--son görülme {{ date('H:i',strtotime($user->last_login)) }} --}}
 		</div>
 		<div class="custom-line"></div>

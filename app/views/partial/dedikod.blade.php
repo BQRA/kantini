@@ -1,15 +1,15 @@
 @if(Auth::check())
 	@if(Flag::where('post_id', $post->id)->where('user_id', Auth::user()->id)->count()>0)
-		<div class="dedikod {{$dummy->gender}} reported beykent">
+		<div class="dedikod {{$dummy->gender}} reported {{$dummy->school}}">
 			<span class="reporting">Raporlandı</span>
 	@else
-		<div class="dedikod {{$dummy->gender}} beykent">
+		<div class="dedikod {{$dummy->gender}} {{$dummy->school}}">
 	@endif
 @else
-<div class="dedikod {{$dummy->gender}} beykent">
+<div class="dedikod {{$dummy->gender}} {{$dummy->school}}">
 @endif
-
-	<div class="uni tooltip" data-content="Beykent Üniversitesi"></div>
+	<?php $uni = School::select('school_name', 'school_fullname')->where('school_name', $dummy->school)->first(); ?>
+	<div class="uni tooltip" data-content="{{ $uni['school_fullname'] }}"></div>
 
 	@include('partial.avatar')
 	

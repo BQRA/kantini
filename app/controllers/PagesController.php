@@ -36,7 +36,7 @@ class PagesController extends \BaseController {
 	public function school($school) {
 
 		try {
-			$value = School::whereSchool($school)->firstOrFail();
+			$value = School::whereSchool_name($school)->firstOrFail();
 		} catch (Illuminate\Database\Eloquent\ModelNotFoundException $e) {
 			return 'Okul bulunamadı';
 		}
@@ -79,7 +79,9 @@ class PagesController extends \BaseController {
 	}
 
 	public function register() {
-		return View::make('users.register');
+		$unis = School::lists('school_fullname', 'school_fullname');
+
+		return View::make('users.register', compact('unis'));
 	}
 
 	public function createEvent() {

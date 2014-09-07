@@ -60,11 +60,8 @@
 		</div>
 		<div class="col-sm-8">
 			<div class="d-inlineblock">
-			{{ Form::select('school', [
-				null => 'Seç', 
-				'Beykent' => 'Beykent Üniversitesi', 
-				'Bahçeşehir' => 'Bahçeşehir Üniversitesi'
-			], null, ['data-valid' => 'required', 'data-message' => 'Bu Alan Zorunludur', 'data-select' => '']) }}		
+			{{ Form::select('school', [null => 'Seç']+$unis , null, ['data-valid' => 'required', 'data-message' => 'Bu Alan Zorunludur', 'data-select' => '']) }}
+
 			</div>
 			@if($errors->has('school'))
 				<span class="error">{{ $errors->first('school') }}</span>

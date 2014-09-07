@@ -1,8 +1,11 @@
 <div id="allUni">
 	<div class="universities">
-		<a href="{{ URL::route('home') }}" class="all-unis">Tüm Üniversiteler</a>
-		<a class="bahcesehir" href="{{ URL::route('home') }}/uni/Bahcesehir">Bahçesehir Üniversitesi</a>
-		<a class="beykent" href="{{ URL::route('home') }}/uni/Beykent">Beykent Üniversitesi</a>
+	<a href="{{ URL::route('home') }}" class="all-unis">Tüm Üniversiteler</a>
+
+	<?php $unis = School::all(); ?>
+	@foreach($unis as $uni)
+		<a class="{{$uni['school_name']}}" href="{{ URL::route('home') }}/uni/{{$uni['school_name']}}">{{$uni['school_fullname']}}</a>
+	@endforeach
 	</div>
 </div>
 
