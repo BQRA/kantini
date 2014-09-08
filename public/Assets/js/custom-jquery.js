@@ -93,7 +93,7 @@ function videoId(data) {
 function alert(content, title) {
 	var padding = ( content == null ) ? '' : 'alert'; 
 	var title = ( title == undefined ) ? '' : title;
-	$('body').append('<div class="lightbox-bg"><div class="close-button"></div><div class="vertical-helper"></div><div class="lightbox-loading"></div><div class="lightbox-container"><h2>' + title + '</h2><div class="lightbox-content ' + padding + '">' + content + '</div></div></div>');
+	$('body').addClass('no-scroll').append('<div class="lightbox-bg"><div class="close-button"></div><div class="vertical-helper"></div><div class="lightbox-loading"></div><div class="lightbox-container"><h2>' + title + '</h2><div class="lightbox-content ' + padding + '">' + content + '</div></div></div>');
 	if ( content != null ) {
 		setTimeout(function(){
 			$('.lightbox-loading').remove();
@@ -116,6 +116,7 @@ function lbOpened() {
 
 // close lightbox function 
 function closeLightbox() {
+	$('body').removeClass('no-scroll');
 	$('.lightbox-bg .lightbox-container').removeClass('opened');
 	setTimeout(function(){
 		$('.lightbox-bg').remove();
@@ -197,12 +198,6 @@ $(function () {
 	});
 	$(document).on('click', '.lightbox-bg .close-button', function(event) {
 		closeLightbox();
-	});
-
-	// all unis
-	$('.header .logo b').click(function(event) {
-		event.stopPropagation();
-		alert($('#allUni').html());
 	});
 
 	// gender selet

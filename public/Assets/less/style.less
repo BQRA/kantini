@@ -71,6 +71,9 @@ body {
 	-moz-font-smoothing: subpixel-antialiased;
 	-o-font-smoothing: subpixel-antialiased;
 	font-smoothing: subpixel-antialiased;
+	&.no-scroll {
+		overflow: hidden;
+	}
 }
 
 
@@ -1183,8 +1186,6 @@ p {
 /* dedikod university icons */
 .dedikod {
 	.uni {
-		background: url('@{img-path}/unis/uni-logos.png') #fff;
-		background-size: 400px 400px;
 		display: inline-block;
 		width: 30px;
 		height: 30px;
@@ -1194,10 +1195,11 @@ p {
 		top: 18px;
 		border-radius: 30px;
 		box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
-	}
-	&.beykent {
-		.uni {
-			background-position: 5px 5px;
+		text-align: center;
+		background-color: #fff;
+		padding: 5px 0 0 0;
+		img {
+			height: 20px;
 		}
 	}
 }
@@ -1728,8 +1730,10 @@ p {
 	z-index: 90;
 	vertical-align: middle;
 	text-align: center;
+	overflow-y: scroll;
+	padding: 110px 0 110px 0;
 	.close-button {
-		position: absolute;
+		position: fixed;
 		left: 50%;
 		bottom: 50px;
 		margin-left: -10px;
@@ -1739,8 +1743,8 @@ p {
 		width: 21px;
 		height: 21px;
 		border-radius: 20px;
-		background: url('@{img-path}/sprite.png') 7px -415px rgba(0, 0, 0, 0.4);
-		box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5);
+		background: url('@{img-path}/sprite.png') 7px -415px rgba(0, 0, 0, 0.7);
+		box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5), 0 0 30px 30px rgba(0, 0, 0, 0.3);
 		.transition(.2s);
 		&:hover {
 			.scale(1.2);
@@ -1768,6 +1772,7 @@ p {
 		.lightbox-content {
 			position: relative;
 			.font(normal, 13px);
+			max-width: 960px;
 			&.alert {
 				background-color: #fff;
 				box-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
@@ -1847,37 +1852,41 @@ p {
 }
 /* tab #end */
 
-#allUni {
-	display: none;
-}
-.lightbox-content {
-	#allUni {
-		display: inline-block;
-	}
-}
 .universities {
+	display: inline-block;
+	width: 100%;
+	text-align: center;
 	a {
-		padding: 75px 0 10px 0;
-		background: url('@{img-path}/unis/uni-logos.png');
-		.font1(11px);
+		padding: 10px;
 		text-align: center;
 		line-height: 18px;
-		width: 100px;
+		width: 96px;
 		color: #333 !important;
 		display: inline-block;
 		border-radius: 5px;
+		float: left;
+		height: 113px;
+		margin: 10px 0 0 0;
 		&:hover {
 			background-color: #fafafa;
 		}
-	}
-	a.all-unis {
-		background-position: -175px 15px;
-	}
-	a.beykent {
-		background-position: 25px 15px;
-	}
-	a.bahcesehir {
-		background-position: -75px 15px;
+		.img {
+			display: inline-block;
+			margin-bottom: 5px;
+			height: 50px;
+			width: 100%;
+			img {
+				height: 100%;
+			}
+		}
+		.name {
+			.font(bold, 11px);
+			display: inline-block;
+			height: 40px;
+			overflow: hidden;
+			width: 100%;
+		}
+
 	}
 }
 

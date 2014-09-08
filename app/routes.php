@@ -65,6 +65,11 @@ Route::get('authorization', function()
 	return View::make('pages.authorization');
 });
 
+Route::get('all-uni', function()
+{
+	return View::make('pages.all-uni');
+});
+
 
 	Route::post('send-post', 'PostsController@sendPost')->before('crsf');
 

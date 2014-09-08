@@ -367,6 +367,9 @@ body {
   -o-font-smoothing: subpixel-antialiased;
   font-smoothing: subpixel-antialiased;
 }
+body.no-scroll {
+  overflow: hidden;
+}
 /* layout */
 a:hover {
   text-decoration: none;
@@ -1462,8 +1465,6 @@ p {
 }
 /* dedikod university icons */
 .dedikod .uni {
-  background: url('../images/unis/uni-logos.png') #ffffff;
-  background-size: 400px 400px;
   display: inline-block;
   width: 30px;
   height: 30px;
@@ -1473,9 +1474,12 @@ p {
   top: 18px;
   border-radius: 30px;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  background-color: #fff;
+  padding: 5px 0 0 0;
 }
-.dedikod.beykent .uni {
-  background-position: 5px 5px;
+.dedikod .uni img {
+  height: 20px;
 }
 /* dedikod university icons #end */
 .upload-from-url,
@@ -2009,9 +2013,11 @@ p {
   z-index: 90;
   vertical-align: middle;
   text-align: center;
+  overflow-y: scroll;
+  padding: 110px 0 110px 0;
 }
 .lightbox-bg .close-button {
-  position: absolute;
+  position: fixed;
   left: 50%;
   bottom: 50px;
   margin-left: -10px;
@@ -2021,8 +2027,8 @@ p {
   width: 21px;
   height: 21px;
   border-radius: 20px;
-  background: url('../images/sprite.png') 7px -415px rgba(0, 0, 0, 0.4);
-  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5);
+  background: url('../images/sprite.png') 7px -415px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5), 0 0 30px 30px rgba(0, 0, 0, 0.3);
   -webkit-transition: all 0.2s ease-in-out;
   -moz-transition: all 0.2s ease-in-out;
   -ms-transition: all 0.2s ease-in-out;
@@ -2071,6 +2077,7 @@ p {
 .lightbox-bg .lightbox-container .lightbox-content {
   position: relative;
   font: normal 13px 'Helvetica Neue', Arial;
+  max-width: 960px;
 }
 .lightbox-bg .lightbox-container .lightbox-content.alert {
   background-color: #fff;
@@ -2160,34 +2167,41 @@ p {
   visibility: visible;
 }
 /* tab #end */
-#allUni {
-  display: none;
-}
-.lightbox-content #allUni {
+.universities {
   display: inline-block;
+  width: 100%;
+  text-align: center;
 }
 .universities a {
-  padding: 75px 0 10px 0;
-  background: url('../images/unis/uni-logos.png');
-  font: 11px 'Cutive', 'Helvetica Neue', Arial;
+  padding: 10px;
   text-align: center;
   line-height: 18px;
-  width: 100px;
+  width: 96px;
   color: #333 !important;
   display: inline-block;
   border-radius: 5px;
+  float: left;
+  height: 113px;
+  margin: 10px 0 0 0;
 }
 .universities a:hover {
   background-color: #fafafa;
 }
-.universities a.all-unis {
-  background-position: -175px 15px;
+.universities a .img {
+  display: inline-block;
+  margin-bottom: 5px;
+  height: 50px;
+  width: 100%;
 }
-.universities a.beykent {
-  background-position: 25px 15px;
+.universities a .img img {
+  height: 100%;
 }
-.universities a.bahcesehir {
-  background-position: -75px 15px;
+.universities a .name {
+  font: bold 11px 'Helvetica Neue', Arial;
+  display: inline-block;
+  height: 40px;
+  overflow: hidden;
+  width: 100%;
 }
 /* tooltip */
 .tooltip {

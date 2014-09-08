@@ -9,7 +9,9 @@
 <div class="dedikod {{$dummy->gender}} {{$dummy->school}}">
 @endif
 	<?php $uni = School::select('school_name', 'school_fullname')->where('school_name', $dummy->school)->first(); ?>
-	<div class="uni tooltip" data-content="{{ $uni['school_fullname'] }}"></div>
+	<div class="uni tooltip" data-content="{{ $uni['school_fullname'] }}">
+		{{ HTML::image('Assets/images/unis/logos/'.$uni['school_name'].'.png', null) }}
+	</div>
 
 	@include('partial.avatar')
 	

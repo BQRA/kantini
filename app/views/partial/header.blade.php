@@ -1,14 +1,3 @@
-<div id="allUni">
-	<div class="universities">
-	<a href="{{ URL::route('home') }}" class="all-unis">Tüm Üniversiteler</a>
-
-	<?php $unis = School::all(); ?>
-	@foreach($unis as $uni)
-		<a class="{{$uni['school_name']}}" href="{{ URL::route('home') }}/uni/{{$uni['school_name']}}">{{$uni['school_fullname']}}</a>
-	@endforeach
-	</div>
-</div>
-
 {{ Form::open(['url' => 'event-image-upload', null, 'class'=>'image-upload']) }}
 {{ Form::hidden('image', '') }}
 {{ Form::hidden('data-imagetype', '') }}
@@ -17,7 +6,7 @@
 <div class="header">
 	<div class="logo">
 		<h1>
-			<b><span class="icon">&#61701</span> <span class="tooltip" data-content="Diğer üniversiteleri göster">Tüm Okullar</span></b>
+			<b data-lightbox="{{ URL::route('home') }}/all-uni #allUni"><span class="icon">&#61701</span> <span class="tooltip" data-content="Diğer üniversiteleri göster">Tüm Okullar</span></b>
 			<a class="title" href="{{ URL::route('home') }}">KANTİNİ</a>
 		</h1>
 	</div>
