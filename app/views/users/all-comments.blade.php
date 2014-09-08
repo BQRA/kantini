@@ -9,14 +9,11 @@
 
 <div class="dedikods">
 	@foreach($users_all_comments as $post)
-	<?php
-		$dummy 		= $post;
-		$post_id 	= $dummy->id;
-		$user 		= User::whereUsername($dummy->username)->first(); 
-	?>
-	@include('partial.dedikod')
+		<?php $uni  = School::select('school_name', 'school_fullname')->where('school_name', $post->school)->first(); ?>
+		@include('partial.dedikod')
 	@endforeach
 </div>
+
 	@if(isset($_GET['type']) && isset($_GET['orderBy']))
 	{{ $users_all_comments->appends(['type' => $_GET['type'], 'orderBy' => $_GET['orderBy']])->links() }}
 

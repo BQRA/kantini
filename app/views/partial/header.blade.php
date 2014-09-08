@@ -1,11 +1,11 @@
 <div id="allUni">
 	<div class="universities">
-	<a href="{{ URL::route('home') }}" class="all-unis">Tüm Üniversiteler</a>
+		<a href="{{ URL::route('home') }}" class="all-unis">Tüm Üniversiteler</a>
 
-	<?php $unis = School::all(); ?>
-	@foreach($unis as $uni)
-		<a class="{{$uni['school_name']}}" href="{{ URL::route('home') }}/uni/{{$uni['school_name']}}">{{$uni['school_fullname']}}</a>
-	@endforeach
+		<?php $unis = School::all(); ?>
+		@foreach($unis as $uni)
+			<a class="{{$uni['school_name']}}" href="{{ URL::route('home') }}/uni/{{$uni['school_name']}}">{{$uni['school_fullname']}}</a>
+		@endforeach
 	</div>
 </div>
 
@@ -17,7 +17,12 @@
 <div class="header">
 	<div class="logo">
 		<h1>
-			<b><span class="icon">&#61701</span> <span class="tooltip" data-content="Diğer üniversiteleri göster">Tüm Okullar</span></b>
+			@if(empty($school))
+				<b><span class="icon">&#61701</span><span class="tooltip" data-content="Diğer üniversiteleri göster">Tüm Okullar</span></b>
+			@else
+				<?php $uni_name = School::select('school_fullname')->whereSchool_name($school)->first(); ?>
+				<b><a href="{{URL::to(URL::current())}}">{{$uni_name->school_fullname}}</a></b>
+			@endif
 			<a class="title" href="{{ URL::route('home') }}">KANTİNİ</a>
 		</h1>
 	</div>
