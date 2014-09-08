@@ -1,13 +1,11 @@
 <div class="avatar">
-	@if(empty($user))
+	@if($post->anonymous == 1)
 		{{ HTML::image('/Avatars/guest-avatar.png') }}
-	@endif
-
-	@if(!empty($user))
+	@else
 		@if($user->profile->avatar == 'guest')
 			{{ HTML::image('/Avatars/guest-avatar.png') }}
 		@else
-			{{ HTML::image('/Avatars/'.$dummy->username.'.jpg') }}
+			{{ HTML::image('/Avatars/'.$post->username.'.jpg') }}
 		@endif
 	@endif
 </div>

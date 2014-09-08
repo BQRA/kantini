@@ -6,7 +6,12 @@
 <div class="header">
 	<div class="logo">
 		<h1>
-			<b data-lightbox="{{ URL::route('home') }}/all-uni #allUni"><span class="icon">&#61701</span> <span class="tooltip" data-content="Diğer üniversiteleri göster">Tüm Okullar</span></b>
+			@if(empty($school))
+				<b data-lightbox="{{ URL::route('home') }}/all-uni #allUni"><span class="icon">&#61701</span><span class="tooltip" data-content="Diğer üniversiteleri göster">Tüm Okullar</span></b>
+			@else
+				<?php $uni_name = School::select('school_fullname')->whereSchool_name($school)->first(); ?>
+				<b data-lightbox="{{ URL::route('home') }}/all-uni #allUni"><a href="{{URL::to(URL::current())}}">{{$uni_name->school_fullname}}</a></b>
+			@endif
 			<a class="title" href="{{ URL::route('home') }}">KANTİNİ</a>
 		</h1>
 	</div>

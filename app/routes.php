@@ -126,3 +126,13 @@ Route::get('/user/account-activate/{code}', [
 ]);
 
 	Route::post('flag/{id}', 'FlagsController@flag');
+
+
+
+
+Route::get('test/test', function() {
+
+	$img = Image::make('Events/barantr90-QgfVHVQNpOciuZjhbcK2qG.jpg');
+	$img->resize(200, 200);
+	$img->save();
+});

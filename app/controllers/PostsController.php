@@ -180,15 +180,15 @@ class PostsController extends \BaseController {
 		} catch (Exception $e) {
 			return View::make('errors.404');
 		}
+		
+		$user = User::whereUsername($post->username)->first();
+		$uni  = School::select('school_name', 'school_fullname')->where('school_name', $post->school)->first();
 
-		$post_id 	= $post->id;
-		$user 		= User::whereUsername($post->username)->first();
-
-		$comments 	= Comment::orderBy('created_at', 'DESC')
+		$comments = Comment::orderBy('created_at', 'DESC')
 							->where('post_id', $id)
 							->get();
 
-		return View::make('posts.show-post', compact('post', 'comments', 'user', 'post_id'));
+		return View::make('posts.show-post', compact('post', 'comments', 'user', 'uni'));
 	}
 
 	public function editPost($id) {
