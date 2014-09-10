@@ -38,7 +38,7 @@
 			{{HTML::image('Assets/images/users/guest-avatar.png', 'Avatar')}}
 		</div>
 		<div class="username">
-			<span>{{guest_username()}}</span>
+			<span>{{'Misafir'.guest_username()}}</span>
 		</div>
 		<div class="custom-line"></div>
 		<div class="membership req">

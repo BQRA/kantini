@@ -6,7 +6,7 @@
 							
 			<div class="add-event">
 				<div class="event-bg-image">
-					{{ HTML::image('/Events/'.$post->event_photo.'.jpg') }}
+					{{ HTML::image('/Events/sm-events/sm-'.$post->event_photo.'.jpg') }}
 				</div>
 
 				<div class="details">
@@ -18,7 +18,7 @@
 								
 						<div class="col-xs-2 detail pic">
 							<div class="pic-upload">
-								{{ HTML::image('/Events/'.$post->event_photo.'.jpg') }}
+								{{ HTML::image('/Events/sm-events/sm-'.$post->event_photo.'.jpg') }}
 							</div>
 						</div>
 					</div>

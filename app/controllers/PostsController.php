@@ -63,7 +63,7 @@ class PostsController extends \BaseController {
 
 			$rules = [
 				'dedikod' 		=> 'required|min:5|max:800',
-				'event_name' 	=> 'required|min:5|max:50|alpha_dash',
+				'event_name' 	=> 'required|min:5|max:50',
 				'event_date'	=> 'required',
 				'event_auth' 	=> 'required',
 				'event_price'	=> 'required',
@@ -309,6 +309,7 @@ class PostsController extends \BaseController {
 		Post::find($id)->delete();
 		Comment::wherePost_id($id)->delete();
 		Vote::wherePost_id($id)->delete();
+		Flag::wherePost_id($id)->delete();
 
 		return Redirect::back()->with('message', 'Gönderiniz başarıyla silinmiştir.');
 	}

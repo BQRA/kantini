@@ -42,7 +42,7 @@
 			</div>
 
 			@if(!Auth::check())
-				{{ Form::textarea('dedikod', null, ['placeholder' => guest_username().' olarak dedikodla!']) }}
+				{{ Form::textarea('dedikod', null, ['placeholder' => 'Misafir'.guest_username().' olarak dedikodla!']) }}
 			@else 
 				{{ Form::textarea('dedikod', null, ['placeholder' => Auth::user()->username.' olarak dedikodla!'])}}
 			@endif

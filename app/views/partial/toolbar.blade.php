@@ -5,7 +5,7 @@
 			{{ $post->username }}
 			</a>
 		@else
-			<span class="username">{{ $post->username }}</span>
+			<span class="username">{{ 'Misafir'.$post->username }}</span>
 		@endif
 							
 		<span class="date tooltip" data-content="Dedikod detayına git"><a href="{{ URL::action('show.post', $post->id) }}">{{date('d.m.Y H:m',strtotime($post->created_at))}}</a></span>

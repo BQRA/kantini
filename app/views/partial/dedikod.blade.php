@@ -1,5 +1,5 @@
 @if(Auth::check())
-	@if(Flag::where('post_id', $post->id)->where('user_id', Auth::user()->id)->count()>0)
+	@if(Flag::select('post_id', 'user_id')->where('post_id', $post->id)->where('user_id', Auth::user()->id)->count()>0)
 		<div class="dedikod {{ $post->gender }} reported {{ $post->school }}">
 			<span class="reporting">Raporlandı</span>
 	@else
@@ -56,7 +56,7 @@
 						
 					@if(!Auth::check())
 						<div>
-							{{ Form::text('comment', null, ['placeholder' => guest_username().' olarak yorum yaz!', 'autocomplete' => 'off', 'data-valid' => 'required', 'data-message' => 'Mesajınızı bos geçmeyiniz']) }}
+							{{ Form::text('comment', null, ['placeholder' => 'Misafir'.guest_username().' olarak yorum yaz!', 'autocomplete' => 'off', 'data-valid' => 'required', 'data-message' => 'Mesajınızı bos geçmeyiniz']) }}
 						</div>
 							
 						<div class="d-none ajax-comment-values">
@@ -107,7 +107,7 @@
 									@if(!empty($commenter))
 										<a data-lightbox="{{ URL::action('home') }}/user/profile/{{ $comment->commenter }} #profileBox" data-lightboxtitle="Profil Kartı" href="javascript:;">{{ $comment->commenter }}</a>
 									@else 
-										{{ $comment->commenter }}
+										{{ 'Misafir'.$comment->commenter }}
 									@endif
 								</span>
 								<span class="comment-content">{{ $comment->comment }}</span>

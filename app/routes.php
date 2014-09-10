@@ -16,10 +16,6 @@ Route::get('user/register', [
 
 	Route::post('login', 'SessionsController@login')->before('crsf');
 
-	//
-	Route::post('create-event', 'PostsController@eventImage')->before('csrf');
-	//
-
 	Route::post('edit-post/{id}', 'PostsController@editPost');
 
 Route::get('logout', [
@@ -40,7 +36,11 @@ Route::get('create-event', [
 	'uses'	 => 'PagesController@createEvent',
 	'before' => 'auth'
 ]);
-
+	
+	// resim upload için kullanılacak fonksiyon.
+	// yalnız 'image' değişkeni dışında formdan hiç bir data post olmuyor.
+	// kontrolleri sağlanırsa memnun olurum sn. Bora Dan (:
+	// Formda ki datatype kısmı lazım bana.
 	Route::post('event-image-upload', function() {
 
 		$data = Input::get('image');
@@ -51,7 +51,11 @@ Route::get('create-event', [
 
 		file_put_contents(public_path().'/Events/'.imageNumber().'.JPG', $data);
 
-		return HTML::image('/Events/'.imageNumber().'.jpg');
+		$img = Image::make('Events/'.imageNumber().'.JPG');
+		$img->resize(100, 100);
+		$img->save('Events/sm-events/sm-'.imageNumber().'.JPG');
+
+		return HTML::image('/Events/'.imageNumber().'.JPG');
 	});
 
 Route::get('add-media', [
@@ -69,7 +73,6 @@ Route::get('all-uni', function()
 {
 	return View::make('pages.all-uni');
 });
-
 
 	Route::post('send-post', 'PostsController@sendPost')->before('crsf');
 
@@ -126,13 +129,3 @@ Route::get('/user/account-activate/{code}', [
 ]);
 
 	Route::post('flag/{id}', 'FlagsController@flag');
-
-
-
-
-Route::get('test/test', function() {
-
-	$img = Image::make('Events/barantr90-QgfVHVQNpOciuZjhbcK2qG.jpg');
-	$img->resize(200, 200);
-	$img->save();
-});
