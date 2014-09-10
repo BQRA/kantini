@@ -49,13 +49,13 @@ Route::get('create-event', [
 		list(, $data)      = explode(',', $data);
 		$data = base64_decode($data);
 
-		file_put_contents(public_path().'/Events/'.imageNumber().'.JPG', $data);
+		file_put_contents(public_path().'/Events/'.imageNumber().'.jpg', $data);
 
-		$img = Image::make('Events/'.imageNumber().'.JPG');
-		$img->resize(100, 100);
-		$img->save('Events/sm-events/sm-'.imageNumber().'.JPG');
+		$img = Image::make('Events/'.imageNumber().'.jpg');
+		$img->fit(100);
+		$img->save('Events/sm-events/sm-'.imageNumber().'.jpg');
 
-		return HTML::image('/Events/'.imageNumber().'.JPG');
+		return HTML::image('/Events/'.imageNumber().'.jpg');
 	});
 
 Route::get('add-media', [
