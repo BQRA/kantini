@@ -11,7 +11,7 @@
 			<span class="name">Tüm Üniversiteler</span>
 		</a>
 
-		<?php $unis = School::all(); ?>
+		<?php $unis = School::select('school_fullname', 'school_name', 'school')->orderBy('school_name', 'ASC')->get(); ?>
 		@foreach($unis as $uni)
 			<a class="{{$uni['school_name']}}" href="{{ URL::route('home') }}/uni/{{$uni['school_name']}}">
 				<span class="img">{{ HTML::image('Assets/images/unis/logos/'.$uni['school_name'].'.png', null) }}</span>

@@ -62,21 +62,44 @@ class PostsController extends \BaseController {
 			$data = Input::all();
 
 			$rules = [
-			//gerekli kontroller eklenecek
-				//'dedikod' 		=> 'required|min:3|max:800',
-				//'event_name' 	=> 'required|min:5|max:50',
-				//'event_date'	=> 'required',
-				//'event_auth' 	=> 'required|alpha_dash',
-				//'event_auth_contact' => 'required|numeric',
+				'dedikod' 		=> 'required|min:5|max:800',
+				'event_name' 	=> 'required|min:5|max:50|alpha_dash',
+				'event_date'	=> 'required',
+				'event_auth' 	=> 'required',
+				'event_price'	=> 'required',
+				'event_auth_contact' => 'numeric'
 			];
 
 			$validator = Validator::make($data, $rules);
 
 			if($validator->passes()) {
 
+				if(trim(Input::get('event_time')) == false) {
+					$event_time = null;
+					} else {
+					$event_time = trim(Input::get('event_time'));
+				}
+
+				if(trim(Input::get('event_address')) == false) {
+					$event_address = null;
+					} else {
+					$event_address = trim(Input::get('event_address'));
+				}
+
+				if(trim(Input::get('event_map')) == false) {
+					$event_map = null;
+					} else {
+					$event_map = trim(Input::get('event_map'));
+				}
+
+				if(trim(Input::get('event_auth_contact')) == false) {
+					$event_auth_contact = null;
+					} else {
+					$event_auth_contact = trim(Input::get('event_auth_contact'));
+				}
+
 				$date 		= Input::get('event_date');
 				$timestamp 	= date('Y-m-d', strtotime($date));
-				$filename 	= 'default_event_image.png';
 
 				$post = new Post;
 				$post->username 			= Auth::user()->username;
@@ -86,12 +109,13 @@ class PostsController extends \BaseController {
 				$post->type 				= Input::get('post_type');
 				$post->event_name 			= trim(Input::get('event_name'));
 				$post->event_date 			= $timestamp;
-				$post->event_address 		= trim(Input::get('event_address'));
-				$post->event_map 			= trim(Input::get('event_map'));
+				$post->event_time 			= $event_time;
+				$post->event_address 		= $event_address;
+				$post->event_map 			= $event_map;
 				$post->event_auth 			= trim(Input::get('event_auth'));
-				$post->event_auth_contact 	= trim(Input::get('event_auth_contact'));
+				$post->event_auth_contact 	= $event_auth_contact;
 				$post->event_price 			= trim(Input::get('event_price'));
-				$post->event_photo 			= $filename;
+				$post->event_photo 			= imageNumber();
 				$post->dedikod 				= trim(Input::get('dedikod'));
 				$post->save();
 

@@ -6,19 +6,19 @@
 							
 			<div class="add-event">
 				<div class="event-bg-image">
-					{{ HTML::image('/Events/'.$post->event_photo) }}
+					{{ HTML::image('/Events/'.$post->event_photo.'.jpg') }}
 				</div>
 
 				<div class="details">
 					<div class="row">
-						<div class="col-sm-10 detail title">
+						<div class="col-xs-10 detail title">
 							<strong>Etkinlik Adı</strong>
 							<span>{{ $post->event_name }}</span>
 						</div>
 								
-						<div class="col-sm-2 detail pic">
+						<div class="col-xs-2 detail pic">
 							<div class="pic-upload">
-								{{ HTML::image('/Events/'.$post->event_photo) }}
+								{{ HTML::image('/Events/'.$post->event_photo.'.jpg') }}
 							</div>
 						</div>
 					</div>
@@ -26,36 +26,57 @@
 					<div class="clearfix"></div>
 							
 					<div class="row">
-						<div class="col-sm-3 detail">
+						<div class="col-xs-3 detail">
 							<strong>Etkinlik Tarihi</strong>
 							<span>{{ date('d.m.Y',strtotime($post->event_date)) }}</span>
 						</div>
+
+						<div class="col-xs-3 detail">
+							<strong>Etkinlik Saati</strong>
+							@if($post->event_time == null)
+								<span>&#8212</span>
+							@else
+								<span>{{ $post->event_time }}</span>
+							@endif
+						</div>
 								
-						<div class="col-sm-3 detail">
+						<div class="col-xs-3 detail">
 							<strong>Yetkili Kisi</strong>
 							<span>{{ $post->event_auth }}</span>
 						</div>
 								
-						<div class="col-sm-3 detail">
+						<div class="col-xs-3 detail">
 							<strong>İletisim</strong>
-							<span>{{ $post->event_auth_contact }}</span>
-						</div>
-								
-						<div class="col-sm-3 detail">
-							<strong>Harita</strong>
-							<span>{{ $post->event_auth_contact }}</span>
+							@if($post->event_auth_contact == null)
+								<span>&#8212</span>
+							@else
+								<span>{{ $post->event_auth_contact }}</span>
+							@endif
 						</div>
 					</div>
 							
 					<div class="clearfix"></div>
 							
 					<div class="row">
-						<div class="col-sm-8 detail address">
+						<div class="col-xs-5 detail last-line">
 							<strong>Adres</strong>
-							<span>{{ $post->event_address }}</span>
+							@if($post->event_address == null)
+								<span>&#8212</span>
+							@else
+								<span>{{ $post->event_address }}</span>
+							@endif
+						</div>
+
+						<div class="col-xs-3 detail last-line">
+							<strong>Harita</strong>
+							@if($post->event_auth_contact == null)
+								<span>&#8212</span>
+							@else
+								<span>{{ $post->event_auth_contact }}</span>
+							@endif
 						</div>
 										
-						<div class="col-sm-4 detail price">
+						<div class="col-xs-4 detail price last-line">
 							{{ $post->event_price }}
 						</div>		
 					</div>
