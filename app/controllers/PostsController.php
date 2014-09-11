@@ -50,14 +50,28 @@ class PostsController extends \BaseController {
 				$post->school 	= $school;
 				$post->save();
 
+				/*
+				$spam = new Spam;
+				$spam->post_id 		= $post->id;
+				$spam->username 	= $username;
+				$spam->ip_address 	= get_client_ip();
+				$spam->save();
+
+				if(Spam::whereIp_address(get_client_ip())->count() > 0) {
+					return 'ok';
+				}
+				*/
+
 				Session::flash('message', 'İletiniz başarıyla gönderilmiştir!');
 				return Redirect::back();
+
 			} else {
 
 			return Redirect::back()
 			->withErrors($validator)
 			->withInput();
 			}
+
 		} elseif(Input::get('post_type') == 'event') {
 			$data = Input::all();
 
@@ -133,6 +147,7 @@ class PostsController extends \BaseController {
 				->withErrors($validator)
 				->withInput();
 			}
+
 		} elseif(Input::get('post_type') == 'video') {
 			$data = Input::all();
 
@@ -161,6 +176,7 @@ class PostsController extends \BaseController {
 				->withErrors($validator)
 				->withInput();
 			}
+
 		} elseif(Input::get('post_type') == 'image') {
 			$data = Input::all();
 
@@ -190,6 +206,7 @@ class PostsController extends \BaseController {
 
 				Session::flash('message', 'İletiniz başarıyla gönderilmiştir!');
 				return Redirect::back();
+
 			} else {
 				return Redirect::back()
 				->withErrors($validator)
