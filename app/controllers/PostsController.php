@@ -295,7 +295,7 @@ class PostsController extends \BaseController {
 			*/
 
 			$date = Comment::find($comment->id);
-			$comment_date = $date->created_at;
+			$comment_date = $date->created_at->diffForHumans();
 			return $comment_date;
 
 		} else {

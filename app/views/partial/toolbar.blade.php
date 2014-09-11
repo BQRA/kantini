@@ -8,7 +8,7 @@
 			<span class="username">{{ 'Misafir'.$post->username }}</span>
 		@endif
 							
-		<span class="date tooltip" data-content="Dedikod detayına git"><a href="{{ URL::action('show.post', $post->id) }}">{{date('d.m.Y H:m',strtotime($post->created_at))}}</a></span>
+		<span class="date tooltip" data-content="Dedikod detayına git"><a href="{{ URL::action('show.post', $post->id) }}">{{$post->created_at->diffForHumans()}}</a></span>
 		<div class="select-box custom">
 			<div class="text">
 				<span class="icon more">&#61703</span>

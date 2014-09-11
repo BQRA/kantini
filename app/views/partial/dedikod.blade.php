@@ -111,7 +111,7 @@
 									@endif
 								</span>
 								<span class="comment-content">{{ $comment->comment }}</span>
-									<div class="date">{{ date('d.m.Y',strtotime($comment->created_at)) }}</div>
+									<div class="date">{{ $comment->created_at->diffForHumans() }}</div>
 							</div>
 						</div>
 					@endforeach
