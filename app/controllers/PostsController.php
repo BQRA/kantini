@@ -51,17 +51,37 @@ class PostsController extends \BaseController {
 				$post->save();
 
 				/*
-				$spam = new Spam;
-				$spam->post_id 		= $post->id;
-				$spam->username 	= $username;
-				$spam->ip_address 	= get_client_ip();
-				$spam->save();
+				if(Spam::whereIp_address(get_client_ip())->count() > 0 ) {
+					
+					$now = strtotime(Carbon::now());
+					
+					$spam = Spam::where('ip_address', get_client_ip())->first();
+					$DB_time = strtotime($spam->created_at);
 
-				if(Spam::whereIp_address(get_client_ip())->count() > 0) {
-					return 'ok';
+					$diff = round(abs($now - $DB_time) / 60*60);
+					$count_spam = $spam->count_spam;
+
+						if($count_spam > 6) {
+							return 'warning!';
+						} else {
+							if($diff < 181) {
+							$new_count_spam = $count_spam + 1;
+
+							DB::table('spam_dedikod_controls')
+					            ->where('ip_address', get_client_ip())
+					            ->update(['count_spam' => $new_count_spam]);
+							}
+						}
+
+				} else {
+
+					$spam = new Spam;
+					$spam->ip_address 	= get_client_ip();
+					$spam->save();
 				}
 				*/
 
+				
 				Session::flash('message', 'İletiniz başarıyla gönderilmiştir!');
 				return Redirect::back();
 

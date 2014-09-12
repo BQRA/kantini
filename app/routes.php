@@ -129,3 +129,12 @@ Route::get('/user/account-activate/{code}', [
 ]);
 
 	Route::post('flag/{id}', 'FlagsController@flag');
+
+
+Route::get('test/test', function() {
+
+	$to_time = strtotime(Carbon::now());
+	$from_time = strtotime("2014-09-12 13:15:00");
+	echo round(abs($to_time - $from_time) / 60*60). " dakika";
+
+});
