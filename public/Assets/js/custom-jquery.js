@@ -134,6 +134,15 @@ function attachImg() {
 	});
 }
 
+// notifications delete after 3 sec
+function delNotif() {
+	if ( $('.notification.info').length > 0 ) {
+		setTimeout(function(){
+			$('.notification.info').hide(0);
+		}, 3000)
+	}
+}
+
 ///////////////////////////////////////////////////
 // GLOBAL FUNTIONS #END
 ///////////////////////////////////////////////////
@@ -166,6 +175,9 @@ $(function () {
 			closeLightbox();
 		}
 	});
+
+	// notif delete
+	delNotif();
 
 	// selectbox
 	$('.select-box:not(.opened) .text').click(function(event) {
