@@ -1027,6 +1027,17 @@ p {
   font: 400 15px 'Roboto', 'Helvetica Neue', Arial;
   line-height: 0;
 }
+.container .left-container .dedikods .dedikod .content .highlight {
+  color: #468966 !important;
+  font-size: 12px;
+  font-weight: 500;
+  background-color: #ccf3df;
+  border-radius: 3px;
+  padding: 3px 6px;
+  color: #fff;
+  top: -1px;
+  position: relative;
+}
 .container .left-container .dedikods .dedikod.reported:before {
   display: inline-block;
   content: '';
@@ -1697,17 +1708,6 @@ p {
 }
 /* form #end */
 /* add event */
-.content > a {
-  color: #468966 !important;
-  font-size: 12px;
-  font-weight: 500;
-  background-color: #ccf3df;
-  border-radius: 3px;
-  padding: 3px 6px;
-  color: #fff;
-  top: -1px;
-  position: relative;
-}
 .content .content-ticket {
   width: 580px;
   overflow: hidden;

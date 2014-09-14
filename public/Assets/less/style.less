@@ -736,6 +736,19 @@ p {
 				border-bottom: 3px solid #f3f3f3;
 				.font2(400, 15px);
 				line-height: 0;
+				.content {
+					.highlight {
+						color: #468966 !important;
+						font-size: 12px;
+						font-weight: 500;
+						background-color: #ccf3df;
+						border-radius: 3px;
+						padding: 3px 6px;
+						color: #fff;
+						top: -1px;
+						position: relative;
+					}
+				}
 				&.reported {
 					&:before {
 						display: inline-block;
@@ -1425,17 +1438,6 @@ p {
 
 /* add event */
 .content {
-	& > a {
-		color: #468966 !important;
-		font-size: 12px;
-		font-weight: 500;
-		background-color: #ccf3df;
-		border-radius: 3px;
-		padding: 3px 6px;
-		color: #fff;
-		top: -1px;
-		position: relative;
-	}
 	.content-ticket {
 		width: 580px;
 		overflow: hidden;
