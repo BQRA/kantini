@@ -962,10 +962,10 @@ p {
 }
 .container .left-container .special-list-title {
   padding: 0 0 20px 0;
-  margin: 0 0 20px 0;
+  margin: 0 0 20px 8%;
   border-bottom: 1px solid #ddd;
   display: inline-block;
-  width: 100%;
+  width: 92%;
   font: 400 17px 'Roboto', 'Helvetica Neue', Arial;
 }
 .container .left-container .special-list-title > span {
