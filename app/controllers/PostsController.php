@@ -50,6 +50,11 @@ class PostsController extends \BaseController {
 				$post->school 	= $school;
 				$post->save();
 
+				$record = new Record;
+				$record->post_id = $post->id;
+				$record->ip_address = get_client_ip();
+				$record->save();
+
 				/*
 				if(Spam::whereIp_address(get_client_ip())->count() > 0 ) {
 					
@@ -61,8 +66,10 @@ class PostsController extends \BaseController {
 					$diff = round(abs($now - $DB_time) / 60*60);
 					$count_spam = $spam->count_spam;
 
-						if($count_spam > 6) {
-							return 'warning!';
+						if($count_spam > 2) {
+							$records = Record::where('ip_address', get_client_ip())->lists('post_id');
+							Post::destroy($records);
+							return 'Spam dedikod göndermeye utanmıyor musun?';
 						} else {
 							if($diff < 181) {
 							$new_count_spam = $count_spam + 1;
@@ -76,11 +83,10 @@ class PostsController extends \BaseController {
 				} else {
 
 					$spam = new Spam;
-					$spam->ip_address 	= get_client_ip();
+					$spam->ip_address = get_client_ip();
 					$spam->save();
 				}
 				*/
-
 				
 				Session::flash('message', 'İletiniz başarıyla gönderilmiştir!');
 				return Redirect::back();
@@ -324,7 +330,10 @@ class PostsController extends \BaseController {
 			$user = User::whereUsername($post->username)->first();
 			
 			if(!empty($user)) {
+
 				//geliştirelecek!!!
+				//Commenter'la dedikod'u gönderen kişi aynı ise mail gönderme
+
 				Mail::send('emails.auth.comment', ['link'=> URL::route('show.post', $id)], function($message) use ($user) {
 					$message->to($user->email)->subject('Kantini - Cevap!');
 				});
