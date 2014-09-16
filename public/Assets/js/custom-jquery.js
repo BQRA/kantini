@@ -55,6 +55,7 @@ function previewImage(input) {
 		var reader = new FileReader();
 		reader.onload = function (e) {
 			$('form.image-upload input[name=image]').val(e.target.result);
+			$('form.image-upload input[name=imagetype]').val($(input).attr('name'));
 			var $form = $('form.image-upload'), serializedData = $form.serialize();
 			$.ajax({
 				url: $form.attr('action'),
@@ -66,7 +67,6 @@ function previewImage(input) {
 					$(input).before('<div class="loading"/>');
 				}
 			}).done(function(e) { 
-				$('form.image-upload input[name=data-imagetype]').val($(input).data('imagetype'));
 				$(input).prev('img').remove();
 				$(input).prev('.loading');
 				$(input).before(e);

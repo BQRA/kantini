@@ -18,7 +18,7 @@
 					</div>
 					<div class="col-xs-2 detail pic">
 						<div class="pic-upload">
-							<input type="file" data-imagetype="event" onchange="previewImage(this)" accept="image/*" />
+							<input type="file" name="event" onchange="previewImage(this)" accept="image/*" />
 						</div>
 					</div>
 				</div>

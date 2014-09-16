@@ -41,7 +41,7 @@
 
 				<div class="upload-from-computer">
 					<div class="pic-upload">
-						<input type="file" data-imagetype="image" onchange="previewImage(this)" accept="image/*" data-valid="required" data-message="Bu Alan Zorunludur" />
+						<input type="file" name="mediaFromPc" onchange="previewImage(this)" accept="image/*" data-valid="required" data-message="Bu Alan Zorunludur" />
 					</div>
 				</div>
 

@@ -1,6 +1,6 @@
 {{ Form::open(['url' => 'event-image-upload', null, 'class'=>'image-upload']) }}
+{{ Form::hidden('imagetype', '') }}
 {{ Form::hidden('image', '') }}
-{{ Form::hidden('data-imagetype', '') }}
 {{ Form::close() }}
 
 <div class="header">

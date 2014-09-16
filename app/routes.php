@@ -43,19 +43,39 @@ Route::get('create-event', [
 	// Formda ki datatype kısmı lazım bana.
 	Route::post('event-image-upload', function() {
 
-		$data = Input::get('image');
+		if(Input::get('imagetype') == 'event') {
 
-		list($type, $data) = explode(';', $data);
-		list(, $data)      = explode(',', $data);
-		$data = base64_decode($data);
+			$data = Input::get('image');
 
-		file_put_contents(public_path().'/Events/'.imageNumber().'.jpg', $data);
+			list($type, $data) = explode(';', $data);
+			list(, $data)      = explode(',', $data);
+			$data = base64_decode($data);
 
-		$img = Image::make('Events/'.imageNumber().'.jpg');
-		$img->fit(100);
-		$img->save('Events/sm-events/sm-'.imageNumber().'.jpg');
+			file_put_contents(public_path().'/Events/'.imageNumber().'.jpg', $data);
 
-		return HTML::image('/Events/sm-events/sm-'.imageNumber().'.jpg');
+			$img = Image::make('Events/'.imageNumber().'.jpg');
+			$img->fit(100);
+			$img->save('Events/sm-events/sm-'.imageNumber().'.jpg');
+
+			return HTML::image('/Events/sm-events/sm-'.imageNumber().'.jpg');
+
+		} elseif(Input::get('imagetype') == 'mediaFromPc') {
+			
+			$data = Input::get('image');
+
+			list($type, $data) = explode(';', $data);
+			list(, $data)      = explode(',', $data);
+			$data = base64_decode($data);
+
+			file_put_contents(public_path().'/images/'.imageNumber().'.jpg', $data);
+
+			$img = Image::make('images/'.imageNumber().'.jpg');
+			$img->fit(100);
+			$img->save('images/sm-images/sm-'.imageNumber().'.jpg');
+
+			return HTML::image('/images/sm-images/sm-'.imageNumber().'.jpg');
+		}		
+
 	});
 
 Route::get('add-media', [
