@@ -238,6 +238,40 @@ class PostsController extends \BaseController {
 				->withErrors($validator)
 				->withInput();
 			}
+		} elseif(Input::get('post_type') == 'mediaFromPc') {
+			$data = Input::all();
+
+			$rules = [
+				'dedikod' 	=> 'required|min:5|max:800'
+			];
+
+			$validator = Validator::make($data, $rules);
+
+			if($validator->passes()) {
+				$post = new Post;
+				$post->username 	= Auth::user()->username;
+				$post->user_id  	= Auth::user()->id;
+				$post->anonymous 	= 0;
+				$post->gender 		= Auth::user()->profile->gender;
+				$post->type 		= Input::get('post_type');
+				$post->dedikod 		= trim(Input::get('dedikod'));
+				$post->links 		= imageNumber();
+				$post->save();
+
+				if(Auth::check()) {
+					$image_number = Profile::find(Auth::user()->id);
+					$image_number->image_number = str_random(22);
+					$image_number->save();
+				}
+
+				Session::flash('message', 'İletiniz başarıyla gönderilmiştir!');
+				return Redirect::back();
+
+			} else {
+				return Redirect::back()
+				->withErrors($validator)
+				->withInput();
+			}
 		}
 	}
 

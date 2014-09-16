@@ -91,6 +91,11 @@
 	<div class="content-img-container"><img src="{{$post->links}}" alt="" /></div>
 	<div class="clear mt10"></div>
 
+@elseif($post->type == 'mediaFromPc')
+	<div class="content-img-container">
+	{{ HTML::image('/images/'.$post->links.'.jpg') }}</div>
+	<div class="clear mt10"></div>
+
 @elseif($post->type == 'video')
 	<iframe width="580" height="360" src="{{$post->links}}?rel=0&autoplay=0&fullscreen=0" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 	<div class="clear mt10"></div>
