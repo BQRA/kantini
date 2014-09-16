@@ -19,7 +19,7 @@
 						<div class="col-xs-2 detail pic">
 							<div class="pic-upload">
 								{{ HTML::image('/Events/sm-events/sm-'.$post->event_photo.'.jpg') }}
-								{{ Form::hidden("normal-size", HTML::image("/Events/sm-events/sm-".$post->event_photo.".jpg")) }}
+								{{ Form::hidden("normal-size", HTML::image("/Events/".$post->event_photo.".jpg")) }}
 							</div>
 						</div>
 					</div>
