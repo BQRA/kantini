@@ -55,7 +55,7 @@ Route::get('create-event', [
 		$img->fit(100);
 		$img->save('Events/sm-events/sm-'.imageNumber().'.jpg');
 
-		return HTML::image('/Events/'.imageNumber().'.jpg');
+		return HTML::image('/Events/sm-events/sm-'.imageNumber().'.jpg');
 	});
 
 Route::get('add-media', [

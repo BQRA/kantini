@@ -8,5 +8,3 @@ composer.lock
 .env.php
 .DS_Store
 Thumbs.db
-public/Avatars/
-public/Organizations/
