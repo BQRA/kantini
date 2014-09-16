@@ -69,7 +69,7 @@ function previewImage(input) {
 				$('form.image-upload input[name=data-imagetype]').val($(input).data('imagetype'));
 				$(input).prev('img').remove();
 				$(input).prev('.loading');
-				$(input).before(e); 
+				$(input).before(e);
 				$(input).parents('.add-event').find('.event-bg-image').html(e);
 			});
 			
