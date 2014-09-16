@@ -48,7 +48,7 @@
 				<div class="clear mt30"></div>
 
 				<div class="text-center">
-					<div class="button green" data-validator data-type="media" id="addAttachment">Dedikod'a Ekle</div>
+					<div class="button green" data-validator data-type="mediaFromPc" id="addAttachment">Dedikod'a Ekle</div>
 				</div>
 
 			</div>

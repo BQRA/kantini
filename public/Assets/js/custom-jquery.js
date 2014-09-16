@@ -273,7 +273,7 @@ $(function () {
 	// event image 
 	$('.dedikod .pic-upload').on('click', function(event) {
 		event.stopPropagation();
-		alert($(this).html());
+		alert($(this).find('input[type=hidden]').val());
 	});
 
 	// Dedikod Attachment
@@ -310,6 +310,11 @@ $(function () {
 		} else if ( $(this).attr('data-type') == 'event' ) {
 			$('.dedikod-area .event-attached').show();
 			$('.dedikod-area .attachment img').attr('src', '/kantini/public/Assets/images/event-attached.png');
+		} else if ( $(this).attr('data-type') == 'mediaFromPc' ) {
+			$('.dedikod-area .media-attached').show();
+			$('#addMedia .tab').remove();
+			$('#addMedia .tab-content-item:not(.selected)').remove();
+			$('input[name=post_type]').attr('value', 'mediaFromPc');
 		}
 		attachImg();
 	});

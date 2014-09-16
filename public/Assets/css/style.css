@@ -2086,7 +2086,7 @@ p {
   border-radius: 5px;
 }
 .lightbox-bg .lightbox-container .lightbox-content.alert img {
-  max-height: 75%;
+  max-height: 500px;
 }
 .lightbox-bg .lightbox-container .lightbox-content.alert:after {
   content: '';
