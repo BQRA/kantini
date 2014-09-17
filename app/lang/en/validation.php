@@ -83,8 +83,15 @@ return array(
 	*/
 
 	'custom' => array(
-		'attribute-name' => array(
-			'rule-name' => 'custom-message',
+		
+		'dedikod' => array(
+			'required' => 'Dedikod alanı boş olamaz.',
+			'min' => 'Dedikod en az 5 karakter uzunluğunda olmalıdır.',
+			'max' => 'Dedikod en fazla 800 karakter uzunluğunda olabilir.'
+		),
+
+		'gender' => array(
+			'required' => 'Cinsiyet seçiniz',
 		),
 	),
 

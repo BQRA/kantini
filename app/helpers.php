@@ -24,12 +24,12 @@ function session_user_posts() {
 }
 
 function session_user_comments() {
-	$user_comments = Comment::where('commenter', Auth::user()->username)->get();
+	$user_comments = Comment::select('commenter')->where('commenter', Auth::user()->username)->get();
 	return $user_comments;
 }
 
 function session_user_votes() {
-	$user_votes = Vote::where('rater', Auth::user()->username)->get();
+	$user_votes = Vote::select('rater')->where('rater', Auth::user()->username)->get();
 	return $user_votes;
 }
 

@@ -40,6 +40,7 @@ class PostsController extends \BaseController {
 			$validator = Validator::make($data, $rules);
 
 			if($validator->passes()) {
+
 				$dedikod = trim(Input::get('dedikod'));
 
 				$post = new Post;
@@ -50,6 +51,7 @@ class PostsController extends \BaseController {
 				$post->dedikod 	= strip_tags($dedikod,'<a>');
 				$post->type 	= 'dedikod';
 				$post->school 	= $school;
+				$post->ip_address = get_client_ip();
 				$post->save();
 
 				$record = new Record;
@@ -71,7 +73,12 @@ class PostsController extends \BaseController {
 						if($count_spam > 2) {
 							$records = Record::where('ip_address', get_client_ip())->lists('post_id');
 							Post::destroy($records);
-							return 'Spam dedikod göndermeye utanmıyor musun?';
+
+							$ban_ip = new Banned;
+							$ban_ip->ip_address = get_client_ip();
+							$ban_ip->save();
+
+							return Redirect::back();
 						} else {
 							if($diff < 181) {
 							$new_count_spam = $count_spam + 1;
@@ -159,6 +166,7 @@ class PostsController extends \BaseController {
 				$post->event_price 			= trim(Input::get('event_price'));
 				$post->event_photo 			= imageNumber();
 				$post->dedikod 				= strip_tags($dedikod,'<a>');
+				$post->ip_address 			= get_client_ip();
 				$post->save();
 
 				if(Auth::check()) {
@@ -200,6 +208,7 @@ class PostsController extends \BaseController {
 						$post->dedikod 	= strip_tags($dedikod,'<a>');
 					}
 				$post->links 		= Input::get('media');
+				$post->ip_address 	= get_client_ip();
 				$post->save();
 
 				Session::flash('message', 'İletiniz başarıyla gönderilmiştir!');
@@ -234,6 +243,7 @@ class PostsController extends \BaseController {
 						$post->dedikod 	= strip_tags($dedikod,'<a>');
 					}
 				$post->links 		= Input::get('media');
+				$post->ip_address = get_client_ip();
 				$post->save();
 
 				if(Auth::check()) {
