@@ -36,20 +36,16 @@ Route::get('create-event', [
 	'uses'	 => 'PagesController@createEvent',
 	'before' => 'auth'
 ]);
-	
-	// resim upload için kullanılacak fonksiyon.
-	// yalnız 'image' değişkeni dışında formdan hiç bir data post olmuyor.
-	// kontrolleri sağlanırsa memnun olurum sn. Bora Dan (:
-	// Formda ki datatype kısmı lazım bana.
-	Route::post('event-image-upload', function() {
+
+	Route::post('image-upload', function() {
+
+		$data = Input::get('image');
+
+		list($type, $data) = explode(';', $data);
+		list(, $data)      = explode(',', $data);
+		$data = base64_decode($data);
 
 		if(Input::get('imagetype') == 'event') {
-
-			$data = Input::get('image');
-
-			list($type, $data) = explode(';', $data);
-			list(, $data)      = explode(',', $data);
-			$data = base64_decode($data);
 
 			file_put_contents(public_path().'/Events/'.imageNumber().'.jpg', $data);
 
@@ -60,14 +56,12 @@ Route::get('create-event', [
 			return HTML::image('/Events/sm-events/sm-'.imageNumber().'.jpg');
 
 		} elseif(Input::get('imagetype') == 'mediaFromPc') {
-			
-			$data = Input::get('image');
-
-			list($type, $data) = explode(';', $data);
-			list(, $data)      = explode(',', $data);
-			$data = base64_decode($data);
 
 			file_put_contents(public_path().'/images/'.imageNumber().'.jpg', $data);
+
+			$normal_img = Image::make('images/'.imageNumber().'.jpg');
+			$normal_img->fit(1000);
+			$normal_img->save('images/'.imageNumber().'.jpg');
 
 			$img = Image::make('images/'.imageNumber().'.jpg');
 			$img->fit(100);

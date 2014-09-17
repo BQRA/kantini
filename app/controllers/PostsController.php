@@ -40,12 +40,14 @@ class PostsController extends \BaseController {
 			$validator = Validator::make($data, $rules);
 
 			if($validator->passes()) {
+				$dedikod = trim(Input::get('dedikod'));
+
 				$post = new Post;
 				$post->username = $username;
 				$post->user_id  = $user_id;
 				$post->anonymous = $anonymous;
 				$post->gender 	= $gender;
-				$post->dedikod 	= trim(Input::get('dedikod'));
+				$post->dedikod 	= strip_tags($dedikod,'<a>');
 				$post->type 	= 'dedikod';
 				$post->school 	= $school;
 				$post->save();
@@ -140,6 +142,7 @@ class PostsController extends \BaseController {
 
 				$date 		= Input::get('event_date');
 				$timestamp 	= date('Y-m-d', strtotime($date));
+				$dedikod 	= trim(Input::get('dedikod'));
 
 				$post = new Post;
 				$post->username 			= Auth::user()->username;
@@ -156,7 +159,7 @@ class PostsController extends \BaseController {
 				$post->event_auth_contact 	= $event_auth_contact;
 				$post->event_price 			= trim(Input::get('event_price'));
 				$post->event_photo 			= imageNumber();
-				$post->dedikod 				= trim(Input::get('dedikod'));
+				$post->dedikod 				= strip_tags($dedikod,'<a>');
 				$post->save();
 
 				if(Auth::check()) {
@@ -185,13 +188,15 @@ class PostsController extends \BaseController {
 			$validator = Validator::make($data, $rules);
 
 			if($validator->passes()) {
+				$dedikod = trim(Input::get('dedikod'));
+
 				$post = new Post;
 				$post->username 	= Auth::user()->username;
 				$post->user_id  	= Auth::user()->id;
 				$post->anonymous 	= 0;
 				$post->gender 		= Auth::user()->profile->gender;
 				$post->type 		= Input::get('post_type');
-				$post->dedikod 		= trim(Input::get('dedikod'));
+				$post->dedikod 		= strip_tags($dedikod,'<a>');
 				$post->links 		= Input::get('media');
 				$post->save();
 
@@ -214,13 +219,15 @@ class PostsController extends \BaseController {
 			$validator = Validator::make($data, $rules);
 
 			if($validator->passes()) {
+				$dedikod = trim(Input::get('dedikod'));
+
 				$post = new Post;
 				$post->username 	= Auth::user()->username;
 				$post->user_id  	= Auth::user()->id;
 				$post->anonymous 	= 0;
 				$post->gender 		= Auth::user()->profile->gender;
 				$post->type 		= Input::get('post_type');
-				$post->dedikod 		= trim(Input::get('dedikod'));
+				$post->dedikod 		= strip_tags($dedikod,'<a>');
 				$post->links 		= Input::get('media');
 				$post->save();
 
@@ -248,13 +255,15 @@ class PostsController extends \BaseController {
 			$validator = Validator::make($data, $rules);
 
 			if($validator->passes()) {
+				$dedikod = trim(Input::get('dedikod'));
+
 				$post = new Post;
 				$post->username 	= Auth::user()->username;
 				$post->user_id  	= Auth::user()->id;
 				$post->anonymous 	= 0;
 				$post->gender 		= Auth::user()->profile->gender;
 				$post->type 		= Input::get('post_type');
-				$post->dedikod 		= trim(Input::get('dedikod'));
+				$post->dedikod 		= strip_tags($dedikod,'<a>');
 				$post->links 		= imageNumber();
 				$post->save();
 
