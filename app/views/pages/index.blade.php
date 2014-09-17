@@ -1,10 +1,12 @@
 @extends('layouts.master')
 
 @section('content')
-@include('partial.filter-bar')
 
-<div class="dedikods">
-	@if($posts->count() > 0)
+@if($posts->count() > 0)
+
+	@include('partial.filter-bar')
+
+	<div class="dedikods">
 		@foreach($posts as $post)
 		<?php 
 			$user = User::whereUsername($post->username)->first();
@@ -12,10 +14,13 @@
 		?>			
 			@include('partial.dedikod')
 		@endforeach
-	@else 
-		<p>Bu okul kantini’nde hiç dedikod yoktur</p>
-	@endif
-</div>
+	</div>
+@else 
+	<div class="blank-page">
+		<h2>Üzgünüz...</h2>
+		<p class="text-center">Bu okul kantini’nde hiç dedikod yoktur.</p>
+	</div>
+@endif
 
 	@if(isset($_GET['type']) && isset($_GET['orderBy']))
 	{{ $posts->appends(['type' => $_GET['type'], 'orderBy' => $_GET['orderBy']])->links() }}

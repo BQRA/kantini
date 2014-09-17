@@ -77,7 +77,7 @@
 
 		<ul class="menu">		
 			<li><a href="{{ URL::route('home') }}">Anasayfa</a></li>
-			<li><a href="#">Kontak</a></li>
+			<li><a href="#"><del>Kontak</del></a></li>
 		</ul>
 	</div>
 

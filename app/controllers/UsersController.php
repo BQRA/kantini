@@ -74,8 +74,8 @@ class UsersController extends \BaseController {
 			$profile->image_number = str_random(22);
 			$profile->save();
 
-			Mail::send('emails.auth.account-activate', ['link'=> URL::route('account.activate', $code), 'username' => $username], function($message) use ($user) {
-				$message->to($user->email, $user->username)->subject('Kantini - Hoşgeldiniz!');
+			Mail::send('emails.activation', ['link'=> URL::route('account.activate', $code), 'username' => $username], function($message) use ($user) {
+				$message->to($user->email, $user->username)->subject('[Kantini] Aktivasyon');
 			});
 
 			Session::flash('message', 'Üyeliğiniz başarıyla gerçekleştirilmiştir. Lütfen eposta adresinizi kontrol ediniz ve üyeliğinizi aktifleştiriniz.');

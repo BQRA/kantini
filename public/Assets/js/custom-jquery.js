@@ -176,6 +176,11 @@ $(function () {
 		}
 	});
 
+	// focus login input
+	$('body').on('click', '#authorization .button.blue', function(event) {
+		$('.right-panel form input[name=username]').focus();
+	});
+
 	// notif delete
 	delNotif();
 

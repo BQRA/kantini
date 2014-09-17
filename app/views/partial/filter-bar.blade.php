@@ -35,7 +35,7 @@
 
 	<div class="right">
 		<div class="select-box">
-			<span class="text">İçeriğe göre filtrele</span>
+			<span class="text">İçeriğe göre sırala</span>
 			<ul>
 				@if(Input::has('q'))
 					@if(Input::has('type'))
