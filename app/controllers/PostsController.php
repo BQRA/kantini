@@ -99,7 +99,6 @@ class PostsController extends \BaseController {
 			->withErrors($validator)
 			->withInput();
 			}
-
 		} elseif(Input::get('post_type') == 'event') {
 			$data = Input::all();
 
@@ -176,27 +175,30 @@ class PostsController extends \BaseController {
 				->withErrors($validator)
 				->withInput();
 			}
-
 		} elseif(Input::get('post_type') == 'video') {
 			$data = Input::all();
 
 			$rules = [
-				'dedikod' 	=> 'required|min:5|max:800',
-				'media' 	=> 'required'
+				'media' => 'required'
 			];
 
 			$validator = Validator::make($data, $rules);
 
 			if($validator->passes()) {
+				
 				$dedikod = trim(Input::get('dedikod'));
-
+				
 				$post = new Post;
 				$post->username 	= Auth::user()->username;
 				$post->user_id  	= Auth::user()->id;
 				$post->anonymous 	= 0;
 				$post->gender 		= Auth::user()->profile->gender;
 				$post->type 		= Input::get('post_type');
-				$post->dedikod 		= strip_tags($dedikod,'<a>');
+					if(empty($dedikod)) {
+						$post->dedikod 	= null;
+					} else {
+						$post->dedikod 	= strip_tags($dedikod,'<a>');
+					}
 				$post->links 		= Input::get('media');
 				$post->save();
 
@@ -207,18 +209,17 @@ class PostsController extends \BaseController {
 				->withErrors($validator)
 				->withInput();
 			}
-
 		} elseif(Input::get('post_type') == 'image') {
 			$data = Input::all();
 
 			$rules = [
-				'dedikod' 	=> 'required|min:5|max:800',
 				'media' 	=> 'required'
 			];
 
 			$validator = Validator::make($data, $rules);
 
 			if($validator->passes()) {
+				
 				$dedikod = trim(Input::get('dedikod'));
 
 				$post = new Post;
@@ -227,7 +228,11 @@ class PostsController extends \BaseController {
 				$post->anonymous 	= 0;
 				$post->gender 		= Auth::user()->profile->gender;
 				$post->type 		= Input::get('post_type');
-				$post->dedikod 		= strip_tags($dedikod,'<a>');
+					if(empty($dedikod)) {
+						$post->dedikod 	= null;
+					} else {
+						$post->dedikod 	= strip_tags($dedikod,'<a>');
+					}
 				$post->links 		= Input::get('media');
 				$post->save();
 
@@ -248,13 +253,12 @@ class PostsController extends \BaseController {
 		} elseif(Input::get('post_type') == 'mediaFromPc') {
 			$data = Input::all();
 
-			$rules = [
-				'dedikod' 	=> 'required|min:5|max:800'
-			];
+			$rules = [];
 
 			$validator = Validator::make($data, $rules);
 
 			if($validator->passes()) {
+				
 				$dedikod = trim(Input::get('dedikod'));
 
 				$post = new Post;
@@ -263,7 +267,11 @@ class PostsController extends \BaseController {
 				$post->anonymous 	= 0;
 				$post->gender 		= Auth::user()->profile->gender;
 				$post->type 		= Input::get('post_type');
-				$post->dedikod 		= strip_tags($dedikod,'<a>');
+					if(empty($dedikod)) {
+						$post->dedikod 	= null;
+					} else {
+						$post->dedikod 	= strip_tags($dedikod,'<a>');
+					}
 				$post->links 		= imageNumber();
 				$post->save();
 

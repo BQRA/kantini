@@ -101,9 +101,11 @@
 	<div class="clear mt10"></div>
 @endif
 
-<span class="dedikod-content">
-	{{ $post->dedikod }}
-</span>
+@if($post->dedikod !== null)
+	<span class="dedikod-content">
+		{{ $post->dedikod }}
+	</span>
+@endif
 
 @if(Auth::check())
 	@if(Auth::user()->username == $post->username)
