@@ -315,6 +315,7 @@ $(function () {
 			$('#addMedia .tab').remove();
 			$('#addMedia .tab-content-item:not(.selected)').remove();
 			$('input[name=post_type]').attr('value', 'mediaFromPc');
+			$('.dedikod-area .attachment img').attr('src', $(this).parents('.tab-content-item').find('.pic-upload img').attr('src'));
 		}
 		attachImg();
 	});
