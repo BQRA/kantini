@@ -14,8 +14,8 @@
 				<span class="icon more">&#61703</span>
 			</div>
 			<ul>
-				<li><a href="javascript:;">Facebook'ta Paylas</a></li>
-				<li><a href="javascript:;">Twiter'da Paylas</a></li>
+				<li><a href="javascript:;"><del>Facebook'ta Paylaş</del></a></li>
+				<li><a href="javascript:;"><del>Twiter'da Paylaş</del></a></li>
 				
 				@if(Auth::check())
 					@if(!Flag::where('post_id', $post->id)->where('user_id', Auth::user()->id)->count()>0)

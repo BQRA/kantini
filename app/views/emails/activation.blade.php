@@ -60,7 +60,7 @@
 											<table cellspacing="0" cellpadding="0" border="0" height="40px">
 												<tr height="40px">
 													<td width="20px" background="http://cl.ly/Xa2M/button-l.jpg"></td>
-													<td bgcolor="#63c085"><a href="{{ $link }}">Hesabımı Aktif</a></td>
+													<td bgcolor="#63c085"><a href="{{ $link }}">Hesabımı Aktif Et</a></td>
 													<td width="20px" background="http://cl.ly/XaH3/button-r.jpg"></td>
 												</tr>
 											</table>

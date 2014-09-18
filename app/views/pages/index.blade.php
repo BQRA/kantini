@@ -18,7 +18,8 @@
 @else 
 	<div class="blank-page">
 		<h2>Üzgünüz...</h2>
-		<p class="text-center">Bu okul kantini’nde hiç dedikod yoktur.</p>
+		<p class="text-center">Bu okul kantini’nde hiç Dedikod yoktur.</p>
+		<h2 class="text-center">Neden ilk Dedikod'u sen gönder miyorsun?</h2> 
 	</div>
 @endif
 
