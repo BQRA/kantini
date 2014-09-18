@@ -44,7 +44,7 @@
 				@else
 					{{ $users_all_votes->count() }}
 				@endif
-				<small>Yorum</small>
+				<small>Oy</small>
 			</div>
 
 		</div>

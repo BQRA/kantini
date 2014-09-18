@@ -1,14 +1,15 @@
 <div class="toolbar">
 	<div class="left">
-		@if(!empty($user))
-			<a class="username" data-lightbox="{{ URL::action('show.profile', $user->username) }} #profileBox" data-lightboxtitle="Profil Kartı" href="javascript:;">
+		@if($post->anonymous == 0)
+			<a class="username" data-lightbox="{{ URL::action('show.profile', $post->username) }} #profileBox" data-lightboxtitle="Profil Kartı" href="javascript:;">
 			{{ $post->username }}
 			</a>
 		@else
 			<span class="username">{{ 'Misafir'.$post->username }}</span>
 		@endif
 							
-		<span class="date tooltip" data-content="Dedikod detayına git"><a href="{{ URL::action('show.post', $post->id) }}">{{$post->created_at->diffForHumans()}}</a></span>
+		<span class="date tooltip" data-content="Dedikod detayına git"><a href="{{ URL::action('show.post', $post->id) }}">
+		{{ $post->created_at->diffForHumans() }}</a></span>
 		<div class="select-box custom">
 			<div class="text">
 				<span class="icon more">&#61703</span>

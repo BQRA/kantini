@@ -249,7 +249,7 @@ class UsersController extends \BaseController {
 			$type 		= $_GET['type'];
 			$orderBy 	= $_GET['orderBy'];
 
-			$users_all_comments = DB::table('comments')
+			$users_all_comments = Comment::query()
 									->leftjoin('posts', 'posts.id', '=', 'comments.post_id')
 									->where('commenter', $username)
 									->where('flag', 'NO')
@@ -261,7 +261,7 @@ class UsersController extends \BaseController {
 		} elseif (Input::has('orderBy')) {
 			$orderBy = $_GET['orderBy'];
 
-			$users_all_comments = DB::table('comments')
+			$users_all_comments = Comment::query()
 									->leftjoin('posts', 'posts.id', '=', 'comments.post_id')
 									->where('commenter', $username)
 									->where('flag', 'NO')
@@ -272,7 +272,7 @@ class UsersController extends \BaseController {
 		} elseif (Input::has('type')) {
 			$type = $_GET['type'];
 
-			$users_all_comments = DB::table('comments')
+			$users_all_comments = Comment::query()
 									->leftjoin('posts', 'posts.id', '=', 'comments.post_id')
 									->where('commenter', $username)
 									->where('flag', 'NO')
@@ -282,7 +282,7 @@ class UsersController extends \BaseController {
 									->Paginate(36);
 			
 		} else {
-			$users_all_comments = DB::table('comments')
+			$users_all_comments = Comment::query()
 									->leftjoin('posts', 'posts.id', '=', 'comments.post_id')
 									->where('commenter', $username)
 									->where('flag', 'NO')
@@ -306,7 +306,7 @@ class UsersController extends \BaseController {
 			$type 		= $_GET['type'];
 			$orderBy 	= $_GET['orderBy'];
 
-			$users_all_votes = DB::table('votes')
+			$users_all_votes = Vote::query()
 									->leftjoin('posts', 'posts.id', '=', 'votes.post_id')
 									->where('rater', $username)
 									->where('flag', 'NO')
@@ -318,7 +318,7 @@ class UsersController extends \BaseController {
 		} elseif (Input::has('orderBy')) {
 			$orderBy = $_GET['orderBy'];
 
-			$users_all_votes = DB::table('votes')
+			$users_all_votes = Vote::query()
 									->leftjoin('posts', 'posts.id', '=', 'votes.post_id')
 									->where('rater', $username)
 									->where('flag', 'NO')
@@ -329,7 +329,7 @@ class UsersController extends \BaseController {
 		} elseif (Input::has('type')) {
 			$type = $_GET['type'];
 
-			$users_all_votes = DB::table('votes')
+			$users_all_votes = Vote::query()
 									->leftjoin('posts', 'posts.id', '=', 'votes.post_id')
 									->where('rater', $username)
 									->where('flag', 'NO')
@@ -339,7 +339,7 @@ class UsersController extends \BaseController {
 									->Paginate(36);
 			
 		} else {
-			$users_all_votes = DB::table('votes')
+			$users_all_votes = Vote::query()
 									->leftjoin('posts', 'posts.id', '=', 'votes.post_id')
 									->where('rater', $username)
 									->where('flag', 'NO')
