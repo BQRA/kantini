@@ -378,6 +378,7 @@ class PostsController extends \BaseController {
 			$comment->commenter 	= $commenter;
 			$comment->post_id 		= $id;
 			$comment->comment 		= trim(Input::get('comment'));
+			$comment->ip_address 	= get_client_ip();
 			$comment->save();
 
 			$comments = Comment::select('post_id')->where('post_id', $id)->get();
@@ -390,14 +391,18 @@ class PostsController extends \BaseController {
 			/*
 			$user = User::whereUsername($post->username)->first();
 			
-			if(!empty($user)) {
-
-				//geliştirelecek!!!
-				//Commenter'la dedikod'u gönderen kişi aynı ise mail gönderme
-
-				Mail::send('emails.auth.comment', ['link'=> URL::route('show.post', $id)], function($message) use ($user) {
-					$message->to($user->email)->subject('Kantini - Cevap!');
-				});
+			if(Auth::check()) {
+				if(!empty($user) && $user->username != Auth::user()->username ) {
+					Mail::send('emails.auth.comment', ['link'=> URL::route('show.post', $id)], function($message) use ($user) {
+						$message->to($user->email)->subject('Kantini - Cevap!');
+					});
+				}
+			} else {
+				if(!empty($user)) {
+					Mail::send('emails.auth.comment', ['link'=> URL::route('show.post', $id)], function($message) use ($user) {
+						$message->to($user->email)->subject('Kantini - Cevap!');
+					});
+				}
 			}
 			*/
 
