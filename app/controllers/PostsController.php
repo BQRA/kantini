@@ -156,6 +156,7 @@ class PostsController extends \BaseController {
 				$post->anonymous 			= 0;
 				$post->gender 				= Auth::user()->profile->gender;
 				$post->type 				= Input::get('post_type');
+				$post->school 				= $school;
 				$post->event_name 			= trim(Input::get('event_name'));
 				$post->event_date 			= $timestamp;
 				$post->event_time 			= $event_time;
@@ -202,6 +203,7 @@ class PostsController extends \BaseController {
 				$post->anonymous 	= 0;
 				$post->gender 		= Auth::user()->profile->gender;
 				$post->type 		= Input::get('post_type');
+				$post->school 		= $school;
 					if(empty($dedikod)) {
 						$post->dedikod 	= null;
 					} else {
@@ -237,6 +239,7 @@ class PostsController extends \BaseController {
 				$post->anonymous 	= 0;
 				$post->gender 		= Auth::user()->profile->gender;
 				$post->type 		= Input::get('post_type');
+				$post->school 		= $school;
 					if(empty($dedikod)) {
 						$post->dedikod 	= null;
 					} else {
@@ -277,6 +280,7 @@ class PostsController extends \BaseController {
 				$post->anonymous 	= 0;
 				$post->gender 		= Auth::user()->profile->gender;
 				$post->type 		= Input::get('post_type');
+				$post->school 		= $school;
 					if(empty($dedikod)) {
 						$post->dedikod 	= null;
 					} else {
